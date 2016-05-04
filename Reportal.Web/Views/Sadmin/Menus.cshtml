@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = "Menus";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+    ViewBag.ActiveMenu = "";
+    ViewBag.ActiveMenuRoot = "";
+}
+
+@section css{
+    <link href="~/assets/plugins/nestable/jquery.nestable.css" rel="stylesheet" />
+}
+
+@section script{
+
+    <script src="~/assets/js/jquery.core.js"></script>
+    <script src="~/assets/js/jquery.app.js"></script>
+
+    <!--script for this page only-->
+    <script src="~/assets/plugins/nestable/jquery.nestable.js"></script>
+    <script src="~/assets/pages/nestable.js"></script>
+    <script src="~/assets/js.app/super.admin.js"></script>
+
+    <script src="~/assets/plugins/notifyjs/dist/notify.min.js"></script>
+    <script src="~/assets/plugins/notifications/notify-metro.js"></script>
+}
+
+<div class="container">
+
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="page-title">Super Administración</h4>
+            <ol class="breadcrumb">
+                <li><a href="#">Reportes GI</a></li>
+                <li><a href="#">Super Administración</a></li>
+                <li class="active">Configuracion de Menús</li>
+            </ol>
+        </div>
+    </div>
+
+    <!--MODALS-->
+    <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Configuración de Menú</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="txtTitulo" class="control-label">Titulo</label>
+                                <input type="text" class="form-control" id="txtTitulo" placeholder="Título">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="txtUrl" class="control-label">Url</label>
+                                <input type="text" class="form-control" id="txtUrl" placeholder="Url">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="field-3" class="control-label">Ícono</label>
+                                <input type="text" class="form-control" id="field-3" placeholder="Clase del Icono">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning waves-effect" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" id="btnInsertaMenu">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="portlet">
+                <!-- /primary heading -->
+                <div class="portlet-heading">
+                    <h3 class="portlet-title text-dark"> <b>Jerarquia de Menus de la Aplicación</b> </h3>
+                    <div class="portlet-widgets">
+                        <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                        <span class="divider"></span>
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#bg-default"><i class="ion-minus-round"></i></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="bg-default" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <p class="text-muted m-b-30 font-13">Arrastre y suelte los menús para ordenar las Jerarquias. El menu de Superadministrador no aparece por que es reservado por el sistema</p>
+
+                        <button id="btnGrabar" class="btn btn-primary">Guardar Cambios</button>
+                        <button id="btnPublicar" class="btn btn-primary">Publicar Cambios</button>
+                        <button id="btnAgregarMenu" class="btn btn-primary" data-toggle="modal" data-target="#con-close-modal">Agregar Menú</button>
+                        
+                        <hr />
+                        <div class="custom-dd-empty dd" id="nestable_list_3">
+                            <ol class="dd-list">
+
+                                @foreach (var item in ViewBag.json_data)
+                                    {
+                                        <li class="dd-item dd3-item" data-titulo="@Html.Raw(item.titulo)" data-url="@Html.Raw(item.url)" data-icono="@Html.Raw(item.icono)">
+                                            <div class="dd-handle dd3-handle"></div>
+                                            <div class="dd3-content">
+                                                @Html.Raw(item.titulo)
+                                            </div>
+                                            <div class="dd3-buttons">
+                                                <div class="btn-group-chr btn-group-xs btn-group-solid btn-adentro">
+                                                    <button class="btn purple edit" type="button" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-edit"></i> </button>
+                                                    <button class="btn purple delete" type="button"> <i class="fa fa-remove"></i> </button>
+                                                </div>
+                                            </div>
+
+                                            
+                                                @if (item.children != null)
+                                                {
+                                                    <ol class="dd-list">
+                                                        @foreach (var item2 in item.children)
+                                                        {
+
+                                                            <li class="dd-item dd3-item" data-titulo="@Html.Raw(item2.titulo)" data-url="@Html.Raw(item2.url)" data-icono="@Html.Raw(item2.icono)">
+                                                                <div class="dd-handle dd3-handle"></div>
+                                                                <div class="dd3-content">
+                                                                    @Html.Raw(item2.titulo)
+                                                                </div>
+                                                                <div class="dd3-buttons">
+                                                                    <div class="btn-group-chr btn-group-xs btn-group-solid btn-adentro">
+                                                                        <button class="btn purple edit" type="button" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-edit"></i> </button>
+                                                                        <button class="btn purple delete" type="button"> <i class="fa fa-remove"></i> </button>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                    @if (item2.children != null)
+                                                                    {
+                                                                        <ol class="dd-list">
+                                                                            @foreach (var item3 in item2.children)
+                                                                            {
+                                                                            <li class="dd-item dd3-item" data-titulo="@Html.Raw(item3.titulo)" data-url="@Html.Raw(item3.url)" data-icono="@Html.Raw(item3.icono)">
+                                                                                <div class="dd-handle dd3-handle"></div>
+                                                                                <div class="dd3-content">
+                                                                                    @Html.Raw(item3.titulo)
+                                                                                </div>
+                                                                                <div class="dd3-buttons">
+                                                                                    <div class="btn-group-chr btn-group-xs btn-group-solid btn-adentro">
+                                                                                        <button class="btn purple edit" type="button" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-edit"></i> </button>
+                                                                                        <button class="btn purple delete" type="button"> <i class="fa fa-remove"></i> </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+                                                                            }
+                                                                        </ol>
+                                                                    }
+                                                                        
+
+                                                           </li>
+                                                        }
+                                                    </ol>
+                                                }
+                                            
+
+                                        </li>
+                                     }
+                                
+
+
+
+                            </ol>
+                        </div><!--end corpse-->
+                    </div>
+                </div>
+            </div>
+            <!-- /Portlet -->
+        </div>
+
+    </div>
+
+</div>

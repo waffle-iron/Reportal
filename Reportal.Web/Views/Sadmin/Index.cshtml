@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+    ViewBag.ActiveMenu = "";
+    ViewBag.ActiveMenuRoot = "";
+}
+
+
+<div class="container">
+
+
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="page-title">Super Administración</h4>
+            <ol class="breadcrumb">
+                <li><a href="#">Reportes GI</a></li>
+                <li><a href="#">Super Administración</a></li>
+                <li class="active">Inicio</li>
+            </ol>
+        </div>
+    </div>
+  
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="portlet">
+                <!-- /primary heading -->
+                <div class="portlet-heading">
+                    <h3 class="portlet-title text-dark">
+                        Links Interés
+                    </h3>
+                    <div class="portlet-widgets">
+                        
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#portlet1"><i class="ion-minus-round"></i></a>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="portlet1" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <ul>
+                            <li><a href="http://serv-55.laaraucana.local:8002" target="_blank">Base de Conocimientos</a></li>
+                            <li><a href="http://serv-55.laaraucana.local:8001" target="_blank">Controlador de Versiones GIT</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- container -->

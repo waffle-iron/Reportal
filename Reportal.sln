@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reportal.Web", "Reportal.Web\Reportal.Web.csproj", "{C46270D3-AC34-477E-9C6F-809319A165A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplicaciones", "Aplicaciones", "{472DBCEF-4449-4A83-8231-D8178F08DDA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistencia", "Persistencia", "{814080AD-E3F5-4CF6-9466-FE82AFEBFB54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reportal.Domain", "Reportal.Domain\Reportal.Domain.csproj", "{9779A096-885A-48AA-827B-4F359B04F94D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{C56C3A63-15A3-43EF-9255-704EEE9FC962}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDK", "CDK\CDK.csproj", "{6765A812-8AE2-4200-9BB0-C77B2FA4C9FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reportal.Data", "Reportal.Data\Reportal.Data.csproj", "{BB1F9B85-DC6D-4D9B-9078-0BD09684B974}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{BBE305EB-B335-4D1F-B76E-D1899FFE7B50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reportal.Api", "Reportal.Api\Reportal.Api.csproj", "{F359E313-1F96-43C0-A286-3C0BD26FAFA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C46270D3-AC34-477E-9C6F-809319A165A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C46270D3-AC34-477E-9C6F-809319A165A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C46270D3-AC34-477E-9C6F-809319A165A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C46270D3-AC34-477E-9C6F-809319A165A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9779A096-885A-48AA-827B-4F359B04F94D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9779A096-885A-48AA-827B-4F359B04F94D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9779A096-885A-48AA-827B-4F359B04F94D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9779A096-885A-48AA-827B-4F359B04F94D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6765A812-8AE2-4200-9BB0-C77B2FA4C9FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6765A812-8AE2-4200-9BB0-C77B2FA4C9FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6765A812-8AE2-4200-9BB0-C77B2FA4C9FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6765A812-8AE2-4200-9BB0-C77B2FA4C9FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB1F9B85-DC6D-4D9B-9078-0BD09684B974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB1F9B85-DC6D-4D9B-9078-0BD09684B974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB1F9B85-DC6D-4D9B-9078-0BD09684B974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB1F9B85-DC6D-4D9B-9078-0BD09684B974}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F359E313-1F96-43C0-A286-3C0BD26FAFA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F359E313-1F96-43C0-A286-3C0BD26FAFA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F359E313-1F96-43C0-A286-3C0BD26FAFA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F359E313-1F96-43C0-A286-3C0BD26FAFA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C46270D3-AC34-477E-9C6F-809319A165A7} = {472DBCEF-4449-4A83-8231-D8178F08DDA0}
+		{9779A096-885A-48AA-827B-4F359B04F94D} = {814080AD-E3F5-4CF6-9466-FE82AFEBFB54}
+		{6765A812-8AE2-4200-9BB0-C77B2FA4C9FB} = {C56C3A63-15A3-43EF-9255-704EEE9FC962}
+		{BB1F9B85-DC6D-4D9B-9078-0BD09684B974} = {814080AD-E3F5-4CF6-9466-FE82AFEBFB54}
+		{F359E313-1F96-43C0-A286-3C0BD26FAFA3} = {BBE305EB-B335-4D1F-B76E-D1899FFE7B50}
+	EndGlobalSection
+EndGlobal
