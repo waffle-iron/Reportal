@@ -18,5 +18,10 @@ namespace Reportal.Api.Models
         {
             return CampaniaDataAccess.Obtener(id);
         }
+
+        public IdentidadDetalleCampania ObtenerDetalle(int id)
+        {
+            return DetalleCampaniaDataAccess.Obtener(id);
+        }
     }
 }
