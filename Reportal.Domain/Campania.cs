@@ -12,6 +12,7 @@ namespace Reportal.Domain
         public string Nombre { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaTermino { get; set; }
+        public string Periodo { get; set; }
         public bool CanalEmail { get; set; }
         public bool CanalSMS { get; set; }
         public bool CanalLlamada { get; set; }
@@ -19,6 +20,5 @@ namespace Reportal.Domain
         public string Concepto { get; set; }
         public string SubConcepto { get; set; }
         public int CantidadNomina { get; set; }
-
     }
 }

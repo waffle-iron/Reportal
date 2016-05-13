@@ -24,6 +24,8 @@
                             dataSrc: ''
                         },
                         columns: [
+
+                            { data: "Periodo" },
                             { 
                                 data: "Nombre",
                                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
@@ -43,9 +45,9 @@
                                 {
                                     return (data === true) ? '<span class="glyphicon glyphicon-ok"></span>' : '<span class="glyphicon glyphicon-remove"></span>';
                                 },
-                                "targets": [2,3,4]
+                                "targets": [3,4,5]
                             }
-                            
+
                         ]
                     });
                 } );
@@ -80,15 +82,16 @@
             <div class="card-box table-responsive">
                 <table id="datatable" class="table table-striped table-bordered">
                     <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Email</th>
-                            <th>SMS</th>
-                            <th>Call</th>
-                            <th>Segmento</th>
-                            <th>N Afiliados</th>
-                        </tr>
+                    <tr>
+                        <th>Periodo</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Email</th>
+                        <th>SMS</th>
+                        <th>Call</th>
+                        <th>Segmento</th>
+                        <th>Cantidad Afiliados</th>
+                    </tr>
                     </thead>
 
                     <tbody>

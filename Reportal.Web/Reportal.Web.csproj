@@ -180,6 +180,7 @@
     <Content Include="assets\images\users\avatar-7.jpg" />
     <Content Include="assets\images\users\avatar-8.jpg" />
     <Content Include="assets\images\users\avatar-9.jpg" />
+    <Content Include="assets\js.app\detalleCampania.js" />
     <Content Include="assets\js.app\campanias.js" />
     <Content Include="assets\js.app\jquery.CDK.js" />
     <Content Include="assets\js.app\super.admin.js" />

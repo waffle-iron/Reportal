@@ -9,6 +9,7 @@ namespace Reportal.Domain
     public class IdentidadDetalleCampania
     {
         public int Id { get; set; }
+        public int TotalAFiliadosCampanados { get; set; }
         public int TotalAFiliadosContactados { get; set; }
         public int TotalPrivadosContactados { get; set; }
         public int TotalPrivadosContactadosSms { get; set; }

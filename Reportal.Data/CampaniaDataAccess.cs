@@ -40,7 +40,7 @@ namespace Reportal.Data
                 Observacion = row["cmp_observacion"] != DBNull.Value ? row["cmp_observacion"].ToString() : string.Empty,
                 FechaInicio = row["cmp_fecha_inicio"] != DBNull.Value ? Convert.ToDateTime(row["cmp_fecha_inicio"]) : DateTime.MinValue,
                 FechaTermino = row["cmp_fecha_termino"] != DBNull.Value ? Convert.ToDateTime(row["cmp_fecha_termino"]) : DateTime.MinValue,
-
+                Periodo = row["cmp_periodo"] != DBNull.Value ? row["cmp_periodo"].ToString() : string.Empty,
             };
         }
         #endregion

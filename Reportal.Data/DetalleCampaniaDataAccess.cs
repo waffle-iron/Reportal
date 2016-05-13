@@ -27,6 +27,7 @@ namespace Reportal.Data
             return new IdentidadDetalleCampania
             {
                 Id = row["IdCampania"] != DBNull.Value ? Convert.ToInt32(row["IdCampania"]) : 0,
+                TotalAFiliadosCampanados = row["TotalAFiliadosCampanados"] != DBNull.Value ? Convert.ToInt32(row["TotalAFiliadosCampanados"]) : 0,
                 TotalAFiliadosContactados = row["TotalAFiliadosContactados"] != DBNull.Value ? Convert.ToInt32(row["TotalAFiliadosContactados"]) : 0,
                 TotalPrivadosContactados = row["TotalPrivadosContactados"] != DBNull.Value ? Convert.ToInt32(row["TotalPrivadosContactados"]) : 0,
                 TotalPrivadosContactadosSms = row["TotalPrivadosContactadosSms"] != DBNull.Value ? Convert.ToInt32(row["TotalPrivadosContactadosSms"]) : 0,

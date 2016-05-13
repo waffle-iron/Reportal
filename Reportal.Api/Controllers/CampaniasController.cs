@@ -34,6 +34,8 @@ namespace Reportal.Api.Controllers
             return camprepositorio.Obtener(id);
         }
 
+
+
         
     }
 }
