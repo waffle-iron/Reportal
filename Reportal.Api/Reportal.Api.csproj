@@ -164,16 +164,24 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AFEmpresaController.cs" />
     <Compile Include="Controllers\CampaniasController.cs" />
+    <Compile Include="Controllers\CicloVidaEmpresaController.cs" />
     <Compile Include="Controllers\DetalleCampaniaController.cs" />
+    <Compile Include="Controllers\GeneroEmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NSEEmpresaController.cs" />
     <Compile Include="Controllers\ResumenController.cs" />
     <Compile Include="Controllers\TendenciaResumenController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AFEmpresaRepository.cs" />
     <Compile Include="Models\CampaniasRepository.cs" />
+    <Compile Include="Models\CicloEmpresaRepository.cs" />
+    <Compile Include="Models\GeneroEmpresaRepository.cs" />
+    <Compile Include="Models\NSEEmpresaRepository.cs" />
     <Compile Include="Models\ResumenRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

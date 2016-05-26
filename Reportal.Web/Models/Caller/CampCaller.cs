@@ -26,7 +26,7 @@ namespace Reportal.Web.Models.Caller
         }
 
         public Campania Get(int id)
-        {            
+        {
             var request = new RestRequest("campanias/{id}", Method.GET);
             request.AddUrlSegment("id", id.ToString());
             IRestResponse<Campania> response = client.Execute<Campania>(request);
