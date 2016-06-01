@@ -19,6 +19,8 @@
     return sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
 }
 
+
+
 $(document).ready(function () {
 
 
@@ -27,15 +29,12 @@ $(document).ready(function () {
         var dataCampania = respoonse;
 
 
-
-
-
-        $("#TotalPublicos").text(dataCampania.TotalPublicosContactados.toMoney());
+        //$("#TotalPublicos").text(dataCampania.TotalPublicosContactados.toMoney());
         $("#totalAfiliadosPublicos").text(dataCampania.TotalPublicosContactados.toMoney());
 
-        $("#TotalPrivados").text(dataCampania.TotalPrivadosContactados.toMoney());
+        //$("#TotalPrivados").text(dataCampania.TotalPrivadosContactados.toMoney());
         $("#totalAfiliadosPrivados").text(dataCampania.TotalPrivadosContactados.toMoney());
-        
+        $("#TotalTrabajadores").text((dataCampania.TotalPrivadosContactados + dataCampania.TotalPublicosContactados).toMoney());
 
         $("#TotalPensionados").text(dataCampania.TotalPensionadosContactados.toMoney());
         $("#totalAfiliados").text(dataCampania.TotalAFiliadosContactados.toMoney());
@@ -100,14 +99,10 @@ $(document).ready(function () {
                     
         /* GRAFICOS*/
         var dataRt = [
+           
             {
-                "label": "Privados",
-                "value": dataCampania.TotalPrivadosContactados,
-                "color": "#5fbeaa"
-            },
-            {
-                "label": "Publicos",
-                "value": dataCampania.TotalPublicosContactados,
+                "label": "Trabajadores",
+                "value": (dataCampania.TotalTrabajadoresContactados),
                 'color': '#f05050'
             },
             {
@@ -135,6 +130,20 @@ $(document).ready(function () {
             ;
 
             d3.select("#chart2 svg")
+                .datum(dataRt)
+                .transition()
+                .duration(350)
+                .call(chart);
+
+
+            d3.select("#chart23 svg")
+                .datum(dataRt)
+                .transition()
+                .duration(350)
+                .call(chart);
+
+
+            d3.select("#chart24 svg")
                 .datum(dataRt)
                 .transition()
                 .duration(350)
