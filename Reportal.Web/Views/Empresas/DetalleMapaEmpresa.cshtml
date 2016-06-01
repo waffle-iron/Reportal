@@ -1,0 +1,293 @@
+﻿
+@{
+    ViewBag.Title = "Detalle MapaEmpresa";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+    ViewBag.ActiveMenu = "mapaempresas";
+    ViewBag.ActiveMenuRoot = "empresas";
+}
+@section css {
+
+    <link href="~/assets/plugins/nvd3/build/nv.d3.min.css" rel="stylesheet" type="text/css" />
+
+}
+
+@section script{
+
+
+    <script src="~/assets/plugins/peity/jquery.peity.min.js"></script>
+    <script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/assets/plugins/jquery-knob/jquery.knob.js"></script>
+
+
+    <script src="~/assets/plugins/d3/d3.min.js"></script>
+    <script src="~/assets/plugins/nvd3/build/nv.d3.min.js"></script>
+    <script src="~/assets/pages/jquery.nvd3.init.js"></script>
+
+
+
+    <script src="~/assets/js/jquery.core.js"></script>
+    <script src="~/assets/js/jquery.app.js"></script>
+
+    <!-- Chart JS -->
+    <script src="~/assets/plugins/Chart.js/Chart.min.js"></script>
+
+    <script src="~/assets/js.app/empresas.js"></script>
+}
+
+
+<div class="container">
+
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="page-title">Empresas</h4>
+            <ol class="breadcrumb">
+                <li><a href="#">Portal de Informacion</a></li>
+                <li><a href="#">Empresa</a></li>
+                <li class="active">Mapa Empresas</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Ciclo de Vida</h4>
+
+                <div class="widget-chart text-center">
+                    <div id="grafCicloVida">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+
+                    <ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">Adulto Mayor</h5>
+                            <h4 class="m-b-0" id="CVAdultoMayor">1000</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Adultos</h5>
+                            <h4 class="m-b-0" id="CVAdultos">523</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Desarrollo</h5>
+                            <h4 class="m-b-0" id="CVDesarrollo">965</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Jovenes</h5>
+                            <h4 class="m-b-0" id="CVJovenes">965</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Madurez</h5>
+                            <h4 class="m-b-0" id="CVMadurez">965</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Nivel Socioeconomico</h4>
+
+                <div class="widget-chart text-center">
+                    <div id="grafCicloVida">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+
+                    <ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">Abc1</h5>
+                            <h4 class="m-b-0" id="CVAdultoMayor">1000</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">c2</h5>
+                            <h4 class="m-b-0" id="CVAdultos">523</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">c3</h5>
+                            <h4 class="m-b-0" id="CVDesarrollo">965</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">d</h5>
+                            <h4 class="m-b-0" id="CVJovenes">965</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">e</h5>
+                            <h4 class="m-b-0" id="CVMadurez">965</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tramo Asignación Familiar</h4>
+
+                <div class="widget-chart text-center">
+                    <div id="grafCicloVida">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+
+                    <ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">Tramo A</h5>
+                            <h4 class="m-b-0" id="CVAdultoMayor">1000</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Tramo B</h5>
+                            <h4 class="m-b-0" id="CVAdultos">523</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Tramo C</h5>
+                            <h4 class="m-b-0" id="CVDesarrollo">965</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Tramo D</h5>
+                            <h4 class="m-b-0" id="CVJovenes">965</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Tramo E</h5>
+                            <h4 class="m-b-0" id="CVMadurez">965</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tramo Etario Afiliado</h4>
+
+                <div class="widget-chart text-center">
+                    <div id="grafCicloVida">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+
+                    <ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">de 18 a 30 años</h5>
+                            <h4 class="m-b-0" id="CVAdultoMayor">1000</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">31 a 45 años</h5>
+                            <h4 class="m-b-0" id="CVAdultos">523</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">46 a 60</h5>
+                            <h4 class="m-b-0" id="CVDesarrollo">965</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">61 a 75</h5>
+                            <h4 class="m-b-0" id="CVJovenes">965</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">75 y mas</h5>
+                            <h4 class="m-b-0" id="CVMadurez">965</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Regimen de salud</h4>
+
+                <div class="widget-chart text-center">
+                    <div id="grafCicloVida">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+
+                    <ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">Fonasa</h5>
+                            <h4 class="m-b-0" id="CVAdultoMayor">1000</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Isapre</h5>
+                            <h4 class="m-b-0" id="CVAdultos">523</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">a</h5>
+                            <h4 class="m-b-0" id="CVDesarrollo"></h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">a</h5>
+                            <h4 class="m-b-0" id="CVJovenes"></h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">a</h5>
+                            <h4 class="m-b-0" id="CVMadurez"></h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tenencia de Carga</h4>
+
+                <div class="widget-chart text-center">
+                    <div id="grafCicloVida">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+
+                    <ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">SI</h5>
+                            <h4 class="m-b-0" id="CVAdultoMayor"></h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">NO</h5>
+                            <h4 class="m-b-0" id="CVAdultos"></h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">a</h5>
+                            <h4 class="m-b-0" id="CVDesarrollo"></h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">a</h5>
+                            <h4 class="m-b-0" id="CVJovenes"></h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">a</h5>
+                            <h4 class="m-b-0" id="CVMadurez"></h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tipo de Carga</h4>
+
+                <div class="widget-chart text-center">
+                    <div id="grafCicloVida">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+
+                    <ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">Hijos</h5>
+                            <h4 class="m-b-0" id="CVAdultoMayor">87</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Otros</h5>
+                            <h4 class="m-b-0" id="CVAdultos">13</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20"></h5>
+                            <h4 class="m-b-0" id="CVDesarrollo"></h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20"></h5>
+                            <h4 class="m-b-0" id="CVJovenes"></h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20"></h5>
+                            <h4 class="m-b-0" id="CVMadurez"></h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -43,6 +43,8 @@
     <Compile Include="AFEmpresaDataAccess.cs" />
     <Compile Include="CicloVidaEmpresaDataAccess.cs" />
     <Compile Include="DetalleCampaniaDataAccess.cs" />
+    <Compile Include="DetalleEmpresaDataAccess.cs" />
+    <Compile Include="EmpresaDataAccess.cs" />
     <Compile Include="GeneroEmpresaDataAccess.cs" />
     <Compile Include="NSEEmpresaDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

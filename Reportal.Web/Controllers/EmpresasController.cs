@@ -18,5 +18,10 @@ namespace Reportal.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult DetalleMapaEmpresa(int id)
+        {
+            return View();
+        }
     }
 }

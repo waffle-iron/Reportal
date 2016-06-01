@@ -43,24 +43,36 @@ $(document).ready(function () {
             $("#CVAdultos").html(data.CVAdultos.toMoney());
             $("#CVDesarrollo").html(data.CVDesarrollo.toMoney());
             $("#CVJovenes").html(data.CVJovenes.toMoney()); 
-            $("#CVMadurez").html(data.CVJovenes.toMoney());
+            $("#CVMadurez").html(data.CVMadurez.toMoney());
 
             var proCorreos = [
 	              {
-	                  "label": "Privados",
-	                  "value": Math.round((data.AfiliadosCorreoPrivados / data.TotalAfiliadosCorreo) * 100).toMoney(),
+	                  "label": "Adulto Mayor",
+	                  "value": Math.round(data.CVAdultoMayor).toMoney(),
 	                  "color": "#5fbeaa"
 	              },
 	              {
-	                  "label": "Publicos",
-	                  "value": Math.round((data.AfiliadosCorreoPublicos / data.TotalAfiliadosCorreo) * 100).toMoney(),
+	                  "label": "Adultos",
+	                  "value": Math.round(data.CVAdultoMayor).toMoney(),
 	                  'color': '#f05050'
 	              },
 	              {
-	                  "label": "Pensionados",
+	                  "label": "Desarrollo",
 	                  "value": Math.round((data.AfiliadosCorreoPensionados / data.TotalAfiliadosCorreo) * 100).toMoney(),
 	                  'color': '#5d9cec'
-	              }
+	              },
+                  {
+	                  "label": "Jovenes",
+                      "value": Math.round((data.AfiliadosCorreoPensionados / data.TotalAfiliadosCorreo) * 100).toMoney(),
+                      'color': '#5d9cec'
+                  },
+                   {
+                       "label": "Madurez",
+                       "value": Math.round((data.AfiliadosCorreoPensionados / data.TotalAfiliadosCorreo) * 100).toMoney(),
+                       'color': '#5d9cec'
+                   }
+
+
             ];
 
             //Donut chart example
