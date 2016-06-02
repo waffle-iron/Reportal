@@ -20,9 +20,9 @@ namespace Reportal.Api.Controllers
             empresarepositorio = new EmpresaRepository();
         }
 
-        public IdentidadDetalleEmpresa Get(int rutEmpresa)
+        public IdentidadDetalleEmpresa Get(int id)
         {
-            return empresarepositorio.ObtenerDetalle(rutEmpresa);
+            return empresarepositorio.ObtenerDetalle(id);
         }
     }
 }

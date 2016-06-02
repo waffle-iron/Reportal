@@ -8,7 +8,7 @@ namespace Reportal.Domain
 {
     public class Empresa
     {
-        public int RutEmpresa { get; set; }
+        public int Id { get; set; }
         public string DVEmpresa { get; set; }
         public string NombreEmpresa { get; set; }
         public string SegmentoEmpresa { get; set; }

@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Security.Principal;
+using Reportal.Web.Models.Caller;
 namespace Reportal.Web.Controllers
 {
     public class EmpresasController : Controller
     {
+        private EmpCaller emp;
         // GET: Empresas
-        public ActionResult Index()
+
+        public EmpresasController()
         {
-            return View();
+            emp = new EmpCaller();
         }
+      
 
         public ActionResult MapaEmpresas()
         {
@@ -21,6 +25,9 @@ namespace Reportal.Web.Controllers
 
         public ActionResult DetalleMapaEmpresa(int id)
         {
+            //ViewBag.Campania = emp.Get(id);
+            ViewBag.Empresa = emp.Get(id);
+
             return View();
         }
     }

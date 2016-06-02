@@ -12,9 +12,9 @@ namespace Reportal.Data
 {
     public static class DetalleEmpresaDataAccess
     {
-        public static IdentidadDetalleEmpresa Obtener(int rutEmpresa)
+        public static IdentidadDetalleEmpresa Obtener(int id)
         {
-            Parametro p = new Parametro("@RutEmpresa", rutEmpresa);
+            Parametro p = new Parametro("@RutEmpresa", id);
             //return DBHelper.InstanceReporteria.ObtenerEntidad("sp_ObtenerDetalleCampania", p, ConstructorEntidad);
             return DBHelper.InstanceReporteria.ObtenerEntidad("sp_ListarCicloVidaEmpresa", p, ConstructorEntidad);
         }
@@ -22,7 +22,7 @@ namespace Reportal.Data
         {
             return new IdentidadDetalleEmpresa
             {
-                RutEmpresa = row["RutEmpresa"] != DBNull.Value ? Convert.ToInt32(row["RutEmpresa"]) : 0,
+                Id = row["RutEmpresa"] != DBNull.Value ? Convert.ToInt32(row["RutEmpresa"]) : 0,
                 CVAdultoMayor = row["Adulto Mayor"] != DBNull.Value ? Convert.ToInt32(row["Adulto Mayor"]) : 0,
                 CVAdulto = row["Adultos"] != DBNull.Value ? Convert.ToInt32(row["Adultos"]) : 0,
                 CVDesarrollo = row["Desarrollo"] != DBNull.Value ? Convert.ToInt32(row["Desarrollo"]) : 0,

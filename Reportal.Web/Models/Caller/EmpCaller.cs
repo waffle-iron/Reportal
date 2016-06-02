@@ -16,5 +16,19 @@ namespace Reportal.Web.Models.Caller
         {
             client = new RestClient(ConfigHelper.ObtenerKeyWebConfig("ServiceBaseUrl"));
         }
+        public List<Empresa> Get()
+        {
+            var request = new RestRequest("empresa", Method.GET);
+            IRestResponse<List<Empresa>> response = client.Execute<List<Empresa>>(request);
+            return response.Data;
+        }
+
+        public Empresa Get(int id)
+        {
+            var request = new RestRequest("empresa/{id}", Method.GET);
+            request.AddUrlSegment("id", id.ToString());
+            IRestResponse<Empresa> response = client.Execute<Empresa>(request);
+            return response.Data;
+        }
     }
 }

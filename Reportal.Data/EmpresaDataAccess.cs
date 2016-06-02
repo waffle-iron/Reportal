@@ -26,7 +26,7 @@ namespace Reportal.Data
         {
             return new Empresa
             {
-                RutEmpresa = row["Empresa_Rut"] != DBNull.Value ? Convert.ToInt32(row["Empresa_Rut"]) : 0,
+                Id = row["Empresa_Rut"] != DBNull.Value ? Convert.ToInt32(row["Empresa_Rut"]) : 0,
                 DVEmpresa = row["Empresa_Dv"] != DBNull.Value ? row["Empresa_Dv"].ToString() : string.Empty,
                 NombreEmpresa = row["EmpresaNombre"] != DBNull.Value ? row["EmpresaNombre"].ToString() : string.Empty,
                 SegmentoEmpresa = row["SegmentoEmpresa"] != DBNull.Value ? row["SegmentoEmpresa"].ToString() : string.Empty,

@@ -25,10 +25,10 @@ namespace Reportal.Api.Controllers
         {
             return emprerepositorio.Listar();
         }
-        public Empresa Get(int RutEmpresas)
+        public Empresa Get(int id)
         {
             //  return camprepositorio.Obtener(id);
-            return emprerepositorio.Obtener(RutEmpresas);
+            return emprerepositorio.Obtener(id);
         }
 
 

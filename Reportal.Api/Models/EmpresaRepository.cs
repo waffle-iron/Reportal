@@ -12,16 +12,16 @@ namespace Reportal.Api.Models
         {
             return EmpresaDataAccess.ListarEmpresa();
         }
-        public Empresa Obtener(int RutEmpresas)
+        public Empresa Obtener(int id)
         {
             //return CampaniaDataAccess.Obtener(id);
-            return EmpresaDataAccess.Obtener(RutEmpresas);
+            return EmpresaDataAccess.Obtener(id);
 
         }
 
-        public IdentidadDetalleEmpresa ObtenerDetalle(int rutEmpresa)
+        public IdentidadDetalleEmpresa ObtenerDetalle(int id)
         {
-            return DetalleEmpresaDataAccess.Obtener(rutEmpresa);
+            return DetalleEmpresaDataAccess.Obtener(id);
         }
 
     }
