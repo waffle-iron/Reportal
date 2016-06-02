@@ -40,7 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AFEmpresaDataAccess.cs" />
+    <Compile Include="CicloVidaEmpresaDataAccess.cs" />
     <Compile Include="DetalleCampaniaDataAccess.cs" />
+    <Compile Include="GeneroEmpresaDataAccess.cs" />
+    <Compile Include="NSEEmpresaDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CampaniaDataAccess.cs" />
     <Compile Include="ResumenGlobalDataAccess.cs" />
