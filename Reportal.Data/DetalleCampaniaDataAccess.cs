@@ -19,7 +19,6 @@ namespace Reportal.Data
             return DBHelper.InstanceReporteria.ObtenerEntidad("sp_ObtenerDetalleCampania", p, ConstructorEntidad);
         }
 
-        
 
         #region constructor
         private static IdentidadDetalleCampania ConstructorEntidad(DataRow row)
@@ -41,6 +40,11 @@ namespace Reportal.Data
                 TotalPensionadosContactadosEmail = row["TotalPensionadosContactadosEmail"] != DBNull.Value ? Convert.ToInt32(row["TotalPensionadosContactadosEmail"]) : 0,
                 TotalPensionadosContactadosSms = row["TotalPensionadosContactadosSms"] != DBNull.Value ? Convert.ToInt32(row["TotalPensionadosContactadosSms"]) : 0,
                 TotalPensionadosContactadosCall = row["TotalPensionadosContactadosCall"] != DBNull.Value ? Convert.ToInt32(row["TotalPensionadosContactadosCall"]) : 0,
+                TotalComunicacionesExitosas = row["TotalComunicacionesExitosas"] != DBNull.Value ? Convert.ToInt32(row["TotalComunicacionesExitosas"]) : 0,
+                TotalTrabajadoresContactados = row["TotalTrabajadoresContactados"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresContactados"]) : 0,
+                TotalTrabajadoresContactadosCall = row["TotalTrabajadoresContactadosCall"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresContactadosCall"]) : 0,
+                TotalTrabajadoresContactadosEmail = row["TotalTrabajadoresContactadosEmail"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresContactadosEmail"]) : 0,
+                TotalTrabajadoresContactadosSms = row["TotalTrabajadoresContactadosSms"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresContactadosSms"]) : 0,
             };
         }
         #endregion
