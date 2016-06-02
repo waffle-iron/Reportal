@@ -26,58 +26,49 @@ $(document).ready(function () {
 
     var InicializaGraficas = function () {
 
-        $.getJSON("http://localhost:8080/api/CicloVidaEmpresa", function (data) {
-
-            var prcAF = Math.round((data.TotalAfiliadosContactables / data.TotalAfiliados) * 100);
-            $(".knob").val(prcAF.toString());
-
-            /*Totales*/
-            //$("#totalAfiliados").html(data.TotalAfiliados.toMoney());
-            //$("#AfiliadosContactables").html(data.TotalAfiliadosContactables.toMoney());
+        $.getJSON("http://localhost:8080/api/DetalleEmpresa/" + $("#IdEmpresa").val(), function (data) {
 
 
-            /*Afiliados correo*/
-            //$("#TotalAfiliadosCorreo").html(data.TotalAfiliadosCorreo.toMoney());
+            $("#CVAdulto").html(data.CVAdulto);
+            $("#CVAdultoMayor").html(data.CVAdultoMayor);
+            $("#CVDesarrollo").html(data.CVDesarrollo);
+            $("#CVJovenes").html(data.CVJovenes);
+            $("#CVMadurez").html(data.CVMadurez);
 
-            $("#CVAdultoMayor").html(data.CVAdultoMayor.toMoney());
-            $("#CVAdultos").html(data.CVAdultos.toMoney());
-            $("#CVDesarrollo").html(data.CVDesarrollo.toMoney());
-            $("#CVJovenes").html(data.CVJovenes.toMoney()); 
-            $("#CVMadurez").html(data.CVMadurez.toMoney());
-
-            var proCorreos = [
-	              {
-	                  "label": "Adulto Mayor",
-	                  "value": Math.round(data.CVAdultoMayor).toMoney(),
-	                  "color": "#5fbeaa"
-	              },
-	              {
-	                  "label": "Adultos",
-	                  "value": Math.round(data.CVAdultoMayor).toMoney(),
-	                  'color': '#f05050'
-	              },
-	              {
-	                  "label": "Desarrollo",
-	                  "value": Math.round((data.AfiliadosCorreoPensionados / data.TotalAfiliadosCorreo) * 100).toMoney(),
-	                  'color': '#5d9cec'
-	              },
-                  {
-	                  "label": "Jovenes",
-                      "value": Math.round((data.AfiliadosCorreoPensionados / data.TotalAfiliadosCorreo) * 100).toMoney(),
-                      'color': '#5d9cec'
-                  },
-                   {
-                       "label": "Madurez",
-                       "value": Math.round((data.AfiliadosCorreoPensionados / data.TotalAfiliadosCorreo) * 100).toMoney(),
-                       'color': '#5d9cec'
-                   }
-
+            var proCicloVida = [
+                {
+                    "label": "Adulto",
+                    "value": data.CVAdulto,
+                    "color": '#5fbeaa'
+                },
+                {
+                    "label": "Adulto Mayor",
+                    "value": data.CVAdultoMayor,
+                    "color": '#5d9cec'
+                },
+                {
+                    "label": "Desarrollo",
+                    "value": data.CVDesarrollo,
+                    "color": '#A9F5BC'
+                },
+                {
+                    "label": "Joevenes",
+                    "value": data.CVJovenes,
+                    "color": '#A9F5A9'
+                },
+                {
+                    "label": "Madurez",
+                    "value": data.CVMadurez,
+                    "color": '#0000FF'
+                }
 
             ];
 
+
+
             //Donut chart example
             nv.addGraph(function () {
-                var chartCorreos = nv.models.pieChart()
+                var chartCicloVida = nv.models.pieChart()
                     .x(function (d) { return d.label })
                     .y(function (d) { return d.value })
                     .showLabels(true)     //Display pie labels
@@ -89,14 +80,92 @@ $(document).ready(function () {
                 ;
 
                 d3.select("#grafCicloVida svg")
-                    .datum(proCorreos)
+                    .datum(proCicloVida)
                     .transition().duration(350)
-                    .call(chartCorreos);
+                    .call(chartCicloVida);
 
-                return chartCorreos;
+                return chartCicloVida;
             });
 
-    });
+        });
+
+        $.getJSON("http://localhost:8080/api/NSEEmpresa/" + $("#IdEmpresa").val(), function (data) {
+
+
+            $("#NSEABC1").html(data.NSEABC1);
+            $("#NSEC2").html(data.NSEC2);
+            $("#NSEC3").html(data.NSEC3);
+            $("#NSED").html(data.NSED);
+            $("#NSEE").html(data.NSEE);
+
+            var proNSE = [
+                {
+                    "label": "ABC1",
+                    "value":data.NSEABC1,
+                    "color": '#5fbeaa'
+                },
+                {
+                    "label": "C2",
+                    "value": data.NSEC2,
+                    "color": '#5d9cec'
+                },
+                {
+                    "label": "C3",
+                    "value": data.NSEC3,
+                    "color": '#A9F5BC'
+                },
+                {
+                    "label": "D",
+                    "value": data.NSED,
+                    "color": '#A9F5A9'
+                },
+                {
+                    "label": "E",
+                    "value": data.NSEE,
+                    "color": '#0000FF'
+                }
+
+            ];
+
+
+
+            //Donut chart example
+            nv.addGraph(function () {
+                var chartNSE = nv.models.pieChart()
+                    .x(function (d) { return d.label })
+                    .y(function (d) { return d.value })
+                    .showLabels(true)     //Display pie labels
+                    .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                    .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                    .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                    .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
+
+                ;
+
+                d3.select("#grafNSE svg")
+                    .datum(proNSE)
+                    .transition().duration(350)
+                    .call(chartNSE);
+
+                return chartNSE;
+            });
+
+        });
+
     }
+
+    InicializaGraficas();
+    $(".knob").knob();
+
+    var resizeChart;
+
+    $(window).resize(function (e) {
+        clearTimeout(resizeChart);
+        resizeChart = setTimeout(function () {
+            InicializaGraficas();
+        }, 300);
+    });
+
+
 
 });

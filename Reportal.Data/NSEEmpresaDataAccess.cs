@@ -12,23 +12,23 @@ namespace Reportal.Data
 {
     public static class NSEEmpresaDataAccess
     {
-        public static List<NSEEmpresa> ListarNSEPorRutempresa(int RutEmpresa)
+        public static NSEEmpresa Obtener(int id)
         {
 
-            Parametro p = new Parametro("@RutEmpresa", RutEmpresa);
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_ListarNSEEmpresa", p, ConstructorEntidad);
+            Parametro p = new Parametro("@RutEmpresa", id);
+            return DBHelper.InstanceReporteria.ObtenerEntidad("sp_ListarNSEEmpresa", p, ConstructorEntidad);
         }
 
         public static NSEEmpresa ConstructorEntidad(DataRow row)
         {
             return new NSEEmpresa
             {
-                RutEmpresas = row["Detalle_EmpresaRut_NSEE"] != DBNull.Value ? Convert.ToInt32(row["Detalle_EmpresaRut_NSEE"]) : 0,
-                NSABC1 = row["ABC1"] != DBNull.Value ? Convert.ToInt32(row["ABC1"]) : 0,
-                NSC2 = row["C2"] != DBNull.Value ? Convert.ToInt32(row["C2"]) : 0,
-                NSC3 = row["C3"] != DBNull.Value ? Convert.ToInt32(row["C3"]) : 0,
-                NSD = row["D"] != DBNull.Value ? Convert.ToInt32(row["D"]) : 0,
-                NSE = row["E"] != DBNull.Value ? Convert.ToInt32(row["E"]) : 0,
+                Id = row["RutEmpresa"] != DBNull.Value ? Convert.ToInt32(row["RutEmpresa"]) : 0,
+                NSEABC1 = row["ABC1"] != DBNull.Value ? Convert.ToInt32(row["ABC1"]) : 0,
+                NSEC2 = row["C2"] != DBNull.Value ? Convert.ToInt32(row["C2"]) : 0,
+                NSEC3 = row["C3"] != DBNull.Value ? Convert.ToInt32(row["C3"]) : 0,
+                NSED = row["D"] != DBNull.Value ? Convert.ToInt32(row["D"]) : 0,
+                NSEE = row["E"] != DBNull.Value ? Convert.ToInt32(row["E"]) : 0,
             };
         }
     }

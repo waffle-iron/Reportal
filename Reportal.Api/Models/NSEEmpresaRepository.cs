@@ -9,9 +9,9 @@ namespace Reportal.Api.Models
 {
     public class NSEEmpresaRepository
     {
-        public List<NSEEmpresa>ListaNSEEmpresaPorRutEmpresa(int RutEmpresa)
+        public NSEEmpresa ObtenerDetalle(int id)
         {
-            return NSEEmpresaDataAccess.ListarNSEPorRutempresa(RutEmpresa);
+            return NSEEmpresaDataAccess.Obtener(id);
         }
     }
 }

@@ -19,9 +19,9 @@ namespace Reportal.Api.Controllers
             nseempresarepositorio = new NSEEmpresaRepository();
         }
 
-        public List<NSEEmpresa>Get(int id)
+        public NSEEmpresa Get(int id)
         {
-            return nseempresarepositorio.ListaNSEEmpresaPorRutEmpresa(id);
+            return nseempresarepositorio.ObtenerDetalle(id);
         }
     }
 }

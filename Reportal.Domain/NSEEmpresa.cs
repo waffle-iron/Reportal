@@ -7,11 +7,13 @@ namespace Reportal.Domain
 {
     public class NSEEmpresa
     {
-        public int RutEmpresas { get; set; }
-        public int NSABC1 { get; set; }
-        public int NSC2 { get; set; }
-        public int NSC3 { get; set;  }
-        public int NSD { get; set; }
-        public int NSE { get; set; }
+        public int Id { get; set; } //generico para todos
+
+        public int NSEABC1 { get; set; }
+        public int NSEC2 { get; set; }
+        public int NSEC3 { get; set; }
+        public int NSED { get; set; }
+        public int NSEE { get; set; }
+
     }
 }
