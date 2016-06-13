@@ -14,25 +14,25 @@
 
 @section script{
 
-<script src="~/assets/plugins/peity/jquery.peity.min.js"></script>
-<script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
-<script src="~/assets/plugins/jquery-knob/jquery.knob.js"></script>
+    <script src="~/assets/plugins/peity/jquery.peity.min.js"></script>
+    <script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/assets/plugins/jquery-knob/jquery.knob.js"></script>
 
 
-<script src="~/assets/plugins/d3/d3.min.js"></script>
-<script src="~/assets/plugins/nvd3/build/nv.d3.min.js"></script>
-<script src="~/assets/pages/jquery.nvd3.init.js"></script>
+    <script src="~/assets/plugins/d3/d3.min.js"></script>
+    <script src="~/assets/plugins/nvd3/build/nv.d3.min.js"></script>
+    <script src="~/assets/pages/jquery.nvd3.init.js"></script>
 
 
 
-<script src="~/assets/js/jquery.core.js"></script>
-<script src="~/assets/js/jquery.app.js"></script>
+    <script src="~/assets/js/jquery.core.js"></script>
+    <script src="~/assets/js/jquery.app.js"></script>
 
-<!-- Chart JS -->
-<script src="~/assets/plugins/Chart.js/Chart.min.js"></script>
+    <!-- Chart JS -->
+    <script src="~/assets/plugins/Chart.js/Chart.min.js"></script>
 
 
-<script src="~/assets/js.app/empresas.js"></script>
+    <script src="~/assets/js.app/empresas.js"></script>
 
 
 }
@@ -55,20 +55,18 @@
         <div class="col-lg-4">
             <div class="card-box">
                 <h4 class="text-dark header-title m-t-0 m-b-30">Ciclo de Vida</h4>
-
                 <div class="widget-chart text-center">
                     <div id="grafCicloVida">
                         <svg style="height: 350px; width: 100%;"></svg>
                     </div>
-
-                    <ul class="list-inline m-t-15">
+                    @*<ul class="list-inline m-t-15">
                         <li>
                             <h5 class="text-muted m-t-20">Adulto Mayor</h5>
                             <h4 class="m-b-0" id="CVAdultoMayor">1000</h4>
                         </li>
                         <li>
                             <h5 class="text-muted m-t-20">Adultos</h5>
-                            <h4 class="m-b-0" id="CVAdultos">523</h4>
+                            <h4 class="m-b-0" id="CVAdulto">523</h4>
                         </li>
                         <li>
                             <h5 class="text-muted m-t-20">Desarrollo</h5>
@@ -82,20 +80,18 @@
                             <h5 class="text-muted m-t-20">Madurez</h5>
                             <h4 class="m-b-0" id="CVMadurez">965</h4>
                         </li>
-                    </ul>
+                    </ul>*@
                 </div>
             </div>
-        </div>    
+        </div>
         <div class="col-lg-4">
             <div class="card-box">
-                <h4 class="text-dark header-title m-t-0 m-b-30">Nivel Socioeconomico</h4>
-
+                <h4 class="text-dark header-title m-t-0 m-b-30">Nivel Socioeconómico</h4>
                 <div class="widget-chart text-center">
                     <div id="grafNSE">
                         <svg style="height: 350px; width: 100%;"></svg>
                     </div>
-
-                    <ul class="list-inline m-t-15">
+                    @*<ul class="list-inline m-t-15">
                         <li>
                             <h5 class="text-muted m-t-20">ABC1</h5>
                             <h4 class="m-b-0" id="NSEABC1">1000</h4>
@@ -116,19 +112,191 @@
                             <h5 class="text-muted m-t-20">E</h5>
                             <h4 class="m-b-0" id="NSEE">965</h4>
                         </li>
-                    </ul>
+                    </ul>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tramo Asignación Familiar</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafTramoAF">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+                    @*<ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">Tramo A</h5>
+                            <h4 class="m-b-0" id="Tramo_A">1000</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Tramo B</h5>
+                            <h4 class="m-b-0" id="Tramo_B">523</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Tramo C</h5>
+                            <h4 class="m-b-0" id="Tramo_C">965</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Tramo D</h5>
+                            <h4 class="m-b-0" id="Tramo_D">965</h4>
+                        </li>
+
+                    </ul>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tramo Etario Afiliados</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafTramoEtarioA">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+                    @*<ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">18 a 30</h5>
+                            <h4 class="m-b-0" id="18a30">1000</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">31 a 45</h5>
+                            <h4 class="m-b-0" id="31a45">523</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">46 a 60</h5>
+                            <h4 class="m-b-0" id="46a60">965</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">61 a 75</h5>
+                            <h4 class="m-b-0" id="61a75">965</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">75 y mas</h5>
+                            <h4 class="m-b-0" id="75mas">965</h4>
+                        </li>
+                    </ul>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Régimen de Salud</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafRegimenSalud">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+
+                    @*<ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">Fonasa</h5>
+                            <h4 class="m-b-0" id="Fonasa">1000</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Isapre</h5>
+                            <h4 class="m-b-0" id="Isapre">523</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Sin Información</h5>
+                            <h4 class="m-b-0" id="SinInfo">523</h4>
+                        </li>
+                    </ul>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Genéro</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafGenero">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+
+                    @*<ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">Fonasa</h5>
+                            <h4 class="m-b-0" id="Fonasa">1000</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Isapre</h5>
+                            <h4 class="m-b-0" id="Isapre">523</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Sin Información</h5>
+                            <h4 class="m-b-0" id="SinInfo">523</h4>
+                        </li>
+                    </ul>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tenencia de Cargas</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafCargas">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+
+                    @*<ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">Fonasa</h5>
+                            <h4 class="m-b-0" id="Fonasa">1000</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Isapre</h5>
+                            <h4 class="m-b-0" id="Isapre">523</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Sin Información</h5>
+                            <h4 class="m-b-0" id="SinInfo">523</h4>
+                        </li>
+                    </ul>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tipo de Carga</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafTipoCarga">
+                        <svg style="height: 350px; width: 100%;"></svg>
+                    </div>
+
+                    @*<ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">Fonasa</h5>
+                            <h4 class="m-b-0" id="Fonasa">1000</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Isapre</h5>
+                            <h4 class="m-b-0" id="Isapre">523</h4>
+                        </li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Sin Información</h5>
+                            <h4 class="m-b-0" id="SinInfo">523</h4>
+                        </li>
+                    </ul>*@
                 </div>
             </div>
         </div>
 
+
+        <div class="col-lg-6">
+            <div class="card-box">
+                <h4 class="m-t-0 header-title"><b>Bar Chart</b></h4>
+                <ul class="list-inline chart-detail-list text-center">
+                    <li><h5><i class="fa fa-circle m-r-5" style="color: #5d9cec"></i>Series A</h5></li>
+                    <li><h5><i class="fa fa-circle m-r-5" style="color: #ebeff2"></i>Series B</h5></li>
+                </ul>
+                <canvas style="width: 483px; height: 300px;" width="483" id="bar" height="300"></canvas>
+            </div>
+            </div>
     </div>
 
+ 
 
 
+    <input type="hidden" value="@Html.Raw(ViewBag.Empresa.Id)" id="IdEmpresa" />
 
-        <input type="hidden" value="@Html.Raw(ViewBag.Empresa.Id)" id="IdEmpresa" />
-
-    </div>
+</div>
 
 
 

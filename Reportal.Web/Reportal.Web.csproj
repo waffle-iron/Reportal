@@ -391,7 +391,6 @@
     </Compile>
     <Compile Include="Models\ActiveDirectoryModel.cs" />
     <Compile Include="Models\Caller\CampCaller.cs" />
-    <Compile Include="Models\Caller\CVidaEmpCaller.cs" />
     <Compile Include="Models\Caller\EmpCaller.cs" />
     <Compile Include="Models\Caller\Icaller.cs" />
     <Compile Include="Models\Json\Menu.cs" />
