@@ -22,7 +22,15 @@ namespace Reportal.Api.Controllers
 
         public IdentidadDetalleEmpresa Get(int id)
         {
-            return empresarepositorio.ObtenerDetalle(id);
+
+           try
+            {
+                return empresarepositorio.ObtenerDetalle(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }            
         }
     }
 }

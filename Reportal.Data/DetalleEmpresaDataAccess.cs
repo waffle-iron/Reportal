@@ -23,6 +23,25 @@ namespace Reportal.Data
             return new IdentidadDetalleEmpresa
             {
                 Id = row["RutEmpresa"] != DBNull.Value ? Convert.ToInt32(row["RutEmpresa"]) : 0,
+                empresaDV= row["DvEmpresa"] != DBNull.Value ? row["DvEmpresa"].ToString() : string.Empty,
+                empresaNombre= row["EmpresaNombre"] != DBNull.Value ? row["EmpresaNombre"].ToString() : string.Empty,
+                empresaSectorEconomico= row["SectorEconomico"] != DBNull.Value ? row["SectorEconomico"].ToString() : string.Empty,
+                tipoEmpresa= row["Tipo_empresa"] != DBNull.Value ? row["Tipo_empresa"].ToString() : string.Empty,
+                empresaclasificacionRiesgo= row["ClaRiesgoEmpresa"] != DBNull.Value ? row["ClaRiesgoEmpresa"].ToString() : string.Empty,
+                empresaclasificacionComercial = row["ClaComercialEmpresa"] != DBNull.Value ? row["ClaComercialEmpresa"].ToString() : string.Empty,
+                empresaHolding= row["Holding"] != DBNull.Value ? row["Holding"].ToString() : string.Empty,
+                empresaSegmentoCredito= row["Empresa_Segmento_credito"] != DBNull.Value ? row["Empresa_Segmento_credito"].ToString() : string.Empty,
+                empresaAniosAfiliado = row["Años_afilida"] != DBNull.Value ? Convert.ToInt32(row["Años_afilida"]) : 0,
+                empresaRNK = row["RNK"] != DBNull.Value ? row["RNK"].ToString() : string.Empty,
+                empresaCantidadTrabajadores = row["Cantidad_Trabajadores"] != DBNull.Value ? Convert.ToInt32(row["Cantidad_Trabajadores"]) : 0,
+                empresaTrabajadorMail = row["Trab_Mail"] != DBNull.Value ? Convert.ToInt32(row["Trab_Mail"]) : 0,
+                empresaTrabajadorCelular = row["Trab_Celular"] != DBNull.Value ? Convert.ToInt32(row["Trab_Celular"]) : 0,
+                empresaTrabajadorMailCelular = row["Trab_Mail_celu"] != DBNull.Value ? Convert.ToInt32(row["Trab_Mail_celu"]) : 0,
+                empresaTrabajadorTarjDigital= row["Trab_tarj_digital"] != DBNull.Value ? Convert.ToInt32(row["Trab_tarj_digital"]) : 0,
+                empresaPromedioRenta = row["Promedio_renta"] != DBNull.Value ? Convert.ToDouble(row["Promedio_renta"]) : 0,
+                empresaPromedioEdad = row["Promedio_edad"] != DBNull.Value ? Convert.ToInt32(row["Promedio_edad"]) : 0,
+                empresaSegmento = row["SegmentoEmpresa"] != DBNull.Value ? row["SegmentoEmpresa"].ToString() : string.Empty,
+                empresaNSE = row["EmpresaNSE"] != DBNull.Value ? row["EmpresaNSE"].ToString() : string.Empty,
                 CVAdultoMayor = row["Adulto_Mayor"] != DBNull.Value ? Convert.ToDecimal(row["Adulto_Mayor"]) : 0,
                 CVAdulto = row["Adultos"] != DBNull.Value ? Convert.ToDecimal(row["Adultos"]) : 0,
                 CVDesarrollo = row["Desarrollo"] != DBNull.Value ? Convert.ToDecimal(row["Desarrollo"]) : 0,
@@ -30,7 +49,7 @@ namespace Reportal.Data
                 CVMadurez = row["Madurez"] != DBNull.Value ? Convert.ToDecimal(row["Madurez"]) : 0,
                 NS_Abc1 = row["ABC1"] != DBNull.Value ? Convert.ToDecimal(row["ABC1"]) : 0,
                 NS_C2 = row["C2"] != DBNull.Value ? Convert.ToDecimal(row["C2"]) : 0,
-                NS_C3= row["C3"] != DBNull.Value ? Convert.ToDecimal(row["C3"]) : 0,
+                NS_C3 = row["C3"] != DBNull.Value ? Convert.ToDecimal(row["C3"]) : 0,
                 NS_D = row["D"] != DBNull.Value ? Convert.ToDecimal(row["D"]) : 0,
                 NS_E = row["E"] != DBNull.Value ? Convert.ToDecimal(row["E"]) : 0,
                 TA_Tramo_A = row["Tramo_A"] != DBNull.Value ? Convert.ToDecimal(row["Tramo_A"]) : 0,
@@ -58,11 +77,7 @@ namespace Reportal.Data
                 CargaHijoDe7a14Anios = row["De 7 a 14 Años"] != DBNull.Value ? Convert.ToDecimal(row["De 7 a 14 Años"]) : 0,
                 CargaHijoDe15a18Anios = row["De 15 a 18 Años"] != DBNull.Value ? Convert.ToDecimal(row["De 15 a 18 Años"]) : 0,
                 CargaHijoDe19MasAnios = row["De 19 y mas Años"] != DBNull.Value ? Convert.ToDecimal(row["De 19 y mas Años"]) : 0,
-
-
-
-
-
+                TotalTrabajadores = row["TotalTrabajorEmpresa"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajorEmpresa"]) : 0,
             };
         }
     }

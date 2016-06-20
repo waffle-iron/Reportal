@@ -35,32 +35,50 @@ $(document).ready(function () {
             $("#CVJovenes").text(data.CVJovenes.toMoney() + "%");
             $("#CVMadurez").text(data.CVMadurez.toMoney() + "%");
             */
-            
+            $("#empresaRut").text(data.Id);
+            $("#empresaSegmento").text(data.empresaSegmento);
+            $("#empresaDV").text(data.empresaDV)
+            $("#empresaNSE").text(data.empresaNSE);
+            $("#empresaNombre").text(data.empresaNombre);
+            $("#empresaNumTrabajadores").text(data.empresaCantidadTrabajadores);
+            $("#empresaTipo").text(data.tipoEmpresa);
+            $("#empresaTrabajadorMail").text(data.empresaTrabajadorMail);
+            $("#empresaSectorEconomico").text(data.empresaSectorEconomico);
+            $("#empresaTrabajadorCelular").text(data.empresaTrabajadorCelular);
+            $("#clasificacionComercial").text(data.empresaclasificacionComercial);
+            $("#clasificacionRiesgo").text(data.empresaclasificacionRiesgo);
+            $("#empresaTrabajadorMailCelular").text(data.empresaTrabajadorMailCelular);
+            $("#empresaTrabajadorTarjeta").text(data.empresaTrabajadorTarjDigital);
+            $("#clasificacionCredito").text(data.empresaSegmentoCredito);
+            $("#empresaTrabajadorRentaPromedio").text(data.empresaPromedioRenta.toMoney());
+            $("#antiguedadempresa").text(data.empresaAniosAfiliado); 
+            $("#empresatrabajadorpromedio").text(data.empresaPromedioEdad);
+            $("#perteneceholding").text(data.empresaHolding);
 
             var proCicloVida = [
                 {
                     "label": "Adulto",
-                    "value": data.CVAdulto,
+                    "value": Math.round(data.CVAdulto * data.empresaCantidadTrabajadores),
                     "color": '#5fbeaa'
                 },
                 {
                     "label": "Adulto Mayor",
-                    "value": data.CVAdultoMayor,
+                    "value": Math.round(data.CVAdultoMayor * data.empresaCantidadTrabajadores),
                     "color": '#5d9cec'
                 },
                 {
                     "label": "Desarrollo",
-                    "value": data.CVDesarrollo,
+                    "value": Math.round(data.CVDesarrollo * data.empresaCantidadTrabajadores),
                     "color": '#A9F5BC'
                 },
                 {
                     "label": "Jovenes",
-                    "value": data.CVJovenes,
+                    "value": Math.round(data.CVJovenes * data.empresaCantidadTrabajadores),
                     "color": '#A9F5A9'
                 },
                 {
                     "label": "Madurez",
-                    "value": data.CVMadurez,
+                    "value": Math.round(data.CVMadurez * data.empresaCantidadTrabajadores),
                     "color": '#0000FF'
                 }
 
@@ -88,39 +106,33 @@ $(document).ready(function () {
 
                 return chartCicloVida;
             });
-            /*
-            $("#NSEABC1").text(data.NS_Abc1.toMoney());
-            $("#NSEC2").text(data.NS_C2.toMoney());
-            $("#NSEC3").text(data.NS_C3.toMoney());
-            $("#NSED").text(data.NS_D.toMoney());
-            $("#NSEE").text(data.NS_E.toMoney());
-            */
+         
 
 
             var proNSE = [
                 {
                     "label": "ABC1",
-                    "value": data.NS_Abc1,
+                    "value": Math.round(data.NS_Abc1 * data.empresaCantidadTrabajadores),
                     "color": '#5fbeaa'
                 },
                 {
                     "label": "C2",
-                    "value": data.NS_C2,
+                    "value": Math.round(data.NS_C2 * data.empresaCantidadTrabajadores),
                     "color": '#5d9cec'
                 },
                 {
                     "label": "C3",
-                    "value": data.NS_C3,
+                    "value": Math.round(data.NS_C3 * data.empresaCantidadTrabajadores),
                     "color": '#A9F5BC'
                 },
                 {
                     "label": "D",
-                    "value": data.NS_D,
+                    "value": Math.round(data.NS_D * data.empresaCantidadTrabajadores),
                     "color": '#A9F5A9'
                 },
                 {
                     "label": "E",
-                    "value": data.NS_E,
+                    "value": Math.round(data.NS_E * data.empresaCantidadTrabajadores),
                     "color": '#0000FF'
                 }
 
@@ -149,33 +161,27 @@ $(document).ready(function () {
                 return chartNSE;
             });
 
-            /*
-            $("#Tramo_A").text(data.TA_Tramo_A.toMoney());
-            $("#Tramo_B").text(data.TA_Tramo_B.toMoney());
-            $("#Tramo_C").text(data.TA_Tramo_C.toMoney());
-            $("#Tramo_D").text(data.TA_Tramo_D.toMoney());
-            */
-
+         
 
             var proAsignacionFamiliar = [
                 {
                     "label": "Tramo A",
-                    "value": data.TA_Tramo_A,
+                    "value": Math.round(data.TA_Tramo_A * data.empresaCantidadTrabajadores),
                     "color": '#5fbeaa'
                 },
                 {
                     "label": "Tramo B",
-                    "value": data.TA_Tramo_B,
+                    "value": Math.round(data.TA_Tramo_B * data.empresaCantidadTrabajadores),
                     "color": '#5d9cec'
                 },
                 {
                     "label": "Tramo C",
-                    "value": data.TA_Tramo_C,
+                    "value": Math.round(data.TA_Tramo_C * data.empresaCantidadTrabajadores),
                     "color": '#A9F5BC'
                 },
                 {
                     "label": "Tramo D",
-                    "value": data.TA_Tramo_D,
+                    "value": Math.round(data.TA_Tramo_D * data.empresaCantidadTrabajadores),
                     "color": '#A9F5A9'
                 }
 
@@ -215,27 +221,27 @@ $(document).ready(function () {
             var proTramoEtarioAfiliado = [
                 {
                     "label": "18 a 30",
-                    "value": data.TramoEtarioDe18a30Anios,
+                    "value": Math.round(data.TramoEtarioDe18a30Anios * data.empresaCantidadTrabajadores),
                     "color": '#5fbeaa'
                 },
                 {
                     "label": "31 a 45",
-                    "value": data.TramoEtarioDe31a45Anios,
+                    "value": Math.round(data.TramoEtarioDe31a45Anios * data.empresaCantidadTrabajadores),
                     "color": '#5d9cec'
                 },
                 {
                     "label": "46 a 60",
-                    "value": data.TramoEtarioDe46a60Anios,
+                    "value": Math.round(data.TramoEtarioDe46a60Anios * data.empresaCantidadTrabajadores),
                     "color": '#A9F5BC'
                 },
                 {
                     "label": "61 a 75",
-                    "value": data.TramoEtarioDe61a75Anios,
+                    "value": Math.round(data.TramoEtarioDe61a75Anios * data.empresaCantidadTrabajadores),
                     "color": '#A9F5A9'
                 },
                 {
                     "label": "75 a más",
-                    "value": data.TramoEtarioDe75aMasAnios,
+                    "value": Math.round(data.TramoEtarioDe75aMasAnios * data.empresaCantidadTrabajadores),
                     "color": '#0000FF'
                 }
 
@@ -274,17 +280,20 @@ $(document).ready(function () {
             var proRegimenSalud = [
                 {
                     "label": "Fonasa",
-                    "value": data.RegimenSaludFonasa,
+                    //"value": data.RegimenSaludFonasa,
+                    "value": Math.round(data.RegimenSaludFonasa * data.empresaCantidadTrabajadores),
                     "color": '#5fbeaa'
                 },
                 {
                     "label": "Isapre",
-                    "value": data.RegimenSaludIsapre,
+                    //"value": data.RegimenSaludIsapre,
+                    "value": Math.round(data.RegimenSaludIsapre * data.empresaCantidadTrabajadores),
                     "color": '#5d9cec'
                 },
                 {
                     "label": "Sin Información",
-                    "value": data.RegimenSaludSinInformacion,
+                    //"value": data.RegimenSaludSinInformacion,
+                    "value": Math.round(data.RegimenSaludSinInformacion * data.empresaCantidadTrabajadores),
                     "color": '#A9F5BC'
                 }
             ];
@@ -313,17 +322,20 @@ $(document).ready(function () {
             var proGenero = [
                {
                    "label": "Masculino",
-                   "value": data.SexoMasculino,
+                   //"value": data.SexoMasculino,
+                   "value": Math.round(data.SexoMasculino * data.empresaCantidadTrabajadores),
                    "color": '#5fbeaa'
                },
                {
                    "label": "Femenino",
-                   "value": data.SexoFemenino,
+                   //"value": data.SexoFemenino,
+                   "value": Math.round(data.SexoFemenino * data.empresaCantidadTrabajadores),
                    "color": '#5d9cec'
                },
                {
                    "label": "Sin Información",
-                   "value": data.SexoSinInfo,
+                   //"value": data.SexoSinInfo,
+                   "value": Math.round(data.SexoSinInfo * data.empresaCantidadTrabajadores),
                    "color": '#A9F5BC'
                }
             ];
@@ -352,12 +364,14 @@ $(document).ready(function () {
             var proTenenciaCarga = [
               {
                   "label": "Si",
-                  "value": data.TC_Si,
+                  //"value": data.TC_Si,
+                  "value": Math.round(data.TC_Si * data.empresaCantidadTrabajadores),
                   "color": '#5fbeaa'
               },
               {
                   "label": "No",
-                  "value": data.TC_No,
+                  //"value": data.TC_No,
+                  "value": Math.round(data.TC_No * data.empresaCantidadTrabajadores),
                   "color": '#5d9cec'
               }
             ];
@@ -372,7 +386,6 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-
                 ;
 
                 d3.select("#grafCargas svg")
@@ -386,12 +399,14 @@ $(document).ready(function () {
             var proTipoCarga = [
              {
                  "label": "Hijos",
-                 "value": data.TipoCargaHijo,
+                 //"value": data.TipoCargaHijo,
+                 "value": Math.round(data.TipoCargaHijo * data.empresaCantidadTrabajadores),
                  "color": '#5fbeaa'
              },
              {
                  "label": "Otros",
-                 "value": data.TipoCargaOtros,
+                 //"value": data.TipoCargaOtros,
+                 "value": Math.round(data.TipoCargaOtros * data.empresaCantidadTrabajadores),
                  "color": '#5d9cec'
              }
             ];
@@ -433,7 +448,6 @@ $(document).ready(function () {
             InicializaGraficas();
         }, 300);
     });
-
 
 
 });
