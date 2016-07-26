@@ -12,8 +12,6 @@ namespace Reportal.Data
 {
     public class ResumenGlobalLicenciaDataAccess
     {
-
-
         public static DataTable ObtenerGraficoBarra(int RutEmpresas)
         {
             

@@ -489,7 +489,7 @@ $(document).ready(function () {
             }
 
 
-            var selector = $("#bar");
+            var selector = $("#bar2");
             var ctx = selector.get(0).getContext("2d");
             var container = $(selector).parent();
             var ww = selector.attr('width', $(container).width());

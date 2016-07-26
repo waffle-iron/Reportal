@@ -379,18 +379,17 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8">
-            <div class="card-box">
-                <h4 class="m-t-10 header-title"><b>Tendencia</b></h4>
+            @*<p align="right">
+                <a href="~/Empresas/DetalleMapaEmpresaV2" class="btn btn-default btn-rounded waves-effect waves-light" role="button">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-right"></i>
+                    </span>Siguiente
+                </a>
+            </p>*@
 
-                <ul class="list-inline chart-detail-list text-center">
-                    <li><h5><i class="fa fa-circle m-r-5" style="color: #0000ff"></i>Porcentaje de afiliados contactables en los ultimos 10 meses</h5></li>
-                </ul>
-                <canvas id="bar" height="351"></canvas>
-            </div>
         </div>
-    </div>
     <input type="hidden" value="@Html.Raw(ViewBag.Empresa.Id)" id="IdEmpresa" />
+    
     <input type="hidden" id="TotalEmpresaCalculo" />
 </div>
 
