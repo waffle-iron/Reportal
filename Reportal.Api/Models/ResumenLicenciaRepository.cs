@@ -8,20 +8,11 @@ using Reportal.Domain;
 
 namespace Reportal.Api.Models
 {
-    public class ResumenRepository
+    public class ResumenLicenciaRepository
     {
-        public ResumenGlobal Obtener()
-        {
-            return ResumenGlobalDataAccess.Obtener();
-        }
+      
 
-        public List<ResumenGlobal> Listar()
-        {
-            return ResumenGlobalDataAccess.Listar();
-        }
-
-
-        public TendenciaBarChart ObtenerGraficoBarra()
+        public TendenciaBarChart ObtenerGraficoBarra(int id)
         {
             TendenciaBarChart retorno = new TendenciaBarChart();
             retorno.datasets = new List<DataSetBarChart>();
@@ -36,7 +27,7 @@ namespace Reportal.Api.Models
             };
 
 
-            DataRowCollection rwsGraficos = ResumenGlobalDataAccess.ObtenerGraficoBarra().Rows;
+            DataRowCollection rwsGraficos = ResumenGlobalLicenciaDataAccess.ObtenerGraficoBarra(id).Rows;
             int meseMotrar = 10;
 
 
@@ -45,8 +36,8 @@ namespace Reportal.Api.Models
                 try
                 {
                     DataRow vrGr = rwsGraficos[i];
-                    retorno.labels.Add(vrGr["Periodo"].ToString());
-                    dsVc.data.Add(Convert.ToInt32(vrGr["Porcentaje"]));
+                    retorno.labels.Add(vrGr["Licencia_fInicio"].ToString());
+                    dsVc.data.Add(Convert.ToInt32(vrGr["porcentaje"]));
                 }
                 catch (IndexOutOfRangeException ex)
                 {

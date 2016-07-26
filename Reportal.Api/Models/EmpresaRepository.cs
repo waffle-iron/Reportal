@@ -23,6 +23,11 @@ namespace Reportal.Api.Models
         {
             return DetalleEmpresaDataAccess.Obtener(id);
         }
+        
+        public IdentidadEncabezadoEmpresa ObtenerEncabezado(int id)
+        {
+            return EncabezadoEmpresaDataAccess.ObtenerEncabezado(id);
+        }
 
     }
 }

@@ -12,20 +12,19 @@ using System.Web.Http.Cors;
 namespace Reportal.Api.Controllers
 {
     [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
-    public class TendenciaResumenController : ApiController
+    public class ResumenLicenciaController : ApiController
     {
+        private ResumenLicenciaRepository resumenRepo;
 
-        private ResumenRepository resumenRepo;
-
-        public TendenciaResumenController()
+        public ResumenLicenciaController()
         {
-            resumenRepo = new ResumenRepository();
+            resumenRepo = new ResumenLicenciaRepository();
         }
 
         // GET api/TendenciaResumen
-        public TendenciaBarChart Get()
+        public TendenciaBarChart Get(int id)
         {
-            return resumenRepo.ObtenerGraficoBarra();
+            return resumenRepo.ObtenerGraficoBarra(id);
         }
     }
 }

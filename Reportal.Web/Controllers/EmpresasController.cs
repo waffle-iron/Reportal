@@ -27,7 +27,6 @@ namespace Reportal.Web.Controllers
         {
             //ViewBag.Campania = emp.Get(id);
             ViewBag.Empresa = emp.Get(id);
-
             return View();
         }
     }

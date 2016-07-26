@@ -43,9 +43,11 @@
     <Compile Include="DetalleCampaniaDataAccess.cs" />
     <Compile Include="DetalleEmpresaDataAccess.cs" />
     <Compile Include="EmpresaDataAccess.cs" />
+    <Compile Include="EncabezadoEmpresaDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CampaniaDataAccess.cs" />
     <Compile Include="ResumenGlobalDataAccess.cs" />
+    <Compile Include="ResumenGlobalLicenciaDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CDK\CDK.csproj">

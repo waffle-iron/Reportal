@@ -13,7 +13,10 @@ namespace Reportal.Domain
         public string HoldingEmpresa { get; set; }
         public string RubroEmpresa { get; set; }
         public string TipoEntidadEmpresa { get; set; }
-        public int PeriodoEmpresa { get; set; }
+        public string ClasificacionRiegoEmpresa { get; set; }
+        public string ClasificacionComercial { get; set; }
+        public int TotalAfiliados { get; set; }
+        public int TotalAfiliadosCredito { get; set; }
 
     }
 }

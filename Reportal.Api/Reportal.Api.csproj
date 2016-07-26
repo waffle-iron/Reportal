@@ -168,8 +168,10 @@
     <Compile Include="Controllers\DetalleCampaniaController.cs" />
     <Compile Include="Controllers\DetalleEmpresaController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\EncabezadoEmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ResumenController.cs" />
+    <Compile Include="Controllers\ResumenLicenciaController.cs" />
     <Compile Include="Controllers\TendenciaResumenController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -177,6 +179,7 @@
     </Compile>
     <Compile Include="Models\CampaniasRepository.cs" />
     <Compile Include="Models\EmpresaRepository.cs" />
+    <Compile Include="Models\ResumenLicenciaRepository.cs" />
     <Compile Include="Models\ResumenRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

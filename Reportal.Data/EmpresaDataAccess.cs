@@ -31,7 +31,11 @@ namespace Reportal.Data
                 HoldingEmpresa = row["Holding"] != DBNull.Value ? row["Holding"].ToString() : string.Empty,
                 RubroEmpresa = row["RubroEmpresa"] != DBNull.Value ? row["RubroEmpresa"].ToString() : string.Empty,
                 TipoEntidadEmpresa = row["TipoEntidad"] != DBNull.Value ? row["TipoEntidad"].ToString() : string.Empty,
-                PeriodoEmpresa = row["Periodo"] != DBNull.Value ? Convert.ToInt32(row["Periodo"]) : 0
+                ClasificacionRiegoEmpresa = row["Clasificacion_Riesgo"] != DBNull.Value ? row["Clasificacion_Riesgo"].ToString() : string.Empty,
+                ClasificacionComercial = row["Clasificacion_Comercial"] != DBNull.Value ? row["Clasificacion_Comercial"].ToString() : string.Empty,
+                TotalAfiliados = row["Total_Afiliados"] != DBNull.Value ? Convert.ToInt32(row["Total_Afiliados"]) : 0,
+                TotalAfiliadosCredito = row["Total_Afiliados_Creditos"] != DBNull.Value ? Convert.ToInt32(row["Total_Afiliados_Creditos"]) : 0,
+
             };
         }
     }

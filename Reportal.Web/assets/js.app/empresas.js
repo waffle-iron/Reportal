@@ -19,22 +19,12 @@
     return sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
 }
 
-
-
-
 $(document).ready(function () {
 
     var InicializaGraficas = function () {
 
-        $.getJSON("http://localhost:8080/api/DetalleEmpresa/" + $("#IdEmpresa").val(), function (data) {
+        $.getJSON("http://localhost:8080/api/EncabezadoEmpresa/" + $("#IdEmpresa").val(), function (data) {
 
-            /*
-            $("#CVAdulto").text(data.CVAdulto.toMoney() + "%");
-            $("#CVAdultoMayor").text(data.CVAdultoMayor.toMoney() + "%");
-            $("#CVDesarrollo").text(data.CVDesarrollo.toMoney() + "%");
-            $("#CVJovenes").text(data.CVJovenes.toMoney() + "%");
-            $("#CVMadurez").text(data.CVMadurez.toMoney() + "%");
-            */
             $("#empresaRut").text(data.Id);
             $("#empresaSegmento").text(data.empresaSegmento);
             $("#empresaDV").text(data.empresaDV)
@@ -51,41 +41,46 @@ $(document).ready(function () {
             $("#empresaTrabajadorTarjeta").text(data.empresaTrabajadorTarjDigital);
             $("#clasificacionCredito").text(data.empresaSegmentoCredito);
             $("#empresaTrabajadorRentaPromedio").text(data.empresaPromedioRenta.toMoney());
-            $("#antiguedadempresa").text(data.empresaAniosAfiliado); 
+            $("#antiguedadempresa").text(data.empresaAniosAfiliado);
             $("#empresatrabajadorpromedio").text(data.empresaPromedioEdad);
             $("#perteneceholding").text(data.empresaHolding);
+        });
 
+        $.getJSON("http://localhost:8080/api/DetalleEmpresa/" + $("#IdEmpresa").val(), function (data) {
+          
             var proCicloVida = [
                 {
                     "label": "Adulto",
-                    "value": Math.round(data.CVAdulto * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.CVAdulto * data.TotalTrabajadores),
+                    //"value":data.CVAdulto,
                     "color": '#5fbeaa'
                 },
                 {
                     "label": "Adulto Mayor",
-                    "value": Math.round(data.CVAdultoMayor * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.CVAdultoMayor * data.TotalTrabajadores),
+                    //"value": data.CVAdultoMayor,
                     "color": '#5d9cec'
                 },
                 {
                     "label": "Desarrollo",
-                    "value": Math.round(data.CVDesarrollo * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.CVDesarrollo * data.TotalTrabajadores),
+                    //"value": data.CVDesarrollo,
                     "color": '#A9F5BC'
                 },
                 {
                     "label": "Jovenes",
-                    "value": Math.round(data.CVJovenes * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.CVJovenes * data.TotalTrabajadores),
+                    //"value": data.CVJovenes,
                     "color": '#A9F5A9'
                 },
                 {
                     "label": "Madurez",
-                    "value": Math.round(data.CVMadurez * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.CVMadurez * data.TotalTrabajadores),
+                   // "value": data.CVMadurez,
                     "color": '#0000FF'
                 }
 
             ];
-
-
-
             //Donut chart example
             nv.addGraph(function () {
                 var chartCicloVida = nv.models.pieChart()
@@ -107,39 +102,33 @@ $(document).ready(function () {
                 return chartCicloVida;
             });
          
-
-
             var proNSE = [
                 {
                     "label": "ABC1",
-                    "value": Math.round(data.NS_Abc1 * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.NS_Abc1 * data.TotalTrabajadores),
                     "color": '#5fbeaa'
                 },
                 {
                     "label": "C2",
-                    "value": Math.round(data.NS_C2 * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.NS_C2 * data.TotalTrabajadores),
                     "color": '#5d9cec'
                 },
                 {
                     "label": "C3",
-                    "value": Math.round(data.NS_C3 * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.NS_C3 * data.TotalTrabajadores),
                     "color": '#A9F5BC'
                 },
                 {
                     "label": "D",
-                    "value": Math.round(data.NS_D * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.NS_D * data.TotalTrabajadores),
                     "color": '#A9F5A9'
                 },
                 {
                     "label": "E",
-                    "value": Math.round(data.NS_E * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.NS_E * data.TotalTrabajadores),
                     "color": '#0000FF'
                 }
-
             ];
-
-
-
             //Donut chart example
             nv.addGraph(function () {
                 var chartNSE = nv.models.pieChart()
@@ -152,7 +141,6 @@ $(document).ready(function () {
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
 
                 ;
-
                 d3.select("#grafNSE svg")
                     .datum(proNSE)
                     .transition().duration(350)
@@ -160,35 +148,29 @@ $(document).ready(function () {
 
                 return chartNSE;
             });
-
-         
-
             var proAsignacionFamiliar = [
                 {
                     "label": "Tramo A",
-                    "value": Math.round(data.TA_Tramo_A * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.TA_Tramo_A * data.TotalTrabajadores),
                     "color": '#5fbeaa'
                 },
                 {
                     "label": "Tramo B",
-                    "value": Math.round(data.TA_Tramo_B * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.TA_Tramo_B * data.TotalTrabajadores),
                     "color": '#5d9cec'
                 },
                 {
                     "label": "Tramo C",
-                    "value": Math.round(data.TA_Tramo_C * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.TA_Tramo_C * data.TotalTrabajadores),
                     "color": '#A9F5BC'
                 },
                 {
                     "label": "Tramo D",
-                    "value": Math.round(data.TA_Tramo_D * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.TA_Tramo_D * data.TotalTrabajadores),
                     "color": '#A9F5A9'
                 }
 
             ];
-
-
-
             //Donut chart example
             nv.addGraph(function () {
                 var chartAsignacionFamiliar = nv.models.pieChart()
@@ -199,7 +181,6 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-
                 ;
 
                 d3.select("#grafTramoAF svg")
@@ -209,44 +190,34 @@ $(document).ready(function () {
 
                 return chartAsignacionFamiliar;
             });
-            /*
-            $("#18a30").text(data.TramoEtarioDe18a30Anios.toMoney());
-            $("#31a45").text(data.TramoEtarioDe31a45Anios.toMoney());
-            $("#46a60").text(data.TramoEtarioDe46a60Anios.toMoney());
-            $("#61a75").text(data.TramoEtarioDe61a75Anios.toMoney());
-            $("#75mas").text(data.TramoEtarioDe75aMasAnios.toMoney());
-            */
-
-
             var proTramoEtarioAfiliado = [
                 {
                     "label": "18 a 30",
-                    "value": Math.round(data.TramoEtarioDe18a30Anios * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.TramoEtarioDe18a30Anios * data.TotalTrabajadores),
                     "color": '#5fbeaa'
                 },
                 {
                     "label": "31 a 45",
-                    "value": Math.round(data.TramoEtarioDe31a45Anios * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.TramoEtarioDe31a45Anios * data.TotalTrabajadores),
                     "color": '#5d9cec'
                 },
                 {
                     "label": "46 a 60",
-                    "value": Math.round(data.TramoEtarioDe46a60Anios * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.TramoEtarioDe46a60Anios * data.TotalTrabajadores),
                     "color": '#A9F5BC'
                 },
                 {
                     "label": "61 a 75",
-                    "value": Math.round(data.TramoEtarioDe61a75Anios * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.TramoEtarioDe61a75Anios * data.TotalTrabajadores),
                     "color": '#A9F5A9'
                 },
                 {
                     "label": "75 a más",
-                    "value": Math.round(data.TramoEtarioDe75aMasAnios * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.TramoEtarioDe75aMasAnios * data.TotalTrabajadores),
                     "color": '#0000FF'
                 }
 
             ];
-
             //Donut chart example
             nv.addGraph(function () {
                 var chartTramoEtarioAfiliado = nv.models.pieChart()
@@ -267,33 +238,23 @@ $(document).ready(function () {
 
                 return chartTramoEtarioAfiliado;
             });
-
-            /*
-            $("#Fonasa").text(data.RegimenSaludFonasa.toMoney());
-            $("#Isapre").text(data.RegimenSaludIsapre.toMoney());
-            $("#SinInfo").text(data.RegimenSaludSinInformacion.toMoney());
-            */
-          
-
-
-
             var proRegimenSalud = [
                 {
                     "label": "Fonasa",
                     //"value": data.RegimenSaludFonasa,
-                    "value": Math.round(data.RegimenSaludFonasa * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.RegimenSaludFonasa * data.TotalTrabajadores),
                     "color": '#5fbeaa'
                 },
                 {
                     "label": "Isapre",
                     //"value": data.RegimenSaludIsapre,
-                    "value": Math.round(data.RegimenSaludIsapre * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.RegimenSaludIsapre * data.TotalTrabajadores),
                     "color": '#5d9cec'
                 },
                 {
                     "label": "Sin Información",
                     //"value": data.RegimenSaludSinInformacion,
-                    "value": Math.round(data.RegimenSaludSinInformacion * data.empresaCantidadTrabajadores),
+                    "value": Math.round(data.RegimenSaludSinInformacion * data.TotalTrabajadores),
                     "color": '#A9F5BC'
                 }
             ];
@@ -318,28 +279,26 @@ $(document).ready(function () {
 
                 return chartRegimenSalud;
             });
-
             var proGenero = [
                {
                    "label": "Masculino",
                    //"value": data.SexoMasculino,
-                   "value": Math.round(data.SexoMasculino * data.empresaCantidadTrabajadores),
+                   "value":Math.round(data.SexoMasculino * data.TotalTrabajadores),
                    "color": '#5fbeaa'
                },
                {
                    "label": "Femenino",
                    //"value": data.SexoFemenino,
-                   "value": Math.round(data.SexoFemenino * data.empresaCantidadTrabajadores),
+                   "value": Math.round(data.SexoFemenino * data.TotalTrabajadores),
                    "color": '#5d9cec'
                },
                {
                    "label": "Sin Información",
                    //"value": data.SexoSinInfo,
-                   "value": Math.round(data.SexoSinInfo * data.empresaCantidadTrabajadores),
+                   "value": Math.round(data.SexoSinInfo * data.TotalTrabajadores),
                    "color": '#A9F5BC'
                }
             ];
-
             //Donut chart example
             nv.addGraph(function () {
                 var chartGenero = nv.models.pieChart()
@@ -360,22 +319,20 @@ $(document).ready(function () {
 
                 return chartGenero;
             });
-
             var proTenenciaCarga = [
               {
                   "label": "Si",
                   //"value": data.TC_Si,
-                  "value": Math.round(data.TC_Si * data.empresaCantidadTrabajadores),
+                  "value": Math.round(data.TC_Si * data.TotalTrabajadores),
                   "color": '#5fbeaa'
               },
               {
                   "label": "No",
                   //"value": data.TC_No,
-                  "value": Math.round(data.TC_No * data.empresaCantidadTrabajadores),
+                  "value": Math.round(data.TC_No * data.TotalTrabajadores),
                   "color": '#5d9cec'
               }
             ];
-
             //Donut chart example
             nv.addGraph(function () {
                 var chartCarga = nv.models.pieChart()
@@ -395,18 +352,17 @@ $(document).ready(function () {
 
                 return chartCarga;
             });
-
             var proTipoCarga = [
              {
                  "label": "Hijos",
                  //"value": data.TipoCargaHijo,
-                 "value": Math.round(data.TipoCargaHijo * data.empresaCantidadTrabajadores),
+                 "value": Math.round(data.TipoCargaHijo * data.TotalTrabajadores),
                  "color": '#5fbeaa'
              },
              {
                  "label": "Otros",
                  //"value": data.TipoCargaOtros,
-                 "value": Math.round(data.TipoCargaOtros * data.empresaCantidadTrabajadores),
+                 "value": Math.round(data.TipoCargaOtros * data.TotalTrabajadores),
                  "color": '#5d9cec'
              }
             ];
@@ -431,10 +387,114 @@ $(document).ready(function () {
 
                 return chartTipoCarga;
             });
+            var proTipoHijosEdad = [
+        {
+            "label": "De 0 a 2 años",
+            //"value": data.TipoCargaHijo,
+            "value": Math.round(data.CargaHijoDe0a2Anios * data.TotalTrabajadores),
+            "color": '#6890FC'
+        },
+        {
+            "label": "De 3 a 4 años",
+            //"value": data.TipoCargaOtros,
+            "value": Math.round(data.CargaHijoDe3a4Anios * data.TotalTrabajadores),
+            "color": '#FF8A14'
+        },
+        {
+            "label": "De 5 a 6 años",
+            //"value": data.TipoCargaOtros,
+            "value": Math.round(data.CargaHijoDe5a6Anios * data.TotalTrabajadores),
+            "color": '#FF3131'
+        },
+        {
+            "label": "De 7 a 14 años",
+            //"value": data.TipoCargaOtros,
+            "value": Math.round(data.CargaHijoDe7a14Anios * data.TotalTrabajadores),
+            "color": '#5858FA'
+        },
+        {
+            "label": "De 15 a 18 años",
+            //"value": data.TipoCargaOtros,
+            "value": Math.round(data.CargaHijoDe15a18Anios * data.TotalTrabajadores),
+            "color": '#BDBDBD'
+        },
+         {
+             "label": "De 19 a más años",
+             //"value": data.TipoCargaOtros,
+             "value": Math.round(data.CargaHijoDe19MasAnios * data.TotalTrabajadores),
+             "color": '#013ADF'
+         }
+            ];
+
+            //Donut chart example
+            nv.addGraph(function () {
+                var chartTipoCargaHijosEdad = nv.models.pieChart()
+                    .x(function (d) { return d.label })
+                    .y(function (d) { return d.value })
+                    .showLabels(true)     //Display pie labels
+                    .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                    .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                    .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                    .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
+
+                ;
+
+                d3.select("#grafTipoCargaHijosporEdad svg")
+                    .datum(proTipoHijosEdad)
+                    .transition().duration(350)
+                    .call(chartTipoCargaHijosEdad);
+
+                return chartTipoCargaHijosEdad;
+            });
+            $.getJSON("http://localhost:8080/api/TendenciaResumen", function (data) {
+
+                //Grafico de barras
+                var BarChart = {
+                    labels: ["Enero - 2016", "Febrero - 2016"],
+                    datasets: [
+                        {
+                            fillColor: 'rgba(95, 190, 170, 0.7)',
+                            strokeColor: 'rgba(95, 190, 170, 1)',
+                            highlightFill: 'rgba(95, 190, 170, 1)',
+                            highlightStroke: 'rgba(95, 190, 170, 0.9)',
+                            data: [75, 100]
+                        }
+                    ]
+                }
+
+
+                var selector = $("#bar");
+                var ctx = selector.get(0).getContext("2d");
+                var container = $(selector).parent();
+                var ww = selector.attr('width', $(container).width());
+                var sal = new Chart(ctx).Bar(data);
+            });
+
         });//ciere local
 
-      
+        $.getJSON("http://localhost:8080/api/ResumenLicencia/" + $("#IdEmpresa").val(), function (data) {
 
+            //Grafico de barras
+            var BarChart = {
+                labels: ["Enero - 2016", "Febrero - 2016"],
+                datasets: [
+                    {
+                        fillColor: 'rgba(95, 190, 170, 0.7)',
+                        strokeColor: 'rgba(95, 190, 170, 1)',
+                        highlightFill: 'rgba(95, 190, 170, 1)',
+                        highlightStroke: 'rgba(95, 190, 170, 0.9)',
+                        data: [75, 100] / 100
+                    }
+                ]
+            }
+
+
+            var selector = $("#bar");
+            var ctx = selector.get(0).getContext("2d");
+            var container = $(selector).parent();
+            var ww = selector.attr('width', $(container).width());
+            var sal = new Chart(ctx).Bar(data);
+        });
     }
 
     InicializaGraficas();
