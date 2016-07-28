@@ -30,15 +30,15 @@ $(document).ready(function () {
             $("#empresaDV").text(data.empresaDV)
             $("#empresaNSE").text(data.empresaNSE);
             $("#empresaNombre").text(data.empresaNombre);
-            $("#empresaNumTrabajadores").text(data.empresaCantidadTrabajadores);
+            $("#empresaNumTrabajadores").text(data.empresaCantidadTrabajadores.toMoney());
             $("#empresaTipo").text(data.tipoEmpresa);
-            $("#empresaTrabajadorMail").text(data.empresaTrabajadorMail);
+            $("#empresaTrabajadorMail").text(data.empresaTrabajadorMail.toMoney());
             $("#empresaSectorEconomico").text(data.empresaSectorEconomico);
-            $("#empresaTrabajadorCelular").text(data.empresaTrabajadorCelular);
+            $("#empresaTrabajadorCelular").text(data.empresaTrabajadorCelular.toMoney());
             $("#clasificacionComercial").text(data.empresaclasificacionComercial);
             $("#clasificacionRiesgo").text(data.empresaclasificacionRiesgo);
-            $("#empresaTrabajadorMailCelular").text(data.empresaTrabajadorMailCelular);
-            $("#empresaTrabajadorTarjeta").text(data.empresaTrabajadorTarjDigital);
+            $("#empresaTrabajadorMailCelular").text(data.empresaTrabajadorMailCelular.toMoney());
+            $("#empresaTrabajadorTarjeta").text(data.empresaTrabajadorTarjDigital.toMoney());
             $("#empresaTrabajadorRentaPromedio").text(data.empresaPromedioRenta.toMoney());
             $("#antiguedadempresa").text(data.empresaAniosAfiliado);
             $("#empresatrabajadorpromedio").text(data.empresaPromedioEdad);
