@@ -39,7 +39,6 @@ $(document).ready(function () {
             $("#clasificacionRiesgo").text(data.empresaclasificacionRiesgo);
             $("#empresaTrabajadorMailCelular").text(data.empresaTrabajadorMailCelular);
             $("#empresaTrabajadorTarjeta").text(data.empresaTrabajadorTarjDigital);
-            $("#clasificacionCredito").text(data.empresaSegmentoCredito);
             $("#empresaTrabajadorRentaPromedio").text(data.empresaPromedioRenta.toMoney());
             $("#antiguedadempresa").text(data.empresaAniosAfiliado);
             $("#empresatrabajadorpromedio").text(data.empresaPromedioEdad);
@@ -47,37 +46,37 @@ $(document).ready(function () {
         });
 
         $.getJSON("http://localhost:8080/api/DetalleEmpresa/" + $("#IdEmpresa").val(), function (data) {
-          
+
             var proCicloVida = [
                 {
                     "label": "Adulto",
-                    "value": Math.round(data.CVAdulto * data.TotalTrabajadores),
-                    //"value":data.CVAdulto,
-                    "color": '#5fbeaa'
+                    //"value": Math.round(data.CVAdulto * data.TotalTrabajadores),
+                    "value": Math.round(data.CVAdulto),
+                    "color": '#013ADF'
                 },
                 {
                     "label": "Adulto Mayor",
-                    "value": Math.round(data.CVAdultoMayor * data.TotalTrabajadores),
-                    //"value": data.CVAdultoMayor,
-                    "color": '#5d9cec'
+                    // "value": Math.round(data.CVAdultoMayor * data.TotalTrabajadores),
+                    "value": data.CVAdultoMayor,
+                    "color": '#BDBDBD'
                 },
                 {
                     "label": "Desarrollo",
-                    "value": Math.round(data.CVDesarrollo * data.TotalTrabajadores),
-                    //"value": data.CVDesarrollo,
-                    "color": '#A9F5BC'
+                    //"value": Math.round(data.CVDesarrollo * data.TotalTrabajadores),
+                    "value": data.CVDesarrollo,
+                    "color": '#5858FA'
                 },
                 {
                     "label": "Jovenes",
-                    "value": Math.round(data.CVJovenes * data.TotalTrabajadores),
-                    //"value": data.CVJovenes,
-                    "color": '#A9F5A9'
+                    // "value": Math.round(data.CVJovenes * data.TotalTrabajadores),
+                    "value": data.CVJovenes,
+                    "color": '#FF3131'
                 },
                 {
                     "label": "Madurez",
-                    "value": Math.round(data.CVMadurez * data.TotalTrabajadores),
-                   // "value": data.CVMadurez,
-                    "color": '#0000FF'
+                    // "value": Math.round(data.CVMadurez * data.TotalTrabajadores),
+                    "value": data.CVMadurez,
+                    "color": '#FF8A14'
                 }
 
             ];
@@ -91,7 +90,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-
+                    .valueFormat(function (d) {
+                        return d.toMoney();
+                    })
                 ;
 
                 d3.select("#grafCicloVida svg")
@@ -101,32 +102,32 @@ $(document).ready(function () {
 
                 return chartCicloVida;
             });
-         
+
             var proNSE = [
                 {
                     "label": "ABC1",
                     "value": Math.round(data.NS_Abc1 * data.TotalTrabajadores),
-                    "color": '#5fbeaa'
+                    "color": '#013ADF'
                 },
                 {
                     "label": "C2",
                     "value": Math.round(data.NS_C2 * data.TotalTrabajadores),
-                    "color": '#5d9cec'
+                    "color": '#BDBDBD'
                 },
                 {
                     "label": "C3",
                     "value": Math.round(data.NS_C3 * data.TotalTrabajadores),
-                    "color": '#A9F5BC'
+                    "color": '#5858FA'
                 },
                 {
                     "label": "D",
                     "value": Math.round(data.NS_D * data.TotalTrabajadores),
-                    "color": '#A9F5A9'
+                    "color": '#FF3131'
                 },
                 {
                     "label": "E",
                     "value": Math.round(data.NS_E * data.TotalTrabajadores),
-                    "color": '#0000FF'
+                    "color": '#FF8A14'
                 }
             ];
             //Donut chart example
@@ -139,7 +140,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-
+                .valueFormat(function (d) {
+                    return d.toMoney();
+                })
                 ;
                 d3.select("#grafNSE svg")
                     .datum(proNSE)
@@ -152,22 +155,22 @@ $(document).ready(function () {
                 {
                     "label": "Tramo A",
                     "value": Math.round(data.TA_Tramo_A * data.TotalTrabajadores),
-                    "color": '#5fbeaa'
+                    "color": '#013ADF'
                 },
                 {
                     "label": "Tramo B",
                     "value": Math.round(data.TA_Tramo_B * data.TotalTrabajadores),
-                    "color": '#5d9cec'
+                    "color": '#BDBDBD'
                 },
                 {
                     "label": "Tramo C",
                     "value": Math.round(data.TA_Tramo_C * data.TotalTrabajadores),
-                    "color": '#A9F5BC'
+                    "color": '#FF8A14'
                 },
                 {
                     "label": "Tramo D",
                     "value": Math.round(data.TA_Tramo_D * data.TotalTrabajadores),
-                    "color": '#A9F5A9'
+                    "color": '#FF3131'
                 }
 
             ];
@@ -181,6 +184,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
+                .valueFormat(function (d) {
+                    return d.toMoney();
+                })
                 ;
 
                 d3.select("#grafTramoAF svg")
@@ -194,27 +200,27 @@ $(document).ready(function () {
                 {
                     "label": "18 a 30",
                     "value": Math.round(data.TramoEtarioDe18a30Anios * data.TotalTrabajadores),
-                    "color": '#5fbeaa'
+                    "color": '#013ADF'
                 },
                 {
                     "label": "31 a 45",
                     "value": Math.round(data.TramoEtarioDe31a45Anios * data.TotalTrabajadores),
-                    "color": '#5d9cec'
+                    "color": '#BDBDBD'
                 },
                 {
                     "label": "46 a 60",
                     "value": Math.round(data.TramoEtarioDe46a60Anios * data.TotalTrabajadores),
-                    "color": '#A9F5BC'
+                    "color": '#5858FA'
                 },
                 {
                     "label": "61 a 75",
                     "value": Math.round(data.TramoEtarioDe61a75Anios * data.TotalTrabajadores),
-                    "color": '#A9F5A9'
+                    "color": '#FF3131'
                 },
                 {
                     "label": "75 a más",
                     "value": Math.round(data.TramoEtarioDe75aMasAnios * data.TotalTrabajadores),
-                    "color": '#0000FF'
+                    "color": '#FF8A14'
                 }
 
             ];
@@ -228,7 +234,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-
+                .valueFormat(function (d) {
+                    return d.toMoney();
+                })
                 ;
 
                 d3.select("#grafTramoEtarioA svg")
@@ -243,19 +251,19 @@ $(document).ready(function () {
                     "label": "Fonasa",
                     //"value": data.RegimenSaludFonasa,
                     "value": Math.round(data.RegimenSaludFonasa * data.TotalTrabajadores),
-                    "color": '#5fbeaa'
+                    "color": '#5858FA'
                 },
                 {
                     "label": "Isapre",
                     //"value": data.RegimenSaludIsapre,
                     "value": Math.round(data.RegimenSaludIsapre * data.TotalTrabajadores),
-                    "color": '#5d9cec'
+                    "color": '#FF3131'
                 },
                 {
                     "label": "Sin Información",
                     //"value": data.RegimenSaludSinInformacion,
                     "value": Math.round(data.RegimenSaludSinInformacion * data.TotalTrabajadores),
-                    "color": '#A9F5BC'
+                    "color": '#FF8A14'
                 }
             ];
 
@@ -269,7 +277,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-
+                .valueFormat(function (d) {
+                    return d.toMoney();
+                })
                 ;
 
                 d3.select("#grafRegimenSalud svg")
@@ -283,20 +293,20 @@ $(document).ready(function () {
                {
                    "label": "Masculino",
                    //"value": data.SexoMasculino,
-                   "value":Math.round(data.SexoMasculino * data.TotalTrabajadores),
-                   "color": '#5fbeaa'
+                   "value": Math.round(data.SexoMasculino * data.TotalTrabajadores),
+                   "color": '#5858FA'
                },
                {
                    "label": "Femenino",
                    //"value": data.SexoFemenino,
                    "value": Math.round(data.SexoFemenino * data.TotalTrabajadores),
-                   "color": '#5d9cec'
+                   "color": '#FF3131'
                },
                {
                    "label": "Sin Información",
                    //"value": data.SexoSinInfo,
                    "value": Math.round(data.SexoSinInfo * data.TotalTrabajadores),
-                   "color": '#A9F5BC'
+                   "color": '#FF8A14'
                }
             ];
             //Donut chart example
@@ -309,7 +319,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-
+                .valueFormat(function (d) {
+                    return d.toMoney();
+                })
                 ;
 
                 d3.select("#grafGenero svg")
@@ -324,13 +336,13 @@ $(document).ready(function () {
                   "label": "Si",
                   //"value": data.TC_Si,
                   "value": Math.round(data.TC_Si * data.TotalTrabajadores),
-                  "color": '#5fbeaa'
+                  "color": '#FF8A14'
               },
               {
                   "label": "No",
                   //"value": data.TC_No,
                   "value": Math.round(data.TC_No * data.TotalTrabajadores),
-                  "color": '#5d9cec'
+                  "color": '#FF3131'
               }
             ];
             //Donut chart example
@@ -343,6 +355,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
+                .valueFormat(function (d) {
+                    return d.toMoney();
+                })
                 ;
 
                 d3.select("#grafCargas svg")
@@ -357,13 +372,13 @@ $(document).ready(function () {
                  "label": "Hijos",
                  //"value": data.TipoCargaHijo,
                  "value": Math.round(data.TipoCargaHijo * data.TotalTrabajadores),
-                 "color": '#5fbeaa'
+                 "color": '#FF8A14'
              },
              {
                  "label": "Otros",
                  //"value": data.TipoCargaOtros,
                  "value": Math.round(data.TipoCargaOtros * data.TotalTrabajadores),
-                 "color": '#5d9cec'
+                 "color": '#FF3131'
              }
             ];
 
@@ -377,7 +392,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-
+                .valueFormat(function (d) {
+                    return d.toMoney();
+                })
                 ;
 
                 d3.select("#grafTipoCarga svg")
@@ -436,7 +453,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-
+                .valueFormat(function (d) {
+                    return d.toMoney();
+                })
                 ;
 
                 d3.select("#grafTipoCargaHijosporEdad svg")

@@ -26,15 +26,15 @@ namespace Reportal.Data
         {
             return new Empresa
             {
-                Id = row["Rut"] != DBNull.Value ? Convert.ToInt32(row["Rut"]) : 0,
-                NombreEmpresa = row["NombreEmpresa"] != DBNull.Value ? row["NombreEmpresa"].ToString() : string.Empty,
+                Id = row["Empresa_Rut"] != DBNull.Value ? Convert.ToInt32(row["Empresa_Rut"]) : 0,
+                Dv = row["Empresa_Dv"] != DBNull.Value ? row["Empresa_Dv"].ToString() : string.Empty,
+                NombreEmpresa = row["EmpresaNombre"] != DBNull.Value ? row["EmpresaNombre"].ToString() : string.Empty,
                 HoldingEmpresa = row["Holding"] != DBNull.Value ? row["Holding"].ToString() : string.Empty,
-                RubroEmpresa = row["RubroEmpresa"] != DBNull.Value ? row["RubroEmpresa"].ToString() : string.Empty,
-                TipoEntidadEmpresa = row["TipoEntidad"] != DBNull.Value ? row["TipoEntidad"].ToString() : string.Empty,
-                ClasificacionRiegoEmpresa = row["Clasificacion_Riesgo"] != DBNull.Value ? row["Clasificacion_Riesgo"].ToString() : string.Empty,
-                ClasificacionComercial = row["Clasificacion_Comercial"] != DBNull.Value ? row["Clasificacion_Comercial"].ToString() : string.Empty,
-                TotalAfiliados = row["Total_Afiliados"] != DBNull.Value ? Convert.ToInt32(row["Total_Afiliados"]) : 0,
-                TotalAfiliadosCredito = row["Total_Afiliados_Creditos"] != DBNull.Value ? Convert.ToInt32(row["Total_Afiliados_Creditos"]) : 0,
+                SectorEcoEmpresa = row["SectorEconomico"] != DBNull.Value ? row["SectorEconomico"].ToString() : string.Empty,
+                TipoEntidadEmpresa = row["Tipo_empresa"] != DBNull.Value ? row["Tipo_empresa"].ToString() : string.Empty,
+                ClasificacionRiegoEmpresa = row["ClaRiesgoEmpresa"] != DBNull.Value ? row["ClaRiesgoEmpresa"].ToString() : string.Empty,
+                ClasificacionComercial = row["ClaComercialEmpresa"] != DBNull.Value ? row["ClaComercialEmpresa"].ToString() : string.Empty,
+                TotalAfiliados = row["Cantidad_Trabajadores"] != DBNull.Value ? Convert.ToInt32(row["Cantidad_Trabajadores"]) : 0,
 
             };
         }

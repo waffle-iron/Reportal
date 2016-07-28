@@ -18,7 +18,7 @@ namespace Reportal.Domain
         public string empresaclasificacionRiesgo { get; set; }
         public string empresaclasificacionComercial { get; set; }
         public string empresaHolding { get; set; }
-        public string empresaSegmentoCredito { get; set; }
+       // public string empresaSegmentoCredito { get; set; }
         public int empresaAniosAfiliado { get; set; }
         public string empresaRNK { get; set; }
         public int empresaCantidadTrabajadores { get; set; }
