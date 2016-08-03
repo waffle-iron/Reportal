@@ -26,6 +26,7 @@ $(document).ready(function () {
         $.getJSON("http://localhost:8080/api/EncabezadoEmpresa/" + $("#IdEmpresa").val(), function (data) {
 
             $("#empresaRut").text(data.Id);
+            $("#empresaRutDv").text(data.Rut_DV);
             $("#empresaSegmento").text(data.empresaSegmento);
             $("#empresaDV").text(data.empresaDV)
             $("#empresaNSE").text(data.empresaNSE);
@@ -36,13 +37,16 @@ $(document).ready(function () {
             $("#empresaSectorEconomico").text(data.empresaSectorEconomico);
             $("#empresaTrabajadorCelular").text(data.empresaTrabajadorCelular.toMoney());
             $("#clasificacionComercial").text(data.empresaclasificacionComercial);
-            $("#clasificacionRiesgo").text(data.empresaclasificacionRiesgo);
             $("#empresaTrabajadorMailCelular").text(data.empresaTrabajadorMailCelular.toMoney());
             $("#empresaTrabajadorTarjeta").text(data.empresaTrabajadorTarjDigital.toMoney());
             $("#empresaTrabajadorRentaPromedio").text(data.empresaPromedioRenta.toMoney());
             $("#antiguedadempresa").text(data.empresaAniosAfiliado);
             $("#empresatrabajadorpromedio").text(data.empresaPromedioEdad);
             $("#perteneceholding").text(data.empresaHolding);
+            
+          
+
+
         });
 
         $.getJSON("http://localhost:8080/api/DetalleEmpresa/" + $("#IdEmpresa").val(), function (data) {

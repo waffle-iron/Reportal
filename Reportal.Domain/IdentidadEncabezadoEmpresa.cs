@@ -15,7 +15,6 @@ namespace Reportal.Domain
         public string empresaNombre { get; set; }
         public string empresaSectorEconomico { get; set; }
         public string tipoEmpresa { get; set; }
-        public string empresaclasificacionRiesgo { get; set; }
         public string empresaclasificacionComercial { get; set; }
         public string empresaHolding { get; set; }
        // public string empresaSegmentoCredito { get; set; }
@@ -30,6 +29,8 @@ namespace Reportal.Domain
         public int empresaPromedioEdad { get; set; }
         public string empresaSegmento { get; set; }
         public string empresaNSE { get; set; }
+        public string Rut_DV { get; set; }
+        public string Fecha_Proceso { get; set; }
 
 
 
