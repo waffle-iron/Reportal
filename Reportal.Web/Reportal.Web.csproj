@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\buttons.datatables.min.css" />
     <Content Include="assets\css\components.css" />
     <Content Include="assets\css\core.css" />
     <Content Include="assets\css\icons.css" />

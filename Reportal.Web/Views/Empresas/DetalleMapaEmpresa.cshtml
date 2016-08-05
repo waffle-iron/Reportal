@@ -17,24 +17,13 @@
     <script src="~/assets/plugins/peity/jquery.peity.min.js"></script>
     <script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
     <script src="~/assets/plugins/jquery-knob/jquery.knob.js"></script>
-
-
     <script src="~/assets/plugins/d3/d3.min.js"></script>
     <script src="~/assets/plugins/nvd3/build/nv.d3.min.js"></script>
     <script src="~/assets/pages/jquery.nvd3.init.js"></script>
-
-
-
     <script src="~/assets/js/jquery.core.js"></script>
     <script src="~/assets/js/jquery.app.js"></script>
-
-    <!-- Chart JS -->
     <script src="~/assets/plugins/Chart.js/Chart.min.js"></script>
-
-
     <script src="~/assets/js.app/empresas.js"></script>
-
-
 }
 
 <div class="container">
@@ -47,7 +36,7 @@
                 <b>
                     Actualización : @Html.Raw(ViewBag.Empresa.Fecha_ProcesoEmpresa)
                 </b>
-                </p>
+            </p>
         </div>
         <div class="col-sm-12">
             <h4 class="page-title">@Html.Raw(ViewBag.Empresa.NombreEmpresa)</h4>
@@ -55,10 +44,15 @@
                 <li><a href="/Reportal">Portal de Información</a></li>
                 <li><a href="/Reportal/Empresas/MapaEmpresas">Mapa Empresa</a></li>
                 <li class="active">@Html.Raw(ViewBag.Empresa.NombreEmpresa)</li>
-                
             </ol>
+            <a href="/Reportal/Empresas/MapaEmpresas">
+                <button type="button" class="btn btn-default waves-effect waves-block">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>Volver Atrás
+                </button>
         </div>
-   
+
     </div>
     <div class="row">
         <div class="card-box table-responsive">
@@ -113,7 +107,7 @@
                         <td id="empresaTrabajadorTarjeta"></td>
                     </tr>
                     <tr>
-                      
+
                         <th>Renta Promedio</th>
                         <td id="empresaTrabajadorRentaPromedio"></td>
                         <th>Edad Promedio</th>
