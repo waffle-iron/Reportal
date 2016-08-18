@@ -103,7 +103,7 @@ $(document).ready(function () {
                     .datum(proCicloVida)
                     .transition().duration(350)
                     .call(chartCicloVida);
-
+                    
                 return chartCicloVida;
             });
 

@@ -45,6 +45,8 @@
     <Compile Include="IdentidadDetalleCampania.cs" />
     <Compile Include="IdentidadDetalleEmpresa.cs" />
     <Compile Include="IdentidadEncabezadoEmpresa.cs" />
+    <Compile Include="PensionadoPeriodo.cs" />
+    <Compile Include="PensionadosResumen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResumenGlobalLicencia.cs" />
     <Compile Include="TendenciaBarChart.cs" />

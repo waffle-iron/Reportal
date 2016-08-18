@@ -186,9 +186,14 @@
     <Content Include="assets\js.app\empresas.js" />
     <Content Include="assets\js.app\jquery.CDK.js" />
     <Content Include="assets\js.app\super.admin.js" />
+    <Content Include="assets\js\app.js" />
     <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\canvas2image.js" />
     <Content Include="assets\js\detect.js" />
     <Content Include="assets\js\fastclick.js" />
+    <Content Include="assets\js\html2canvas.js" />
+    <Content Include="assets\js\jqPlugin.js" />
+    <Content Include="assets\js\jquery-2.1.3.js" />
     <Content Include="assets\js\jquery.app.js" />
     <Content Include="assets\js\jquery.blockUI.js" />
     <Content Include="assets\js\jquery.core.js" />
@@ -196,7 +201,10 @@
     <Content Include="assets\js\jquery.nicescroll.js" />
     <Content Include="assets\js\jquery.scrollTo.min.js" />
     <Content Include="assets\js\jquery.slimscroll.js" />
+    <Content Include="assets\js\jspdf.js" />
     <Content Include="assets\js\modernizr.min.js" />
+    <Content Include="assets\js\pdfFromHTML.js" />
+    <Content Include="assets\js\svg_to_pdf.js" />
     <Content Include="assets\js\waves.js" />
     <Content Include="assets\js\wow.min.js" />
     <Content Include="assets\pages\chartjs.init.js" />
