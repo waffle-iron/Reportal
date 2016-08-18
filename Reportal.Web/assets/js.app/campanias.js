@@ -40,26 +40,26 @@ $(document).ready(function () {
             
             /*Afiliados correo*/
             $("#TotalAfiliadosCorreo").html(data.TotalAfiliadosCorreo.toMoney());
-
-            $("#AfiliadosCorreoPrivados").html(data.AfiliadosCorreoPrivados.toMoney());
-            $("#AfiliadosCorreoPublicos").html(data.AfiliadosCorreoPublicos.toMoney());
+            
+            $("#AfiliadosCorreoTrabajadores").html((data.AfiliadosCorreoPrivados + data.AfiliadosCorreoPublicos).toMoney());
+            //$("#AfiliadosCorreoPrivados").html(data.AfiliadosCorreoPrivados.toMoney());
+            //$("#AfiliadosCorreoPublicos").html(data.AfiliadosCorreoPublicos.toMoney());
             $("#AfiliadosCorreoPensionados").html(data.AfiliadosCorreoPensionados.toMoney());
 
 
+            var fechaAct = new Date(Date.parse(data.FechaActualizacion));
+            $("#fechaActualizacion").html(fechaAct.toLocaleDateString());
+
             var proCorreos =  [
+
 	              { 
-	                  "label": "Privados",
-	                  "value": Math.round((data.AfiliadosCorreoPrivados / data.TotalAfiliadosCorreo) * 100).toMoney(),
-	                  "color" : "#5fbeaa"
-	              } , 
-	              { 
-	                  "label": "Publicos",
-	                  "value": Math.round((data.AfiliadosCorreoPublicos / data.TotalAfiliadosCorreo) * 100).toMoney(),
-	                  'color': '#f05050'
+	                  "label": "Trabajadores",
+	                  "value": (data.AfiliadosCorreoPublicos + data.AfiliadosCorreoPrivados),
+	                  'color': '#5fbeaa'
 	              } , 
 	              { 
 	                  "label": "Pensionados",
-	                  "value": Math.round((data.AfiliadosCorreoPensionados / data.TotalAfiliadosCorreo) * 100).toMoney(),
+	                  "value": data.AfiliadosCorreoPensionados,
 	                  'color': '#5d9cec'
 	              } 	      
             ];
@@ -74,7 +74,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-                    
+                    .valueFormat(function (d) {
+                        return d.toMoney();
+                    })
                 ;
 
                 d3.select("#grafCorreos svg")
@@ -90,24 +92,22 @@ $(document).ready(function () {
             /*Afiliados SMS*/
             $("#TotalAfiliadosSMS").html(data.TotalAfiliadosSMS.toMoney());
 
-            $("#AfiliadosSMSPrivados").html(data.AfiliadosSMSPrivados.toMoney());
-            $("#AfiliadosSMSPublicos").html(data.AfiliadosSMSPublicos.toMoney());
+
+            $("#AfiliadosSMSTrabajadores").html((data.AfiliadosSMSPrivados + data.AfiliadosSMSPublicos).toMoney());
+            //$("#AfiliadosSMSPrivados").html(data.AfiliadosSMSPrivados.toMoney());
+            //$("#AfiliadosSMSPublicos").html(data.AfiliadosSMSPublicos.toMoney());
             $("#AfiliadosSMSPensionados").html(data.AfiliadosSMSPensionados.toMoney());
 
             var prcSMS = [
+	             
 	              {
-	                  "label": "Privados",
-	                  "value": Math.round((data.AfiliadosSMSPrivados / data.TotalAfiliadosSMS) * 100).toMoney(),
-	                  "color": "#5fbeaa"
-	              },
-	              {
-	                  "label": "Publicos",
-	                  "value": Math.round((data.AfiliadosSMSPublicos / data.TotalAfiliadosSMS) * 100).toMoney(),
-	                  'color': '#f05050'
+	                  "label": "Trabajadores",
+	                  "value": (data.AfiliadosSMSPublicos + data.AfiliadosSMSPrivados),
+	                  'color': '#5fbeaa'
 	              },
 	              {
 	                  "label": "Pensionados",
-	                  "value": Math.round((data.AfiliadosSMSPensionados / data.TotalAfiliadosSMS) * 100).toMoney(),
+	                  "value": data.AfiliadosSMSPensionados,
 	                  'color': '#5d9cec'
 	              }
             ];
@@ -123,7 +123,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-
+                .valueFormat(function (d) {
+                    return d.toMoney();
+                })
                 ;
 
                 d3.select("#grafSMS svg")
@@ -138,25 +140,22 @@ $(document).ready(function () {
 
             /*Afiliados Llamada*/
             $("#TotalAfiliadosCall").html(data.TotalAfiliadosCall.toMoney());
-
-            $("#AfiliadosCallPrivados").html(data.AfiliadosCallPrivados.toMoney());
-            $("#AfiliadosCallPublicos").html(data.AfiliadosCallPublicos.toMoney());
+            
+            $("#AfiliadosCallTrabajadores").html((data.AfiliadosCallPrivados + data.AfiliadosCallPublicos).toMoney());
+            //$("#AfiliadosCallPrivados").html(data.AfiliadosCallPrivados.toMoney());
+            //$("#AfiliadosCallPublicos").html(data.AfiliadosCallPublicos.toMoney());
             $("#AfiliadosCallPensionados").html(data.AfiliadosCallPensionados.toMoney());
 
             var prcCall = [
+	              
 	              {
-	                  "label": "Privados",
-	                  "value": Math.round((data.AfiliadosCallPrivados / data.TotalAfiliadosCall) * 100).toMoney(),
-	                  "color": "#5fbeaa"
-	              },
-	              {
-	                  "label": "Publicos",
-	                  "value": Math.round((data.AfiliadosCallPublicos / data.TotalAfiliadosCall) * 100).toMoney(),
-	                  'color': '#f05050'
+	                  "label": "Trabajadores",
+	                  "value": (data.AfiliadosCallPrivados + data.AfiliadosCallPublicos),
+	                  'color': '#5fbeaa'
 	              },
 	              {
 	                  "label": "Pensionados",
-	                  "value": Math.round((data.AfiliadosCallPensionados / data.TotalAfiliadosCall) * 100).toMoney(),
+	                  "value": data.AfiliadosCallPensionados,
 	                  'color': '#5d9cec'
 	              }
             ];
@@ -171,7 +170,9 @@ $(document).ready(function () {
                     .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                     .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
                     .donutRatio(0.30)     //Configure how big you want the donut hole size to be.
-
+                .valueFormat(function (d) {
+                    return d.toMoney();
+                })
                 ;
 
                 d3.select("#grafCall svg")

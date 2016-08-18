@@ -45,6 +45,33 @@ namespace Reportal.Data
                 TotalTrabajadoresContactadosCall = row["TotalTrabajadoresContactadosCall"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresContactadosCall"]) : 0,
                 TotalTrabajadoresContactadosEmail = row["TotalTrabajadoresContactadosEmail"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresContactadosEmail"]) : 0,
                 TotalTrabajadoresContactadosSms = row["TotalTrabajadoresContactadosSms"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresContactadosSms"]) : 0,
+                TotalPensionadosCampanados = row["TotalPensionadosCampanados"] != DBNull.Value ? Convert.ToInt32(row["TotalPensionadosCampanados"]) : 0,
+                TotalPensionadosExitosas = row["TotalPensionadosExitosas"] != DBNull.Value ? Convert.ToInt32(row["TotalPensionadosExitosas"]) : 0,
+                TotalTrabajadoresCampanados = row["TotalTrabajadoresCampanados"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresCampanados"]) : 0,
+                TotalTrabajadoresExitosas = row["TotalTrabajadoresExitosas"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresExitosas"]) : 0,
+                TotalPensionadosCampanadosCall = row["TotalPensionadosCampanadosCall"] != DBNull.Value ? Convert.ToInt32(row["TotalPensionadosCampanadosCall"]) : 0,
+                TotalPensionadosCampanadosEmail = row["TotalPensionadosCampanadosEmail"] != DBNull.Value ? Convert.ToInt32(row["TotalPensionadosCampanadosEmail"]) : 0,
+                TotalPensionadosCampanadosSms = row["TotalPensionadosCampanadosSms"] != DBNull.Value ? Convert.ToInt32(row["TotalPensionadosCampanadosSms"]) : 0,
+                TotalTrabajadoresCampanadosCall = row["TotalTrabajadoresCampanadosCall"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresCampanadosCall"]) : 0,
+                TotalTrabajadoresCampanadosEmail = row["TotalTrabajadoresCampanadosEmail"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresCampanadosEmail"]) : 0,
+                TotalTrabajadoresCampanadosSms = row["TotalTrabajadoresCampanadosSms"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresCampanadosSms"]) : 0,
+                TotalPensionadosExitosasCall = row["TotalPensionadosExitosasCall"] != DBNull.Value ? Convert.ToInt32(row["TotalPensionadosExitosasCall"]) : 0,
+                TotalPensionadosExitosasEmail = row["TotalPensionadosExitosasEmail"] != DBNull.Value ? Convert.ToInt32(row["TotalPensionadosExitosasEmail"]) : 0,
+                TotalPensionadosExitosasSms = row["TotalPensionadosExitosasSms"] != DBNull.Value ? Convert.ToInt32(row["TotalPensionadosExitosasSms"]) : 0,
+                TotalTrabajadoresExitosasCall = row["TotalTrabajadoresExitosasCall"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresExitosasCall"]) : 0,
+                TotalTrabajadoresExitosasEmail = row["TotalTrabajadoresExitosasEmail"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresExitosasEmail"]) : 0,
+                TotalTrabajadoresExitosasSms = row["TotalTrabajadoresExitosasSms"] != DBNull.Value ? Convert.ToInt32(row["TotalTrabajadoresExitosasSms"]) : 0,
+
+                TotalVentas = row["TotalVentas"] != DBNull.Value ? Convert.ToInt32(row["TotalVentas"]) : 0,
+                TotalVentasPensionadosSMS = row["TotalVentasPensionadosSMS"] != DBNull.Value ? Convert.ToInt32(row["TotalVentasPensionadosSMS"]) : 0,
+                TotalVentasTrabajadoresSMS = row["TotalVentasTrabajadoresSMS"] != DBNull.Value ? Convert.ToInt32(row["TotalVentasTrabajadoresSMS"]) : 0,
+                TotalVentasPensionadosEmail = row["TotalVentasPensionadosEmail"] != DBNull.Value ? Convert.ToInt32(row["TotalVentasPensionadosEmail"]) : 0,
+                TotalVentasTrabajadoresEmail = row["TotalVentasTrabajadoresEmail"] != DBNull.Value ? Convert.ToInt32(row["TotalVentasTrabajadoresEmail"]) : 0,
+                TotalVentasPensionados = row["TotalVentasPensionados"] != DBNull.Value ? Convert.ToInt32(row["TotalVentasPensionados"]) : 0,
+                TotalVentasTrabajadores = row["TotalVentasTrabajadores"] != DBNull.Value ? Convert.ToInt32(row["TotalVentasTrabajadores"]) : 0,
+                TotalVentasPensionadosCall = row["TotalVentasPensionadosCall"] != DBNull.Value ? Convert.ToInt32(row["TotalVentasPensionadosCall"]) : 0,
+                TotalVentasTrabajadoreaCall = row["TotalVentasTrabajadoreaCall"] != DBNull.Value ? Convert.ToInt32(row["TotalVentasTrabajadoreaCall"]) : 0,
+
             };
         }
         #endregion

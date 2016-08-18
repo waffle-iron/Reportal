@@ -9,11 +9,13 @@
 @section css{
 
     <link href="~/assets/plugins/nvd3/build/nv.d3.min.css" rel="stylesheet" type="text/css" />
-
+    <link rel="stylesheet" href="~/assets/plugins/morris/morris.css">
 }
 
 @section script{
 
+    <script src="~/assets/plugins/morris/morris.min.js"></script>
+    <script src="~/assets/plugins/raphael/raphael-min.js"></script>
 
     <script src="~/assets/js/jquery.core.js"></script>
     <script src="~/assets/js/jquery.app.js"></script>
@@ -39,18 +41,19 @@
         </div>
     </div>
 
+
     <div class="row">
 
         <div class="col-lg-4">
             <div class="widget-bg-color-icon card-box fadeInDown animated">
-                <div class="bg-icon bg-icon-info pull-left">
-                    <i class="md md-contacts text-info"></i>
+                <div class="bg-icon bg-icon-custom pull-left">
+                    <i class="md md-account-child text-custom"></i>
                 </div>
                 <div class="text-right">
                     <h3 class="text-dark">
                         <b class="counter" id="totalAfiliadosCamp">0</b>
                     </h3>
-                    <p class="text-muted">Total de Afiliados Campañados</p>
+                    <p class="text-muted">Campañados</p>
                 </div>
                 <div class="clearfix"></div>
 
@@ -60,16 +63,16 @@
 
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-3" style="display:none;">
             <div class="widget-bg-color-icon card-box fadeInDown animated">
                 <div class="bg-icon bg-icon-info pull-left">
-                    <i class="md md-contacts text-info"></i>
+                    <i class="md  md-send text-info"></i>
                 </div>
                 <div class="text-right">
                     <h3 class="text-dark">
                         <b class="counter" id="totalAfiliados">0</b>
                     </h3>
-                    <p class="text-muted">Total de Afiliados Contactados</p>
+                    <p class="text-muted">Afiliados Contactados</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -78,300 +81,464 @@
         <div class="col-lg-4">
 
             <div class="widget-bg-color-icon card-box fadeInDown animated">
-                <div class="bg-icon bg-icon-info pull-left">
-                    <i class="md md-contacts text-info"></i>
+                <div class="bg-icon bg-icon-primary pull-left">
+                    <i class="md md-drafts text-primary"></i>
                 </div>
+
+                 
                 <div class="text-right">
                     <h3 class="text-dark">
                         <b class="counter" id="totalComunicacionesExitosas">0</b>
                     </h3>
-                    <p class="text-muted">Total de Comunicaciones Exitosas</p>
+                    <p class="text-muted">Contactactados</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
 
         </div>
 
-    </div>
-
-    <div class="row">
-            <div class="col-lg-12">
-                <div class="card-box">
-
-                    <p class="font-600">Tasa de Contacto <span class="text-success pull-right" id="efectivbs">80%</span></p>
-                    <div class="progress m-b-30">
-                        <div id="efectivb" style="width: 40%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
-                        </div><!-- /.progress-bar .progress-bar-success -->
-                    </div><!-- /.progress .no-rounded -->
-
-
-                    <p class="font-600">Tasa de Éxito <span class="text-success pull-right" id="efectivbs">40%</span></p>
-                    <div class="progress m-b-30">
-                        <div id="efectivb" style="width: 40%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
-                        </div><!-- /.progress-bar .progress-bar-success -->
-                    </div><!-- /.progress .no-rounded -->
-
-                </div>
-            </div>
-
-        </div>
-
-    <div class="row">
 
         <div class="col-lg-4">
-            <div class="card-box">
-            <div class="widget-chart text-center">
-                <p>Contactados por Tipo de Afiliado</p>
-                <div id="chart2">
-                    <svg style="height: 300px; width: 100%"></svg>
-                </div>
-                <ul class="list-inline m-t-15">
-                    <li>
-                        <h5 class="text-muted m-t-20">Trabajadores</h5>
-                        <h4 id="TotalTrabajadores" class="m-b-0">37.606</h4>
-                    </li>
-                    <li></li>
-                    <li>
-                        <h5 class="text-muted m-t-20">Pensionados</h5>
-                        <h4 id="TotalPensionados" class="m-b-0">21.857</h4>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        </div>
 
-        <div class="col-lg-4">
-        <div class="card-box">
-            <div class="widget-chart text-center">
-                <p>Contactados por Tipo de Afiliado</p>
-                <div id="chart23">
-                    <svg style="height: 300px; width: 100%"></svg>
-                </div>
-                <ul class="list-inline m-t-15">
-                    <li>
-                        <h5 class="text-muted m-t-20">Trabajadores</h5>
-                        <h4 id="TotalTrabajadores" class="m-b-0">37.606</h4>
-                    </li>
-                    <li></li>
-                    <li>
-                        <h5 class="text-muted m-t-20">Pensionados</h5>
-                        <h4 id="TotalPensionados" class="m-b-0">21.857</h4>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-        <div class="col-lg-4">
-        <div class="card-box">
-            <div class="widget-chart text-center">
-                <p>Contactados por Tipo de Afiliado</p>
-                <div id="chart24">
-                    <svg style="height: 300px; width: 100%"></svg>
-                </div>
-                <ul class="list-inline m-t-15">
-                    <li>
-                        <h5 class="text-muted m-t-20">Trabajadores</h5>
-                        <h4 id="TotalTrabajadores" class="m-b-0">37.606</h4>
-                    </li>
-                    <li></li>
-                    <li>
-                        <h5 class="text-muted m-t-20">Pensionados</h5>
-                        <h4 id="TotalPensionados" class="m-b-0">21.857</h4>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    </div>
-
-      <div class="row">
-            <div class="col-lg-4">
-                <div class="card-box">
-
-                    <p class="font-600">Tasa de Contacto <span class="text-success pull-right" id="efectivbs">80%</span></p>
-                    <div class="progress m-b-30">
-                        <div id="efectivb" style="width: 40%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
-                        </div><!-- /.progress-bar .progress-bar-success -->
-                    </div><!-- /.progress .no-rounded -->
-
-
-                    <p class="font-600">Tasa de Éxito <span class="text-success pull-right" id="efectivbs">40%</span></p>
-                    <div class="progress m-b-30">
-                        <div id="efectivb" style="width: 40%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
-                        </div><!-- /.progress-bar .progress-bar-success -->
-                    </div><!-- /.progress .no-rounded -->
-
-                </div>
-            </div>
-
-        </div>
-
-
-
-      <div class="row">
-
-        <div class="col-lg-4">
             <div class="widget-bg-color-icon card-box fadeInDown animated">
-                <div class="bg-icon bg-icon-info pull-left">
-                    <i class="md md-contacts text-info"></i>
+                <div class="bg-icon bg-icon-pink pull-left">
+                    <i class="md md-add-shopping-cart text-pink"></i>
                 </div>
                 <div class="text-right">
-                    <h3 class="text-dark"><b class="counter" id="totalAfiliadosPublicos">0</b></h3>
-                    <p class="text-muted">Afiliados Públicos Contactados</p>
+                    <h3 class="text-dark">
+                        <b class="counter" id="totalCoclocaciones">150</b>
+                    </h3>
+                    <p class="text-muted">Compras</p>
                 </div>
                 <div class="clearfix"></div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="card-box">
+
+                <p class="font-600" style="display:none">Tasa de Contacto <span class="text-success pull-right" id="tasaContacto_prc">80%</span></p>
+                <div class="progress m-b-30" style="display:none">
+                    <div id="tasaContacto" style="width: 40%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
+                    </div><!-- /.progress-bar .progress-bar-success -->
+                </div><!-- /.progress .no-rounded -->
+
+
+                <p class="font-600">Tasa de Contacto <span class="text-success pull-right" id="tasaExito_prc">0%</span></p>
+                <div class="progress m-b-30">
+                    <div id="tasaExito" style="width: 0%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
+                    </div><!-- /.progress-bar .progress-bar-success -->
+                </div><!-- /.progress .no-rounded -->
+
+
+                <p class="font-600">Tasa de Compra <span class="text-success pull-right" id="tasaCompra_prc">0%</span></p>
+                <div class="progress m-b-30">
+                    <div id="tasaCompra" style="width: 0%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
+                    </div><!-- /.progress-bar .progress-bar-success -->
+                </div><!-- /.progress .no-rounded -->
+
+
             </div>
         </div>
 
 
+        @*<div class="col-lg-4">
+                <div class="card-box">
+                    <div class="widget-chart text-center">
+                        <p>Contactados por Tipo de Afiliado</p>
+                        <div id="chart23">
+                            <svg style="height: 300px; width: 100%"></svg>
+                        </div>
+                        <ul class="list-inline m-t-15">
+                            <li>
+                                <h5 class="text-muted m-t-20">Trabajadores</h5>
+                                <h4 id="TotalTrabajadores" class="m-b-0">37.606</h4>
+                            </li>
+                            <li></li>
+                            <li>
+                                <h5 class="text-muted m-t-20">Pensionados</h5>
+                                <h4 id="TotalPensionados" class="m-b-0">21.857</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>*@
+
+        @*<div class="col-lg-4">
+                <div class="card-box">
+                    <div class="widget-chart text-center">
+                        <p>Comunicaciones exitosas por Tipo de Afiliado</p>
+                        <div id="chart24">
+                            <svg style="height: 300px; width: 100%"></svg>
+                        </div>
+                        <ul class="list-inline m-t-15">
+                            <li>
+                                <h5 class="text-muted m-t-20">Trabajadores</h5>
+                                <h4 id="TotalTrabajadores" class="m-b-0">37.606</h4>
+                            </li>
+                            <li></li>
+                            <li>
+                                <h5 class="text-muted m-t-20">Pensionados</h5>
+                                <h4 id="TotalPensionados" class="m-b-0">21.857</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>*@
+
+    </div>
+
+    <div class="row">
+
         <div class="col-lg-4">
             <div class="card-box">
-<<<<<<< HEAD
+                <div class="widget-chart text-center">
+                    <p>Campañados por Tipo de Afiliado</p>
+                    <div id="chart2">
+                        <svg style="height: 300px; width: 100%"></svg>
+                    </div>
+                    <ul class="list-inline m-t-15">
+                        <li>
+                            <h5 class="text-muted m-t-20">Trabajadores</h5>
+                            <h4 id="TotalTrabajadores" class="m-b-0">37.606</h4>
+                        </li>
+                        <li></li>
+                        <li>
+                            <h5 class="text-muted m-t-20">Pensionados</h5>
+                            <h4 id="TotalPensionados" class="m-b-0">21.857</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-4" style="display:none">
+            <div class="card-box">
+                <p>Contactados por Tipo de Afiliado</p>
+                <div class="text-center">
+                    <ul class="list-inline chart-detail-list">
+                        <li>
+                            <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Contactados</h5>
+                        </li>
+                        <li>
+                            <h5><i class="fa fa-circle m-r-5" style="color: #dcdcdc;"></i>Campañados</h5>
+                        </li>
+                    </ul>
+                </div>
+                <div id="contactados-tipo-afiliado" style="height: 303px;"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card-box">
+                <p>Contactactados por Tipo de Afiliado</p>
+                <div class="text-center">
+                    <ul class="list-inline chart-detail-list">
+                        <li>
+                            <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Contactados</h5>
+                        </li>
+                        <li>
+                            <h5><i class="fa fa-circle m-r-5" style="color: #dcdcdc;"></i>Campañados</h5>
+                        </li>
+                    </ul>
+                </div>
+                <div id="exitosos-tipo-afiliado" style="height: 303px;"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card-box">
+                <p>Compra Crédito por Tipo de Afiliado</p>
+                <div class="text-center">
+                    <ul class="list-inline chart-detail-list">
+                        <li>
+                            <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Compras</h5>
+                        </li>
+                        <li>
+                            <h5><i class="fa fa-circle m-r-5" style="color: #dcdcdc;"></i>Campañados</h5>
+                        </li>
+                    </ul>
+                </div>
+                <div id="compras-tipo-afiliado" style="height: 303px;"></div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <div class="row" style="display:none;">
+        <div class="col-lg-12">
+            <div class="card-box">
+                <h4 class="m-t-0 header-title"><b>Canales</b></h4>
+
+                @if (ViewBag.Campania.CanalEmail)
+                {
+                    <p class="font-600">Email <span class="text-pink pull-right" id="PubPrcMail">50%</span></p>
+                    <div class="progress m-b-30">
+                        <div id="PubBarMail" style="width: 50%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar" class="progress-bar progress-bar-pink progress-animated wow animated animated">
+                        </div><!-- /.progress-bar desarrollado porel charlyu .progress-bar-pink -->
+                    </div><!-- /.progress .no-rounded -->
+                }
+
+                @if (ViewBag.Campania.CanalSMS)
+                {
                     <p class="font-600">SMS <span class="text-primary pull-right" id="PubPrcSms">80%</span></p>
                     <div class="progress m-b-30">
                         <div id="PubBarSms" style="width: 80%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-primary progress-animated wow animated animated">
                         </div><!-- /.progress-bar .progress-bar-danger -->
                     </div><!-- /.progress .no-rounded -->
-=======
+                }
 
->>>>>>> 7ea0e6b03d9e0bf54c1f17bd3b79c727eb708630
-
-                <p class="font-600">SMS <span class="text-primary pull-right" id="PubPrcSms">80%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PubBarSms" style="width: 80%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-primary progress-animated wow animated animated">
-                    </div><!-- /.progress-bar .progress-bar-danger -->
-                </div><!-- /.progress .no-rounded -->
-
-<<<<<<< HEAD
+                @if (ViewBag.Campania.CanalLlamada)
+                {
                     <p class="font-600">Llamada <span class="text-success pull-right" id="PubPrcCall">40%</span></p>
                     <div class="progress m-b-30">
                         <div id="PubBarCall" style="width: 40%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
                         </div><!-- /.progress-bar .progress-bar-success -->
                     </div><!-- /.progress .no-rounded -->
-=======
-                <p class="font-600">Email <span class="text-pink pull-right" id="PubPrcMail">50%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PubBarMail" style="width: 50%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar" class="progress-bar progress-bar-pink progress-animated wow animated animated">
-                    </div><!-- /.progress-bar desarrollado porel charlyu .progress-bar-pink -->
-                </div><!-- /.progress .no-rounded -->
+                }
 
-                <p class="font-600">Llamada <span class="text-success pull-right" id="PubPrcCall">40%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PubBarCall" style="width: 40%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
-                    </div><!-- /.progress-bar .progress-bar-success -->
-                </div><!-- /.progress .no-rounded -->
-
-
->>>>>>> 7ea0e6b03d9e0bf54c1f17bd3b79c727eb708630
-            </div>
-        </div>
-
-
-        <div class="col-lg-4">
-            <div class="card-box">
-                <p class="font-600">SMS <span class="text-primary pull-right" id="PubPrcSms">80%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PubBarSms" style="width: 80%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-primary progress-animated wow animated animated">
-                    </div><!-- /.progress-bar .progress-bar-danger -->
-                </div><!-- /.progress .no-rounded -->
-
-                <p class="font-600">Email <span class="text-pink pull-right" id="PubPrcMail">50%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PubBarMail" style="width: 50%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar" class="progress-bar progress-bar-pink progress-animated wow animated animated">
-                    </div><!-- /.progress-bar desarrollado porel charlyu .progress-bar-pink -->
-                </div><!-- /.progress .no-rounded -->
-
-                <p class="font-600">Llamada <span class="text-success pull-right" id="PubPrcCall">40%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PubBarCall" style="width: 40%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
-                    </div><!-- /.progress-bar .progress-bar-success -->
-                </div><!-- /.progress .no-rounded -->
             </div>
         </div>
     </div>
+
 
     <div class="row">
+        <div class="col-sm-12">
+           
+                <div class="row">
+                    <div class="col-lg-6" id="ResumenFinPensionados">
+                        <div class="card-box">
+                            <h4 class="m-t-0 header-title"><b>Pensionados</b></h4>
 
-        <div class="col-lg-4">
+                            <div class="p-20">
+                                <div class="table-responsive table-striped">
+                                    <table class="table m-0">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2">&nbsp;</th>
+                                                <th rowspan="2">Campañados</th>
+                                                <th colspan="2" style="text-align:center; display:none;">Contactos</th>
+                                                <th colspan="2" style="text-align:center;">Contactados</th>
+                                                <th colspan="2" style="text-align:center;">Compra</th>
+                                            </tr>
+                                            <tr>
+                                                <th>N</th>
+                                                <th style="display:none">%</th>
+                                                <th style="display:none">N</th>
+                                                <th>%</th>
+                                                <th>N</th>
+                                                <th>%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (ViewBag.Campania.CanalEmail)
+                                            {
+                                                <tr>
+                                                    <th scope="row">Email</th>
+                                                    <td><label id="p_email-totl">0</label></td>
+                                                    <td style="display:none"><label id="p_email-ncon">0</label></td>
+                                                    <td style="display:none"><label id="p_email-pcon">0</label></td>
+                                                    <td><label id="p_email-nexi">0</label></td>
+                                                    <td><label id="p_email-pexi">0</label></td>
+                                                    <td><label id="p_email-ncompra">0</label></td>
+                                                    <td><label id="p_email-pcompra">0</label></td>
+                                                </tr>
+                                            }
 
+                                            @if (ViewBag.Campania.CanalSMS)
+                                            {
+                                                <tr>
+                                                    <th scope="row">SMS</th>
+                                                    <td><label id="p_sms-totl">0</label></td>
+                                                    <td style="display:none"><label id="p_sms-ncon">0</label></td>
+                                                    <td style="display:none"><label id="p_sms-pcon">0</label></td>
+                                                    <td><label id="p_sms-nexi">0</label></td>
+                                                    <td><label id="p_sms-pexi">0</label></td>
+                                                    <td><label id="p_sms-ncompra">0</label></td>
+                                                    <td><label id="p_sms-pcompra">0</label></td>
+                                                </tr>
+                                            }
 
+                                            @if (ViewBag.Campania.CanalLlamada)
+                                            {
+                                                <tr>
+                                                    <th scope="row">Call</th>
+                                                    <td><label id="p_call-totl">0</label></td>
+                                                    <td style="display:none"><label id="p_call-ncon">0</label></td>
+                                                    <td style="display:none"><label id="p_call-pcon">0</label></td>
+                                                    <td><label id="p_call-nexi">0</label></td>
+                                                    <td><label id="p_call-pexi">0</label></td>
+                                                    <td><label id="p_call-ncompra">0</label></td>
+                                                    <td><label id="p_call-pcompra">0</label></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-lg-6" id="ResumenFinTrabajadores">
+                        <div class="card-box">
+                            <h4 class="m-t-0 header-title"><b>Trabajadores</b></h4>
 
-            <div class="widget-bg-color-icon card-box fadeInDown animated">
-                <div class="bg-icon bg-icon-info pull-left">
-                    <i class="md md-contacts text-info"></i>
+                            <div class="p-20">
+                                <div class="table-responsive table-striped">
+                                    <table class="table m-0">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2">&nbsp;</th>
+                                                <th rowspan="2">Campañados</th>
+                                                <th colspan="2" style="text-align:center; display:none;">Contactos</th>
+                                                <th colspan="2" style="text-align:center;">Contactados</th>
+                                                <th colspan="2" style="text-align:center;">Compra</th>
+                                            </tr>
+                                            <tr>
+                                                <th style="display:none">N</th>
+                                                <th style="display:none">%</th>
+                                                <th>N</th>
+                                                <th>%</th>
+                                                <th>N</th>
+                                                <th>%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (ViewBag.Campania.CanalEmail)
+                                            {
+                                                <tr>
+                                                    <th scope="row">Email</th>
+                                                    <td><label id="t_email-totl">0</label></td>
+                                                    <td style="display:none"><label id="t_email-ncon">0</label></td>
+                                                    <td style="display:none"><label id="t_email-pcon">0</label></td>
+                                                    <td><label id="t_email-nexi">0</label></td>
+                                                    <td><label id="t_email-pexi">0</label></td>
+                                                    <td><label id="t_email-ncompra">0</label></td>
+                                                    <td><label id="t_email-pcompra">0</label></td>
+                                                </tr>
+                                            }
+
+                                            @if (ViewBag.Campania.CanalSMS)
+                                            {
+                                                <tr>
+                                                    <th scope="row">SMS</th>
+                                                    <td><label id="t_sms-totl">0</label></td>
+                                                    <td style="display:none"><label id="t_sms-ncon">0</label></td>
+                                                    <td style="display:none"><label id="t_sms-pcon">0</label></td>
+                                                    <td><label id="t_sms-nexi">0</label></td>
+                                                    <td><label id="t_sms-pexi">0</label></td>
+                                                    <td><label id="t_sms-ncompra">0</label></td>
+                                                    <td><label id="t_sms-pcompra">0</label></td>
+                                                </tr>
+                                            }
+
+                                            @if (ViewBag.Campania.CanalLlamada)
+                                            {
+                                                <tr>
+                                                    <th scope="row">Call</th>
+                                                    <td><label id="t_call-totl">0</label></td>
+                                                    <td style="display:none"><label id="t_call-ncon">0</label></td>
+                                                    <td style="display:none"><label id="t_call-pcon">0</label></td>
+                                                    <td><label id="t_call-nexi">0</label></td>
+                                                    <td><label id="t_call-pexi">0</label></td>
+                                                    <td><label id="t_call-ncompra">0</label></td>
+                                                    <td><label id="t_call-pcompra">0</label></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-right">
-                    <h3 class="text-dark">
-                        <b class="counter" id="totalAfiliadosPrivados">0</b>
-                    </h3>
-                    <p class="text-muted">Afiliados Privados Contactados</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-
+            
         </div>
-
-
-        <div class="col-lg-4">
-            <div class="card-box">
-
-
-                <p class="font-600">SMS <span class="text-primary pull-right" id="PriPrcSms">80%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PriBarSms" style="width: 80%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-primary progress-animated wow animated animated">
-                    </div><!-- /.progress-bar .progress-bar-danger -->
-                </div><!-- /.progress .no-rounded -->
-
-                <p class="font-600">Email <span class="text-pink pull-right" id="PriPrcMail">50%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PriBarMail" style="width: 50%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar" class="progress-bar progress-bar-pink progress-animated wow animated animated">
-                    </div><!-- /.progress-bar .progress-bar-pink -->
-                </div><!-- /.progress .no-rounded -->
-
-                <p class="font-600">Llamada <span class="text-success pull-right" id="PriPrcCall">40%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PriBarCall" style="width: 40%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
-                    </div><!-- /.progress-bar .progress-bar-success -->
-                </div><!-- /.progress .no-rounded -->
-
-
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div class="card-box">
-
-
-                <p class="font-600">SMS <span class="text-primary pull-right" id="PriPrcSms">80%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PriBarSms" style="width: 80%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-primary progress-animated wow animated animated">
-                    </div><!-- /.progress-bar .progress-bar-danger -->
-                </div><!-- /.progress .no-rounded -->
-
-                <p class="font-600">Email <span class="text-pink pull-right" id="PriPrcMail">50%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PriBarMail" style="width: 50%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar" class="progress-bar progress-bar-pink progress-animated wow animated animated">
-                    </div><!-- /.progress-bar .progress-bar-pink -->
-                </div><!-- /.progress .no-rounded -->
-
-                <p class="font-600">Llamada <span class="text-success pull-right" id="PriPrcCall">40%</span></p>
-                <div class="progress m-b-30">
-                    <div id="PriBarCall" style="width: 40%; visibility: visible; animation-name: animationProgress;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success progress-animated wow animated animated">
-                    </div><!-- /.progress-bar .progress-bar-success -->
-                </div><!-- /.progress .no-rounded -->
-
-
-            </div>
-        </div>
-
     </div>
 
 
+    @*<div class="row">
+            <div class="col-sm-12">
+                <div class="card-box">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4 class="m-t-0 header-title"><b>Trabajadores</b></h4>
 
+                            <div class="p-20">
+                                <div class="table-responsive table-striped">
+                                    <table class="table m-0">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2">&nbsp;</th>
+                                                <th rowspan="2">N Afiliados</th>
+                                                <th colspan="2" style="text-align:center;">Contactos</th>
+                                                <th colspan="2" style="text-align:center;">Exitos</th>
+                                            </tr>
+                                            <tr>
+                                                <th>N</th>
+                                                <th>%</th>
+                                                <th>N</th>
+                                                <th>%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (ViewBag.Campania.CanalEmail)
+                                            {
+                                            <tr>
+                                                <th scope="row">Email</th>
+                                                <td><label id="t_email-totl">0</label></td>
+                                                <td><label id="t_email-ncon">0</label></td>
+                                                <td><label id="t_email-pcon">0</label></td>
+                                                <td><label id="t_email-nexi">0</label></td>
+                                                <td><label id="t_email-pexi">0</label></td>
+                                            </tr>
+                                            }
 
+                                            @if (ViewBag.Campania.CanalSMS)
+                                            {
+                                            <tr>
+                                                <th scope="row">SMS</th>
+                                                <td><label id="t_sms-totl">0</label></td>
+                                                <td><label id="t_sms-ncon">0</label></td>
+                                                <td><label id="t_sms-pcon">0</label></td>
+                                                <td><label id="t_sms-nexi">0</label></td>
+                                                <td><label id="t_sms-pexi">0</label></td>
+                                            </tr>
+                                            }
+
+                                            @if (ViewBag.Campania.CanalLlamada)
+                                            {
+                                            <tr>
+                                                <th scope="row">Call</th>
+                                                <td><label id="t_call-totl">0</label></td>
+                                                <td><label id="t_call-ncon">0</label></td>
+                                                <td><label id="t_call-pcon">0</label></td>
+                                                <td><label id="t_call-nexi">0</label></td>
+                                                <td><label id="t_call-pexi">0</label></td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>*@
 
     <input type="hidden" value="@Html.Raw(ViewBag.Campania.Id)" id="IdCampania" />
 

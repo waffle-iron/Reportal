@@ -13,7 +13,7 @@ namespace Reportal.Api.Controllers
     [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
     public class CampaniasController : ApiController
     {
-
+    
         private CampaniasRepository camprepositorio;
 
 

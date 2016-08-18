@@ -23,7 +23,7 @@ namespace Reportal.Domain
         public int AfiliadosCallPublicos { get; set; }
         public int AfiliadosCallPensionados { get; set; }
         public int Periodo { get; set; }
-
+        public DateTime FechaActualizacion { get; set; }
 
     }
 }

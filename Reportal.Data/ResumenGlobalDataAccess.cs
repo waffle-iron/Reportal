@@ -49,6 +49,7 @@ namespace Reportal.Data
                 TotalAfiliadosCorreo = row["TotalAfiliadosCorreo"] != DBNull.Value ? Convert.ToInt32(row["TotalAfiliadosCorreo"]) : 0,
                 TotalAfiliadosSMS = row["TotalAfiliadosSMS"] != DBNull.Value ? Convert.ToInt32(row["TotalAfiliadosSMS"]) : 0,
                 Periodo = row["Periodo"] != DBNull.Value ? Convert.ToInt32(row["Periodo"]) : 0,
+                FechaActualizacion = row["FechaActualizacion"] != DBNull.Value ? Convert.ToDateTime(row["FechaActualizacion"]) : DateTime.Now,
 
             };
         }
