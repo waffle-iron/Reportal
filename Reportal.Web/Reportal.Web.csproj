@@ -392,6 +392,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CampañasController.cs" />
+    <Compile Include="Controllers\ColocacionController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -403,6 +404,7 @@
     <Compile Include="Models\Caller\CampCaller.cs" />
     <Compile Include="Models\Caller\EmpCaller.cs" />
     <Compile Include="Models\Caller\Icaller.cs" />
+    <Compile Include="Models\ColocCaller.cs" />
     <Compile Include="Models\Json\Menu.cs" />
     <Compile Include="Models\Menu\MenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -474,7 +476,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Empresas\MapaEmpresas.cshtml" />
     <Content Include="Views\Empresas\DetalleMapaEmpresa.cshtml" />
-    <Content Include="Views\Colocaciones\Colocacion.cshtml" />
+    <Content Include="Views\Colocacion\Colocaciones.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
