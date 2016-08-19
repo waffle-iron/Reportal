@@ -12,9 +12,9 @@ namespace Reportal.Data
 {
     public static class PensionadoResumenDataAccess
     {
-        public static List<PensionadosResumen> ListarPensionadoResumen()
-        {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_ListarEmpresas", ConstructorEntidad);
-        }
+        //public static List<PensionadosResumen> ListarPensionadoResumen()
+        //{
+        //  //  return DBHelper.InstanceReporteria.ObtenerColeccion("sp_ListarEmpresas", ConstructorEntidad);
+        //}
     }
 }
