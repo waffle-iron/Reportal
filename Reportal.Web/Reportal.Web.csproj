@@ -394,6 +394,7 @@
     <Compile Include="Controllers\CampañasController.cs" />
     <Compile Include="Controllers\ColocacionController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
+    <Compile Include="Controllers\IndRiesgoCreditoController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SadminController.cs" />
@@ -477,6 +478,7 @@
     <Content Include="Views\Empresas\MapaEmpresas.cshtml" />
     <Content Include="Views\Empresas\DetalleMapaEmpresa.cshtml" />
     <Content Include="Views\Colocacion\Colocaciones.cshtml" />
+    <Content Include="Views\IndRiesgoCredito\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
