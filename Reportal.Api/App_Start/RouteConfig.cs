@@ -18,6 +18,12 @@ namespace Reportal.Api
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            
+            /*routes.MapRoute(
+                name: "Benchmark",
+                url: "{controller}/{action}/{periodo}/{item}",
+                defaults: new { controller = "Home", action = "Index", periodo = UrlParameter.Optional, item = UrlParameter.Optional }
+            );*/
         }
     }
 }

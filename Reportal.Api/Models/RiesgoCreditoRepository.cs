@@ -18,5 +18,10 @@ namespace Reportal.Api.Models
         {
             return IndRiesgoCreditoDataAccess.ObtenerPeriodos();
         }
+
+        public List<Benchmark> ObtenerBenchmark(int Periodo, string Item)
+        {
+           return BenchmarkDataAccess.Obtener(Periodo, Item);
+        }
     }
 }

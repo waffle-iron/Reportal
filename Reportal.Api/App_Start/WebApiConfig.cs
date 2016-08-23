@@ -20,6 +20,13 @@ namespace Reportal.Api
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "BenchmarkApi",
+                routeTemplate: "api/{controller}/{periodo}/{item}",
+                defaults: new { periodo = RouteParameter.Optional, item = RouteParameter.Optional }
+            );
+
         }
     }
 }
