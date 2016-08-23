@@ -52,6 +52,39 @@
         }
 
         $(function () {
+
+            /*Benchmark*/
+
+            //<th style="text-align:center; background: #9fc4f2 none repeat scroll 0 0;">Tasa Riesgo (Mora hasta 365)</th>
+            $.getJSON("http://localhost:8080/api/Benchmark/201607/Tasa_Riesgo", function (respoonse) {
+
+                $("#bdy_Benchmark").append(
+                    $("<tr>").append($("<th>").html("Tasa Riesgo (Mora hasta 365)").attr("scope", "row").css("text-align", "center").css("background", "#9fc4f2 none repeat scroll 0 0").attr("colspan","2"))
+                );
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_Benchmark").append(
+                            $("<tr>").append($("<td>").html(o.Caja).css("text-align", "center"))
+                            .append($("<td>").html(o.ValorTasa.toMoney(1) + "%").css("text-align", "center"))
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/Benchmark/201607/Tasa_Gasto", function (respoonse) {
+                $("#bdy_Benchmark").append(
+                     $("<tr>").append($("<th>").html("Tasa Gasto en provisión trimestral (Mora hasta 365)").attr("scope", "row").css("text-align", "center").css("background", "#9fc4f2 none repeat scroll 0 0").attr("colspan", "2"))
+                );
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_Benchmark").append(
+                            $("<tr>").append($("<td>").html(o.Caja).css("text-align", "center"))
+                            .append($("<td>").html(o.ValorTasa.toMoney(1) + "%").css("text-align", "center"))
+                    );
+                });
+            });
+
+
+            /*Colocacion por perful de riesgo*/
             $("#sl_periodo").on("change", function () {
                 $.getJSON("http://localhost:8080/api/RiesgoCredito/" + $(this).val(), function (respoonse) {
                     $("#bdy_RiesgoCredito").html("");
@@ -78,11 +111,9 @@
 
                 $("#sl_periodo").trigger("change");
             });
-
-
+            /************************************************************************************************/
         });
        
-
 
         function _Mes(periodo) {
             var mes = parseInt(periodo.toString().substring(4, 6));
@@ -117,23 +148,36 @@
 
     <div class="col-lg-12">
         <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Benchmark</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <tbody id="bdy_Benchmark">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-12">
+        <div class="card-box">
             <h3 class="m-t-0 header-title"><b>Colocación por Perfil de Riesgo</b></h3>
             <div>Periodo: <select id="sl_periodo"></select></div>
             <div class="p-20">
                 <div>
-                    <table class="table table-responsive table-striped m-0" >
+                    <table class="table table-responsive table-striped" >
                         <thead>
                             <tr>
-                                <th>&nbsp;</th>
-                                <th style="text-align:center;"># Operaciones</th>
-                                <th style="text-align:center;">Capital Efectivo (MM$)</th>
-                                <th style="text-align:center;">Distribución Capital (%)</th>
+                                <th style="text-align:center; background: #9fc4f2 none repeat scroll 0 0;">&nbsp;</th>
+                                <th style="text-align:center; background: #9fc4f2 none repeat scroll 0 0; color:#fff1f1;"># Operaciones</th>
+                                <th style="text-align:center; background: #9fc4f2 none repeat scroll 0 0; color:#fff1f1;">Capital Efectivo (MM$)</th>
+                                <th style="text-align:center; background: #9fc4f2 none repeat scroll 0 0; color:#fff1f1;">Distribución Capital (%)</th>
                             </tr>
                         </thead>
                         <tbody id="bdy_RiesgoCredito">
                             
-
-                           
 
                         </tbody>
                         
