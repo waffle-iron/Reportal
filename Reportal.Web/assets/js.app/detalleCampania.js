@@ -17,10 +17,6 @@
 
     j = ((j = i.length) > 3) ? j % 3 : 0;
     var retorno = sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
-    //return isNaN(retorno) ? 0 : retorno;
-
-    console.log(typeof(retorno))
-
     
     return retorno;
 }

@@ -1,17 +1,150 @@
 ﻿
+
 @{
-    Layout = null;
+    ViewBag.Title = "Detalle Campaña";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+    ViewBag.ActiveMenu = "gestión";
+    ViewBag.ActiveMenuRoot = "campañas";
 }
 
-<!DOCTYPE html>
+@section css{
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
+    <link href="~/assets/plugins/nvd3/build/nv.d3.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/assets/plugins/morris/morris.css">
+}
+
+@section script{
+
+    <script src="~/assets/plugins/morris/morris.min.js"></script>
+    <script src="~/assets/plugins/raphael/raphael-min.js"></script>
+
+    <script src="~/assets/js/jquery.core.js"></script>
+    <script src="~/assets/js/jquery.app.js"></script>
+
+    <script src="~/assets/plugins/d3/d3.min.js"></script>
+    <script src="~/assets/plugins/nvd3/build/nv.d3.min.js"></script>
+
+
+    <script type="text/javascript">
+
+
+        Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
+            var n = this,
+            c = isNaN(decimals) ? 0 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
+            d = decimal_sep || ',', //if no decimal separator is passed we use the dot as default decimal separator (we MUST use a decimal separator)
+
+            /*
+            according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
+            the fastest way to check for not defined parameter is to use typeof value === 'undefined' 
+            rather than doing value === undefined.
+            */
+            t = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep, //if you don't want to use a thousands separator you can pass empty string as thousands_sep value
+
+            sign = (n < 0) ? '-' : '',
+
+            //extracting the absolute value of the integer part of the number and converting to string
+            i = parseInt(n = Math.abs(n).toFixed(c)) + '',
+
+            j = ((j = i.length) > 3) ? j % 3 : 0;
+            var retorno = sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
+
+            return retorno;
+        }
+
+        $(function () {
+            $("#sl_periodo").on("change", function () {
+                $.getJSON("http://localhost:8080/api/RiesgoCredito/" + $(this).val(), function (respoonse) {
+                    $("#bdy_RiesgoCredito").html("");
+                    $.each(respoonse, function (i, o) {
+                        $("#bdy_RiesgoCredito").append(
+                                $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
+                                .append($("<td>").html(o.Operaciones.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.CapitalEfectivoMM.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.DistribucionCapital.toMoney(2) + "%").css("text-align", "center"))
+                        );
+                    });
+                });
+            });
+
+
+            $.getJSON("http://localhost:8080/api/RcPeriodos", function (respoonse) {
+
+                var ordf = respoonse.reverse();
+                $.each(ordf, function (i, o) {
+
+                    var txt = _Mes(o) + " - " + _Anio(o)
+                    $("#sl_periodo").append($("<option>", { value: o, text: txt }))
+                });
+
+                $("#sl_periodo").trigger("change");
+            });
+
+
+        });
+       
+
+
+        function _Mes(periodo) {
+            var mes = parseInt(periodo.toString().substring(4, 6));
+            var mesesSTR = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+            return mesesSTR[mes];
+        }
+
+        function _Anio(periodo) {
+            return periodo.toString().substring(0, 4)
+        }
+
+    </script>
+   
+}
+    
+
+<div class="container">
+
+
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="page-title">Indicadores de Riesgo de Credito</h4>
+            <ol class="breadcrumb">
+                <li><a href="#">Portal de Informacion</a></li>
+                <li><a href="#">Indicadores</a></li>
+                <li class="active">Riesgo de Credito</li>
+            </ol>
+        </div>
     </div>
-</body>
-</html>
+
+
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Colocación por Perfil de Riesgo</b></h3>
+            <div>Periodo: <select id="sl_periodo"></select></div>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped m-0" >
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th style="text-align:center;"># Operaciones</th>
+                                <th style="text-align:center;">Capital Efectivo (MM$)</th>
+                                <th style="text-align:center;">Distribución Capital (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_RiesgoCredito">
+                            
+
+                           
+
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
