@@ -59,7 +59,7 @@
             $.getJSON("http://localhost:8080/api/Benchmark/201607/Tasa_Riesgo", function (respoonse) {
 
                 $("#bdy_Benchmark").append(
-                    $("<tr>").append($("<th>").html("Tasa Riesgo (Mora hasta 365)").attr("scope", "row").css("text-align", "center").css("background", "#9fc4f2 none repeat scroll 0 0").attr("colspan","2"))
+                    $("<tr>").append($("<th>").html("Tasa Riesgo (Mora hasta 365)").attr("scope", "row").css("text-align", "center").css("background", "#fff1f1 none repeat scroll 0 0").attr("colspan", "2"))
                 );
 
                 $.each(respoonse, function (i, o) {
@@ -72,7 +72,7 @@
 
             $.getJSON("http://localhost:8080/api/Benchmark/201607/Tasa_Gasto", function (respoonse) {
                 $("#bdy_Benchmark").append(
-                     $("<tr>").append($("<th>").html("Tasa Gasto en provisión trimestral (Mora hasta 365)").attr("scope", "row").css("text-align", "center").css("background", "#9fc4f2 none repeat scroll 0 0").attr("colspan", "2"))
+                     $("<tr>").append($("<th>").html("Tasa Gasto en provisión trimestral (Mora hasta 365)").attr("scope", "row").css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
                 );
 
                 $.each(respoonse, function (i, o) {
@@ -100,6 +100,200 @@
             });
 
 
+            /*EVOLUCION CAMADAS 3 MESES */
+            $.getJSON("http://localhost:8080/api/EvolucionCamadas_3M/" + $(this).val(), function (respoonse) {
+                $("#bdy_EvolucionCamadas_3M").append(
+                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_EvolucionCamadas_3M").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
+            $.getJSON("http://localhost:8080/api/EvolucionCamadas_3M_Pens", function (respoonse) {
+                $("#bdy_EvolucionCamadas_3M").append(
+                     $("<tr>").append($("<th>").html("Pensionado").attr("scope", "row").css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+                );
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_EvolucionCamadas_3M").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                    );
+                });
+            });
+            $.getJSON("http://localhost:8080/api/EvolucionCamadas_3M_Total", function (respoonse) {
+                $("#bdy_EvolucionCamadas_3M").append(
+                     $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+                );
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_EvolucionCamadas_3M").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                    );
+                });
+            });
+
+            /*EVOLUCION CAMADAS 6 MESES */
+            $.getJSON("http://localhost:8080/api/EvolucionCamadas_6M/" + $(this).val(), function (respoonse) {
+                $("#bdy_EvolucionCamadas_6M").append(
+                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_EvolucionCamadas_6M").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
+            $.getJSON("http://localhost:8080/api/EvolucionCamadas_6M_Pens", function (respoonse) {
+                $("#bdy_EvolucionCamadas_6M").append(
+                     $("<tr>").append($("<th>").html("Pensionado").attr("scope", "row").css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+                );
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_EvolucionCamadas_6M").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                    );
+                });
+            });
+            $.getJSON("http://localhost:8080/api/EvolucionCamadas_6M_Total", function (respoonse) {
+                $("#bdy_EvolucionCamadas_6M").append(
+                     $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+                );
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_EvolucionCamadas_6M").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                    );
+                });
+            });
+
+            /*MATRIZ  DE TRANSICION*/
+            $.getJSON("http://localhost:8080/api/MatrizTransaccion/" + $(this).val(), function (respoonse) {
+                $("#bdy_MatrizTransicion_A").append(
+                  $("<tr>").append($("<th>").html("Cartera al Día - A").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_MatrizTransicion_A").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/MatrizTransaccion_B/" + $(this).val(), function (respoonse) {
+                $("#bdy_MatrizTransicion_A").append(
+                  $("<tr>").append($("<th>").html("Cartera 1-30 días mora - B").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_MatrizTransicion_A").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/MatrizTransaccion_C/" + $(this).val(), function (respoonse) {
+                $("#bdy_MatrizTransicion_A").append(
+                  $("<tr>").append($("<th>").html("Cartera 31-60 días mora - C").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_MatrizTransicion_A").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/MatrizTransaccion_D/" + $(this).val(), function (respoonse) {
+                $("#bdy_MatrizTransicion_A").append(
+                  $("<tr>").append($("<th>").html("Cartera 31-60 días mora - C").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_MatrizTransicion_A").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
             $.getJSON("http://localhost:8080/api/RcPeriodos", function (respoonse) {
 
                 var ordf = respoonse.reverse();
@@ -111,6 +305,8 @@
 
                 $("#sl_periodo").trigger("change");
             });
+
+
             /************************************************************************************************/
         });
        
@@ -170,10 +366,10 @@
                     <table class="table table-responsive table-striped" >
                         <thead>
                             <tr>
-                                <th style="text-align:center; background: #9fc4f2 none repeat scroll 0 0;">&nbsp;</th>
-                                <th style="text-align:center; background: #9fc4f2 none repeat scroll 0 0; color:#fff1f1;"># Operaciones</th>
-                                <th style="text-align:center; background: #9fc4f2 none repeat scroll 0 0; color:#fff1f1;">Capital Efectivo (MM$)</th>
-                                <th style="text-align:center; background: #9fc4f2 none repeat scroll 0 0; color:#fff1f1;">Distribución Capital (%)</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0;">&nbsp;</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;"># Operaciones</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Capital Efectivo (MM$)</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Distribución Capital (%)</th>
                             </tr>
                         </thead>
                         <tbody id="bdy_RiesgoCredito">
@@ -187,8 +383,86 @@
         </div>
     </div>
 
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Evolucion Camadas Corte 3 meses</b></h3>
+             <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                               
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0;">&nbsp;</th>
+                                <th style="text-align:center; background: #105481  none repeat scroll 0 0; color:#fff1f1;">Dic-15</th>
+                                <th style="text-align:center; background: #105481  none repeat scroll 0 0; color:#fff1f1;">Ene-16</th>
+                                <th style="text-align:center; background: #105481  none repeat scroll 0 0; color:#fff1f1;">Feb-16</th>
+                                <th style="text-align:center; background: #105481  none repeat scroll 0 0; color:#fff1f1;">Mar-16</th>
+                                <th style="text-align:center; background: #105481  none repeat scroll 0 0; color:#fff1f1;">Abr-16</th>
+                                <th style="text-align:center; background: #105481  none repeat scroll 0 0; color:#fff1f1;">May-16</th>
+                                <th style="text-align:center; background: #105481  none repeat scroll 0 0; color:#fff1f1;">Jun-16</th>
+                                <th style="text-align:center; background: #105481  none repeat scroll 0 0; color:#fff1f1;">Jul-16</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_EvolucionCamadas_3M"></tbody>
 
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Evolución Camadas Corte 6 meses</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
 
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0;">&nbsp;</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Ene-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Feb-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Mar-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Abr-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">May-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Jun-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Jul-16</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_EvolucionCamadas_6M"></tbody>
 
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Matrices de Transición</b></h3>
+            <h3 class="m-t-0 header-title"><b>Frecuencia de cartera al día, 1-2-3 meses de mora</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0;">&nbsp;</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Ene-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Feb-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Mar-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Abr-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">May-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Jun-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Jul-16</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_MatrizTransicion_A"></tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

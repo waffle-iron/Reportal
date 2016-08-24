@@ -130,6 +130,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\EvolucionCamadas_3M\" />
+    <Folder Include="Views\EvolucionCamadas_3M_Pens\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -170,6 +172,19 @@
     <Compile Include="Controllers\DetalleEmpresaController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EncabezadoEmpresaController.cs" />
+    <Compile Include="Controllers\MatrizTransaccion_GController.cs" />
+    <Compile Include="Controllers\MatrizTransaccion_FController.cs" />
+    <Compile Include="Controllers\MatrizTransaccion_EController.cs" />
+    <Compile Include="Controllers\MatrizTransaccion_DController.cs" />
+    <Compile Include="Controllers\MatrizTransaccion_CController.cs" />
+    <Compile Include="Controllers\MatrizTransaccion_BController.cs" />
+    <Compile Include="Controllers\MatrizTransaccionController.cs" />
+    <Compile Include="Controllers\EvolucionCamadas_6M_TotalController.cs" />
+    <Compile Include="Controllers\EvolucionCamadas_6M_PensController.cs" />
+    <Compile Include="Controllers\EvolucionCamadas_6MController.cs" />
+    <Compile Include="Controllers\EvolucionCamadas_3MController.cs" />
+    <Compile Include="Controllers\EvolucionCamadas_3M_TotalController.cs" />
+    <Compile Include="Controllers\EvolucionCamadas_3M_PensController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RcPeriodosController.cs" />
     <Compile Include="Controllers\ResumenController.cs" />
@@ -182,6 +197,19 @@
     </Compile>
     <Compile Include="Models\CampaniasRepository.cs" />
     <Compile Include="Models\EmpresaRepository.cs" />
+    <Compile Include="Models\MatrizTransaccion_GRepository.cs" />
+    <Compile Include="Models\MatrizTransaccion_FRepository.cs" />
+    <Compile Include="Models\MatrizTransaccion_ERepository.cs" />
+    <Compile Include="Models\MatrizTransaccion_DRepository.cs" />
+    <Compile Include="Models\MatrizTransaccion_CRepository.cs" />
+    <Compile Include="Models\MatrizTransaccion_BRepository.cs" />
+    <Compile Include="Models\MatrizTransaccionRepository.cs" />
+    <Compile Include="Models\EvolucionCamadas_6M_TotalRepository.cs" />
+    <Compile Include="Models\EvolucionCamadas_6M_PensRepository.cs" />
+    <Compile Include="Models\EvolucionCamadas_6MRepository.cs" />
+    <Compile Include="Models\EvolucionCamadas_3MRepository.cs" />
+    <Compile Include="Models\EvolucionCamadas_3M_TotalRepository.cs" />
+    <Compile Include="Models\EvolucionCamadas_3M_PensRepository.cs" />
     <Compile Include="Models\ResumenLicenciaRepository.cs" />
     <Compile Include="Models\ResumenRepository.cs" />
     <Compile Include="Models\RiesgoCreditoRepository.cs" />

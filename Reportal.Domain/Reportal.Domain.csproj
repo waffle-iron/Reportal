@@ -43,6 +43,9 @@
     <Compile Include="Benchmark.cs" />
     <Compile Include="Campania.cs" />
     <Compile Include="Empresa.cs" />
+    <Compile Include="MatrizTransaccion.cs" />
+    <Compile Include="EvolucionCamadas_6M.cs" />
+    <Compile Include="EvolucionCamadas_3M.cs" />
     <Compile Include="IdentidadDetalleCampania.cs" />
     <Compile Include="IdentidadDetalleEmpresa.cs" />
     <Compile Include="IdentidadEncabezadoEmpresa.cs" />
