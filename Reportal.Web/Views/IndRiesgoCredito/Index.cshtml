@@ -1,10 +1,10 @@
 ﻿
 
 @{
-    ViewBag.Title = "Detalle Campaña";
+    ViewBag.Title = "Indicadores Riesgo Crédito";
     Layout = "~/Views/Layout/_Principal.cshtml";
-    ViewBag.ActiveMenu = "gestión";
-    ViewBag.ActiveMenuRoot = "campañas";
+    ViewBag.ActiveMenu = "Indicadores Riesgo";
+    ViewBag.ActiveMenuRoot = "Crédito";
 }
 
 @section css{
@@ -35,7 +35,7 @@
 
             /*
             according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
-            the fastest way to check for not defined parameter is to use typeof value === 'undefined' 
+            the fastest way to check for not defined parameter is to use typeof value === 'undefined'
             rather than doing value === undefined.
             */
             t = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep, //if you don't want to use a thousands separator you can pass empty string as thousands_sep value
@@ -52,6 +52,71 @@
         }
 
         $(function () {
+
+
+            /*Castigos netos*/
+            $.getJSON("http://localhost:8080/api/CastigosNetos_Trab" + $(this).val(), function (respoonse) {
+                $("#bdy_CastigosNetos").append(
+                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_CastigosNetos").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/CastigosNetos_Pens" + $(this).val(), function (respoonse) {
+                $("#bdy_CastigosNetos").append(
+                  $("<tr>").append($("<th>").html("Pensionado").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_CastigosNetos").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney(1)).css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/CastigosNetos_Total" + $(this).val(), function (respoonse) {
+                $("#bdy_CastigosNetos").append(
+                  $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_CastigosNetos").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+
+                    );
+                });
+            });
+
 
             /*Benchmark*/
 
@@ -136,6 +201,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
                     );
                 });
             });
@@ -358,6 +424,27 @@
                 $.each(respoonse, function (i, o) {
                     $("#bdy_Reprogramaciones").append(
                             $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+
+                    );
+                });
+            });
+
+
+            /*MATRIZ  DE TRANSICION DEUDOR DIRECTO*/
+            $.getJSON("http://localhost:8080/api/MatrizTransicionDD_A" + $(this).val(), function (respoonse) {
+                $("#bdy_MatrizTransicion_DD").append(
+                  $("<tr>").append($("<th>").html("Cartera al Día - A").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_MatrizTransicion_DD").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
                             .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
@@ -369,6 +456,121 @@
                     );
                 });
             });
+            $.getJSON("http://localhost:8080/api/MatrizTransicionDD_B" + $(this).val(), function (respoonse) {
+                $("#bdy_MatrizTransicion_DD").append(
+                  $("<tr>").append($("<th>").html("Cartera 1-30 Días mora - B").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_MatrizTransicion_DD").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/MatrizTransicionDD_C" + $(this).val(), function (respoonse) {
+                $("#bdy_MatrizTransicion_DD").append(
+                  $("<tr>").append($("<th>").html("Cartera 31-60 Días mora - C").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_MatrizTransicion_DD").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/MatrizTransicionDD_D" + $(this).val(), function (respoonse) {
+                $("#bdy_MatrizTransicion_DD").append(
+                  $("<tr>").append($("<th>").html("Cartera 61-90 Días mora - D").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_MatrizTransicion_DD").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/MatrizTransicionDD_E" + $(this).val(), function (respoonse) {
+                $("#bdy_MatrizTransicion_DD").append(
+                  $("<tr>").append($("<th>").html("Cartera 91-120 Días mora - E").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_MatrizTransicion_DD").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/MatrizTransicionDD_F" + $(this).val(), function (respoonse) {
+                $("#bdy_MatrizTransicion_DD").append(
+                  $("<tr>").append($("<th>").html("Cartera 121-150 Días mora - F").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_MatrizTransicion_DD").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/MatrizTransicionDD_G" + $(this).val(), function (respoonse) {
+                $("#bdy_MatrizTransicion_DD").append(
+                  $("<tr>").append($("<th>").html("Cartera 151-180 Días mora - G").attr("scope", "row").css("text-align", "center", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_MatrizTransicion_DD").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+
+                    );
+                });
+            });
+
+           
 
             $.getJSON("http://localhost:8080/api/RcPeriodos", function (respoonse) {
 
@@ -385,7 +587,7 @@
 
             /************************************************************************************************/
         });
-       
+
 
         function _Mes(periodo) {
             var mes = parseInt(periodo.toString().substring(4, 6));
@@ -398,9 +600,9 @@
         }
 
     </script>
-   
+
 }
-    
+
 
 <div class="container">
 
@@ -417,15 +619,28 @@
         </div>
     </div>
 
-
     <div class="col-lg-12">
         <div class="card-box">
-            <h3 class="m-t-0 header-title"><b>Benchmark</b></h3>
+            <h3 class="m-t-0 header-title"><b>Castigos Netos</b></h3>
+            <h3 class="m-t-0 header-title"><b>Cifras en MM$</b></h3>
             <div class="p-20">
                 <div>
                     <table class="table table-responsive table-striped">
-                        <tbody id="bdy_Benchmark">
-                        </tbody>
+                        <thead>
+                            <tr>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0;">&nbsp;</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Dic-15</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Ene-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Feb-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Mar-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Abr-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">May-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Jun-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Jul-16</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_CastigosNetos"></tbody>
+
                     </table>
                 </div>
             </div>
@@ -435,11 +650,27 @@
 
     <div class="col-lg-12">
         <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Benchmark</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <tbody id="bdy_Benchmark"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
+
+    <div class="col-lg-12">
+        <div class="card-box">
             <h3 class="m-t-0 header-title"><b>Colocación por Perfil de Riesgo</b></h3>
             <div>Periodo: <select id="sl_periodo"></select></div>
             <div class="p-20">
                 <div>
-                    <table class="table table-responsive table-striped" >
+                    <table class="table table-responsive table-striped">
                         <thead>
                             <tr>
                                 <th style="text-align:center; background: #105481 none repeat scroll 0 0;">&nbsp;</th>
@@ -448,11 +679,8 @@
                                 <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Distribución Capital (%)</th>
                             </tr>
                         </thead>
-                        <tbody id="bdy_RiesgoCredito">
-                            
+                        <tbody id="bdy_RiesgoCredito"></tbody>
 
-                        </tbody>
-                        
                     </table>
                 </div>
             </div>
@@ -462,12 +690,12 @@
     <div class="col-lg-12">
         <div class="card-box">
             <h3 class="m-t-0 header-title"><b>Evolucion Camadas Corte 3 meses</b></h3>
-             <div class="p-20">
+            <div class="p-20">
                 <div>
                     <table class="table table-responsive table-striped">
                         <thead>
                             <tr>
-                               
+
                                 <th style="text-align:center; background: #105481 none repeat scroll 0 0;">&nbsp;</th>
                                 <th style="text-align:center; background: #105481  none repeat scroll 0 0; color:#fff1f1;">Dic-15</th>
                                 <th style="text-align:center; background: #105481  none repeat scroll 0 0; color:#fff1f1;">Ene-16</th>
@@ -535,6 +763,34 @@
                             </tr>
                         </thead>
                         <tbody id="bdy_MatrizTransicion_A"></tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Matrices de Transición Dedudor Directo</b></h3>
+            <h3 class="m-t-0 header-title"><b>Frecuencia de cartera al día, 1-2-3 meses de mora</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0;">&nbsp;</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Ene-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Feb-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Mar-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Abr-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">May-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Jun-16</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Jul-16</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_MatrizTransicion_DD"></tbody>
 
                     </table>
                 </div>

@@ -12,9 +12,9 @@ namespace Reportal.Data
 {
     public static class MatrizTransicionDD_GDataAccess
     {
-        public static List<MatrizTransicionDD> ListarMatrizTransicionDD_F()
+        public static List<MatrizTransicionDD> ListarMatrizTransicionDD_G()
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_IndCredito_MatricesTransicion_G", ConstructorEntidad);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_IndCredito_MatrizTranDD_G", ConstructorEntidad);
         }
 
         private static MatrizTransicionDD ConstructorEntidad(DataRow row)

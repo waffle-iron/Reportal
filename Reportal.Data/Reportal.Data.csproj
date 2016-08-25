@@ -40,11 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CastigosNetos_TotalDataAccess.cs" />
+    <Compile Include="CastigosNetos_PensDataAccess.cs" />
     <Compile Include="DetalleCampaniaDataAccess.cs" />
     <Compile Include="DetalleEmpresaDataAccess.cs" />
     <Compile Include="EmpresaDataAccess.cs" />
     <Compile Include="EncabezadoEmpresaDataAccess.cs" />
     <Compile Include="BenchmarkDataAccess.cs" />
+    <Compile Include="CastigosNetosDataAccess.cs" />
     <Compile Include="MatricesTransaccion_GDataAccess.cs" />
     <Compile Include="MatricesTransaccion_FDataAccess.cs" />
     <Compile Include="MatricesTransaccion_EDataAccess.cs" />

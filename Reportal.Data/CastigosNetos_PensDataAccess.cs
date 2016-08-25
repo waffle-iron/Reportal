@@ -10,21 +10,22 @@ using CDK.Integration;
 
 namespace Reportal.Data
 {
-    public static class MatrizTransicionDD_BDataAccess
+    public static class CastigosNetos_PensDataAccess
     {
-        public static List<MatrizTransicionDD> ListarMatrizTransicionDD_B()
+        public static List<CastigosNetos> ListarCastigosNetos_Pens()
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_IndCredito_MatrizTranDD_B", ConstructorEntidad);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_IndCredito_CastigoNeto_Pens", ConstructorEntidad);
         }
 
-        private static MatrizTransicionDD ConstructorEntidad(DataRow row)
+        private static CastigosNetos ConstructorEntidad(DataRow row)
         {
-            return new MatrizTransicionDD
+            return new CastigosNetos
             {
-                OrdenSegmento = row["OrdenSegmento"] != DBNull.Value ? Convert.ToInt32(row["OrdenSegmento"]) : 0,
+                OrdenSegmento= row["OrdenSegmento"] != DBNull.Value ? Convert.ToInt32(row["OrdenSegmento"]):0,
                 OrdenItem = row["OrdenItem"] != DBNull.Value ? Convert.ToInt32(row["OrdenItem"]) : 0,
                 Segmento = row["Segmento"] != DBNull.Value ? row["Segmento"].ToString() : string.Empty,
                 item = row["Item"] != DBNull.Value ? row["Item"].ToString() : string.Empty,
+                Dic15 = row["Dic15"] != DBNull.Value ? Convert.ToSingle(row["Dic15"]) : 0,
                 Ene16 = row["Ene16"] != DBNull.Value ? Convert.ToSingle(row["Ene16"]) : 0,
                 Feb16 = row["Feb16"] != DBNull.Value ? Convert.ToSingle(row["Feb16"]) : 0,
                 Mar16 = row["Mar16"] != DBNull.Value ? Convert.ToSingle(row["Mar16"]) : 0,

@@ -169,10 +169,20 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BenchmarkController.cs" />
     <Compile Include="Controllers\CampaniasController.cs" />
+    <Compile Include="Controllers\CastigosNetos_TotalController.cs" />
+    <Compile Include="Controllers\CastigosNetos_PensController.cs" />
     <Compile Include="Controllers\DetalleCampaniaController.cs" />
     <Compile Include="Controllers\DetalleEmpresaController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EncabezadoEmpresaController.cs" />
+    <Compile Include="Controllers\CastigosNetos_TrabController.cs" />
+    <Compile Include="Controllers\MatrizTransicionDD_GController.cs" />
+    <Compile Include="Controllers\MatrizTransicionDD_FController.cs" />
+    <Compile Include="Controllers\MatrizTransicionDD_EController.cs" />
+    <Compile Include="Controllers\MatrizTransicionDD_DController.cs" />
+    <Compile Include="Controllers\MatrizTransicionDD_CController.cs" />
+    <Compile Include="Controllers\MatrizTransicionDD_BController.cs" />
+    <Compile Include="Controllers\MatrizTransicionDD_AController.cs" />
     <Compile Include="Controllers\MatrizTransaccion_GController.cs" />
     <Compile Include="Controllers\MatrizTransaccion_FController.cs" />
     <Compile Include="Controllers\MatrizTransaccion_EController.cs" />
@@ -198,8 +208,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CampaniasRepository.cs" />
+    <Compile Include="Models\CastigosNetos_TotalRepository.cs" />
+    <Compile Include="Models\CastigosNetos_PensRepository.cs" />
     <Compile Include="Models\EmpresaRepository.cs" />
+    <Compile Include="Models\CastigosNetos_TrabRepository.cs" />
     <Compile Include="Models\MatrizTransicionDD_BRepository.cs" />
+    <Compile Include="Models\MatrizTransicionDD_GRepository.cs" />
+    <Compile Include="Models\MatrizTransicionDD_FRepository.cs" />
+    <Compile Include="Models\MatrizTransicionDD_ERepository.cs" />
+    <Compile Include="Models\MatrizTransicionDD_DRepository.cs" />
+    <Compile Include="Models\MatrizTransicionDD_CRepository.cs" />
     <Compile Include="Models\MatrizTransicionDD_ARepository.cs" />
     <Compile Include="Models\MatrizTransaccion_GRepository.cs" />
     <Compile Include="Models\MatrizTransaccion_FRepository.cs" />
