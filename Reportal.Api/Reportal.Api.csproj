@@ -132,6 +132,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\EvolucionCamadas_3M\" />
     <Folder Include="Views\EvolucionCamadas_3M_Pens\" />
+    <Folder Include="Views\Reprogramaciones\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="Controllers\EvolucionCamadas_3M_PensController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RcPeriodosController.cs" />
+    <Compile Include="Controllers\ReprogramacionesController.cs" />
     <Compile Include="Controllers\ResumenController.cs" />
     <Compile Include="Controllers\ResumenLicenciaController.cs" />
     <Compile Include="Controllers\RiesgoCreditoController.cs" />
@@ -197,6 +199,8 @@
     </Compile>
     <Compile Include="Models\CampaniasRepository.cs" />
     <Compile Include="Models\EmpresaRepository.cs" />
+    <Compile Include="Models\MatrizTransicionDD_BRepository.cs" />
+    <Compile Include="Models\MatrizTransicionDD_ARepository.cs" />
     <Compile Include="Models\MatrizTransaccion_GRepository.cs" />
     <Compile Include="Models\MatrizTransaccion_FRepository.cs" />
     <Compile Include="Models\MatrizTransaccion_ERepository.cs" />
@@ -210,6 +214,7 @@
     <Compile Include="Models\EvolucionCamadas_3MRepository.cs" />
     <Compile Include="Models\EvolucionCamadas_3M_TotalRepository.cs" />
     <Compile Include="Models\EvolucionCamadas_3M_PensRepository.cs" />
+    <Compile Include="Models\ReprogramacionesRepository.cs" />
     <Compile Include="Models\ResumenLicenciaRepository.cs" />
     <Compile Include="Models\ResumenRepository.cs" />
     <Compile Include="Models\RiesgoCreditoRepository.cs" />

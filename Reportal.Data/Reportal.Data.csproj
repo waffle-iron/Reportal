@@ -59,9 +59,17 @@
     <Compile Include="EvolucionCamadas_3M_PensDataAccess.cs" />
     <Compile Include="EvolucionCamadas_3MDataAccess.cs" />
     <Compile Include="IndRiesgoCreditoDataAccess.cs" />
+    <Compile Include="MatrizTransicionDD_GDataAccess.cs" />
+    <Compile Include="MatrizTransicionDD_FDataAccess.cs" />
+    <Compile Include="MatrizTransicionDD_EDataAccess.cs" />
+    <Compile Include="MatrizTransicionDD_DDataAccess.cs" />
+    <Compile Include="MatrizTransicionDD_CDataAccess.cs" />
+    <Compile Include="MatrizTransicionDD_BDataAccess.cs" />
+    <Compile Include="MatrizTransicionDD_ADataAccess.cs" />
     <Compile Include="PensionadoResumenDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CampaniaDataAccess.cs" />
+    <Compile Include="ReprogramacionesDataAcces.cs" />
     <Compile Include="ResumenGlobalDataAccess.cs" />
     <Compile Include="ResumenGlobalLicenciaDataAccess.cs" />
   </ItemGroup>
