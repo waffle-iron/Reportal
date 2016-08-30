@@ -198,6 +198,8 @@
     <Compile Include="Controllers\EvolucionCamadas_3M_PensController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RcPeriodosController.cs" />
+    <Compile Include="Controllers\Reprogramaciones_TotalController.cs" />
+    <Compile Include="Controllers\Reprogramaciones_PensController.cs" />
     <Compile Include="Controllers\ReprogramacionesController.cs" />
     <Compile Include="Controllers\ResumenController.cs" />
     <Compile Include="Controllers\ResumenLicenciaController.cs" />
@@ -232,6 +234,8 @@
     <Compile Include="Models\EvolucionCamadas_3MRepository.cs" />
     <Compile Include="Models\EvolucionCamadas_3M_TotalRepository.cs" />
     <Compile Include="Models\EvolucionCamadas_3M_PensRepository.cs" />
+    <Compile Include="Models\Reprogramaciones_TotalRepository.cs" />
+    <Compile Include="Models\Reprogramaciones_PensRepository.cs" />
     <Compile Include="Models\ReprogramacionesRepository.cs" />
     <Compile Include="Models\ResumenLicenciaRepository.cs" />
     <Compile Include="Models\ResumenRepository.cs" />

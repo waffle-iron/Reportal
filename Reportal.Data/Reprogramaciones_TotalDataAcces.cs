@@ -11,11 +11,11 @@ using CDK.Integration;
 
 namespace Reportal.Data
 {
-    public static class ReprogramacionesDataAcces
+    public static class Reprogramaciones_TotalDataAcces
     {
-        public static List<Reprogramaciones> ListarProgramaciones_Trab()
+        public static List<Reprogramaciones> ListarProgramaciones_Total()
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_IndCredito_Reprogramaciones_Tab", ConstructorEntidad);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_IndCredito_Reprogramaciones_Total", ConstructorEntidad);
         }
 
         private static Reprogramaciones ConstructorEntidad(DataRow row)
