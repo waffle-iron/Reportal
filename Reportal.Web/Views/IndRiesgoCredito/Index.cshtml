@@ -53,6 +53,35 @@
 
         $(function () {
 
+            /*Benchmark*/
+
+            //<th style="text-align:center; background: #9fc4f2 none repeat scroll 0 0;">Tasa Riesgo (Mora hasta 365)</th>
+            $.getJSON("http://localhost:8080/api/Benchmark/201607/Tasa_Riesgo", function (respoonse) {
+
+                $("#bdy_Benchmark").append(
+                    $("<tr>").append($("<th>").html("Tasa Riesgo (Mora hasta 365)").attr("scope", "row").css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+                );
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_Benchmark").append(
+                            $("<tr>").append($("<td>").html(o.Caja).css("text-align", "center"))
+                            .append($("<td>").html(o.ValorTasa.toMoney(1) + "%").css("text-align", "center"))
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/Benchmark/201607/Tasa_Gasto", function (respoonse) {
+                $("#bdy_Benchmark").append(
+                     $("<tr>").append($("<th>").html("Tasa Gasto en provisión trimestral (Mora hasta 365)").attr("scope", "row").css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
+                );
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_Benchmark").append(
+                            $("<tr>").append($("<td>").html(o.Caja).css("text-align", "center"))
+                            .append($("<td>").html(o.ValorTasa.toMoney(1) + "%").css("text-align", "center"))
+                    );
+                });
+            });
 
             /*Castigos netos*/
             $.getJSON("http://localhost:8080/api/CastigosNetos_Trab" + $(this).val(), function (respoonse) {
@@ -118,35 +147,7 @@
             });
 
 
-            /*Benchmark*/
-
-            //<th style="text-align:center; background: #9fc4f2 none repeat scroll 0 0;">Tasa Riesgo (Mora hasta 365)</th>
-            $.getJSON("http://localhost:8080/api/Benchmark/201607/Tasa_Riesgo", function (respoonse) {
-
-                $("#bdy_Benchmark").append(
-                    $("<tr>").append($("<th>").html("Tasa Riesgo (Mora hasta 365)").attr("scope", "row").css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
-                );
-
-                $.each(respoonse, function (i, o) {
-                    $("#bdy_Benchmark").append(
-                            $("<tr>").append($("<td>").html(o.Caja).css("text-align", "center"))
-                            .append($("<td>").html(o.ValorTasa.toMoney(1) + "%").css("text-align", "center"))
-                    );
-                });
-            });
-
-            $.getJSON("http://localhost:8080/api/Benchmark/201607/Tasa_Gasto", function (respoonse) {
-                $("#bdy_Benchmark").append(
-                     $("<tr>").append($("<th>").html("Tasa Gasto en provisión trimestral (Mora hasta 365)").attr("scope", "row").css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
-                );
-
-                $.each(respoonse, function (i, o) {
-                    $("#bdy_Benchmark").append(
-                            $("<tr>").append($("<td>").html(o.Caja).css("text-align", "center"))
-                            .append($("<td>").html(o.ValorTasa.toMoney(1) + "%").css("text-align", "center"))
-                    );
-                });
-            });
+           
 
 
             /*Colocacion por perful de riesgo*/
@@ -271,6 +272,64 @@
 
                 $.each(respoonse, function (i, o) {
                     $("#bdy_EvolucionCamadas_6M_Total").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                    );
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/EvolucionCamadas_12M", function (respoonse) {
+                $("#bdy_EvolucionCamadas_12M").append(
+                     $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                );
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_EvolucionCamadas_12M").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                    );
+                });
+            });
+            $.getJSON("http://localhost:8080/api/EvolucionCamadas_12M_Pens", function (respoonse) {
+                $("#bdy_EvolucionCamadas_12M_Pens").append(
+                     $("<tr>").append($("<th>").html("Pensionados").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                );
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_EvolucionCamadas_12M_Pens").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                    );
+                });
+            });
+            $.getJSON("http://localhost:8080/api/EvolucionCamadas_12M_Total", function (respoonse) {
+                $("#bdy_EvolucionCamadas_12M_Total").append(
+                     $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                );
+
+                $.each(respoonse, function (i, o) {
+                    $("#bdy_EvolucionCamadas_12M_Total").append(
                             $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
                             .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
@@ -606,6 +665,46 @@
                     );
                 });
             });
+            $.getJSON("http://localhost:8080/api/SeguroCesantia/" + $(this).val(), function (respoonse) {
+                $("#SeguroCesantia_DD").append(
+                  $("<tr>").append($("<th>").html("Deudores Directo").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#SeguroCesantia_DD").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+
+                    );
+                });
+            });
+            $.getJSON("http://localhost:8080/api/SeguroCesantia_Trab/" + $(this).val(), function (respoonse) {
+                $("#SeguroCesantia_Trab").append(
+                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#SeguroCesantia_Trab").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+
+                    );
+                });
+            });
+            $.getJSON("http://localhost:8080/api/SeguroCesantia_Total/" + $(this).val(), function (respoonse) {
+                $("#SeguroCesantia_Total").append(
+                  $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+              );
+                $.each(respoonse, function (i, o) {
+                    $("#SeguroCesantia_Total").append(
+                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+
+                    );
+                });
+            });
+
 
 
             $.getJSON("http://localhost:8080/api/RcPeriodos", function (respoonse) {
@@ -622,6 +721,57 @@
 
 
             /************************************************************************************************/
+
+
+            /*Eventos de controles de pantalla*/
+
+            //$("#select_camadas").on("change", function () {
+
+            //    if ($(this).val() == 1) {
+            //        $("#div_3meses").css("display", "block");
+            //        $("#div_6meses").css("display", "none");
+
+            //    } else if ($(this).val() == 2) {
+            //        $("#div_3meses").css("display", "none");
+            //        $("#div_6meses").css("display", "block");
+
+            //    }
+            //});
+
+            $("#select_camadas").on("change", function () {
+
+                if ($(this).val() == 3) {
+                    $("#div_3meses").css("display", "block");
+                    $("#div_6meses").css("display", "none");
+                    $("#div_12meses").css("display", "none");
+                } else if ($(this).val() == 6) {
+
+                    $("#div_3meses").css("display", "none");
+                    $("#div_6meses").css("display", "block");
+                    $("#div_12meses").css("display", "none");
+                } else if ($(this).val() == 12) {
+
+                    $("#div_3meses").css("display", "none");
+                    $("#div_6meses").css("display", "none");
+                    $("#div_12meses").css("display", "block");
+                }
+
+            });
+
+            $("#select_matrices").on("change", function () {
+
+                if ($(this).val() == 13) {
+                    $("#div_MatrizTrans").css("display", "block");
+                    $("#div_MatrizDD").css("display", "none");
+                } else if ($(this).val() == 14) {
+
+                    $("#div_MatrizTrans").css("display", "none");
+                    $("#div_MatrizDD").css("display", "block");
+                }
+
+            });
+
+
         });
 
 
@@ -634,6 +784,10 @@
         function _Anio(periodo) {
             return periodo.toString().substring(0, 4)
         }
+
+
+
+
 
     </script>
 
@@ -654,11 +808,23 @@
             </ol>
         </div>
     </div>
-
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Gasto y Tasa de Provisión</b></h3>
+            Evolución y Benchmark Industria
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <tbody id="bdy_Benchmark"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-12">
         <div class="card-box">
             <h3 class="m-t-0 header-title"><b>Castigos Netos</b></h3>
-            <h3 class="m-t-0 header-title"><b>Cifras en MM$</b></h3>
+            Cifras en MM$
             <div class="p-20">
                 <div>
                     <table class="table table-responsive table-striped">
@@ -697,22 +863,6 @@
 
     <div class="col-lg-12">
         <div class="card-box">
-            <h3 class="m-t-0 header-title"><b>Benchmark</b></h3>
-            <div class="p-20">
-                <div>
-                    <table class="table table-responsive table-striped">
-                        <tbody id="bdy_Benchmark"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-    <div class="col-lg-12">
-        <div class="card-box">
             <h3 class="m-t-0 header-title"><b>Colocación por Perfil de Riesgo</b></h3>
             <div>Periodo: <select id="sl_periodo"></select></div>
             <div class="p-20">
@@ -736,9 +886,24 @@
 
     @* CAMADAS CORTE 3 MESES *@
     <div class="col-lg-12">
+        <div>
+            <h3 class="m-t-0 header-title">
+                <b>
+                    Seleccionar Mes Camadas:
+                    <select id="select_camadas">
+                        <option value="3">3 Meses</option>
+                        <option value="6">6 Meses</option>
+                        <option value="12">12 Meses</option>
+                    </select>
+                </b>
+            </h3>
+        </div>
+
+    </div>
+    <div id="div_3meses" class="col-lg-12">
         <div class="card-box">
-            <h3 class="m-t-0 header-title"><b>Evolucion Camadas Corte 3 meses</b></h3>
-            <div>Meses: <select id="sl_camadas"></select></div>
+            Corte Colocaciones a 3 meses
+
             <div class="p-20">
                 <div>
                     <table class="table table-responsive table-striped">
@@ -774,11 +939,10 @@
             </div>
         </div>
     </div>
-
     @*CAMADAS CORTE 6 MESES *@
-    <div class="col-lg-12">
+    <div id="div_6meses" class="col-lg-12" style="display:none;">
         <div class="card-box">
-            <h3 class="m-t-0 header-title"><b>Evolución Camadas Corte 6 meses</b></h3>
+            Corte Colocaciones a 6 Meses
             <div class="p-20">
                 <div>
                     <table class="table table-responsive table-striped">
@@ -815,11 +979,67 @@
             </div>
         </div>
     </div>
+    @*12 meses*@
+    <div id="div_12meses" class="col-lg-12" style="display:none;">
+        <div class="card-box">
+           Corte Colocaciones a 12 Meses
+             <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">&nbsp;</th>
+                                <th style="text-align:center; background: #FFFFFF  none repeat scroll 0 0; color:#000000;">Dic-15</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Ene-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Feb-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Mar-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Abr-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">May-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jun-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jul-16</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_EvolucionCamadas_12M"></tbody>
+
+                    </table>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr></tr>
+                        </thead>
+                        <tbody id="bdy_EvolucionCamadas_12M_Pens"></tbody>
+                    </table>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr></tr>
+                        </thead>
+                        <tbody id="bdy_EvolucionCamadas_12M_Total"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="col-lg-12">
+
+        <div>
+            <h3 class="m-t-0 header-title">
+                <b>
+                    Seleccionar:
+                    <select id="select_matrices">
+                        <option value="13">Matrices de transición</option>
+                        <option value="14">Matrices de Transición Deudor Directo </option>
+                    </select>
+                </b>
+            </h3>
+        </div>
+      
+
+    </div>
+    @*Matrices de Transicion *@
+    <div class="col-lg-12" id="div_MatrizTrans">
         <div class="card-box">
-            <h3 class="m-t-0 header-title"><b>Matrices de Transición</b></h3>
-            <h3 class="m-t-0 header-title"><b>Frecuencia de cartera al día, 1-2-3 meses de mora</b></h3>
+            Frecuencia de cartera al día, 1-2-3 meses de mora
             <div class="p-20">
                 <div>
                     <table class="table table-responsive table-striped">
@@ -879,11 +1099,10 @@
             </div>
         </div>
     </div>
-
-    <div class="col-lg-12">
+    @*matriz de transicion deudor directo*@
+    <div class="col-lg-12" id="div_MatrizDD" style="display:none;">
         <div class="card-box">
-            <h3 class="m-t-0 header-title"><b>Matrices de Transición Dedudor Directo</b></h3>
-            <h3 class="m-t-0 header-title"><b>Frecuencia de cartera al día, 1-2-3 meses de mora</b></h3>
+            Frecuencia de cartera al día, 1-2-3 meses de mora
             <div class="p-20">
                 <div>
                     <table class="table table-responsive table-striped">
@@ -947,7 +1166,7 @@
     <div class="col-lg-12">
         <div class="card-box">
             <h3 class="m-t-0 header-title"><b>REPROGRAMACIONES</b></h3>
-            <h3><b>Número e impacto en provisiones</b></h3>
+            <h3 class="m-t-0 header-title"><b>Número e impacto en provisiones</b></h3>
             <div class="p-20">
                 <div>
                     <table class="table table-responsive table-striped">
@@ -967,6 +1186,40 @@
 
                     </table>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*seguro Cesantia*@
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Seguro Cesantía</b></h3>
+            <h3 class="m-t-0 header-title"><b>Número e impacto en provisiones cartera en mora 1-60 Días</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">&nbsp;</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jun-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jul-16</th>
+                            </tr>
+                        </thead>
+                        <tbody id="SeguroCesantia_DD"></tbody>
+                    </table>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr></tr>
+                        </thead>
+                        <tbody id="SeguroCesantia_Trab"></tbody>
+                    </table>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr></tr>
+                        </thead>
+                        <tbody id="SeguroCesantia_Total"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
