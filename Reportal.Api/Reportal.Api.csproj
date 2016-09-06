@@ -169,8 +169,11 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BenchmarkController.cs" />
     <Compile Include="Controllers\CampaniasController.cs" />
+    <Compile Include="Controllers\CastigosNetos_Pens_PorcController.cs" />
+    <Compile Include="Controllers\CastigosNetos_Total_PorcController.cs" />
     <Compile Include="Controllers\CastigosNetos_TotalController.cs" />
     <Compile Include="Controllers\CastigosNetos_PensController.cs" />
+    <Compile Include="Controllers\CastigosNetos_Trab_PorcController.cs" />
     <Compile Include="Controllers\DetalleCampaniaController.cs" />
     <Compile Include="Controllers\DetalleEmpresaController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
@@ -201,6 +204,8 @@
     <Compile Include="Controllers\EvolucionCamadas_3M_PensController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RcPeriodosController.cs" />
+    <Compile Include="Controllers\Reprogramaciones_TodosController.cs" />
+    <Compile Include="Controllers\Reprogramaciones_TrabController.cs" />
     <Compile Include="Controllers\SeguroCesantia_TotalController.cs" />
     <Compile Include="Controllers\SeguroCesantia_TrabController.cs" />
     <Compile Include="Controllers\SeguroCesantiaController.cs" />
@@ -216,8 +221,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CampaniasRepository.cs" />
+    <Compile Include="Models\CastigosNetos_Pens_PorcRepository.cs" />
+    <Compile Include="Models\CastigosNetos_Total_PorcRepository.cs" />
     <Compile Include="Models\CastigosNetos_TotalRepository.cs" />
     <Compile Include="Models\CastigosNetos_PensRepository.cs" />
+    <Compile Include="Models\CastigosNetos_Trab_PorcRepository.cs" />
     <Compile Include="Models\EmpresaRepository.cs" />
     <Compile Include="Models\CastigosNetos_TrabRepository.cs" />
     <Compile Include="Models\EvolucionCamadas_12MRepository.cs" />
@@ -243,6 +251,8 @@
     <Compile Include="Models\EvolucionCamadas_3MRepository.cs" />
     <Compile Include="Models\EvolucionCamadas_3M_TotalRepository.cs" />
     <Compile Include="Models\EvolucionCamadas_3M_PensRepository.cs" />
+    <Compile Include="Models\Reprogramaciones_TodosRepository.cs" />
+    <Compile Include="Models\Reprogramaciones_TrabRepository.cs" />
     <Compile Include="Models\SeguroCesantia_TotalRepository.cs" />
     <Compile Include="Models\SeguroCesantia_TrabRepository.cs" />
     <Compile Include="Models\SeguroCesantiaRepository.cs" />
@@ -327,6 +337,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

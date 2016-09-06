@@ -12,6 +12,11 @@ namespace Reportal.Domain
         public int OrdenItem { get; set; }
         public string Segmento { get; set; }
         public string item { get; set; }
+        public float Ene16 { get; set; }
+        public float Feb16 { get; set; }
+        public float Mar16 { get; set; }
+        public float Abr16 { get; set; }
+        public float May16 { get; set; }
         public float Jun16 { get; set; }
         public float Jul16 { get; set; }
     }

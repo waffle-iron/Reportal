@@ -2726,6 +2726,119 @@ th {
     margin-bottom: 20px;
 }
 
+.tableBenchmark  {
+    width: 55%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    text-align:center;
+}
+    .tableBenchmark > tbody > tr > td, .tableBenchmark > tbody > tr > th, .tableBenchmark > tfoot > tr > td, .tableBenchmark > tfoot > tr > th, .tableBenchmark > thead > tr > td, .tableBenchmark > thead > tr > th {
+        padding: 8px;
+        line-height: 1.42857143;
+        vertical-align: top;
+        border-top: 1px solid #ddd;
+    }
+
+    .tableBenchmark > thead > tr > th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #ddd;
+    }
+
+    .tableBenchmark > caption + thead > tr:first-child > td, .tableBenchmark > caption + thead > tr:first-child > th, .tableBenchmark > colgroup + thead > tr:first-child > td, .tableBenchmark > colgroup + thead > tr:first-child > th, .tableBenchmark > thead:first-child > tr:first-child > td, .tableBenchmark > thead:first-child > tr:first-child > th {
+        border-top: 0;
+    }
+
+    .tableBenchmark > tbody + tbody {
+        border-top: 2px solid #ddd;
+    }
+
+    .tableBenchmark .tableBenchmark {
+        background-color: #fff;
+    }
+
+.tableBenchmark-condensed > tbody > tr > td, .tableBenchmark-condensed > tbody > tr > th, .tableBenchmark-condensed > tfoot > tr > td, .tableBenchmark-condensed > tfoot > tr > th, .tableBenchmark-condensed > thead > tr > td, .tableBenchmark-condensed > thead > tr > th {
+    padding: 5px;
+}
+
+.tableBenchmark-bordered {
+    border: 1px solid #ddd;
+}
+
+    .tableBenchmark-bordered > tbody > tr > td, .tableBenchmark-bordered > tbody > tr > th, .tableBenchmark-bordered > tfoot > tr > td, .tableBenchmark-bordered > tfoot > tr > th, .tableBenchmark-bordered > thead > tr > td, .tableBenchmark-bordered > thead > tr > th {
+        border: 1px solid #ddd;
+    }
+
+    .tableBenchmark-bordered > thead > tr > td, .tableBenchmark-bordered > thead > tr > th {
+        border-bottom-width: 2px;
+    }
+
+.tableBenchmark-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.tableBenchmarkBenchmark-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.tableBenchmark-hover > tbody > tr:hover {
+    background-color: #f5f5f5;
+}
+
+tableBenchmark col[class*=col-] {
+    position: static;
+    display: table-column;
+    float: none;
+}
+
+tableBenchmark td[class*=col-], tableBenchmark th[class*=col-] {
+    position: static;
+    display: table-cell;
+    float: none;
+}
+
+.tableBenchmark > tbody > tr.active > td, .tableBenchmark > tbody > tr.active > th, .tableBenchmark > tbody > tr > td.active, .tableBenchmark > tbody > tr > th.active, .tableBenchmark > tfoot > tr.active > td, .tableBenchmark > tfoot > tr.active > th, .tableBenchmark > tfoot > tr > td.active, .tableBenchmark > tfoot > tr > th.active, .tableBenchmark > thead > tr.active > td, .tableBenchmark > thead > tr.active > th, .tableBenchmark > thead > tr > td.active, .tableBenchmark > thead > tr > th.active {
+    background-color: #f5f5f5;
+}
+
+.tableBenchmark-hover > tbody > tr.active:hover > td, .tableBenchmark-hover > tbody > tr.active:hover > th, .tableBenchmark-hover > tbody > tr:hover > .active, .tableBenchmark-hover > tbody > tr > td.active:hover, .tableBenchmark-hover > tbody > tr > th.active:hover {
+    background-color: #e8e8e8;
+}
+
+.tableBenchmark > tbody > tr.success > td, .tableBenchmark > tbody > tr.success > th, .tableBenchmark > tbody > tr > td.success, .tableBenchmark > tbody > tr > th.success, .tableBenchmark > tfoot > tr.success > td, .tableBenchmark > tfoot > tr.success > th, .tableBenchmark > tfoot > tr > td.success, .tableBenchmark > tfoot > tr > th.success, .tableBenchmark > thead > tr.success > td, .tableBenchmark > thead > tr.success > th, .tableBenchmark > thead > tr > td.success, .tableBenchmark > thead > tr > th.success {
+    background-color: #dff0d8;
+}
+
+.tableBenchmark-hover > tbody > tr.success:hover > td, .tableBenchmark-hover > tbody > tr.success:hover > th, .tableBenchmark-hover > tbody > tr:hover > .success, .tableBenchmark-hover > tbody > tr > td.success:hover, .tableBenchmark-hover > tbody > tr > th.success:hover {
+    background-color: #d0e9c6;
+}
+
+.tableBenchmark > tbody > tr.info > td, .tableBenchmark > tbody > tr.info > th, .tableBenchmark > tbody > tr > td.info, .tableBenchmark > tbody > tr > th.info, .tableBenchmark > tfoot > tr.info > td, .tableBenchmark > tfoot > tr.info > th, .tableBenchmark > tfoot > tr > td.info, .tableBenchmark > tfoot > tr > th.info, .tableBenchmark > thead > tr.info > td, .tableBenchmark > thead > tr.info > th, .tableBenchmark > thead > tr > td.info, .tableBenchmark > thead > tr > th.info {
+    background-color: #d9edf7;
+}
+
+.tableBenchmark-hover > tbody > tr.info:hover > td, .tableBenchmark-hover > tbody > tr.info:hover > th, .tableBenchmark-hover > tbody > tr:hover > .info, .tableBenchmark-hover > tbody > tr > td.info:hover, .tableBenchmark-hover > tbody > tr > th.info:hover {
+    background-color: #c4e3f3;
+}
+
+.tableBenchmark > tbody > tr.warning > td, .tableBenchmark > tbody > tr.warning > th, .tableBenchmark > tbody > tr > td.warning, .tableBenchmark > tbody > tr > th.warning, .tableBenchmark > tfoot > tr.warning > td, .tableBenchmark > tfoot > tr.warning > th, .tableBenchmark > tfoot > tr > td.warning, .tableBenchmark > tfoot > tr > th.warning, .tableBenchmark > thead > tr.warning > td, .tableBenchmark > thead > tr.warning > th, .tableBenchmark > thead > tr > td.warning, .tableBenchmark > thead > tr > th.warning {
+    background-color: #fcf8e3;
+}
+
+.tableBenchmark-hover > tbody > tr.warning:hover > td, .tableBenchmark-hover > tbody > tr.warning:hover > th, .tableBenchmark-hover > tbody > tr:hover > .warning, .tableBenchmark-hover > tbody > tr > td.warning:hover, .tableBenchmark-hover > tbody > tr > th.warning:hover {
+    background-color: #faf2cc;
+}
+
+.tableBenchmark > tbody > tr.danger > td, .tableBenchmark > tbody > tr.danger > th, .tableBenchmark > tbody > tr > td.danger, .tableBenchmark > tbody > tr > th.danger, .tableBenchmark > tfoot > tr.danger > td, .tableBenchmark > tfoot > tr.danger > th, .tableBenchmark > tfoot > tr > td.danger, .tableBenchmark > tfoot > tr > th.danger, .tableBenchmark > thead > tr.danger > td, .tableBenchmark > thead > tr.danger > th, .tableBenchmark > thead > tr > td.danger, .tableBenchmark > thead > tr > th.danger {
+    background-color: #f2dede;
+}
+
+.tableBenchmark-hover > tbody > tr.danger:hover > td, .tableBenchmark-hover > tbody > tr.danger:hover > th, .tableBenchmark-hover > tbody > tr:hover > .danger, .tableBenchmark-hover > tbody > tr > td.danger:hover, .tableBenchmark-hover > tbody > tr > th.danger:hover {
+    background-color: #ebcccc;
+}
+
+
+
+
     .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
         padding: 8px;
         line-height: 1.42857143;
@@ -2767,6 +2880,10 @@ th {
     }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.tableBenchmark-striped > tbody > tr:nth-of-type(odd) {
     background-color: #f9f9f9;
 }
 
@@ -2864,6 +2981,49 @@ table td[class*=col-], table th[class*=col-] {
                 border-bottom: 0;
             }
 }
+
+.tableBenchmark-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+@media screen and (max-width:767px) {
+    .tableBenchmark-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+    }
+
+        .tableBenchmark-responsive > .table {
+            margin-bottom: 0;
+        }
+
+            .tableBenchmark-responsive > .table > tbody > tr > td, .tableBenchmark-responsive > .table > tbody > tr > th, .tableBenchmark-responsive > .table > tfoot > tr > td, .tableBenchmark-responsive > .table > tfoot > tr > th, .tableBenchmark-responsive > .table > thead > tr > td, .tableBenchmark-responsive > .table > thead > tr > th {
+                white-space: nowrap;
+            }
+
+        .tableBenchmark-responsive > .table-bordered {
+            border: 0;
+        }
+
+            .tableBenchmark-responsive > .table-bordered > tbody > tr > td:first-child, .tableBenchmark-responsive > .table-bordered > tbody > tr > th:first-child, .tableBenchmark-responsive > .table-bordered > tfoot > tr > td:first-child, .tableBenchmark-responsive > .table-bordered > tfoot > tr > th:first-child, .tableBenchmark-responsive > .table-bordered > thead > tr > td:first-child, .tableBenchmark-responsive > .table-bordered > thead > tr > th:first-child {
+                border-left: 0;
+            }
+
+            .tableBenchmark-responsive > .table-bordered > tbody > tr > td:last-child, .tableBenchmark-responsive > .table-bordered > tbody > tr > th:last-child, .tableBenchmark-responsive > .table-bordered > tfoot > tr > td:last-child, .tableBenchmark-responsive > .table-bordered > tfoot > tr > th:last-child, .tableBenchmark-responsive > .table-bordered > thead > tr > td:last-child, .tableBenchmark-responsive > .table-bordered > thead > tr > th:last-child {
+                border-right: 0;
+            }
+
+            .tableBenchmark-responsive > .table-bordered > tbody > tr:last-child > td, .tableBenchmark-responsive > .table-bordered > tbody > tr:last-child > th, .tableBenchmark-responsive > .table-bordered > tfoot > tr:last-child > td, .tableBenchmark-responsive > .table-bordered > tfoot > tr:last-child > th {
+                border-bottom: 0;
+            }
+}
+
+
+
+
 
 fieldset {
     min-width: 0;
