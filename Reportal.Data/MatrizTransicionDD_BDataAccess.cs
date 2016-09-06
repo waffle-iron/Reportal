@@ -31,7 +31,8 @@ namespace Reportal.Data
                 Abr16 = row["Abr16"] != DBNull.Value ? Convert.ToSingle(row["Abr16"]) : 0,
                 May16 = row["May16"] != DBNull.Value ? Convert.ToSingle(row["May16"]) : 0,
                 Jun16 = row["Jun16"] != DBNull.Value ? Convert.ToSingle(row["Jun16"]) : 0,
-                Jul16 = row["Jul16"] != DBNull.Value ? Convert.ToSingle(row["Jul16"]) : 0
+                Jul16 = row["Jul16"] != DBNull.Value ? Convert.ToSingle(row["Jul16"]) : 0,
+                Ago16 = row["Ago16"] != DBNull.Value ? Convert.ToSingle(row["Ago16"]) : 0
             };
         }
     }

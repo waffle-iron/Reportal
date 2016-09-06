@@ -18,5 +18,7 @@ namespace Reportal.Domain
         public float May16 { get; set; }
         public float Jun16 { get; set; }
         public float Jul16 { get; set; }
+        public float Ago16 { get; set; }
+
     }
 }
