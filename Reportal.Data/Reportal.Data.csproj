@@ -78,13 +78,13 @@
     <Compile Include="PensionadoResumenDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CampaniaDataAccess.cs" />
+    <Compile Include="Reprogramaciones_PensDataAcces.cs" />
     <Compile Include="Reprogramaciones_TodosDataAcces.cs" />
     <Compile Include="Reprogramaciones_TrabDataAcces.cs" />
     <Compile Include="SeguroCesantia_TotalDataAcces.cs" />
     <Compile Include="SeguroCesantia_TrabDataAcces.cs" />
     <Compile Include="SeguroCesantiaDataAcces.cs" />
     <Compile Include="Reprogramaciones_TotalDataAcces.cs" />
-    <Compile Include="Reprogramaciones_PensDataAcces.cs" />
     <Compile Include="ReprogramacionesDataAcces.cs" />
     <Compile Include="ResumenGlobalDataAccess.cs" />
     <Compile Include="ResumenGlobalLicenciaDataAccess.cs" />
