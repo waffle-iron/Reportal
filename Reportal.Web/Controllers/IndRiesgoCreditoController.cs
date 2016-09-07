@@ -38,21 +38,21 @@ namespace Reportal.Web.Controllers
             ViewBag.contenido_pdf = contenido_pdf;
 
             var output = new MemoryStream();
-
+            
             var input = new MemoryStream(Encoding.UTF8.GetBytes(contenido_pdf));
-
+            
             var document = new Document(PageSize.LEGAL, 5, 5, 5, 5);
             var writer = PdfWriter.GetInstance(document, output);
             writer.CloseStream = false;
-
+            
             document.Open();
             var htmlContext = new HtmlPipelineContext(null);
             htmlContext.SetTagFactory(Tags.GetHtmlTagProcessorFactory());
-
+            
             ICSSResolver cssResolver = XMLWorkerHelper.GetInstance().GetDefaultCssResolver(false);
             cssResolver.AddCssFile(System.Web.HttpContext.Current.Server.MapPath("~/assets/css/bootstrap.min.css"), true);
             cssResolver.AddCssFile(System.Web.HttpContext.Current.Server.MapPath("~/assets/css/core.css"), true);
-
+            
             var pipeline = new CssResolverPipeline(cssResolver, new HtmlPipeline(htmlContext, new PdfWriterPipeline(document, writer)));
             var worker = new XMLWorker(pipeline, true);
             var p = new XMLParser(worker);
@@ -61,7 +61,7 @@ namespace Reportal.Web.Controllers
             output.Position = 0;
 
             Response.ContentType = "application/pdf";
-            Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Salida-{0}.pdf", "CharLee"));
+            Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Reporte-{0}.pdf", "Indicadores"));
             Response.BinaryWrite(output.ToArray());
 
 

@@ -1024,6 +1024,26 @@
             });
 
 
+            $("#btnExport_PDF").on("click", function () {
+                //Variables para Html y PDF
+                var _html_pdf = '';
+
+                $.each($(".card-box"), function (i, o) {
+
+                    var x = $(o).closest("div.col-lg-12").clone();
+                    if (!$(o).hasClass("noPDF"))
+                    {
+                        _html_pdf += $(x).css("display", "block").css("page-break-after", "always").prop('outerHTML'); 
+                    }
+                    $(x).remove();
+                });
+
+                $("#contenido_pdf").val(_html_pdf);
+                $("#frm_envia_pdf").submit();
+            });
+
+
+
         });
 
 
@@ -1109,12 +1129,7 @@
                         </thead>
                         <tbody id="bdy_CastigosNetos"></tbody>
                     </table>
-                    <table class="table table-responsive table-striped">
-                        <thead>
 
-                        </thead>
-                        <tbody id="bdy_CastigosNetos_Porc"></tbody>
-                    </table>
                     <table class="table table-responsive table-striped">
                         <thead>
 
@@ -1125,19 +1140,7 @@
                         <thead>
 
                         </thead>
-                        <tbody id="bdy_CastigosNetosPen_Porc"></tbody>
-                    </table>
-                    <table class="table table-responsive table-striped">
-                        <thead>
-
-                        </thead>
                         <tbody id="bdy_CastigosNetosTotal"></tbody>
-                    </table>
-                    <table class="table table-responsive table-striped">
-                        <thead>
-
-                        </thead>
-                        <tbody id="bdy_CastigosNetosTotal_Porc"></tbody>
                     </table>
                 </div>
             </div>
@@ -1480,13 +1483,6 @@
                         <tbody id="bdy_Reprogramaciones"></tbody>
                     </table>
                    
-                    <table class="table table-responsive table-striped">
-                        <thead>
-                            <tr></tr>
-                        </thead>
-                        <tbody id="bdy_Reprogramaciones_Total"></tbody>
-                    </table>
-
 
                 </div>
             </div>
@@ -1515,12 +1511,6 @@
                             </tr>
                         </thead>
                         <tbody id="SeguroCesantia_DD"></tbody>
-                    </table>
-                    <table class="table table-responsive table-striped">
-                        <thead>
-                            <tr></tr>
-                        </thead>
-                        <tbody id="SeguroCesantia_Trab"></tbody>
                     </table>
                     <table class="table table-responsive table-striped">
                         <thead>
