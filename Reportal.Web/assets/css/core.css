@@ -146,6 +146,11 @@ File: Helper clasess
 .p-20 {
   padding: 20px !important;
 }
+.p-20Bech {
+   padding: 65px !important;
+   
+   
+}
 .p-30 {
   padding: 30px !important;
 }
@@ -310,6 +315,16 @@ File: Helper clasess
 }
 /* Card Box */
 .card-box {
+  padding: 20px;
+  border: 1px solid rgba(54, 64, 74, 0.05);
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+.card-box1 {
   padding: 20px;
   border: 1px solid rgba(54, 64, 74, 0.05);
   -webkit-border-radius: 5px;

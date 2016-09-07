@@ -10,16 +10,16 @@ using CDK.Integration;
 
 namespace Reportal.Data
 {
-    public static class EvolucionCamadas_12M_TotalDataAccess
+    public static class CastigosNetos_Pens_PorceDataAccess
     {
-        public static List<EvolucionCamadas_12M> ListarEvolucionCamada_12M_Total()
+        public static List<CastigosNetos> ListarCastigosNetos_Pens_Porce()
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_IndCredito_EvoCamadas_12M_Total", ConstructorEntidad);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_IndCredito_CastigoNeto_Pens_Porc", ConstructorEntidad);
         }
 
-        private static EvolucionCamadas_12M ConstructorEntidad(DataRow row)
+        private static CastigosNetos ConstructorEntidad(DataRow row)
         {
-            return new EvolucionCamadas_12M
+            return new CastigosNetos
             {
                 OrdenSegmento= row["OrdenSegmento"] != DBNull.Value ? Convert.ToInt32(row["OrdenSegmento"]):0,
                 OrdenItem = row["OrdenItem"] != DBNull.Value ? Convert.ToInt32(row["OrdenItem"]) : 0,

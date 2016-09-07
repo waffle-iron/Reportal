@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Reportal.Domain
 {
-   public class EvolucionCamadas_3M
+    public class EvolucionCamadas_3M
     {
         public int OrdenSegmento { get; set; }
         public int OrdenItem { get; set; }
@@ -19,5 +19,6 @@ namespace Reportal.Domain
         public float May16 { get; set; }
         public float Jun16 { get; set; }
         public float Jul16 { get; set; }
+        public float Ago16 { get; set; }
     }
 }

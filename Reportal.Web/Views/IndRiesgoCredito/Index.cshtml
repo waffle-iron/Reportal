@@ -63,12 +63,12 @@
             });
 
             $.getJSON("http://localhost:8080/api/Benchmark/201607/Tasa_Gasto", function (respoonse) {
-                $("#bdy_Benchmark").append(
+                $("#bdy_Benchmark_2").append(
                      $("<tr>").append($("<th>").html("Tasa Gasto en provisión trimestral (Mora hasta 365)").attr("scope", "row").css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "2"))
                 );
 
                 $.each(respoonse, function (i, o) {
-                    $("#bdy_Benchmark").append(
+                    $("#bdy_Benchmark_2").append(
                             $("<tr>").append($("<td>").html(o.Caja).css("text-align", "center"))
                             .append($("<td>").html(o.ValorTasa.toMoney(1) + "%").css("text-align", "center"))
                     );
@@ -76,10 +76,11 @@
             });
 
             /*Castigos netos*/
-            $.getJSON("http://localhost:8080/api/CastigosNetos_Trab" + $(this).val(), function (respoonse) {
+            $.getJSON("http://localhost:8080/api/CastigosNetos_Trab", function (respoonse) {
+
                 $("#bdy_CastigosNetos").append(
-                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
-              );
+                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
+                );
 
 
                 $.each(respoonse, function (i, o) {
@@ -93,14 +94,37 @@
                             .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
 
                     );
                 });
-            });
 
-            $.getJSON("http://localhost:8080/api/CastigosNetos_Pens" + $(this).val(), function (respoonse) {
+
+
+
+                $.getJSON("http://localhost:8080/api/CastigosNetos_Trab_Porc", function (respoonse) {
+
+                    $.each(respoonse, function (i, o) {
+                        $("#bdy_CastigosNetos").append(
+                                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
+
+                        );
+                    });
+                });
+
+            });
+            $.getJSON("http://localhost:8080/api/CastigosNetos_Pens", function (respoonse) {
                 $("#bdy_CastigosNetosPen").append(
-                  $("<tr>").append($("<th>").html("Pensionado").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                  $("<tr>").append($("<th>").html("Pensionado").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_CastigosNetosPen").append(
@@ -113,14 +137,35 @@
                             .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
 
                     );
                 });
-            });
 
-            $.getJSON("http://localhost:8080/api/CastigosNetos_Total" + $(this).val(), function (respoonse) {
+
+                $.getJSON("http://localhost:8080/api/CastigosNetos_Pens_Porc", function (respoonse) {
+
+                    $.each(respoonse, function (i, o) {
+                        $("#bdy_CastigosNetosPen").append(
+                                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
+
+                        );
+                    });
+                });
+
+            });
+            $.getJSON("http://localhost:8080/api/CastigosNetos_Total", function (respoonse) {
                 $("#bdy_CastigosNetosTotal").append(
-                  $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                  $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_CastigosNetosTotal").append(
@@ -133,13 +178,35 @@
                             .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
 
                     );
                 });
+
+
+                $.getJSON("http://localhost:8080/api/CastigosNetos_Total_Porc", function (respoonse) {
+                    $.each(respoonse, function (i, o) {
+                        $("#bdy_CastigosNetosTotal").append(
+                                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                 .append($("<td>").html(o.Dic15.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Ene16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Feb16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Mar16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Abr16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
+
+                        );
+                    });
+                });
+
             });
 
 
-           
+
+
 
 
             /*Colocacion por perful de riesgo*/
@@ -161,7 +228,7 @@
             /*EVOLUCION CAMADAS 3 MESES */
             $.getJSON("http://localhost:8080/api/EvolucionCamadas_3M/" + $(this).val(), function (respoonse) {
                 $("#bdy_EvolucionCamadas_3M").append(
-                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_EvolucionCamadas_3M").append(
@@ -174,13 +241,14 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
             });
             $.getJSON("http://localhost:8080/api/EvolucionCamadas_3M_Pens", function (respoonse) {
                 $("#bdy_EvolucionCamadas_3M_Pens").append(
-                     $("<tr>").append($("<th>").html("Pensionado").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                     $("<tr>").append($("<th>").html("Pensionado").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
                 );
 
                 $.each(respoonse, function (i, o) {
@@ -194,13 +262,14 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
             });
             $.getJSON("http://localhost:8080/api/EvolucionCamadas_3M_Total", function (respoonse) {
                 $("#bdy_EvolucionCamadas_3M_Total").append(
-                     $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                     $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
                 );
 
                 $.each(respoonse, function (i, o) {
@@ -214,6 +283,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
                     );
                 });
             });
@@ -221,7 +291,7 @@
             /*EVOLUCION CAMADAS 6 MESES */
             $.getJSON("http://localhost:8080/api/EvolucionCamadas_6M/" + $(this).val(), function (respoonse) {
                 $("#bdy_EvolucionCamadas_6M").append(
-                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_EvolucionCamadas_6M").append(
@@ -234,13 +304,14 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
             });
             $.getJSON("http://localhost:8080/api/EvolucionCamadas_6M_Pens", function (respoonse) {
                 $("#bdy_EvolucionCamadas_6M_Pens").append(
-                     $("<tr>").append($("<th>").html("Pensionado").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                     $("<tr>").append($("<th>").html("Pensionado").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
                 );
 
                 $.each(respoonse, function (i, o) {
@@ -254,12 +325,13 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
                     );
                 });
             });
             $.getJSON("http://localhost:8080/api/EvolucionCamadas_6M_Total", function (respoonse) {
                 $("#bdy_EvolucionCamadas_6M_Total").append(
-                     $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                     $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
                 );
 
                 $.each(respoonse, function (i, o) {
@@ -273,13 +345,14 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
                     );
                 });
             });
 
             $.getJSON("http://localhost:8080/api/EvolucionCamadas_12M", function (respoonse) {
                 $("#bdy_EvolucionCamadas_12M").append(
-                     $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                     $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
                 );
 
                 $.each(respoonse, function (i, o) {
@@ -293,12 +366,13 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
                     );
                 });
             });
             $.getJSON("http://localhost:8080/api/EvolucionCamadas_12M_Pens", function (respoonse) {
                 $("#bdy_EvolucionCamadas_12M_Pens").append(
-                     $("<tr>").append($("<th>").html("Pensionados").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                     $("<tr>").append($("<th>").html("Pensionados").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
                 );
 
                 $.each(respoonse, function (i, o) {
@@ -312,12 +386,13 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
                     );
                 });
             });
             $.getJSON("http://localhost:8080/api/EvolucionCamadas_12M_Total", function (respoonse) {
                 $("#bdy_EvolucionCamadas_12M_Total").append(
-                     $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
+                     $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "10"))
                 );
 
                 $.each(respoonse, function (i, o) {
@@ -331,6 +406,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
                     );
                 });
             });
@@ -338,7 +414,7 @@
             /*MATRIZ  DE TRANSICION*/
             $.getJSON("http://localhost:8080/api/MatrizTransaccion/" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_A").append(
-                  $("<tr>").append($("<th>").html("Cartera al Día - A").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera al Día - A").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_A").append(
@@ -350,6 +426,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
@@ -357,7 +434,7 @@
 
             $.getJSON("http://localhost:8080/api/MatrizTransaccion_B/" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_B").append(
-                  $("<tr>").append($("<th>").html("Cartera 1-30 días mora - B").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 1-30 días mora - B").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_B").append(
@@ -369,6 +446,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
@@ -376,7 +454,7 @@
 
             $.getJSON("http://localhost:8080/api/MatrizTransaccion_C/" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_C").append(
-                  $("<tr>").append($("<th>").html("Cartera 31-60 días mora - C").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 31-60 días mora - C").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_C").append(
@@ -388,6 +466,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
@@ -395,7 +474,7 @@
 
             $.getJSON("http://localhost:8080/api/MatrizTransaccion_D/" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_D").append(
-                  $("<tr>").append($("<th>").html("Cartera 61-90 días mora - D").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 61-90 días mora - D").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_D").append(
@@ -407,13 +486,14 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
             });
             $.getJSON("http://localhost:8080/api/MatrizTransaccion_E/" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_E").append(
-                  $("<tr>").append($("<th>").html("Cartera 91-120 días mora - E").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 91-120 días mora - E").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_E").append(
@@ -425,13 +505,14 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
             });
             $.getJSON("http://localhost:8080/api/MatrizTransaccion_F/" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_F").append(
-                  $("<tr>").append($("<th>").html("Cartera 121-150 días mora - F").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 121-150 días mora - F").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_F").append(
@@ -443,6 +524,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
@@ -450,7 +532,7 @@
 
             $.getJSON("http://localhost:8080/api/MatrizTransaccion_G/" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_G").append(
-                  $("<tr>").append($("<th>").html("Cartera 151-180 días mora - G").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 151-180 días mora - G").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_G").append(
@@ -462,6 +544,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
@@ -473,7 +556,7 @@
             /*MATRIZ  DE TRANSICION DEUDOR DIRECTO*/
             $.getJSON("http://localhost:8080/api/MatrizTransicionDD_A" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_DD").append(
-                  $("<tr>").append($("<th>").html("Cartera al Día - A").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera al Día - A").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_DD").append(
@@ -485,13 +568,14 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
             });
             $.getJSON("http://localhost:8080/api/MatrizTransicionDD_B" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_DD_B").append(
-                  $("<tr>").append($("<th>").html("Cartera 1-30 Días mora - B").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 1-30 Días mora - B").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_DD_B").append(
@@ -503,6 +587,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
@@ -510,7 +595,7 @@
 
             $.getJSON("http://localhost:8080/api/MatrizTransicionDD_C" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_DD_C").append(
-                  $("<tr>").append($("<th>").html("Cartera 31-60 Días mora - C").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 31-60 Días mora - C").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_DD_C").append(
@@ -522,6 +607,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
@@ -529,7 +615,7 @@
 
             $.getJSON("http://localhost:8080/api/MatrizTransicionDD_D" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_DD_D").append(
-                  $("<tr>").append($("<th>").html("Cartera 61-90 Días mora - D").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 61-90 Días mora - D").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_DD_D").append(
@@ -541,6 +627,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
@@ -548,7 +635,7 @@
 
             $.getJSON("http://localhost:8080/api/MatrizTransicionDD_E" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_DD_E").append(
-                  $("<tr>").append($("<th>").html("Cartera 91-120 Días mora - E").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 91-120 Días mora - E").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_DD_E").append(
@@ -560,6 +647,7 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
@@ -567,7 +655,7 @@
 
             $.getJSON("http://localhost:8080/api/MatrizTransicionDD_F" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_DD_F").append(
-                  $("<tr>").append($("<th>").html("Cartera 121-150 Días mora - F").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 121-150 Días mora - F").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_DD_F").append(
@@ -579,14 +667,14 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
-
+                            .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
                     );
                 });
             });
 
             $.getJSON("http://localhost:8080/api/MatrizTransicionDD_G" + $(this).val(), function (respoonse) {
                 $("#bdy_MatrizTransicion_DD_G").append(
-                  $("<tr>").append($("<th>").html("Cartera 151-180 Días mora - G").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Cartera 151-180 Días mora - G").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#bdy_MatrizTransicion_DD_G").append(
@@ -598,100 +686,271 @@
                             .append($("<td>").html(o.May16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney(1) + "%").css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney(1) + "%").css("text-align", "center"))
+                             .append($("<td>").html(o.Ago16.toMoney(1) + "%").css("text-align", "center"))
 
                     );
                 });
             });
 
             /*reprogramaciones*/
-            //$.getJSON("http://localhost:8080/api/Reprogramaciones/" + $(this).val(), function (respoonse) {
-            //    $("#bdy_Reprogramaciones").append(
-            //      $("<tr>").append($("<th>").html("Reprogramaciones").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
-            //  );
-            //    $.each(respoonse, function (i, o) {
-            //        $("#bdy_Reprogramaciones").append(
-            //                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
-            //                .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
-            //                .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
-            //                .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
-            //                .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
-            //                .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
-            //                .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+    
 
-            //        );
-            //    });
-            //});
-
-            //$.getJSON("http://localhost:8080/api/Reprogramaciones_Pens/" + $(this).val(), function (respoonse) {
-            //    $("#bdy_Reprogramaciones_Pens").append(
-            //      $("<tr>").append($("<th>").html("Reprogramaciones").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
-            //  );
-            //    $.each(respoonse, function (i, o) {
-            //        $("#bdy_Reprogramaciones_Pens").append(
-            //                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
-            //                .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
-            //                .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
-            //                .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
-            //                .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
-            //                .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
-            //                .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
-
-            //        );
-            //    });
-            //});
-            $.getJSON("http://localhost:8080/api/Reprogramaciones_Total/" + $(this).val(), function (respoonse) {
-                $("#bdy_Reprogramaciones_Total").append(
-                  $("<tr>").append($("<th>").html("Reprogramaciones").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+            $.getJSON("http://localhost:8080/api/Reprogramaciones", function (respoonse) {
+                $("#bdy_Reprogramaciones").append(
+                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
               );
                 $.each(respoonse, function (i, o) {
-                    $("#bdy_Reprogramaciones_Total").append(
-                            $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
-                            .append($("<td>").html(o.Ene16.toMoney()).css("text-align", "center"))
-                            .append($("<td>").html(o.Feb16.toMoney(2)).css("text-align", "center"))
-                            .append($("<td>").html(o.Mar16.toMoney(2)).css("text-align", "center"))
-                            .append($("<td>").html(o.Abr16.toMoney(2)).css("text-align", "center"))
-                            .append($("<td>").html(o.May16.toMoney(2)).css("text-align", "center"))
-                            .append($("<td>").html(o.Jun16.toMoney(2)).css("text-align", "center"))
-                            .append($("<td>").html(o.Jul16.toMoney(2)).css("text-align", "center"))
+                    if (o.OrdenItem == 1) {
+                       
+                        $("#bdy_Reprogramaciones").append(
+                                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
 
-                    );
+                        );
+                    }
+                    if (o.OrdenItem == 2) {
+                       
+                        $("#bdy_Reprogramaciones").append(
+                                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
+
+                        );
+                    }
+                    if (o.OrdenItem == 3) {
+                       
+                        $("#bdy_Reprogramaciones").append(
+                                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                .append($("<td>").html(o.Feb16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.Mar16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.Abr16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.May16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.Jun16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.Jul16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.Ago16.toMoney(2)).css("text-align", "center"))
+
+                        );
+                    }
+                    if (o.OrdenItem == 4) {
+                       
+                        $("#bdy_Reprogramaciones").append(
+                                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
+
+                        );
+                    }
+                
+
+                });
+
+            });
+
+            $.getJSON("http://localhost:8080/api/Reprogramaciones_Pens", function (respoonse) {
+                $("#bdy_Reprogramaciones").append(
+                  $("<tr>").append($("<th>").html("Pensionados").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+              );
+                $.each(respoonse, function (i, o) {
+                    if (o.OrdenItem == 1) {
+                       
+                        $("#bdy_Reprogramaciones").append(
+                                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
+
+                        );
+                    }
+                    if (o.OrdenItem == 2) {
+                       
+                        $("#bdy_Reprogramaciones").append(
+                                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
+
+                        );
+                    }
+                    if (o.OrdenItem == 3) {
+                       
+                        $("#bdy_Reprogramaciones").append(
+                                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                .append($("<td>").html(o.Feb16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.Mar16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.Abr16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.May16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.Jun16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.Jul16.toMoney(2)).css("text-align", "center"))
+                                .append($("<td>").html(o.Ago16.toMoney(2)).css("text-align", "center"))
+
+                        );
+                    }
+                    if (o.OrdenItem == 4) {
+                       
+                        $("#bdy_Reprogramaciones").append(
+                                $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
+
+                        );
+                    }
+                });
+                $.getJSON("http://localhost:8080/api/Reprogramaciones_Total", function (respoonse) {
+                    $("#bdy_Reprogramaciones").append(
+                      $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  );
+                    $.each(respoonse, function (i, o) {
+                        if (o.OrdenItem == 1) {
+
+                            $("#bdy_Reprogramaciones").append(
+                                    $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                    .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
+
+                            );
+                        }
+                        if (o.OrdenItem == 2) {
+
+                            $("#bdy_Reprogramaciones").append(
+                                    $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                    .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
+
+                            );
+                        }
+                        if (o.OrdenItem == 3) {
+
+                            $("#bdy_Reprogramaciones").append(
+                                    $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                    .append($("<td>").html(o.Feb16.toMoney(2)).css("text-align", "center"))
+                                    .append($("<td>").html(o.Mar16.toMoney(2)).css("text-align", "center"))
+                                    .append($("<td>").html(o.Abr16.toMoney(2)).css("text-align", "center"))
+                                    .append($("<td>").html(o.May16.toMoney(2)).css("text-align", "center"))
+                                    .append($("<td>").html(o.Jun16.toMoney(2)).css("text-align", "center"))
+                                    .append($("<td>").html(o.Jul16.toMoney(2)).css("text-align", "center"))
+                                    .append($("<td>").html(o.Ago16.toMoney(2)).css("text-align", "center"))
+
+                            );
+                        }
+                        if (o.OrdenItem == 4) {
+
+                            $("#bdy_Reprogramaciones").append(
+                                    $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                                    .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                                    .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
+
+                            );
+                        }
+                    });
                 });
             });
+
+        
+
+
+
+
+
+
+
+
             $.getJSON("http://localhost:8080/api/SeguroCesantia/" + $(this).val(), function (respoonse) {
                 $("#SeguroCesantia_DD").append(
-                  $("<tr>").append($("<th>").html("Deudores Directo").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Deudores Directo").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#SeguroCesantia_DD").append(
                             $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
 
                     );
                 });
             });
             $.getJSON("http://localhost:8080/api/SeguroCesantia_Trab/" + $(this).val(), function (respoonse) {
-                $("#SeguroCesantia_Trab").append(
-                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                $("#SeguroCesantia_DD").append(
+                  $("<tr>").append($("<th>").html("Trabajadores").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
-                    $("#SeguroCesantia_Trab").append(
+                    $("#SeguroCesantia_DD").append(
                             $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
 
                     );
                 });
             });
             $.getJSON("http://localhost:8080/api/SeguroCesantia_Total/" + $(this).val(), function (respoonse) {
                 $("#SeguroCesantia_Total").append(
-                  $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "8"))
+                  $("<tr>").append($("<th>").html("Total").attr("scope", "row").css("text-align", "left", "color", "#fff1f1").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1").attr("colspan", "9"))
               );
                 $.each(respoonse, function (i, o) {
                     $("#SeguroCesantia_Total").append(
                             $("<tr>").append($("<th>").html(o.item).attr("scope", "row"))
+                            .append($("<td>").html(o.Ene16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Feb16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Mar16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Abr16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.May16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jun16.toMoney()).css("text-align", "center"))
                             .append($("<td>").html(o.Jul16.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Ago16.toMoney()).css("text-align", "center"))
 
                     );
                 });
@@ -815,10 +1074,13 @@
         <div class="card-box">
             <h3 class="m-t-0 header-title"><b>Gasto y Tasa de Provisión</b></h3>
             Evolución y Benchmark Industria
-            <div class="p-20">
-                <div>
-                    <table class="table table-responsive table-striped">
+            <div class="p-20Bech">
+                <div align="center">
+                    <table class="tableBenchmark tableBenchmark-responsive tableBenchmark-striped">
                         <tbody id="bdy_Benchmark"></tbody>
+                    </table>
+                    <table class="tableBenchmark tableBenchmark-responsive tableBenchmark-striped">
+                        <tbody id="bdy_Benchmark_2"></tbody>
                     </table>
                 </div>
             </div>
@@ -842,9 +1104,16 @@
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">May-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jun-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jul-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Ago-16</th>
                             </tr>
                         </thead>
                         <tbody id="bdy_CastigosNetos"></tbody>
+                    </table>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+
+                        </thead>
+                        <tbody id="bdy_CastigosNetos_Porc"></tbody>
                     </table>
                     <table class="table table-responsive table-striped">
                         <thead>
@@ -856,7 +1125,19 @@
                         <thead>
 
                         </thead>
+                        <tbody id="bdy_CastigosNetosPen_Porc"></tbody>
+                    </table>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+
+                        </thead>
                         <tbody id="bdy_CastigosNetosTotal"></tbody>
+                    </table>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+
+                        </thead>
+                        <tbody id="bdy_CastigosNetosTotal_Porc"></tbody>
                     </table>
                 </div>
             </div>
@@ -905,6 +1186,7 @@
     </div>
     <div id="div_3meses" class="col-lg-12">
         <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Evolución Camadas</b></h3>
             Corte Colocaciones a 3 meses
 
             <div class="p-20">
@@ -922,6 +1204,7 @@
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">May-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jun-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jul-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Ago-16</th>
                             </tr>
                         </thead>
                         <tbody id="bdy_EvolucionCamadas_3M"></tbody>
@@ -945,6 +1228,7 @@
     @*CAMADAS CORTE 6 MESES *@
     <div id="div_6meses" class="col-lg-12" style="display:none;">
         <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Evolución Camadas</b></h3>
             Corte Colocaciones a 6 Meses
             <div class="p-20">
                 <div>
@@ -961,6 +1245,7 @@
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">May-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jun-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jul-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Ago-16</th>
                             </tr>
                         </thead>
                         <tbody id="bdy_EvolucionCamadas_6M"></tbody>
@@ -985,8 +1270,9 @@
     @*12 meses*@
     <div id="div_12meses" class="col-lg-12" style="display:none;">
         <div class="card-box">
-           Corte Colocaciones a 12 Meses
-             <div class="p-20">
+            <h3 class="m-t-0 header-title"><b>Evolución Camadas</b></h3>
+            Corte Colocaciones a 12 Meses
+            <div class="p-20">
                 <div>
                     <table class="table table-responsive table-striped">
                         <thead>
@@ -1001,6 +1287,8 @@
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">May-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jun-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jul-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Ago-16</th>
+
                             </tr>
                         </thead>
                         <tbody id="bdy_EvolucionCamadas_12M"></tbody>
@@ -1036,12 +1324,13 @@
                 </b>
             </h3>
         </div>
-      
+
 
     </div>
     @*Matrices de Transicion *@
     <div class="col-lg-12" id="div_MatrizTrans">
         <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Matrices de Transición</b></h3>
             Frecuencia de cartera al día, 1-2-3 meses de mora
             <div class="p-20">
                 <div>
@@ -1057,6 +1346,7 @@
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">May-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jun-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jul-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Ago-16</th>
                             </tr>
                         </thead>
                         <tbody id="bdy_MatrizTransicion_A"></tbody>
@@ -1105,6 +1395,7 @@
     @*matriz de transicion deudor directo*@
     <div class="col-lg-12" id="div_MatrizDD" style="display:none;">
         <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Matrices de Transición Deudor Directo</b></h3>
             Frecuencia de cartera al día, 1-2-3 meses de mora
             <div class="p-20">
                 <div>
@@ -1120,6 +1411,7 @@
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">May-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jun-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jul-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Ago-16</th>
                             </tr>
                         </thead>
                         <tbody id="bdy_MatrizTransicion_DD"></tbody>
@@ -1169,7 +1461,43 @@
     <div class="col-lg-12">
         <div class="card-box">
             <h3 class="m-t-0 header-title"><b>REPROGRAMACIONES</b></h3>
-            <h3 class="m-t-0 header-title"><b>Número e impacto en provisiones</b></h3>
+            Número e impacto en provisiones
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">&nbsp;</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Feb-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Mar-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Abr-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">May-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jun-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jul-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Ago-16</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_Reprogramaciones"></tbody>
+                    </table>
+                   
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr></tr>
+                        </thead>
+                        <tbody id="bdy_Reprogramaciones_Total"></tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*seguro Cesantia*@
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Seguro Cesantía</b></h3>
+            Número e impacto en provisiones cartera en mora 1-60 Días
             <div class="p-20">
                 <div>
                     <table class="table table-responsive table-striped">
@@ -1183,30 +1511,7 @@
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">May-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jun-16</th>
                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jul-16</th>
-                            </tr>
-                        </thead>
-                        <tbody id="bdy_Reprogramaciones_Total"></tbody>
-
-                    </table>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    @*seguro Cesantia*@
-    <div class="col-lg-12">
-        <div class="card-box">
-            <h3 class="m-t-0 header-title"><b>Seguro Cesantía</b></h3>
-            <h3 class="m-t-0 header-title"><b>Número e impacto en provisiones cartera en mora 1-60 Días</b></h3>
-            <div class="p-20">
-                <div>
-                    <table class="table table-responsive table-striped">
-                        <thead>
-                            <tr>
-                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">&nbsp;</th>
-                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jun-16</th>
-                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Jul-16</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Ago-16</th>
                             </tr>
                         </thead>
                         <tbody id="SeguroCesantia_DD"></tbody>
