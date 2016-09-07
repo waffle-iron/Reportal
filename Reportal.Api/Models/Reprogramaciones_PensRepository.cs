@@ -7,11 +7,11 @@ using Reportal.Domain;
 
 namespace Reportal.Api.Models
 {
-    public class ReprogramacionesRepository
+    public class Reprogramaciones_PensRepository
     {
         public List<Reprogramaciones> Listar()
         {
-            return ReprogramacionesDataAcces.ListarProgramaciones_Trab();
+            return Reprogramaciones_PensDataAcces.ListarProgramaciones_Pens();
         }
 
 

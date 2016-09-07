@@ -7,13 +7,12 @@ using Reportal.Domain;
 
 namespace Reportal.Api.Models
 {
-    public class ReprogramacionesRepository
+    public class EvolucionCamadas_12M_PensRepository
     {
-        public List<Reprogramaciones> Listar()
+        public List<EvolucionCamadas_12M> Listar()
         {
-            return ReprogramacionesDataAcces.ListarProgramaciones_Trab();
+            return EvolucionCamadas_12M_PensDataAccess.ListarEvolucionCamada_12M_Pens();
         }
-
 
     }
 }

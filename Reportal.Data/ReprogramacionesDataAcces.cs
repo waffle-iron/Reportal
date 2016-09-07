@@ -8,11 +8,12 @@ using System.Data;
 using CDK.Data;
 using CDK.Integration;
 
+
 namespace Reportal.Data
 {
     public static class ReprogramacionesDataAcces
     {
-        public static List<Reprogramaciones> ListarProgramaciones()
+        public static List<Reprogramaciones> ListarProgramaciones_Trab()
         {
             return DBHelper.InstanceReporteria.ObtenerColeccion("sp_IndCredito_Reprogramaciones_Tab", ConstructorEntidad);
         }
@@ -25,7 +26,6 @@ namespace Reportal.Data
                 OrdenItem = row["OrdenItem"] != DBNull.Value ? Convert.ToInt32(row["OrdenItem"]) : 0,
                 Segmento = row["Segmento"] != DBNull.Value ? row["Segmento"].ToString() : string.Empty,
                 item = row["Item"] != DBNull.Value ? row["Item"].ToString() : string.Empty,
-                Ene16 = row["Ene16"] != DBNull.Value ? Convert.ToSingle(row["Ene16"]) : 0,
                 Feb16 = row["Feb16"] != DBNull.Value ? Convert.ToSingle(row["Feb16"]) : 0,
                 Mar16 = row["Mar16"] != DBNull.Value ? Convert.ToSingle(row["Mar16"]) : 0,
                 Abr16 = row["Abr16"] != DBNull.Value ? Convert.ToSingle(row["Abr16"]) : 0,
@@ -36,4 +36,3 @@ namespace Reportal.Data
         }
     }
 }
-

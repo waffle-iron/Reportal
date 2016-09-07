@@ -14,7 +14,7 @@ namespace Reportal.Data
     {
         public static List<MatrizTransicionDD> ListarMatrizTransicionDD_F()
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_IndCredito_MatricesTransicion_F", ConstructorEntidad);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_IndCredito_MatrizTranDD_F", ConstructorEntidad);
         }
 
         private static MatrizTransicionDD ConstructorEntidad(DataRow row)

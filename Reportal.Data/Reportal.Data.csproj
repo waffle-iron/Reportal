@@ -40,11 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CastigosNetos_TotalDataAccess.cs" />
+    <Compile Include="CastigosNetos_PensDataAccess.cs" />
     <Compile Include="DetalleCampaniaDataAccess.cs" />
     <Compile Include="DetalleEmpresaDataAccess.cs" />
     <Compile Include="EmpresaDataAccess.cs" />
     <Compile Include="EncabezadoEmpresaDataAccess.cs" />
     <Compile Include="BenchmarkDataAccess.cs" />
+    <Compile Include="CastigosNetosDataAccess.cs" />
+    <Compile Include="EvolucionCamadas_12MDataAccess.cs" />
+    <Compile Include="EvolucionCamadas_12M_PensDataAccess.cs" />
+    <Compile Include="EvolucionCamadas_12M_TotalDataAccess.cs" />
     <Compile Include="MatricesTransaccion_GDataAccess.cs" />
     <Compile Include="MatricesTransaccion_FDataAccess.cs" />
     <Compile Include="MatricesTransaccion_EDataAccess.cs" />
@@ -69,6 +75,11 @@
     <Compile Include="PensionadoResumenDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CampaniaDataAccess.cs" />
+    <Compile Include="SeguroCesantia_TotalDataAcces.cs" />
+    <Compile Include="SeguroCesantia_TrabDataAcces.cs" />
+    <Compile Include="SeguroCesantiaDataAcces.cs" />
+    <Compile Include="Reprogramaciones_TotalDataAcces.cs" />
+    <Compile Include="Reprogramaciones_PensDataAcces.cs" />
     <Compile Include="ReprogramacionesDataAcces.cs" />
     <Compile Include="ResumenGlobalDataAccess.cs" />
     <Compile Include="ResumenGlobalLicenciaDataAccess.cs" />
