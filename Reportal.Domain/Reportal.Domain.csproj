@@ -56,6 +56,8 @@
     <Compile Include="PensionadoPeriodo.cs" />
     <Compile Include="PensionadosResumen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SegPreaprobadosFull.cs" />
+    <Compile Include="SegPreaprobadosGlobal.cs" />
     <Compile Include="SeguroCesantia.cs" />
     <Compile Include="Reprogramaciones.cs" />
     <Compile Include="ResumenGlobalLicencia.cs" />

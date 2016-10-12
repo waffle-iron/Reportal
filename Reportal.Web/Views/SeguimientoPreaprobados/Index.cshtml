@@ -1,0 +1,512 @@
+﻿
+@{
+    
+    ViewBag.Title = "Seguimiento Preaprobados";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+    ViewBag.ActiveMenu = "Indicadores Riesgo";
+    ViewBag.ActiveMenuRoot = "Crédito";
+
+}
+
+
+
+@section script{
+
+
+    <script src="~/assets/js/jquery.core.js"></script>
+    <script src="~/assets/js/jquery.app.js"></script>
+    <script src="~/assets/js/jspdf.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+
+
+        Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
+            var n = this,
+            c = isNaN(decimals) ? 0 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
+            d = decimal_sep || ',', //if no decimal separator is passed we use the dot as default decimal separator (we MUST use a decimal separator)
+
+            /*
+            according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
+            the fastest way to check for not defined parameter is to use typeof value === 'undefined'
+            rather than doing value === undefined.
+            */
+            t = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep, //if you don't want to use a thousands separator you can pass empty string as thousands_sep value
+
+            sign = (n < 0) ? '-' : '',
+
+            //extracting the absolute value of the integer part of the number and converting to string
+            i = parseInt(n = Math.abs(n).toFixed(c)) + '',
+
+            j = ((j = i.length) > 3) ? j % 3 : 0;
+            var retorno = sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
+
+            return retorno;
+        }
+
+        $(function () {
+     
+            $.getJSON("http://localhost:8080/api/SegPreaprobados", function (respoonse) {
+
+                $.each(respoonse, function (i, o) {
+
+                    if (o.PropensionCompra=="Total General") {
+                        $("#ft_preaprobadosGlobal").append(
+                            $("<tr>")
+                                    .append($("<th>").html(o.PropensionCompra).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.N_Oferta.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.Oferta.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.Oferta_Promedio.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.N_Compra.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.Neto.toMoney()).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.Neto_Promedio.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.Bruto.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.WR.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "rgb(254, 86, 22)"))
+                        );
+                    } else {
+
+                        $("#bdy_preaprobadosGlobal").append(
+                           $("<tr>")
+                                .append($("<td>").html(o.PropensionCompra).css("text-align", "center"))
+                                .append($("<td>").html(o.N_Oferta.toMoney(1)).css("text-align", "center"))
+                                .append($("<td>").html(o.Oferta.toMoney(1)).css("text-align", "center"))
+                                .append($("<td>").html(o.Oferta_Promedio.toMoney(1)).css("text-align", "center"))
+                                .append($("<td>").html(o.N_Compra.toMoney(1)).css("text-align", "center"))
+                                .append($("<td>").html(o.Neto.toMoney(1)).css("text-align", "center"))
+                                .append($("<td>").html(o.Neto_Promedio.toMoney(1)).css("text-align", "center"))
+                                .append($("<td>").html(o.Bruto.toMoney(1)).css("text-align", "center"))
+                                .append($("<td>").html(o.WR.toMoney(1)).css("text-align", "center").css("color", "rgb(254, 86, 22)"))
+                        );
+                    }
+                });
+
+            });
+
+            $.getJSON("http://localhost:8080/api/SegPreaprobadosPorSegmento", function (respoonse) {
+
+                $.each(respoonse, function (i, o) {
+
+                    if (o.PropensionCompra == "Total General") {
+                        $("#ft_preaprobadosSegmento").append(
+                            $("<tr>")
+                                    .append($("<th>").html(o.PropensionCompra).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.N_Oferta.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.Oferta.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.Oferta_Promedio.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.N_Compra.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.Neto.toMoney()).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.Neto_Promedio.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.Bruto.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<th>").html(o.WR.toMoney(1)).css("text-align", "center").css("background", "#105481 none repeat scroll 0 0").css("color", "rgb(254, 86, 22)"))
+                        );
+                    } else {
+
+                        if (o.PropensionCompra == "Privados" || o.PropensionCompra == "Publicos" || o.PropensionCompra == "Pensionados")
+                        {
+                            $("#bdy_preaprobadosSegmento").append(
+                               $("<tr>")
+                                    .append($("<td>").html(o.PropensionCompra).css("text-align", "center").css("font-weight", "bold"))
+                                    .append($("<td>").html(o.N_Oferta.toMoney(1)).css("text-align", "center").css("font-weight", "bold"))
+                                    .append($("<td>").html(o.Oferta.toMoney(1)).css("text-align", "center").css("font-weight", "bold"))
+                                    .append($("<td>").html(o.Oferta_Promedio.toMoney(1)).css("text-align", "center").css("font-weight", "bold"))
+                                    .append($("<td>").html(o.N_Compra.toMoney(1)).css("text-align", "center").css("font-weight", "bold"))
+                                    .append($("<td>").html(o.Neto.toMoney(1)).css("text-align", "center").css("font-weight", "bold"))
+                                    .append($("<td>").html(o.Neto_Promedio.toMoney(1)).css("text-align", "center").css("font-weight", "bold"))
+                                    .append($("<td>").html(o.Bruto.toMoney(1)).css("text-align", "center").css("font-weight", "bold"))
+                                    .append($("<td>").html(o.WR.toMoney(1)).css("text-align", "center").css("color", "rgb(254, 86, 22)").css("font-weight", "bold"))
+                            );
+                        }
+                        else
+                        {
+                            $("#bdy_preaprobadosSegmento").append(
+                               $("<tr>")
+                                    .append($("<td>").html(o.PropensionCompra).css("text-align", "center"))
+                                    .append($("<td>").html(o.N_Oferta.toMoney(1)).css("text-align", "center"))
+                                    .append($("<td>").html(o.Oferta.toMoney(1)).css("text-align", "center"))
+                                    .append($("<td>").html(o.Oferta_Promedio.toMoney(1)).css("text-align", "center"))
+                                    .append($("<td>").html(o.N_Compra.toMoney(1)).css("text-align", "center"))
+                                    .append($("<td>").html(o.Neto.toMoney(1)).css("text-align", "center"))
+                                    .append($("<td>").html(o.Neto_Promedio.toMoney(1)).css("text-align", "center"))
+                                    .append($("<td>").html(o.Bruto.toMoney(1)).css("text-align", "center"))
+                                    .append($("<td>").html(o.WR.toMoney(1)).css("text-align", "center").css("color", "rgb(254, 86, 22)"))
+                            );
+                        }                        
+                    }
+                });
+
+            });
+
+
+
+            $.getJSON("http://localhost:8080/api/SegPreaprobadosPorNominas", function (respoonse) {
+
+                $.each(respoonse, function (i, o) {
+
+                    $("#bdy_preaprobadosNominas").append(
+                        $("<tr>")
+                            .append($("<td>").html(o.Nomina).css("text-align", "left"))
+                            .append($("<td>").html(o.N_Oferta.toMoney(1)).css("text-align", "center"))
+                            .append($("<td>").html(o.Oferta.toMoney(1)).css("text-align", "center"))
+                            .append($("<td>").html(o.Oferta_Promedio.toMoney(1)).css("text-align", "center"))
+                            .append($("<td>").html(o.N_Compra.toMoney(1)).css("text-align", "center"))
+                            .append($("<td>").html(o.Neto.toMoney(1)).css("text-align", "center"))
+                            .append($("<td>").html(o.Neto_Promedio.toMoney(1)).css("text-align", "center"))
+                            .append($("<td>").html(o.Bruto.toMoney(1)).css("text-align", "center"))
+                            .append($("<td>").html(o.WR.toMoney(1)).css("text-align", "center").css("color", "rgb(254, 86, 22)"))
+                    );                    
+                });
+            });
+
+            
+            $.getJSON("http://localhost:8080/api/SegPreaprobadosPorNominasProp", function (respoonse) {
+
+                $.each(respoonse, function (i, o) {
+
+                    $("#bdy_preaprobadosNominasPropen").append(
+                        $("<tr>")
+                            .append($("<td>").html(o.Nomina).css("text-align", "left"))
+                            .append($("<td>").html(o.N_Baja.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.Neto_Baja.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.WR_Baja.toMoney(1)).css("text-align", "right").css("color", "rgb(254, 86, 22)"))
+                            .append($("<td>").html(o.N_Media.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.Neto_Media.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.WR_Media.toMoney(1)).css("text-align", "right").css("color", "rgb(254, 86, 22)"))
+                            .append($("<td>").html(o.N_Alta.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.Neto_Alta.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.WR_Alta.toMoney(1)).css("text-align", "right").css("color", "rgb(254, 86, 22)"))
+                            .append($("<td>").html(o.N_Total.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.Neto_Total.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.WR_Total.toMoney(1)).css("text-align", "right").css("color", "rgb(254, 86, 22)"))
+
+
+                        ////.append($("<td>").html(o.WR.toMoney(1)).css("text-align", "center").css("color", "rgb(254, 86, 22)"))
+                    );
+                });
+            });
+
+
+            $.getJSON("http://localhost:8080/api/SegPreaprobadosPorCanales", function (respoonse) {
+
+                $.each(respoonse, function (i, o) {
+
+                    $("#bdy_preaprobadosCanales").append(
+                        $("<tr>")
+                            .append($("<td>").html(o.Canal).css("text-align", "left"))
+                            .append($("<td>").html(o.N_Oferta.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.Oferta.toMoney(1)).css("text-align", "right"))
+                            //.append($("<td>").html(o.Oferta_Promedio.toMoney(1)).css("text-align", "center"))
+                            .append($("<td>").html(o.N_Compra.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.Neto.toMoney(1)).css("text-align", "right"))
+                            //.append($("<td>").html(o.Neto_Promedio.toMoney(1)).css("text-align", "center"))
+                            .append($("<td>").html(o.Bruto.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.WR.toMoney(1)).css("text-align", "right").css("color", "rgb(254, 86, 22)"))
+                    );
+                });
+            });
+
+
+            $.getJSON("http://localhost:8080/api/SegPreaprobadosPorCanalesPropension", function (respoonse) {
+
+                $.each(respoonse, function (i, o) {
+
+                    $("#bdy_preaprobadosCanalesPropen").append(
+                        $("<tr>")
+                            .append($("<td>").html(o.Nomina).css("text-align", "left"))
+                            .append($("<td>").html(o.N_Baja.toMoney(1)).css("text-align", "right"))
+                            //.append($("<td>").html(o.Neto_Baja.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.WR_Baja.toMoney(1)).css("text-align", "right").css("color", "rgb(254, 86, 22)"))
+                            .append($("<td>").html(o.N_Media.toMoney(1)).css("text-align", "right"))
+                            //.append($("<td>").html(o.Neto_Media.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.WR_Media.toMoney(1)).css("text-align", "right").css("color", "rgb(254, 86, 22)"))
+                            .append($("<td>").html(o.N_Alta.toMoney(1)).css("text-align", "right"))
+                            //.append($("<td>").html(o.Neto_Alta.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.WR_Alta.toMoney(1)).css("text-align", "right").css("color", "rgb(254, 86, 22)"))
+                            .append($("<td>").html(o.N_Total.toMoney(1)).css("text-align", "right"))
+                            //.append($("<td>").html(o.Neto_Total.toMoney(1)).css("text-align", "right"))
+                            .append($("<td>").html(o.WR_Total.toMoney(1)).css("text-align", "right").css("color", "rgb(254, 86, 22)"))
+
+
+                        ////.append($("<td>").html(o.WR.toMoney(1)).css("text-align", "center").css("color", "rgb(254, 86, 22)"))
+                    );
+                });
+            });
+
+
+            
+            
+            /************************************************************************************************/
+            /* PDF                                                                                          */
+            /************************************************************************************************/
+
+            $("#btnExport_PDF").on("click", function () {
+                //Variables para Html y PDF
+                var _html_pdf = '';
+
+                $.each($(".card-box"), function (i, o) {
+
+                    var x = $(o).closest("div.col-lg-12").clone();
+                    if (!$(o).hasClass("noPDF"))
+                    {
+                        _html_pdf += $(x).css("display", "block").css("page-break-after", "always").prop('outerHTML');
+                    }
+                    $(x).remove();
+                });
+
+                $("#contenido_pdf").val(_html_pdf);
+                $("#frm_envia_pdf").submit();
+            });
+
+
+
+        });
+
+
+        function _Mes(periodo) {
+            var mes = parseInt(periodo.toString().substring(4, 6));
+            var mesesSTR = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+            return mesesSTR[mes];
+        }
+
+        function _Anio(periodo) {
+            return periodo.toString().substring(0, 4)
+        }
+
+
+
+
+
+</script>
+}
+
+<div class="container">
+
+
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="page-title">Seguimiento Preaprobados</h4>
+            <ol class="breadcrumb">
+                <li><a href="#">Portal de Informacion</a></li>
+                <li class="active">Seguimiento Preaprobados</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Pre-aprobados</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th colspan="3" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Oferta</th>
+                                <th colspan="5" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Resultado</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Propensión Compra</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nro</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Monto Oferta MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Mnt. Oferta<br/> Promedio M$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Compran</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Neto MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Neto Promedio M$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Bruto MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">#WR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_preaprobadosGlobal"></tbody>
+                        <tfoot id="ft_preaprobadosGlobal"></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Pre-aprobados por Segmento</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th colspan="3" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Oferta</th>
+                                <th colspan="5" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Resultado</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Propensión Compra</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nro</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Monto Oferta MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Mnt. Oferta<br /> Promedio M$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Compran</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Neto MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Neto Promedio M$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Bruto MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">#WR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_preaprobadosSegmento"></tbody>
+                        <tfoot id="ft_preaprobadosSegmento"></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Pre-aprobados por Nominas</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th colspan="3" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Oferta</th>
+                                <th colspan="5" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Resultado</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nomina</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nro</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Monto Oferta MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Mnt. Oferta<br /> Promedio M$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Compran</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Neto MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Neto Promedio M$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Bruto MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">#WR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_preaprobadosNominas"></tbody>
+                        <tfoot id="ft_preaprobadosNominas"></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Pre-aprobados por Nominas II</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th colspan="3" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Alta</th>
+                                <th colspan="3" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Media</th>
+                                <th colspan="3" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Baja</th>
+                                <th colspan="3" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Totales</th>
+                                
+                            </tr>
+                            <tr>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nomina</th>
+
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nro</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Neto MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">#WR</th>
+
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nro</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Neto MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">#WR</th>
+
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nro</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Neto MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">#WR</th>
+
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Total Nro</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Total Neto</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">Total #WR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_preaprobadosNominasPropen"></tbody>
+                        <tfoot id="ft_preaprobadosNominasPropen"></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Pre-aprobados por Canales</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th colspan="2" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Oferta</th>
+                                <th colspan="4" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Resultado</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Canal</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nro</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Monto Oferta MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Compran</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Neto MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Bruto MM$</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">#WR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_preaprobadosCanales"></tbody>
+                        <tfoot id="ft_preaprobadosCanales"></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="card-box">
+            <h3 class="m-t-0 header-title"><b>Pre-aprobados por Canales II</b></h3>
+            <div class="p-20">
+                <div>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th colspan="2" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Alta</th>
+                                <th colspan="2" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Media</th>
+                                <th colspan="2" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Baja</th>
+                                <th colspan="2" style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Totales</th>
+
+                            </tr>
+                            <tr>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Canal</th>
+
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nro</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">#WR</th>
+
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nro</th>
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">#WR</th>
+
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Nro</th>
+                                
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">#WR</th>
+
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:#fff1f1;">Total Nro</th>
+                                
+                                <th style="text-align:center; background: #105481 none repeat scroll 0 0; color:rgb(254, 86, 22);">Total #WR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bdy_preaprobadosCanalesPropen"></tbody>
+                        <tfoot id="ft_preaprobadosCanalesPropen"></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    
+
+
+</div>

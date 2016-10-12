@@ -81,6 +81,7 @@
     <Compile Include="Reprogramaciones_PensDataAcces.cs" />
     <Compile Include="Reprogramaciones_TodosDataAcces.cs" />
     <Compile Include="Reprogramaciones_TrabDataAcces.cs" />
+    <Compile Include="SegPreaprobadosGlobalDataAccess.cs" />
     <Compile Include="SeguroCesantia_TotalDataAcces.cs" />
     <Compile Include="SeguroCesantia_TrabDataAcces.cs" />
     <Compile Include="SeguroCesantiaDataAcces.cs" />
