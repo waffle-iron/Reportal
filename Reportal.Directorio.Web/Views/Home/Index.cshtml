@@ -16,7 +16,7 @@
     <script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
     <script src="https://www.highcharts.com/samples/static/highslide.config.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
-
+<script src="~/getstart/plugins/gauge-js/gauge.min.js"></script>
     <script type="text/javascript">
         Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
             var n = this,
@@ -71,9 +71,9 @@
                                 //.append($("<td>").html(o.Octubre_Bruto.toMoney()).css("text-align", "center"))
                                 .append($("<td>").html(o.Octubre_Neto.toMoney() + "%").css("text-align", "center"))
                                 //.append($("<td>").html(o.Noviembre_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Noviembre_Neto.toMoney() + "%").css("text-align", "center"))
+                                //.append($("<td>").html(o.Noviembre_Neto.toMoney() + "%").css("text-align", "center"))
                                 //.append($("<td>").html(o.Diciembre_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Diciembre_Neto.toMoney() + "%").css("text-align", "center"))
+                                //.append($("<td>").html(o.Diciembre_Neto.toMoney() + "%").css("text-align", "center"))
                            );
                     } else {
 
@@ -100,17 +100,17 @@
                                 //.append($("<td>").html(o.Octubre_Bruto.toMoney()).css("text-align", "center"))
                                 .append($("<td>").html(o.Octubre_Neto.toMoney()).css("text-align", "center"))
                                 //.append($("<td>").html(o.Noviembre_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Noviembre_Neto.toMoney()).css("text-align", "center"))
+                                //.append($("<td>").html(o.Noviembre_Neto.toMoney()).css("text-align", "center"))
                                 //.append($("<td>").html(o.Diciembre_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Diciembre_Neto.toMoney()).css("text-align", "center"))
+                                //.append($("<td>").html(o.Diciembre_Neto.toMoney()).css("text-align", "center"))
                         );
                     }
                 });
             });
-            //$.getJSON("http://localhost:8080/api/D_CredPptoMensual/", function (csv) {
             $.getJSON('http://localhost:8080/api/D_CredPptoMensual/', function (data) {
 
                 $('#Lineal').highcharts({
+                    colors: ['#42a5f5', '#8bc34a'],
                     title: {
                         text: '',
                         x: -20 //center
@@ -134,7 +134,7 @@
                         }]
                     },
                     tooltip: {
-                        valueSuffix: 'MM$'
+                        valueSuffix: ' MM$'
                     },
                     legend: {
                         layout: 'horizontal',
@@ -144,20 +144,58 @@
                     },
                     series: [{
                         name: data[0].Item,
-                        data: [data[0].Enero_Neto, data[0].Febrero_Neto, data[0].Marzo_Neto, data[0].Abril_Neto, data[0].Mayo_Neto, data[0].Junio_Neto, data[0].Julio_Neto, data[0].Agosto_Neto, data[0].Septiembre_Neto, data[0].Octubre_Neto, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        data: [data[0].Enero_Neto, data[0].Febrero_Neto, data[0].Marzo_Neto, data[0].Abril_Neto, data[0].Mayo_Neto, data[0].Junio_Neto, data[0].Julio_Neto, data[0].Agosto_Neto, data[0].Septiembre_Neto, data[0].Octubre_Neto]//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
                     }, {
                         name: data[1].Item,
-                        data: [data[1].Enero_Neto, data[1].Febrero_Neto, data[1].Marzo_Neto, data[1].Abril_Neto, data[1].Mayo_Neto, data[1].Junio_Neto, data[1].Julio_Neto, data[1].Agosto_Neto, data[1].Septiembre_Neto, data[1].Octubre_Neto, data[1].Noviembre_Neto, data[1].Diciembre_Neto]
+                        data: [data[1].Enero_Neto, data[1].Febrero_Neto, data[1].Marzo_Neto, data[1].Abril_Neto, data[1].Mayo_Neto, data[1].Junio_Neto, data[1].Julio_Neto, data[1].Agosto_Neto, data[1].Septiembre_Neto, data[1].Octubre_Neto]//, data[1].Noviembre_Neto, data[1].Diciembre_Neto]
                     }]
                 });
             });
+
+
+
+
+
+
+            // GAUGE PLUGIN
+            // =================================================================
+            // Require Gauge.js
+            // -----------------------------------------------------------------
+            // http://bernii.github.io/gauge.js/
+            // =================================================================
+            var opts = {
+                lines: 10, // The number of lines to draw
+                angle: 0, // The length of each line
+                lineWidth: 0.41, // The line thickness
+                pointer: {
+                    length: 0.75, // The radius of the inner circle
+                    strokeWidth: 0.035, // The rotation offset
+                    color: 'rgba(0, 0, 0, 0.38)' // Fill color
+                },
+                limitMax: 'true', // If true, the pointer will not go past the end of the gauge
+                colorStart: '#42a5f5', // Colors
+                colorStop: '#42a5f5', // just experiment with them
+                strokeColor: '#8bc34a', // to see which ones work best for you
+                generateGradient: true
+            };
+
+
+            var target = document.getElementById('demo-gauge'); // your canvas element
+            var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+            gauge.maxValue = 100; // set max gauge value
+            gauge.animationSpeed = 32; // set animation speed (32 is default value)
+            gauge.set(89); // set actual value
+            gauge.setTextField(document.getElementById("demo-gauge-text"));
+
+
+
+
         });
 
     </script>
 
+
 }
-
-
 <div class="boxed">
     <div class="col-sm-12">
         <div class="panel">
@@ -165,7 +203,7 @@
                 <h1 class="panel-title">Colocaciones Netas</h1>
             </div>
             <div class="panel-body">
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <div class="panel">
                         <div class="panel-heading">
                             <h1 class="panel-title">Evolución</h1>
@@ -179,14 +217,44 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Cumplimiento Acumulado</h3>
+                            <h3 class="panel-title">Cumplimiento</h3>
                         </div>
                         <div class="panel-body">
 
-                            <div id="asa" style="height:212px"></div>
+                            <div class="panel panel-success panel-colorful">
+                                <div class="pad-all text-center">
+
+                                    <!--Gauge placeholder-->
+                                    <canvas id="demo-gauge" height="107" class="canvas-responsive"></canvas>
+                                    <p>
+                                        <span id="demo-gauge-text" class="text-lg text-semibold"></span>% Cumplimiento
+                                    </p>
+                                </div>
+                                <div class="pad-ver bg-trans-light">
+                                    <ul class="list-unstyled row text-center">
+                                       
+                                        <!--Gauge info-->
+                                        <li >
+                                           
+                                        </li>
+                                        <li class="col-xs-3">
+                                            <p></p>
+                                        </li>
+                                        <li class="col-xs-3">
+                                            <p>Real</p>80.188
+                                        </li>
+                                        <li class="col-xs-3">
+                                            <p>Presupuesto</p>
+                                            89.466
+                                        </li>
+                                        <li class="col-xs-3">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -194,7 +262,7 @@
                 <div class="col-sm-12">
                     <div class="panel">
                         <div class="panel-heading">
-                            <h1 class="panel-title">Colocación Mensual</h1>
+                            <h1 class="panel-title">Mensual</h1>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -216,31 +284,31 @@
                                                 <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Diciembre</th>*@
                                         </tr>
                                         <tr>
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0;">&nbsp;</th>
-                                            @* <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Ene</th>
-                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Feb</th>
-                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Mar</th>
-                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Abr</th>
-                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">May</th>
-                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Jun</th>
-                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Jul</th>
-                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Ago</th>
-                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Sept</th>
-                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Oct</th>
-                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Nov</th>
-                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Dic</th>
+                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0;">&nbsp;</th>
+                                            @* <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
+                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Ene</th>
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
+                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Feb</th>
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
+                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Mar</th>
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
+                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Abr</th>
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
+                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">May</th>
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Jun</th>
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Jul</th>
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Ago</th>
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Sept</th>
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Oct</th>
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Nov</th>
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Dic</th>*@
                                         </tr>
                                     </thead>
                                     <tbody id="D_CredPptoMensual"></tbody>
