@@ -411,6 +411,7 @@
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SadminController.cs" />
+    <Compile Include="Controllers\SeguimientoPreaprobadosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -493,6 +494,7 @@
     <Content Include="Views\Colocacion\Colocaciones.cshtml" />
     <Content Include="Views\IndRiesgoCredito\Index.cshtml" />
     <Content Include="Views\IndRiesgoCredito\GeneraPdf.cshtml" />
+    <Content Include="Views\SeguimientoPreaprobados\Index.cshtml" />
     <Content Include="Views\Indicadores\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -132,6 +132,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\D_CredPptoMensual\" />
     <Folder Include="Views\Reprogramaciones\" />
+    <Folder Include="Views\SegPreaprobadosBySegmento\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -206,6 +207,12 @@
     <Compile Include="Controllers\RcPeriodosController.cs" />
     <Compile Include="Controllers\Reprogramaciones_TodosController.cs" />
     <Compile Include="Controllers\Reprogramaciones_TrabController.cs" />
+    <Compile Include="Controllers\SegPreaprobadosController.cs" />
+    <Compile Include="Controllers\SegPreaprobadosPorCanalesPropensionController.cs" />
+    <Compile Include="Controllers\SegPreaprobadosPorNominasController.cs" />
+    <Compile Include="Controllers\SegPreaprobadosPorNominasPropController.cs" />
+    <Compile Include="Controllers\SegPreaprobadosPorCanalesController.cs" />
+    <Compile Include="Controllers\SegPreaprobadosPorSegmentoController.cs" />
     <Compile Include="Controllers\SeguroCesantia_TotalController.cs" />
     <Compile Include="Controllers\SeguroCesantia_TrabController.cs" />
     <Compile Include="Controllers\SeguroCesantiaController.cs" />
@@ -254,6 +261,7 @@
     <Compile Include="Models\EvolucionCamadas_3M_PensRepository.cs" />
     <Compile Include="Models\Reprogramaciones_TodosRepository.cs" />
     <Compile Include="Models\Reprogramaciones_TrabRepository.cs" />
+    <Compile Include="Models\SegPreaprobadosRepository.cs" />
     <Compile Include="Models\SeguroCesantia_TotalRepository.cs" />
     <Compile Include="Models\SeguroCesantia_TrabRepository.cs" />
     <Compile Include="Models\SeguroCesantiaRepository.cs" />
