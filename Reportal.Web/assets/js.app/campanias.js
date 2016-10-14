@@ -210,6 +210,10 @@ $(document).ready(function () {
                 var sal = new Chart(ctx).Bar(data);
             });
 
+        $.getJSON("http://localhost:8080/api/D_CredPptoMensual/", function (data) {
+            var prcAF = Math.round(data.Enero_Neto+data.febrero_neto);
+            $(".knob").val(prcAF.toString());
+        });
 
     }
 

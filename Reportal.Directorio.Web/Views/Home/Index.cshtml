@@ -1,31 +1,257 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Directorio - La Araucana";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+    ViewBag.ActiveMenu = "";
+    ViewBag.ActiveMenuRoot = "";
+
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@section script{
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <!-- Additional files for the Highslide popup effect -->
+    <script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
+    <script src="https://www.highcharts.com/samples/static/highslide.config.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
+
+    <script type="text/javascript">
+        Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
+            var n = this,
+            c = isNaN(decimals) ? 0 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
+            d = decimal_sep || ',', //if no decimal separator is passed we use the dot as default decimal separator (we MUST use a decimal separator)
+
+            /*
+            according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
+            the fastest way to check for not defined parameter is to use typeof value === 'undefined'
+            rather than doing value === undefined.
+            */
+            t = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep, //if you don't want to use a thousands separator you can pass empty string as thousands_sep value
+
+            sign = (n < 0) ? '-' : '',
+
+            //extracting the absolute value of the integer part of the number and converting to string
+            i = parseInt(n = Math.abs(n).toFixed(c)) + '',
+
+            j = ((j = i.length) > 3) ? j % 3 : 0;
+            var retorno = sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
+
+            return retorno;
+        }
+        $(function () {
+
+            $.getJSON("http://localhost:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
+
+                $.each(respoonse, function (i, o) {
+
+
+                    if (o.Item == "Cumplimiento") {
+                        $("#D_CredPptoMensual").append(
+                                $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
+                                //.append($("<td>").html(o.Enero_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Enero_Neto.toMoney() + "%").css("text-align", "center"))
+                                //.append($("<td>").html(o.Febrero_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Febrero_Neto.toMoney() + "%").css("text-align", "center"))
+                                //.append($("<td>").html(o.Marzo_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Marzo_Neto.toMoney() + "%").css("text-align", "center"))
+                                //.append($("<td>").html(o.Abril_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Abril_Neto.toMoney() + "%").css("text-align", "center"))
+                               // .append($("<td>").html(o.Mayo_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Mayo_Neto.toMoney() + "%").css("text-align", "center"))
+                               // .append($("<td>").html(o.Junio_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Junio_Neto.toMoney() + "%").css("text-align", "center"))
+                                //.append($("<td>").html(o.Julio_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Julio_Neto.toMoney() + "%").css("text-align", "center"))
+                                //.append($("<td>").html(o.Agosto_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Agosto_Neto.toMoney() + "%").css("text-align", "center"))
+                                //.append($("<td>").html(o.Septiembre_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Septiembre_Neto.toMoney() + "%").css("text-align", "center"))
+                                //.append($("<td>").html(o.Octubre_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Octubre_Neto.toMoney() + "%").css("text-align", "center"))
+                                //.append($("<td>").html(o.Noviembre_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Noviembre_Neto.toMoney() + "%").css("text-align", "center"))
+                                //.append($("<td>").html(o.Diciembre_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Diciembre_Neto.toMoney() + "%").css("text-align", "center"))
+                           );
+                    } else {
+
+                        $("#D_CredPptoMensual").append(
+                                $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
+                                //.append($("<td>").html(o.Enero_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Enero_Neto.toMoney()).css("text-align", "center"))
+                                //.append($("<td>").html(o.Febrero_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Febrero_Neto.toMoney()).css("text-align", "center"))
+                                //.append($("<td>").html(o.Marzo_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Marzo_Neto.toMoney()).css("text-align", "center"))
+                                //.append($("<td>").html(o.Abril_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Abril_Neto.toMoney()).css("text-align", "center"))
+                               // .append($("<td>").html(o.Mayo_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Mayo_Neto.toMoney()).css("text-align", "center"))
+                               // .append($("<td>").html(o.Junio_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Junio_Neto.toMoney()).css("text-align", "center"))
+                                //.append($("<td>").html(o.Julio_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Julio_Neto.toMoney()).css("text-align", "center"))
+                                //.append($("<td>").html(o.Agosto_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Agosto_Neto.toMoney()).css("text-align", "center"))
+                                //.append($("<td>").html(o.Septiembre_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Septiembre_Neto.toMoney()).css("text-align", "center"))
+                                //.append($("<td>").html(o.Octubre_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Octubre_Neto.toMoney()).css("text-align", "center"))
+                                //.append($("<td>").html(o.Noviembre_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Noviembre_Neto.toMoney()).css("text-align", "center"))
+                                //.append($("<td>").html(o.Diciembre_Bruto.toMoney()).css("text-align", "center"))
+                                .append($("<td>").html(o.Diciembre_Neto.toMoney()).css("text-align", "center"))
+                        );
+                    }
+                });
+            });
+            //$.getJSON("http://localhost:8080/api/D_CredPptoMensual/", function (csv) {
+            $.getJSON('http://localhost:8080/api/D_CredPptoMensual/', function (data) {
+
+                $('#Lineal').highcharts({
+                    title: {
+                        text: '',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: '',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                            'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+                    },
+                    yAxis: {
+                        //title: {
+                        //    text: 'Temperature (°C)'
+                        //},
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        valueSuffix: 'MM$'
+                    },
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'left',
+                        verticalAlign: 'top',
+                        borderWidth: 0
+                    },
+                    series: [{
+                        name: data[0].Item,
+                        data: [data[0].Enero_Neto, data[0].Febrero_Neto, data[0].Marzo_Neto, data[0].Abril_Neto, data[0].Mayo_Neto, data[0].Junio_Neto, data[0].Julio_Neto, data[0].Agosto_Neto, data[0].Septiembre_Neto, data[0].Octubre_Neto, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                    }, {
+                        name: data[1].Item,
+                        data: [data[1].Enero_Neto, data[1].Febrero_Neto, data[1].Marzo_Neto, data[1].Abril_Neto, data[1].Mayo_Neto, data[1].Junio_Neto, data[1].Julio_Neto, data[1].Agosto_Neto, data[1].Septiembre_Neto, data[1].Octubre_Neto, data[1].Noviembre_Neto, data[1].Diciembre_Neto]
+                    }]
+                });
+            });
+        });
+
+    </script>
+
+}
+
+
+<div class="boxed">
+    <div class="col-sm-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h1 class="panel-title">Colocaciones Netas</h1>
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Evolución</h1>
+                        </div>
+                        <div class="panel-body">
+
+
+                            <div id="Lineal" style="height:212px"></div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Cumplimiento Acumulado</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <div id="asa" style="height:212px"></div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Colocación Mensual</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            @*<th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">&nbsp;</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Enero</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Febrero</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Marzo</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Abril</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Mayo</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Junio</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Julio</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Agosto</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Septiembre</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Octubre</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Noviembre</th>
+                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Diciembre</th>*@
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0;">&nbsp;</th>
+                                            @* <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Ene</th>
+                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Feb</th>
+                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Mar</th>
+                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Abr</th>
+                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">May</th>
+                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Jun</th>
+                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Jul</th>
+                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Ago</th>
+                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Sept</th>
+                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Oct</th>
+                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Nov</th>
+                                            @*<th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
+                                            <th style="text-align:center; background: #4376b2 none repeat scroll 0 0; color:#FFFFFF;">Dic</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="D_CredPptoMensual"></tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+

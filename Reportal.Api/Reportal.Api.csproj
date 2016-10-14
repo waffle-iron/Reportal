@@ -130,8 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\EvolucionCamadas_3M\" />
-    <Folder Include="Views\EvolucionCamadas_3M_Pens\" />
+    <Folder Include="Views\D_CredPptoMensual\" />
     <Folder Include="Views\Reprogramaciones\" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +175,7 @@
     <Compile Include="Controllers\CastigosNetos_Trab_PorcController.cs" />
     <Compile Include="Controllers\DetalleCampaniaController.cs" />
     <Compile Include="Controllers\DetalleEmpresaController.cs" />
+    <Compile Include="Controllers\D_CredPptoMensualController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EncabezadoEmpresaController.cs" />
     <Compile Include="Controllers\CastigosNetos_TrabController.cs" />
@@ -226,6 +226,7 @@
     <Compile Include="Models\CastigosNetos_TotalRepository.cs" />
     <Compile Include="Models\CastigosNetos_PensRepository.cs" />
     <Compile Include="Models\CastigosNetos_Trab_PorcRepository.cs" />
+    <Compile Include="Models\D_CredPptoMensualRepository.cs" />
     <Compile Include="Models\EmpresaRepository.cs" />
     <Compile Include="Models\CastigosNetos_TrabRepository.cs" />
     <Compile Include="Models\EvolucionCamadas_12MRepository.cs" />
@@ -355,7 +356,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50842</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
