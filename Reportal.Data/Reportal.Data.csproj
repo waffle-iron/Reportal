@@ -47,6 +47,7 @@
     <Compile Include="CastigosNetos_PensDataAccess.cs" />
     <Compile Include="DetalleCampaniaDataAccess.cs" />
     <Compile Include="DetalleEmpresaDataAccess.cs" />
+    <Compile Include="D_CredPptoMensualDataAccess.cs" />
     <Compile Include="EmpresaDataAccess.cs" />
     <Compile Include="EncabezadoEmpresaDataAccess.cs" />
     <Compile Include="BenchmarkDataAccess.cs" />
