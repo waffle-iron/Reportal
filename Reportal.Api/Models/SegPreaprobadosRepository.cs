@@ -10,9 +10,9 @@ namespace Reportal.Api.Models
 {
     public class SegPreaprobadosRepository
     {
-        public List<SegPreaprobadosGlobal> ListarGlobal()
+        public List<SegPreaprobadosGlobal> ListarGlobal(int periodo)
         {
-            return SegPreaprobadosGlobalDataAccess.Listar(201609);
+            return SegPreaprobadosGlobalDataAccess.Listar(periodo);
         }
     }
 }

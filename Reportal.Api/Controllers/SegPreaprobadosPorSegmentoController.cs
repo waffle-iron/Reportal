@@ -13,10 +13,10 @@ namespace Reportal.Api.Controllers
     [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
     public class SegPreaprobadosPorSegmentoController : ApiController
     {
-        // GET: api/SegPreaprobadosPorSegmento/
-        public IEnumerable<SegPreaprobadosGlobal> Get()
+        // GET: api/SegPreaprobadosPorSegmento/201609
+        public IEnumerable<SegPreaprobadosGlobal> Get(int id)
         {
-            return SegPreaprobadosGlobalDataAccess.ListarBySegment(201609);
+            return SegPreaprobadosGlobalDataAccess.ListarBySegment(id);
         }
     }
 }

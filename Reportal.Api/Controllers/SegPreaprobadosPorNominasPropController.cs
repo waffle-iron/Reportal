@@ -14,9 +14,9 @@ namespace Reportal.Api.Controllers
     public class SegPreaprobadosPorNominasPropController : ApiController
     {
         // GET: api/SegPreaprobadosPorNominasProp/
-        public IEnumerable<SegPreaprobadosFull> Get()
+        public IEnumerable<SegPreaprobadosFull> Get(int id)
         {
-            return SegPreaprobadosGlobalDataAccess.ListarByNominayPropension(201609);
+            return SegPreaprobadosGlobalDataAccess.ListarByNominayPropension(id);
         }
     }
 }

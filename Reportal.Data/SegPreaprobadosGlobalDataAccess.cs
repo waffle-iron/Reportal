@@ -20,27 +20,32 @@ namespace Reportal.Data
 
         public static List<SegPreaprobadosGlobal> ListarBySegment(int Periodo)
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarBySegmento", FormaSegmento);
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarBySegmento", p, FormaSegmento);
         }
 
         public static List<SegPreaprobadosGlobal> ListarByNomina(int Periodo)
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarByNomina", FormaNomina);
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarByNomina", p, FormaNomina);
         }
 
         public static List<SegPreaprobadosFull> ListarByNominayPropension(int Periodo)
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarByNominaPropen", FormaNominaPropen);
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarByNominaPropen", p, FormaNominaPropen);
         }
 
         public static List<SegPreaprobadosGlobal> ListarByCanales(int Periodo)
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarByCanales", FormaCanales);
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarByCanales", p, FormaCanales);
         }
 
         public static List<SegPreaprobadosFull> ListarByCanalesPropension(int Periodo)
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarByCanalesPropension", FormaCanalesPropen);
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarByCanalesPropension", p, FormaCanalesPropen);
         }
 
         #region Formas de salida
@@ -52,14 +57,14 @@ namespace Reportal.Data
                 //FechaEjecucion = row["FechaEjecucion"] != DBNull.Value ? Convert.ToInt32(row["FechaEjecucion"]) : 0,
                 //Segmento = row["Segmento"] != DBNull.Value ? row["Segmento"].ToString() : string.Empty,
                 PropensionCompra = row["PrpensionCompra"] != DBNull.Value ? row["PrpensionCompra"].ToString() : string.Empty,
-                N_Oferta = row["N_Oferta"] != DBNull.Value ? Convert.ToInt64(row["N_Oferta"]) : 0,
-                Oferta = row["oferta"] != DBNull.Value ? Convert.ToInt64(row["oferta"]) : 0,
-                Oferta_Promedio = row["ofertaPromedio"] != DBNull.Value ? Convert.ToInt64(row["ofertaPromedio"]) : 0,
-                N_Compra = row["N_Compran"] != DBNull.Value ? Convert.ToInt64(row["N_Compran"]) : 0,
-                Neto = row["Neto"] != DBNull.Value ? Convert.ToInt64(row["Neto"]) : 0,
-                Neto_Promedio = row["NetoPromedio"] != DBNull.Value ? Convert.ToInt64(row["NetoPromedio"]) : 0,
-                Bruto = row["bruto"] != DBNull.Value ? Convert.ToInt64(row["bruto"]) : 0,
-                WR = (row["N_Compran"] != DBNull.Value ? Convert.ToInt64(row["N_Compran"]) : 0) / (row["N_Oferta"] != DBNull.Value ? Convert.ToInt64(row["N_Oferta"]) : 0)
+                N_Oferta = row["N_Oferta"] != DBNull.Value ? Convert.ToDecimal(row["N_Oferta"]) : 0,
+                Oferta = row["oferta"] != DBNull.Value ? Convert.ToDecimal(row["oferta"]) : 0,
+                Oferta_Promedio = row["ofertaPromedio"] != DBNull.Value ? Convert.ToDecimal(row["ofertaPromedio"]) : 0,
+                N_Compra = row["N_Compran"] != DBNull.Value ? Convert.ToDecimal(row["N_Compran"]) : 0,
+                Neto = row["Neto"] != DBNull.Value ? Convert.ToDecimal(row["Neto"]) : 0,
+                Neto_Promedio = row["NetoPromedio"] != DBNull.Value ? Convert.ToDecimal(row["NetoPromedio"]) : 0,
+                Bruto = row["bruto"] != DBNull.Value ? Convert.ToDecimal(row["bruto"]) : 0,
+                WR = row["WR"] != DBNull.Value ? Convert.ToDecimal(row["WR"]) : 0
             };
         }
 
@@ -69,14 +74,14 @@ namespace Reportal.Data
             {
                 Segmento = row["Segmento"] != DBNull.Value ? row["Segmento"].ToString() : string.Empty,
                 PropensionCompra = row["PrpensionCompra"] != DBNull.Value ? row["PrpensionCompra"].ToString() : string.Empty,
-                N_Oferta = row["N_Oferta"] != DBNull.Value ? Convert.ToInt64(row["N_Oferta"]) : 0,
-                Oferta = row["oferta"] != DBNull.Value ? Convert.ToInt64(row["oferta"]) : 0,
-                Oferta_Promedio = row["ofertaPromedio"] != DBNull.Value ? Convert.ToInt64(row["ofertaPromedio"]) : 0,
-                N_Compra = row["N_Compran"] != DBNull.Value ? Convert.ToInt64(row["N_Compran"]) : 0,
-                Neto = row["Neto"] != DBNull.Value ? Convert.ToInt64(row["Neto"]) : 0,
-                Neto_Promedio = row["NetoPromedio"] != DBNull.Value ? Convert.ToInt64(row["NetoPromedio"]) : 0,
-                Bruto = row["bruto"] != DBNull.Value ? Convert.ToInt64(row["bruto"]) : 0,
-                WR = (row["N_Compran"] != DBNull.Value ? Convert.ToInt64(row["N_Compran"]) : 0) / (row["N_Oferta"] != DBNull.Value ? Convert.ToInt64(row["N_Oferta"]) : 0)
+                N_Oferta = row["N_Oferta"] != DBNull.Value ? Convert.ToDecimal(row["N_Oferta"]) : 0,
+                Oferta = row["oferta"] != DBNull.Value ? Convert.ToDecimal(row["oferta"]) : 0,
+                Oferta_Promedio = row["ofertaPromedio"] != DBNull.Value ? Convert.ToDecimal(row["ofertaPromedio"]) : 0,
+                N_Compra = row["N_Compran"] != DBNull.Value ? Convert.ToDecimal(row["N_Compran"]) : 0,
+                Neto = row["Neto"] != DBNull.Value ? Convert.ToDecimal(row["Neto"]) : 0,
+                Neto_Promedio = row["NetoPromedio"] != DBNull.Value ? Convert.ToDecimal(row["NetoPromedio"]) : 0,
+                Bruto = row["bruto"] != DBNull.Value ? Convert.ToDecimal(row["bruto"]) : 0,
+                WR = row["WR"] != DBNull.Value ? Convert.ToDecimal(row["WR"]) : 0
             };
         }
 
@@ -94,7 +99,7 @@ namespace Reportal.Data
                 Neto = row["Neto"] != DBNull.Value ? Convert.ToDecimal(row["Neto"]) : 0,
                 Neto_Promedio = row["NetoPromedio"] != DBNull.Value ? Convert.ToDecimal(row["NetoPromedio"]) : 0,
                 Bruto = row["bruto"] != DBNull.Value ? Convert.ToDecimal(row["bruto"]) : 0,
-                WR = (row["N_Compran"] != DBNull.Value ? Convert.ToDecimal(row["N_Compran"]) : 0) / (row["N_Oferta"] != DBNull.Value ? Convert.ToDecimal(row["N_Oferta"]) : 0)
+                WR = row["WR"] != DBNull.Value ? Convert.ToDecimal(row["WR"]) : 0
             };
         }
 

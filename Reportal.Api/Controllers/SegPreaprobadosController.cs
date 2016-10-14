@@ -21,9 +21,9 @@ namespace Reportal.Api.Controllers
         }
 
         // GET: api/SegPreaprobados/
-        public IEnumerable<SegPreaprobadosGlobal> Get()
+        public IEnumerable<SegPreaprobadosGlobal> Get(int id)
         {
-            return repo.ListarGlobal();
+            return repo.ListarGlobal(id);
         }
 
     }
