@@ -14,6 +14,11 @@ namespace Reportal.Api
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 
+            routes.MapRoute(
+                name: "CreditoFinanciamento",
+                url: "{controller}/{action}/{Periodo}/{iSegmento}",
+                defaults: new { controller = "CreditoFinanciamento", action = "Index", Periodo = UrlParameter.Optional, iSegmento = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "FechasActualizacion",
@@ -21,11 +26,15 @@ namespace Reportal.Api
                 defaults: new { controller = "FechaActualizacion", action = "Index", elcontrolador = UrlParameter.Optional, laaccion = UrlParameter.Optional }
             );
 
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+
+
 
             /*routes.MapRoute(
                 name: "Benchmark",
@@ -34,7 +43,7 @@ namespace Reportal.Api
             );*/
 
 
-            
+
 
         }
     }

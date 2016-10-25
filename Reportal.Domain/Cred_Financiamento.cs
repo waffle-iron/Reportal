@@ -8,7 +8,7 @@ namespace Reportal.Domain
 {
     public class Cred_Financiamento
     {
-        public string periodo { get; set; }
+        public int periodo { get; set; }
        // public int fechaEjecucion { get; set; }
         public int iSegmento { get; set; }
         public string segmento { get; set; }

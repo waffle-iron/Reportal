@@ -9,9 +9,9 @@ namespace Reportal.Api.Models
 {
     public class CreditoFinanciamentoRepository
     {
-        public List<Cred_Financiamento> Listar()
+        public List<Cred_Financiamento> Listar(int Periodo, int iSegmento)
         {
-            return CreditoFinanciamentoDataAccess.Listar_Cred_Financiamento();
+            return CreditoFinanciamentoDataAccess.Listar(Periodo,iSegmento);
         }
     }
 }

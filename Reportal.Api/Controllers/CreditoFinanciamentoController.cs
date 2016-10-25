@@ -20,9 +20,11 @@ namespace Reportal.Api.Controllers
             CredFinan = new CreditoFinanciamentoRepository();
         }
 
-        public IEnumerable<Cred_Financiamento> Get()
+        public IEnumerable<Cred_Financiamento> Get(int Periodo, int iSegmento)
         {
-            return CredFinan.Listar();
+           return CredFinan.Listar(Periodo, iSegmento);
         }
+       
+
     }
 }
