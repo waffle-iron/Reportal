@@ -46,6 +46,7 @@
     <Compile Include="Empresa.cs" />
     <Compile Include="CastigosNetos.cs" />
     <Compile Include="EvolucionCamadas_12M.cs" />
+    <Compile Include="FechaActualizacion.cs" />
     <Compile Include="MatrizTransicionDD.cs" />
     <Compile Include="MatrizTransaccion.cs" />
     <Compile Include="EvolucionCamadas_6M.cs" />

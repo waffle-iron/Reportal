@@ -184,6 +184,7 @@
     <Compile Include="Controllers\EvolucionCamadas_12MController.cs" />
     <Compile Include="Controllers\EvolucionCamadas_12M_PensController.cs" />
     <Compile Include="Controllers\EvolucionCamadas_12M_TotalController.cs" />
+    <Compile Include="Controllers\FechaActualizacionController.cs" />
     <Compile Include="Controllers\MatrizTransicionDD_GController.cs" />
     <Compile Include="Controllers\MatrizTransicionDD_FController.cs" />
     <Compile Include="Controllers\MatrizTransicionDD_EController.cs" />

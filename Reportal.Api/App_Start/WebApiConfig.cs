@@ -14,6 +14,7 @@ namespace Reportal.Api
             config.EnableCors();
             // Rutas de API web
             config.MapHttpAttributeRoutes();
+            
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
@@ -22,10 +23,18 @@ namespace Reportal.Api
             );
 
             config.Routes.MapHttpRoute(
+                name: "FechasActualizacionApi",
+                routeTemplate: "api/{controller}/{elcontrolador}/{laaccion}",
+                defaults: new { elcontrolador = RouteParameter.Optional, laaccion = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "BenchmarkApi",
                 routeTemplate: "api/{controller}/{periodo}/{item}",
                 defaults: new { periodo = RouteParameter.Optional, item = RouteParameter.Optional }
             );
+
+            
 
         }
     }

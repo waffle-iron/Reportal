@@ -245,6 +245,10 @@
 
             });
 
+            $.getJSON("http://localhost:8080/api/FechaActualizacion/seguimientopreaprobados/index/", function (respoonse) {
+                $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
+            });
+
             $("#slPeriodo").trigger("change");
 
             /************************************************************************************************/
@@ -341,7 +345,7 @@
             </select>
 
 
-            <span style="float:right;"><strong>*Datos actualizados al:</strong> Martes, 18 de Octubre de 2016</span>
+            <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
         </div>
 
 
