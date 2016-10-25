@@ -42,6 +42,11 @@
   <ItemGroup>
     <Compile Include="Benchmark.cs" />
     <Compile Include="Campania.cs" />
+    <Compile Include="Coloc_Cumplimiento.cs" />
+    <Compile Include="CreditoColocAcumulada.cs" />
+    <Compile Include="CreditoColocDiaria_Prom.cs" />
+    <Compile Include="CreditoColoc_Diaria.cs" />
+    <Compile Include="Cred_Financiamento.cs" />
     <Compile Include="D_CredPptoMensual.cs" />
     <Compile Include="Empresa.cs" />
     <Compile Include="CastigosNetos.cs" />

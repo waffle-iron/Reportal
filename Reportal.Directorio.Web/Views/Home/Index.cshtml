@@ -7,319 +7,244 @@
 }
 
 @section script{
-
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/data.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <!-- Additional files for the Highslide popup effect -->
-    <script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
-    <script src="https://www.highcharts.com/samples/static/highslide.config.js" charset="utf-8"></script>
-    <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
-<script src="~/getstart/plugins/gauge-js/gauge.min.js"></script>
-    <script type="text/javascript">
-        Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
-            var n = this,
-            c = isNaN(decimals) ? 0 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
-            d = decimal_sep || ',', //if no decimal separator is passed we use the dot as default decimal separator (we MUST use a decimal separator)
-
-            /*
-            according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
-            the fastest way to check for not defined parameter is to use typeof value === 'undefined'
-            rather than doing value === undefined.
-            */
-            t = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep, //if you don't want to use a thousands separator you can pass empty string as thousands_sep value
-
-            sign = (n < 0) ? '-' : '',
-
-            //extracting the absolute value of the integer part of the number and converting to string
-            i = parseInt(n = Math.abs(n).toFixed(c)) + '',
-
-            j = ((j = i.length) > 3) ? j % 3 : 0;
-            var retorno = sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
-
-            return retorno;
-        }
-        $(function () {
-
-            $.getJSON("http://localhost:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
-
-                $.each(respoonse, function (i, o) {
+     <!--STYLESHEET-->
+<!--=================================================-->
+<!--Open Sans Font [ OPTIONAL ]-->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 
 
-                    if (o.Item == "Cumplimiento") {
-                        $("#D_CredPptoMensual").append(
-                                $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
-                                //.append($("<td>").html(o.Enero_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Enero_Neto.toMoney() + "%").css("text-align", "center"))
-                                //.append($("<td>").html(o.Febrero_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Febrero_Neto.toMoney() + "%").css("text-align", "center"))
-                                //.append($("<td>").html(o.Marzo_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Marzo_Neto.toMoney() + "%").css("text-align", "center"))
-                                //.append($("<td>").html(o.Abril_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Abril_Neto.toMoney() + "%").css("text-align", "center"))
-                               // .append($("<td>").html(o.Mayo_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Mayo_Neto.toMoney() + "%").css("text-align", "center"))
-                               // .append($("<td>").html(o.Junio_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Junio_Neto.toMoney() + "%").css("text-align", "center"))
-                                //.append($("<td>").html(o.Julio_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Julio_Neto.toMoney() + "%").css("text-align", "center"))
-                                //.append($("<td>").html(o.Agosto_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Agosto_Neto.toMoney() + "%").css("text-align", "center"))
-                                //.append($("<td>").html(o.Septiembre_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Septiembre_Neto.toMoney() + "%").css("text-align", "center"))
-                                //.append($("<td>").html(o.Octubre_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Octubre_Neto.toMoney() + "%").css("text-align", "center"))
-                                //.append($("<td>").html(o.Noviembre_Bruto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Noviembre_Neto.toMoney() + "%").css("text-align", "center"))
-                                //.append($("<td>").html(o.Diciembre_Bruto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Diciembre_Neto.toMoney() + "%").css("text-align", "center"))
-                           );
-                    } else {
+<!--Bootstrap Stylesheet [ REQUIRED ]-->
+<link href="~/getstart/css/bootstrap.min.css" rel="stylesheet">
 
-                        $("#D_CredPptoMensual").append(
-                                $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
-                                //.append($("<td>").html(o.Enero_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Enero_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Febrero_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Febrero_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Marzo_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Marzo_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Abril_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Abril_Neto.toMoney()).css("text-align", "center"))
-                               // .append($("<td>").html(o.Mayo_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Mayo_Neto.toMoney()).css("text-align", "center"))
-                               // .append($("<td>").html(o.Junio_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Junio_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Julio_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Julio_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Agosto_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Agosto_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Septiembre_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Septiembre_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Octubre_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Octubre_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Noviembre_Bruto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Noviembre_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Diciembre_Bruto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Diciembre_Neto.toMoney()).css("text-align", "center"))
-                        );
-                    }
-                });
-            });
-            $.getJSON('http://localhost:8080/api/D_CredPptoMensual/', function (data) {
 
-                $('#Lineal').highcharts({
-                    colors: ['#42a5f5', '#8bc34a'],
-                    title: {
-                        text: '',
-                        x: -20 //center
-                    },
-                    subtitle: {
-                        text: '',
-                        x: -20
-                    },
-                    xAxis: {
-                        categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-                            'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-                    },
-                    yAxis: {
-                        //title: {
-                        //    text: 'Temperature (°C)'
-                        //},
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }]
-                    },
-                    tooltip: {
-                        valueSuffix: ' MM$'
-                    },
-                    legend: {
-                        layout: 'horizontal',
-                        align: 'left',
-                        verticalAlign: 'top',
-                        borderWidth: 0
-                    },
-                    series: [{
-                        name: data[0].Item,
-                        data: [data[0].Enero_Neto, data[0].Febrero_Neto, data[0].Marzo_Neto, data[0].Abril_Neto, data[0].Mayo_Neto, data[0].Junio_Neto, data[0].Julio_Neto, data[0].Agosto_Neto, data[0].Septiembre_Neto, data[0].Octubre_Neto]//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
-                    }, {
-                        name: data[1].Item,
-                        data: [data[1].Enero_Neto, data[1].Febrero_Neto, data[1].Marzo_Neto, data[1].Abril_Neto, data[1].Mayo_Neto, data[1].Junio_Neto, data[1].Julio_Neto, data[1].Agosto_Neto, data[1].Septiembre_Neto, data[1].Octubre_Neto]//, data[1].Noviembre_Neto, data[1].Diciembre_Neto]
-                    }]
-                });
-            });
+<!--Nifty Stylesheet [ REQUIRED ]-->
+<link href="~/getstart/css/nifty.min.css" rel="stylesheet">
+
+
+<!--Nifty Premium Icon [ DEMONSTRATION ]-->
+<link href="~/getstart/css/demo/nifty-demo-icons.min.css" rel="stylesheet">
+
+
+<!--Demo [ DEMONSTRATION ]-->
+<link href="~/getstart/css/demo/nifty-demo.min.css" rel="stylesheet">
+
+
+
+<!--Morris.js [ OPTIONAL ]-->
+<link href="~/getstart/plugins/morris-js/morris.min.css" rel="stylesheet">
+
+
+<!--Magic Checkbox [ OPTIONAL ]-->
+<link href="~/getstart/plugins/magic-check/css/magic-check.min.css" rel="stylesheet">
 
 
 
 
 
 
-            // GAUGE PLUGIN
-            // =================================================================
-            // Require Gauge.js
-            // -----------------------------------------------------------------
-            // http://bernii.github.io/gauge.js/
-            // =================================================================
-            var opts = {
-                lines: 10, // The number of lines to draw
-                angle: 0, // The length of each line
-                lineWidth: 0.41, // The line thickness
-                pointer: {
-                    length: 0.75, // The radius of the inner circle
-                    strokeWidth: 0.035, // The rotation offset
-                    color: 'rgba(0, 0, 0, 0.38)' // Fill color
-                },
-                limitMax: 'true', // If true, the pointer will not go past the end of the gauge
-                colorStart: '#42a5f5', // Colors
-                colorStop: '#42a5f5', // just experiment with them
-                strokeColor: '#8bc34a', // to see which ones work best for you
-                generateGradient: true
-            };
+<!--JAVASCRIPT-->
+<!--=================================================-->
+<!--Pace - Page Load Progress Par [OPTIONAL]-->
+<link href="~/getstart/plugins/pace/pace.min.css" rel="stylesheet">
+<script src="~/getstart/plugins/pace/pace.min.js"></script>
 
 
-            var target = document.getElementById('demo-gauge'); // your canvas element
-            var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-            gauge.maxValue = 100; // set max gauge value
-            gauge.animationSpeed = 32; // set animation speed (32 is default value)
-            gauge.set(89); // set actual value
-            gauge.setTextField(document.getElementById("demo-gauge-text"));
+<!--jQuery [ REQUIRED ]-->
+<script src="~/getstart/js/jquery-2.2.4.min.js"></script>
+
+
+<!--BootstrapJS [ RECOMMENDED ]-->
+<script src="~/getstart/js/bootstrap.min.js"></script>
+
+
+<!--NiftyJS [ RECOMMENDED ]-->
+<script src="~/getstart/js/nifty.min.js"></script>
 
 
 
 
-        });
-
-    </script>
 
 
-}
-<div class="boxed">
-    <div class="col-sm-12">
-        <div class="panel">
-            <div class="panel-heading">
-                <h1 class="panel-title">Colocaciones Netas</h1>
+<!--=================================================-->
+<!--Demo script [ DEMONSTRATION ]-->
+<script src="~/getstart/js/demo/nifty-demo.min.js"></script>
+
+
+<!--Morris.js [ OPTIONAL ]-->
+<script src="~/getstart/plugins/morris-js/morris.min.js"></script>
+<script src="~/getstart/plugins/morris-js/raphael-js/raphael.min.js"></script>
+
+
+<!--Sparkline [ OPTIONAL ]-->
+<script src="~/getstart/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+
+<!--Specify page [ SAMPLE ]-->
+<script src="~/getstart/js/demo/dashboard.js"></script>
+
+
+
+
+    }
+
+
+
+<div id="page-title">
+    <h1 class="page-header text-overflow">Dashboard</h1>
+    </div>
+    
+<div id="page-content">
+
+
+    <div class="row">
+        <div class="col-lg-7">
+
+            <!--Network Line Chart-->
+            <!--===================================================-->
+            <div id="demo-panel-network" class="panel">
+                <div class="panel-heading">
+                    <div class="panel-control">
+                        <button id="demo-panel-network-refresh" data-toggle="panel-overlay" data-target="#demo-panel-network" class="btn"><i class="demo-pli-repeat-2 icon-lg"></i></button>
+                        <div class="btn-group">
+                            <button class="dropdown-toggle btn" data-toggle="dropdown" aria-expanded="false"><i class="demo-pli-gear icon-lg"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h3 class="panel-title">Network</h3>
+                </div>
+
+                <!--Morris line chart placeholder-->
+                <div id="morris-chart-network" class="morris-full-content"></div>
+
+                <!--Chart information-->
+                <div class="panel-body">
+                    <div class="row pad-top">
+                        <div class="col-lg-8">
+                            <div class="media">
+                                <div class="media-left">
+                                    <div class="media">
+                                        <p class="text-semibold text-main">Temperature</p>
+                                        <div class="media-left pad-no">
+                                            <span class="text-2x text-semibold text-nowrap text-main">
+                                                <i class="demo-pli-temperature"></i> 43.7
+                                            </span>
+                                        </div>
+                                        <div class="media-body">
+                                            <p class="mar-no">°C</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media-body pad-lft">
+                                    <div class="pad-btm">
+                                        <p class="text-semibold text-main mar-no">Today Tips</p>
+                                        <small>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <p class="text-semibold text-main">Bandwidth Usage</p>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <span class="text-2x text-semibold text-main">75.9</span>
+                                        </div>
+                                        <div class="media-body">
+                                            <p class="mar-no">Mbps</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="clearfix">
+                                        <p class="pull-left mar-no">Outcome</p>
+                                        <p class="pull-right mar-no">75%</p>
+                                    </div>
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar progress-bar-info" style="width: 75%;">
+                                            <span class="sr-only">75%</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
-            <div class="panel-body">
-                <div class="col-sm-8">
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h1 class="panel-title">Evolución</h1>
+            <!--===================================================-->
+            <!--End network line chart-->
+
+        </div>
+        <div class="col-lg-5">
+            <div class="row">
+              
+                <div class="col-sm-6 col-lg-6">
+
+                    <!--Sparkline Line Chart-->
+                    <div class="panel panel-info panel-colorful">
+                        <div class="pad-all">
+                            <p class="text-lg text-semibold"><i class="demo-pli-wallet-2 icon-fw"></i><a href="~/Credito/Presupuesto">Presupuesto</a></p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">$764</span>
+                                Today
+                            </p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">$1,332</span>
+                                Last 7 Day
+                            </p>
                         </div>
-                        <div class="panel-body">
+                        <div class="pad-all text-center">
 
-
-                            <div id="Lineal" style="height:212px"></div>
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Cumplimiento</h3>
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="panel panel-success panel-colorful">
-                                <div class="pad-all text-center">
-
-                                    <!--Gauge placeholder-->
-                                    <canvas id="demo-gauge" height="107" class="canvas-responsive"></canvas>
-                                    <p>
-                                        <span id="demo-gauge-text" class="text-lg text-semibold"></span>% Cumplimiento
-                                    </p>
-                                </div>
-                                <div class="pad-ver bg-trans-light">
-                                    <ul class="list-unstyled row text-center">
-                                       
-                                        <!--Gauge info-->
-                                        <li >
-                                           
-                                        </li>
-                                        <li class="col-xs-3">
-                                            <p></p>
-                                        </li>
-                                        <li class="col-xs-3">
-                                            <p>Real</p>80.188
-                                        </li>
-                                        <li class="col-xs-3">
-                                            <p>Presupuesto</p>
-                                            89.466
-                                        </li>
-                                        <li class="col-xs-3">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <!--Placeholder-->
+                            <div id="demo-sparkline-line"></div>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12">
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h1 class="panel-title">Mensual</h1>
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            @*<th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">&nbsp;</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Enero</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Febrero</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Marzo</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Abril</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Mayo</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Junio</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Julio</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Agosto</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Septiembre</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Octubre</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Noviembre</th>
-                                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Diciembre</th>*@
-                                        </tr>
-                                        <tr>
-                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0;">&nbsp;</th>
-                                            @* <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Ene</th>
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Feb</th>
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Mar</th>
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Abr</th>
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">May</th>
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Jun</th>
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Jul</th>
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Ago</th>
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Sept</th>
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Oct</th>
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Nov</th>
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                            @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Dic</th>*@
-                                        </tr>
-                                    </thead>
-                                    <tbody id="D_CredPptoMensual"></tbody>
-                                </table>
+            </div>
+            <div class="row">
+              
+                <div class="col-sm-6 col-lg-6">
 
-                            </div>
+                    <!--Sparkline pie chart -->
+                    <div class="panel panel-warning panel-colorful">
+                        <div class="pad-all">
+                            <p class="text-lg text-semibold"><i class="demo-pli-check icon-fw"></i><a href="~/Colocacion/Colocaciones">Colocación</a></p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">34</span>
+                                Completed
+                            </p>
+                            <p class="mar-no">
+                                <span class="pull-right text-bold">79</span>
+                                Total
+                            </p>
+                        </div>
+                        <div class="pad-all">
+                            <ul class="list-group list-unstyled">
+                                <li class="mar-btm">
+                                    <span class="label label-warning pull-right">15%</span>
+                                    <p>Progress</p>
+                                    <div class="progress progress-md">
+                                        <div style="width: 15%;" class="progress-bar progress-bar-light">
+                                            <span class="sr-only">15%</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
 

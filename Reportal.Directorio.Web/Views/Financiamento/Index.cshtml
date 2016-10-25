@@ -1,0 +1,425 @@
+﻿
+@{
+    ViewBag.Title = "Colocaciones - La Araucana";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+}
+@section script{
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<!-- Additional files for the Highslide popup effect -->
+<script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
+<script src="https://www.highcharts.com/samples/static/highslide.config.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
+<script src="~/getstart/plugins/gauge-js/gauge.min.js"></script>
+<script type="text/javascript">
+        Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
+            var n = this,
+            c = isNaN(decimals) ? 0 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
+            d = decimal_sep || ',', //if no decimal separator is passed we use the dot as default decimal separator (we MUST use a decimal separator)
+
+            /*
+            according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
+            the fastest way to check for not defined parameter is to use typeof value === 'undefined'
+            rather than doing value === undefined.
+            */
+            t = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep, //if you don't want to use a thousands separator you can pass empty string as thousands_sep value
+
+            sign = (n < 0) ? '-' : '',
+
+            //extracting the absolute value of the integer part of the number and converting to string
+            i = parseInt(n = Math.abs(n).toFixed(c)) + '',
+
+            j = ((j = i.length) > 3) ? j % 3 : 0;
+            var retorno = sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
+
+            return retorno;
+        }
+        $(function () {
+           /*
+            $.getJSON("http://172.16.133.65:8080/api/CreditoColocAcumulada/" + $(this).val(), function (respoonse) {
+                $.each(respoonse, function (i, o) {
+                    $("#CreditoColocAcumulada").append(
+                            $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
+                            .append($("<td>").html(o.NCred.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Bruto.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.Neto.toMoney()).css("text-align", "center"))
+                            .append($("<td>").html(o.indRepac.toMoney() + " %").css("text-align", "center"))
+                    );
+                });
+            });
+            */
+
+         
+
+            $.getJSON('http://172.16.133.65:8080/api/CreditoFinanciamento', function (data) {
+                var dias = new Array();
+                var spread1 = new Array();
+                var tasaPromedio1 = new Array();
+                var segmento2= new Array();
+                $.each(data, function (i, e) {
+                    dias[i] = e.diaGrafico;
+                    spread1[i] = e.sPread;
+                    tasaPromedio1[i] = e.tasaPromedio;
+                    segmento2[i] =e.segmento;
+                 
+
+                });
+
+                // console.log(bruta)
+                if (segmento2 == 'Pensionados')
+             {
+                $('#LinealPensionado').highcharts({
+                    colors: ['#42a5f5', '#8bc34a', '#ba68c8'],
+                    title: {
+                        text: '',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: '',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: dias
+                    },
+
+                    yAxis: [{ // Primary yAxis
+                        labels: {
+                            format: '{value}',
+                                style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        },
+                        title: {
+                            text: 'M$',
+                           style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        }
+                    }, { // Secondary yAxis
+                        title: {
+                            text: '%',
+                            style: {
+                                color: Highcharts.getOptions().colors[0]
+                            }
+                        },
+                        labels: {
+                            format: '{value}',
+                            style: {
+                                color: Highcharts.getOptions().colors[0]
+                            }
+                        },
+                        opposite: true
+                    }],
+                    tooltip: {
+                        pointFormat: "{point.y:.2f}"
+                    },
+
+                    credits: { enabled: false },
+                    exporting: { enabled: false },
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'left',
+                        verticalAlign: 'top',
+                        borderWidth: 0
+                        //backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                        // borderWidth: 0
+                    },
+                    series: [{
+                        name: 'sPread',
+                        data: spread1,//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        tooltip: {
+                            valueSuffix: '',
+                            formatter: function () {
+                                return this.value.toMoney();
+                            }
+                        }
+
+                    },  {
+                        name: 'Tasa Promedio',
+                        type: 'line',
+                        yAxis: 1,
+                        data: tasaPromedio1
+                    }]
+                });
+                }
+
+           
+
+
+            });
+
+
+            $.getJSON('http://172.16.133.65:8080/api/CreditoFinanciamento', function (data) {
+                var dias = new Array();
+                var spread1 = new Array();
+                var tasaPromedio1 = new Array();
+                var segmento2 = new Array();
+                $.each(data, function (i, e) {
+                    dias[i] = e.diaGrafico;
+                    spread1[i] = e.sPread;
+                    tasaPromedio1[i] = e.tasaPromedio;
+                    segmento2[i] = e.segmento;
+
+
+                });
+
+                // console.log(bruta)
+
+
+                $('#LinealTrabajador').highcharts({
+                    colors: ['#42a5f5', '#8bc34a', '#ba68c8'],
+                    title: {
+                        text: '',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: '',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: dias
+                    },
+
+                    yAxis: [{ // Primary yAxis
+                        labels: {
+                            format: '{value}',
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        },
+                        title: {
+                            text: 'M$',
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        }
+                    }, { // Secondary yAxis
+                        title: {
+                            text: '%',
+                            style: {
+                                color: Highcharts.getOptions().colors[0]
+                            }
+                        },
+                        labels: {
+                            format: '{value}',
+                            style: {
+                                color: Highcharts.getOptions().colors[0]
+                            }
+                        },
+                        opposite: true
+                    }],
+                    tooltip: {
+                        pointFormat: "{point.y:.2f}"
+                    },
+
+                    credits: { enabled: false },
+                    exporting: { enabled: false },
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'left',
+                        verticalAlign: 'top',
+                        borderWidth: 0
+                        //backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                        // borderWidth: 0
+                    },
+                    series: [{
+                        name: 'sPread',
+                        data: spread1,//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        tooltip: {
+                            valueSuffix: '',
+                            formatter: function () {
+                                return this.value.toMoney();
+                            }
+                        }
+
+                    }, {
+                        name: 'Tasa Promedio',
+                        type: 'line',
+                        yAxis: 1,
+                        data: tasaPromedio1
+                    }]
+                });
+
+
+
+
+
+            });
+
+            $.getJSON('http://172.16.133.65:8080/api/CreditoFinanciamento', function (data) {
+                var dias = new Array();
+                var spread1 = new Array();
+                var tasaPromedio1 = new Array();
+                var segmento2 = new Array();
+                $.each(data, function (i, e) {
+                    dias[i] = e.diaGrafico;
+                    spread1[i] = e.sPread;
+                    tasaPromedio1[i] = e.tasaPromedio;
+                    segmento2[i] = e.segmento;
+
+
+                });
+
+                // console.log(bruta)
+
+
+                $('#LinealTotal').highcharts({
+                    colors: ['#42a5f5', '#8bc34a', '#ba68c8'],
+                    title: {
+                        text: '',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: '',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: dias
+                    },
+
+                    yAxis: [{ // Primary yAxis
+                        labels: {
+                            format: '{value}',
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        },
+                        title: {
+                            text: 'M$',
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        }
+                    }, { // Secondary yAxis
+                        title: {
+                            text: '%',
+                            style: {
+                                color: Highcharts.getOptions().colors[0]
+                            }
+                        },
+                        labels: {
+                            format: '{value}',
+                            style: {
+                                color: Highcharts.getOptions().colors[0]
+                            }
+                        },
+                        opposite: true
+                    }],
+                    tooltip: {
+                        pointFormat: "{point.y:.2f}"
+                    },
+
+                    credits: { enabled: false },
+                    exporting: { enabled: false },
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'left',
+                        verticalAlign: 'top',
+                        borderWidth: 0
+                        //backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                        // borderWidth: 0
+                    },
+                    series: [{
+                        name: 'sPread',
+                        data: spread1,//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        tooltip: {
+                            valueSuffix: '',
+                            formatter: function () {
+                                return this.value.toMoney();
+                            }
+                        }
+
+                    }, {
+                        name: 'Tasa Promedio',
+                        type: 'line',
+                        yAxis: 1,
+                        data: tasaPromedio1
+                    }]
+                });
+
+
+
+
+
+            });
+        });
+</script>
+}
+<div class="tab-base">
+
+    <!--Nav Tabs-->
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#demo-lft-tab-1">Financiamento </a> @*<span class="badge badge-purple">27</span>*@
+        </li>
+        @*<li>
+                <a data-toggle="tab" href="#demo-lft-tab-2">Profile</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#demo-lft-tab-3">Setting</a>
+            </li>*@
+    </ul>
+
+    <!--Tabs Content-->
+    <div class="tab-content">
+        <div id="demo-lft-tab-1" class="tab-pane fade active in">
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <h1 class="panel-title">Financiamento</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" align="center" style="margin: 0px auto;  width: 50%;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0;">&nbsp;</th>
+                                    <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">N° Crédito</th>
+                                    <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto M$</th>
+                                    <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Neto M$</th>
+                                    <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Refinanciamiento</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableFinanciamento"></tbody>
+                        </table>
+
+                    </div>
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Pensionado</h1>
+                    </div>
+                    <div id="LinealPensionado" style="height:212px"></div>
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Trabajador</h1>
+                    </div>
+                    <div id="LinealTrabajador" style="height:212px"></div>
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Total</h1>
+                    </div>
+                    <div id="LinealTotal" style="height:212px"></div>
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+
+        </div>
+        <div id="demo-lft-tab-2" class="tab-pane fade">
+            <p class="text-main text-semibold">Second Tab Content</p>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        </div>
+        <div id="demo-lft-tab-3" class="tab-pane fade">
+            <p class="text-main text-semibold">Third Tab Content</p>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        </div>
+    </div>
+</div>
+
+

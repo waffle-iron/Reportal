@@ -131,6 +131,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CreditoColocAcumulada\" />
+    <Folder Include="Views\CreditoColocDiaria_Prom\" />
+    <Folder Include="Views\CreditoColoc_Diaria\" />
+    <Folder Include="Views\CreditoFinanciamento\" />
     <Folder Include="Views\D_CredPptoMensual\" />
     <Folder Include="Views\Reprogramaciones\" />
     <Folder Include="Views\SegPreaprobadosBySegmento\" />
@@ -175,6 +179,10 @@
     <Compile Include="Controllers\CastigosNetos_TotalController.cs" />
     <Compile Include="Controllers\CastigosNetos_PensController.cs" />
     <Compile Include="Controllers\CastigosNetos_Trab_PorcController.cs" />
+    <Compile Include="Controllers\CreditoColocAcumuladaController.cs" />
+    <Compile Include="Controllers\CreditoColocDiaria_PromController.cs" />
+    <Compile Include="Controllers\CreditoColoc_DiariaController.cs" />
+    <Compile Include="Controllers\CreditoFinanciamentoController.cs" />
     <Compile Include="Controllers\DetalleCampaniaController.cs" />
     <Compile Include="Controllers\DetalleEmpresaController.cs" />
     <Compile Include="Controllers\D_CredPptoMensualController.cs" />
@@ -234,6 +242,10 @@
     <Compile Include="Models\CastigosNetos_TotalRepository.cs" />
     <Compile Include="Models\CastigosNetos_PensRepository.cs" />
     <Compile Include="Models\CastigosNetos_Trab_PorcRepository.cs" />
+    <Compile Include="Models\CreditoColocAcumuladaRepository.cs" />
+    <Compile Include="Models\CreditoColocDiaria_PromRepository.cs" />
+    <Compile Include="Models\CreditoColoc_DiariaRepository.cs" />
+    <Compile Include="Models\CreditoFinanciamentoRepository.cs" />
     <Compile Include="Models\D_CredPptoMensualRepository.cs" />
     <Compile Include="Models\EmpresaRepository.cs" />
     <Compile Include="Models\CastigosNetos_TrabRepository.cs" />
