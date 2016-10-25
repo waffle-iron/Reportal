@@ -60,6 +60,7 @@
     <Compile Include="EvolucionCamadas_12MDataAccess.cs" />
     <Compile Include="EvolucionCamadas_12M_PensDataAccess.cs" />
     <Compile Include="EvolucionCamadas_12M_TotalDataAccess.cs" />
+    <Compile Include="FechaActualizacionDataAccess.cs" />
     <Compile Include="MatricesTransaccion_GDataAccess.cs" />
     <Compile Include="MatricesTransaccion_FDataAccess.cs" />
     <Compile Include="MatricesTransaccion_EDataAccess.cs" />

@@ -13,17 +13,29 @@ namespace Reportal.Api
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+
+            routes.MapRoute(
+                name: "FechasActualizacion",
+                url: "{controller}/{action}/{elcontrolador}/{laaccion}",
+                defaults: new { controller = "FechaActualizacion", action = "Index", elcontrolador = UrlParameter.Optional, laaccion = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-            
+
             /*routes.MapRoute(
                 name: "Benchmark",
                 url: "{controller}/{action}/{periodo}/{item}",
                 defaults: new { controller = "Home", action = "Index", periodo = UrlParameter.Optional, item = UrlParameter.Optional }
             );*/
+
+
+            
+
         }
     }
 }
