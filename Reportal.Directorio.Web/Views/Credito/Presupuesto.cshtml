@@ -130,7 +130,24 @@
                             value: 0,
                             width: 1,
                             color: '#808080'
-                        }]
+                        }],
+                        labels: {
+                            formatter: function () {
+                                return this.value.toMoney();
+                            },
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        },
+                        title: {
+                            text: 'M$',
+                            formatter: function () {
+                                return this.value.toMoney();
+                            },
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        }
                     },
                     tooltip: {
                         valueSuffix: ' MM$'
@@ -252,64 +269,71 @@
                 });
             });
 
-
-            // GAUGE PLUGIN demo-gauge_brutas
-            // =================================================================
-            // Require Gauge.js
-            // -----------------------------------------------------------------
-            // http://bernii.github.io/gauge.js/
-            // =================================================================
-            var opts = {
-                lines: 10, // The number of lines to draw
-                angle: 0, // The length of each line
-                lineWidth: 0.41, // The line thickness
-                pointer: {
-                    length: 0.75, // The radius of the inner circle
-                    strokeWidth: 0.035, // The rotation offset
-                    color: 'rgba(0, 0, 0, 0.38)' // Fill color
-                },
-                limitMax: 'true', // If true, the pointer will not go past the end of the gauge
-                colorStart: '#42a5f5', // Colors
-                colorStop: '#42a5f5', // just experiment with them
-                strokeColor: '#8bc34a', // to see which ones work best for you
-                generateGradient: true
-            };
-
-
-            var target = document.getElementById('demo-gauge'); // your canvas element
-            var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-            gauge.maxValue = 100; // set max gauge value
-            gauge.animationSpeed = 32; // set animation speed (32 is default value)
-            gauge.set(89); // set actual value
-            gauge.setTextField(document.getElementById("demo-gauge-text"));
+            $.getJSON("http://172.16.133.65:8080/api/CredCumplimiento_Neto", function (data) {
+                $("#cReal").html(data[1].TotalNeto.toMoney())
+                $("#cPresupuesto").html(data[0].TotalNeto.toMoney())
+                // GAUGE PLUGIN demo-gauge_brutas
+                // =================================================================
+                // Require Gauge.js
+                // -----------------------------------------------------------------
+                // http://bernii.github.io/gauge.js/
+                // =================================================================
+                var opts = {
+                    lines: 10, // The number of lines to draw
+                    angle: 0, // The length of each line
+                    lineWidth: 0.41, // The line thickness
+                    pointer: {
+                        length: 0.75, // The radius of the inner circle
+                        strokeWidth: 0.035, // The rotation offset
+                        color: 'rgba(0, 0, 0, 0.38)' // Fill color
+                    },
+                    limitMax: 'true', // If true, the pointer will not go past the end of the gauge
+                    colorStart: '#42a5f5', // Colors
+                    colorStop: '#42a5f5', // just experiment with them
+                    strokeColor: '#8bc34a', // to see which ones work best for you
+                    generateGradient: true
+                };
 
 
-            // http://bernii.github.io/gauge.js/
-            // =================================================================
-            var opts1 = {
-                lines: 10, // The number of lines to draw
-                angle: 0, // The length of each line
-                lineWidth: 0.41, // The line thickness
-                pointer: {
-                    length: 0.75, // The radius of the inner circle
-                    strokeWidth: 0.035, // The rotation offset
-                    color: 'rgba(0, 0, 0, 0.38)' // Fill color
-                },
-                limitMax: 'true', // If true, the pointer will not go past the end of the gauge
-                colorStart: '#42a5f5', // Colors
-                colorStop: '#42a5f5', // just experiment with them
-                strokeColor: '#8bc34a', // to see which ones work best for you
-                generateGradient: true
-            };
+                var target = document.getElementById('demo-gauge'); // your canvas element
+                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                gauge.maxValue = 100; // set max gauge value
+                gauge.animationSpeed = 32; // set animation speed (32 is default value)
+                gauge.set(data[1].TotalNeto / data[0].TotalNeto * 100); // set actual value
+                gauge.setTextField(document.getElementById("demo-gauge-text"));
+
+            });
 
 
-            var target1 = document.getElementById('demo-gauge_brutas'); // your canvas element
-            var gauge1 = new Gauge(target1).setOptions(opts1); // create sexy gauge!
-            gauge1.maxValue = 100; // set max gauge value
-            gauge1.animationSpeed = 32; // set animation speed (32 is default value)
-            gauge1.set(92); // set actual value
-            gauge1.setTextField(document.getElementById("demo-gauge_brutas-text"));
+            $.getJSON("http://172.16.133.65:8080/api/CredCumplimiento_Bruto", function (data) {
+                $("#cRealBruto").html(data[1].Total.toMoney())
+                $("#PptoBruto").html(data[0].Total.toMoney())
+                // http://bernii.github.io/gauge.js/
+                // =================================================================
+                var opts1 = {
+                    lines: 10, // The number of lines to draw
+                    angle: 0, // The length of each line
+                    lineWidth: 0.41, // The line thickness
+                    pointer: {
+                        length: 0.75, // The radius of the inner circle
+                        strokeWidth: 0.035, // The rotation offset
+                        color: 'rgba(0, 0, 0, 0.38)' // Fill color
+                    },
+                    limitMax: 'true', // If true, the pointer will not go past the end of the gauge
+                    colorStart: '#42a5f5', // Colors
+                    colorStop: '#42a5f5', // just experiment with them
+                    strokeColor: '#8bc34a', // to see which ones work best for you
+                    generateGradient: true
+                };
 
+
+                var target1 = document.getElementById('demo-gauge_brutas'); // your canvas element
+                var gauge1 = new Gauge(target1).setOptions(opts1); // create sexy gauge!
+                gauge1.maxValue = 100; // set max gauge value
+                gauge1.animationSpeed = 32; // set animation speed (32 is default value)
+                gauge1.set(data[1].Total / data[0].Total*100); // set actual value
+                gauge1.setTextField(document.getElementById("demo-gauge_brutas-text"));
+            });
 
 
             $("#select_Colocacion").on("change", function () {
@@ -331,6 +355,8 @@
 
 
 }
+
+
 <div class="boxed">
         <div class="col-sm-12">
 
@@ -384,11 +410,11 @@
                                                 <p></p>
                                             </li>
                                             <li class="col-xs-3">
-                                                <p>Real</p>80.188
+                                                <p>Real</p><span id="cReal"> </span>
                                             </li>
                                             <li class="col-xs-3">
                                                 <p>Presupuesto</p>
-                                                89.466
+                                                <span id="cPresupuesto"> </span>
                                             </li>
                                             <li class="col-xs-3">
                                             </li>
@@ -499,11 +525,11 @@
                                                 <p></p>
                                             </li>
                                             <li class="col-xs-3">
-                                                <p>Real</p>80.188
+                                                <p>Real</p><span id="cRealBruto"></span>
                                             </li>
                                             <li class="col-xs-3">
                                                 <p>Presupuesto</p>
-                                                89.466
+                                                <span id="PptoBruto"></span>
                                             </li>
                                             <li class="col-xs-3">
                                             </li>
@@ -539,7 +565,7 @@
                                                     <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Diciembre</th>*@
                                             </tr>
                                             <tr>
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0;">&nbsp;</th>
+                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0;color:#FFFFFF;">&nbsp;MM$</th>
                                                 @* <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
                                                 <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Ene</th>
                                                 @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@

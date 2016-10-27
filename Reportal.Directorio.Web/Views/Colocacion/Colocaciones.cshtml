@@ -83,17 +83,6 @@
                     xAxis: {
                         categories: dias
                     },
-                    //yAxis: {
-                    //    //title: {
-                    //    //    text: 'Temperature (°C)'
-                    //    //},
-                    //    plotLines: [{
-                    //        value: 0,
-                    //        width: 1,
-                    //        color: '#808080'
-                    //    }]
-                    //},
-
                     yAxis: [{ // Primary yAxis
                         labels: {
                             formatter: function () {
@@ -114,20 +103,20 @@
                         }
                     }, { // Secondary yAxis
                         title: {
-                            text: '%',
+                            text: '% Refinanciamento',
                             style: {
-                                color: Highcharts.getOptions().colors[0]
+                                color: Highcharts.getOptions().colors[1]
                             }
                         },
                         labels: {
                             format: '{value}',
                             style: {
-                                color: Highcharts.getOptions().colors[0]
+                                color: Highcharts.getOptions().colors[1]
                             }
                         },
                         opposite: true,
                         tooltip: {
-                    pointFormat: "{point.y:.2f}"
+                       pointFormat: "{point.y:.2f}"
                 },
                     }],
                    
@@ -160,8 +149,10 @@
                         yAxis: 1,
                         data: repac,
                         tooltip: {
-                            pointFormat: "{point.y:.2f}",
-                            valueSuffix: '%'
+                            pointFormat: 'Refinan: <b>{point.y:.2f}%</b><br/>',
+                            shared: true
+                            //pointFormat: "Refinan: {point.y:.2f}",
+                            //valueSuffix: '%'
 
                         }
 
@@ -219,15 +210,15 @@
                         }
                     }, { // Secondary yAxis
                         title: {
-                            text: '%',
+                            text: 'Veces Renta',
                             style: {
-                                color: Highcharts.getOptions().colors[0]
+                                color: Highcharts.getOptions().colors[1]
                             }
                         },
                         labels: {
                             format: '{value}',
                             style: {
-                                color: Highcharts.getOptions().colors[0]
+                                color: Highcharts.getOptions().colors[1]
                             }
                         },
                         opposite: true
@@ -267,8 +258,8 @@
                         yAxis: 1,
                         data: renta,
                         tooltip: {
-                            pointFormat: "{point.y:.1f}",
-                            valueSuffix: 'Veces Renta'
+                            pointFormat: 'Veces Renta: <b>{point.y:.2f}%</b><br/>',
+                            shared: true
 
                         }
                     }]

@@ -7,41 +7,42 @@
     <title>@ViewBag.Title</title>
 
     @RenderSection("css", false)
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
-    <link href="~/getstart/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/getstart/css/nifty.min.css" rel="stylesheet">
-    <link href="~/getstart/css/demo/nifty-demo-icons.min.css" rel="stylesheet">
-    <link href="~/getstart/css/demo/nifty-demo.min.css" rel="stylesheet">
-    <link href="~/getstart/plugins/morris-js/morris.min.css" rel="stylesheet">
-    <link href="~/getstart/plugins/magic-check/css/magic-check.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'/>
+    <link href="~/getstart/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="~/getstart/css/nifty.min.css" rel="stylesheet"/>
+    <link href="~/getstart/css/demo/nifty-demo-icons.min.css" rel="stylesheet"/>
+    <link href="~/getstart/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/> 
+    <link href="~/getstart/css/demo/nifty-demo.min.css" rel="stylesheet"/>
+    <link href="~/getstart/plugins/morris-js/morris.min.css" rel="stylesheet"/>
+    <link href="~/getstart/plugins/magic-check/css/magic-check.min.css" rel="stylesheet"/>
 
     <link href="~/getstart/plugins/pace/pace.min.css" rel="stylesheet">
     <script src="~/getstart/plugins/pace/pace.min.js"></script>
     <script src="~/getstart/js/jquery-2.2.4.min.js"></script>
     <script src="~/getstart/js/bootstrap.min.js"></script>
     <script src="~/getstart/js/nifty.min.js"></script>
-   @* <script src="~/getstart/js/demo/nifty-demo.min.js"></script>*@
+    @* <script src="~/getstart/js/demo/nifty-demo.min.js"></script>*@
     @*<script src="~/getstart/plugins/morris-js/morris.min.js"></script>*@
-   @* <script src="~/getstart/plugins/morris-js/raphael-js/raphael.min.js"></script>*@
+    @* <script src="~/getstart/plugins/morris-js/raphael-js/raphael.min.js"></script>*@
     @*<script src="~/getstart/plugins/sparkline/jquery.sparkline.min.js"></script>*@
     @*<script src="~/getstart/js/demo/dashboard.js"></script>*@
     <script type="text/javascript">
-            var resizefunc = [];
+        var resizefunc = [];
     </script>
 </head>
 <body>
     <div id="container" class="effect aside-float aside-bright mainnav-lg">
         <header id="navbar">
             <div id="navbar-container" class="boxed">
-   <div class="navbar-header">
+                <div class="navbar-header">
                     <a class="navbar-brand">
-                        <img src="~/getstart/img/logo.png" alt="Nifty Logo" class="brand-icon">
+                        @*<img src="~/getstart/img/logo.png" alt="Nifty Logo" class="brand-icon">
                         <div class="brand-title">
                             <span class="brand-text">Nifty</span>
-                        </div>
+                        </div>*@
                     </a>
                 </div>
-              <div class="navbar-content clearfix">
+                <div class="navbar-content clearfix">
                     <ul class="nav navbar-top-links pull-left">
                         <li class="tgl-menu-btn">
                             <a class="mainnav-toggle" href="#">
@@ -59,15 +60,15 @@
             <div id="content-container">
                 <div id="page-title">
                     <!--Searchbox-->
-              @*  <div class="searchbox">
-        <div class="input-group custom-search-form">
-            <input type="text" class="form-control" placeholder="Search..">
-            <span class="input-group-btn">
-                <button class="text-muted" type="button"><i class="demo-pli-magnifi-glass"></i></button>
-            </span>
-        </div>
-    </div>
-            *@
+                    @*  <div class="searchbox">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search..">
+                                <span class="input-group-btn">
+                                    <button class="text-muted" type="button"><i class="demo-pli-magnifi-glass"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    *@
                 </div>
                 <div id="page-content">
                     @RenderBody()
@@ -77,7 +78,6 @@
             <!--END CONTENT CONTAINER-->
             <!--ASIDE-->
             <!--===================================================-->
-         
             <!--===================================================-->
             <!--END ASIDE-->
             <!--MAIN NAVIGATION-->
@@ -92,51 +92,50 @@
                                 <!--Profile Widget-->
                                 <!--================================-->
                                 <div id="mainnav-profile" class="nano-content">
-                                        @*<p class="mnp-name demo-psi-male">
+                                    @*<p class="mnp-name demo-psi-male">
                                             <strong>Felipe Saavedra</strong>
                                         </p>*@
-                                    </div>
-                                        <ul id="mainnav-menu" class="list-group">
-                                            <li class="list-header">Navegación</li>
-                                            <li class="active-sub">
-                                                <a href="#">
-                                                    <i class="demo-psi-pen-5"></i>
-                                                    <span class="menu-title">Crédito</span>
-                                                    <i class="arrow"></i>
-                                                </a>
-
-                                                <!--Submenu-->
-                                                <ul class="collapse">
-                                                    <li><a href="~/Credito/Presupuesto">Presupuesto</a></li>
-                                                    <li><a href="~/Colocacion/Colocaciones">Colocación</a></li>
-                                                    <li><a href="~/Financiamento">Financiamento</a></li>
-                                                </ul>
-                                            </li>
-
-
-
+                                </div>
+                                <ul id="mainnav-menu" class="list-group">
+                                    <li class="list-header">Navegación</li>
+                                    <li class="active-sub">
+                                        <a href="#">
+                                            <i class="fa fa-credit-card"></i>
+                                            <span class="menu-title">Crédito</span>
+                                            <i class="arrow"></i>
+                                        </a>
+                                        <!--Submenu-->
+                                        <ul class="collapse">
+                                            <li><a href="~/Credito/Presupuesto">Presupuesto</a></li>
+                                            <li><a href="~/Colocacion/Colocaciones">Colocación</a></li>
+                                            <li><a href="~/Financiamento">Financiamento</a></li>
                                         </ul>
+                                    </li>
 
+
+
+                                </ul>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-                    </div>  
-                    </nav>
-                    </div>
+            </nav>
+        </div>
         <div class="hide-fixed pull-right pad-rgt">
             <footer id="footer">
                 <p class="pad-lft">&#0169;  2016 © Gerencia de Planificación y Control de Gestión / División Información Analítica.</p>
             </footer>
         </div>
-            @RenderSection("script", false);
-            <button class="scroll-top btn">
-                <i class="pci-chevron chevron-up"></i>
-            </button>
-           
+        @RenderSection("script", false);
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
 
 
 
-        </div>
+
+    </div>
 
 
 

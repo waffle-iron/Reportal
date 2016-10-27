@@ -10,7 +10,7 @@ using System.Web.Http.Cors;
 
 namespace Reportal.Api.Controllers
 {
-    [EnableCors(origins: "http://172.16.133.65", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
     public class CreditoColocAcumuladaController : ApiController
     {
         // GET: CreditoColocAcumulada

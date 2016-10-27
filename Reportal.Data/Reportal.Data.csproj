@@ -50,6 +50,7 @@
     <Compile Include="CreditoColocDiaria_PromDataAccess.cs" />
     <Compile Include="CreditoFinanciamentoDataAccess.cs" />
     <Compile Include="CreditoColoc_DiariaDataAccess.cs" />
+    <Compile Include="Cred_CumplimientoPptoDataAccess.cs" />
     <Compile Include="DetalleCampaniaDataAccess.cs" />
     <Compile Include="DetalleEmpresaDataAccess.cs" />
     <Compile Include="D_CredPptoMensualDataAccess.cs" />

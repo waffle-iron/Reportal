@@ -46,6 +46,7 @@
     <Compile Include="CreditoColocAcumulada.cs" />
     <Compile Include="CreditoColocDiaria_Prom.cs" />
     <Compile Include="CreditoColoc_Diaria.cs" />
+    <Compile Include="Cred_CumplimientoPpto.cs" />
     <Compile Include="Cred_Financiamento.cs" />
     <Compile Include="D_CredPptoMensual.cs" />
     <Compile Include="Empresa.cs" />
