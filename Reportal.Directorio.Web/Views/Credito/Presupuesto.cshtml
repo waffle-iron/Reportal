@@ -207,6 +207,10 @@
                     }
                 });
             });
+
+            $.getJSON("http://172.16.133.65:8080/api/FechaActualizacion/2/", function (respoonse) {
+                $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
+            });
             // tabla Bruto
             $.getJSON("http://172.16.133.65:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
 
@@ -331,7 +335,7 @@
         <div class="col-sm-12">
 
             <div class="panel">
-
+                <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
                 <div class="panel-heading">
 
                     <h3 class="panel-title">
@@ -341,6 +345,7 @@
                             <option value="14">Brutas</option>
                         </select>
                     </h3>
+                    
                 </div>
                 <div id="bdy_Netas" class="panel-body">
                     <div class="col-sm-8">
@@ -419,7 +424,7 @@
                                                     <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Diciembre</th>*@
                                             </tr>
                                             <tr>
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0;">&nbsp;</th>
+                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0;color:#FFFFFF;">&nbsp;MM$</th>
                                                 @* <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
                                                 <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Ene</th>
                                                 @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@

@@ -27,11 +27,13 @@ namespace Reportal.Api
               routeTemplate: "api/{controller}/{Periodo}/{iSegmento}",
               defaults: new { Periodo = RouteParameter.Optional, iSegmento = RouteParameter.Optional }
           );
-            config.Routes.MapHttpRoute(
+
+            /*config.Routes.MapHttpRoute(
                 name: "FechasActualizacionApi",
                 routeTemplate: "api/{controller}/{elcontrolador}/{laaccion}",
                 defaults: new { elcontrolador = RouteParameter.Optional, laaccion = RouteParameter.Optional }
             );
+            */
 
             config.Routes.MapHttpRoute(
                 name: "BenchmarkApi",

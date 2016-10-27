@@ -12,12 +12,11 @@ namespace Reportal.Data
 {
     public class FechaActualizacionDataAccess
     {
-        public static FechaActualizacion Obtener(string controlador, string accion)
+        public static FechaActualizacion Obtener(int id)
         {
             Parametros para = new Parametros
             {
-                new Parametro("@Controlador", controlador),
-                new Parametro("@Accion", accion)
+                new Parametro("@Controlador", id)
             };
 
             return DBHelper.InstanceReporteria.ObtenerEntidad("sp_General_FechasActualizacion", para ,ConstructorEntidad);

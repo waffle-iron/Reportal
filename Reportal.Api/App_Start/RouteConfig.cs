@@ -20,11 +20,12 @@ namespace Reportal.Api
                 defaults: new { controller = "CreditoFinanciamento", action = "Index", Periodo = UrlParameter.Optional, iSegmento = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
+            /*routes.MapRoute(
                 name: "FechasActualizacion",
                 url: "{controller}/{action}/{elcontrolador}/{laaccion}",
                 defaults: new { controller = "FechaActualizacion", action = "Index", elcontrolador = UrlParameter.Optional, laaccion = UrlParameter.Optional }
             );
+            */
 
 
             routes.MapRoute(

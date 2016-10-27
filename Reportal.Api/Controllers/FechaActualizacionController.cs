@@ -14,9 +14,9 @@ namespace Reportal.Api.Controllers
     [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
     public class FechaActualizacionController : ApiController
     {
-        public FechaActualizacion Get(string elcontrolador, string laaccion)
+        public FechaActualizacion Get(int id)
         {
-            return FechaActualizacionDataAccess.Obtener(elcontrolador, laaccion);
+            return FechaActualizacionDataAccess.Obtener(id);
         }
 
     }
