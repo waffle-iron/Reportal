@@ -179,16 +179,16 @@
                     if (o.Item == "Cumplimiento") {
                         $("#D_CredPptoMensual").append(
                                 $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
-                                .append($("<td>").html(o.Enero_Neto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Febrero_Neto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Marzo_Neto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Abril_Neto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Mayo_Neto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Junio_Neto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Julio_Neto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Agosto_Neto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Septiembre_Neto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Octubre_Neto.toMoney() + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Enero_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Febrero_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Marzo_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Abril_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Mayo_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Junio_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Julio_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Agosto_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Septiembre_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Octubre_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
                                 //.append($("<td>").html(o.Noviembre_Neto.toMoney() + "%").css("text-align", "center"))
                                 //.append($("<td>").html(o.Diciembre_Neto.toMoney() + "%").css("text-align", "center"))
                            );
@@ -235,16 +235,16 @@
                     if (o.Item == "Cumplimiento") {
                         $("#D_CredPptoMensualBruto").append(
                                 $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
-                                .append($("<td>").html(o.Enero_Bruto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Febrero_Bruto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Marzo_Bruto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Abril_Bruto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Mayo_Bruto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Junio_Bruto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Julio_Bruto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Agosto_Bruto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Septiembre_Bruto.toMoney() + "%").css("text-align", "center"))
-                                .append($("<td>").html(o.Octubre_Bruto.toMoney() + "%").css("text-align", "center"))
+                                .append($("<td>").html(o.Enero_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Febrero_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Marzo_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Abril_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Mayo_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Junio_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Julio_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Agosto_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Septiembre_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
+                                .append($("<td>").html(o.Octubre_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
                                 //.append($("<td>").html(o.Noviembre_Bruto.toMoney()).css("text-align", "center"))
                                 //.append($("<td>").html(o.Diciembre_Bruto.toMoney()).css("text-align", "center"))
                            );
@@ -410,10 +410,11 @@
                                                 <p></p>
                                             </li>
                                             <li class="col-xs-3">
-                                                <p>Real</p><span id="cReal"> </span>
+                                                <b><p>Real</p></b> 
+                                                <span id="cReal"> </span>
                                             </li>
                                             <li class="col-xs-3">
-                                                <p>Presupuesto</p>
+                                                <b><p>Presupuesto</p></b>
                                                 <span id="cPresupuesto"> </span>
                                             </li>
                                             <li class="col-xs-3">
@@ -525,10 +526,11 @@
                                                 <p></p>
                                             </li>
                                             <li class="col-xs-3">
-                                                <p>Real</p><span id="cRealBruto"></span>
+                                                <b><p>Real</p></b>
+                                                <span id="cRealBruto"></span>
                                             </li>
                                             <li class="col-xs-3">
-                                                <p>Presupuesto</p>
+                                                <b><p>Presupuesto</p></b>
                                                 <span id="PptoBruto"></span>
                                             </li>
                                             <li class="col-xs-3">

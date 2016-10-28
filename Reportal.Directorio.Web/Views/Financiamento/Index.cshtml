@@ -74,10 +74,10 @@
                 });
 
                 $("#bodyFinanciamiento").append($("<tr class=\"total\">"));
-                $("#bodyFinanciamiento > tr.total").append($("<th>").html("Total").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $("#bodyFinanciamiento > tr.total").append($("<th>").html("Total").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF").css("font-weight", "bold"));
                 $.each(respoonse.Total, function (i, e) {
-                    $("#bodyFinanciamiento > tr.total").append($("<td>").html(e.Tasa.toMoney(2)));
-                    $("#bodyFinanciamiento > tr.total").append($("<td>").html(e.Spred.toMoney(2)));
+                    $("#bodyFinanciamiento > tr.total").append($("<td>").html(e.Tasa.toMoney(2)).css("font-weight", "bold"));
+                    $("#bodyFinanciamiento > tr.total").append($("<td>").html(e.Spred.toMoney(2)).css("font-weight", "bold"));
                 });
 
 
@@ -409,7 +409,7 @@
                         <div class="panel-heading">
                             <h1 class="panel-title">Trabajador</h1>
                         </div>
-                        <div id="LinealTrabajador" style="height:212px"></div>
+                        <div id="LinealTrabajador" style="height:212px" ></div>
                         <div class="panel-heading">
                             <h1 class="panel-title">Total</h1>
                         </div>
