@@ -12,9 +12,10 @@ namespace Reportal.Data
 {
     public static class CreditoColocDiaria_PromDataAccess
     {
-        public static List<CreditoColocDiaria_Prom> Listar_CredColocDiariaPromedio()
+        public static List<CreditoColocDiaria_Prom> Listar_CredColocDiariaPromedio(int Periodo)
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Directorio_Cred_Prom_ColocDiaria_Listar", ConstructorEntidad);
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Directorio_Cred_Prom_ColocDiaria_Listar", p, ConstructorEntidad);
         }
         private static CreditoColocDiaria_Prom ConstructorEntidad(DataRow row)
         {

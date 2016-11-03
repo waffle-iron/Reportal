@@ -20,9 +20,9 @@ namespace Reportal.Api.Controllers
             CredProm = new CreditoColocDiaria_PromRepository();
         }
 
-        public IEnumerable<CreditoColocDiaria_Prom> Get()
+        public IEnumerable<CreditoColocDiaria_Prom> Get(int id)
         {
-            return CredProm.Listar();
+            return CredProm.Listar(id);
         }
     }
 }

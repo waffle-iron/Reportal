@@ -9,9 +9,9 @@ namespace Reportal.Api.Models
 {
     public class CreditoColoc_DiariaRepository
     {
-        public List<CreditoColoc_Diaria> Listar()
+        public List<CreditoColoc_Diaria> Listar(int periodo)
         {
-            return CreditoColoc_DiariaDataAccess.Listar_CredColocDiaria();
+            return CreditoColoc_DiariaDataAccess.Listar_CredColocDiaria(periodo);
         }
     }
 }

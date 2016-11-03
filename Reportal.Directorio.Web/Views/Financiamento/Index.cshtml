@@ -42,7 +42,7 @@
 
             /*PRUEBAS*/
 
-            $.getJSON("http://172.16.133.65:8080/api/CredFinanciamentoTodo", function (respoonse) {
+            $.getJSON("http://localhost:8080/api/CredFinanciamentoTodo", function (respoonse) {
                 
                 //console.log(respoonse);
 
@@ -93,7 +93,7 @@
                 $("#LinealTotal").html("");
 
            /*
-            $.getJSON("http://172.16.133.65:8080/api/CreditoColocAcumulada/" + $(this).val(), function (respoonse) {
+            $.getJSON("http://localhost:8080/api/CreditoColocAcumulada/" + $(this).val(), function (respoonse) {
                 $.each(respoonse, function (i, o) {
                     $("#CreditoColocAcumulada").append(
                             $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
@@ -106,7 +106,7 @@
             });
             */
 
-                $.getJSON("http://172.16.133.65:8080/api/CreditoFinanciamento/"+$("#slPeriodo").val() + "/1", function (data) {
+                $.getJSON("http://localhost:8080/api/CreditoFinanciamento/"+$("#slPeriodo").val() + "/1", function (data) {
                     
                     var dias = new Array();
                     var spread1 = new Array();
@@ -188,7 +188,7 @@
 
                     });
                 });
-                $.getJSON("http://172.16.133.65:8080/api/CreditoFinanciamento/" + $("#slPeriodo").val() + "/2", function (data) {
+                $.getJSON("http://localhost:8080/api/CreditoFinanciamento/" + $("#slPeriodo").val() + "/2", function (data) {
 
                     var dias = new Array();
                     var spread1 = new Array();
@@ -268,7 +268,7 @@
 
                     });
                 });
-                $.getJSON("http://172.16.133.65:8080/api/CreditoFinanciamento/" + $("#slPeriodo").val() + "/3", function (data) {
+                $.getJSON("http://localhost:8080/api/CreditoFinanciamento/" + $("#slPeriodo").val() + "/3", function (data) {
 
                     var dias = new Array();
                     var spread1 = new Array();
@@ -350,7 +350,7 @@
 
                     });
                 });
-                $.getJSON("http://172.16.133.65:8080/api/FechaActualizacion/2/", function (respoonse) {
+                $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
                     $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
                 });
             });

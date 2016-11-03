@@ -14,5 +14,7 @@ namespace Reportal.Domain
         public int Bruta { get; set; }
         public int Neta { get; set; }
         public int indRepac { get; set; }
+
+        public int Periodo { get; set; }
     }
 }

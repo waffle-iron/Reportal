@@ -7,11 +7,12 @@ using Reportal.Domain;
 
 namespace Reportal.Api.Models
 {
-    public class CreditoColocAcumuladaRepository
+    public class Cred_ColocDiariaTableRepositorycs
     {
-        public List<CreditoColocAcumulada> Listar(int periodo)
+        public List<Cred_ColocDiariaTable> Listar(int Periodo)
         {
-            return CreditoColocAcumuladaDataAccess.Listar_CredColocAcumulada(periodo);
+            return Cred_ColocDiariaTableDataAccess.ListarCred_ColocDiariaTable(Periodo);
         }
+
     }
 }

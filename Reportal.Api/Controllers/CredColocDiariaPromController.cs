@@ -11,19 +11,19 @@ using System.Web.Http.Cors;
 namespace Reportal.Api.Controllers
 {
     [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
-    public class CreditoColoc_DiariaController : ApiController
+    public class CredColocDiariaPromController : ApiController
     {
-        // GET: CreditoColoc_Diaria
-        private CreditoColoc_DiariaRepository ColocDiaria;
+        // GET: CredColocDiariaProm
+        private CredColoc_DiariaPromedio CredProm;
 
-        public CreditoColoc_DiariaController()
+        public CredColocDiariaPromController()
         {
-            ColocDiaria = new CreditoColoc_DiariaRepository();
+            CredProm = new CredColoc_DiariaPromedio();
         }
 
         public IEnumerable<CreditoColoc_Diaria> Get(int id)
         {
-            return ColocDiaria.Listar(id);
+            return CredProm.Listar(id);
         }
     }
 }

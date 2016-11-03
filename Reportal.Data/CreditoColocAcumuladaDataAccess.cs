@@ -12,9 +12,10 @@ namespace Reportal.Data
 {
     public static class CreditoColocAcumuladaDataAccess
     {
-        public static List<CreditoColocAcumulada> Listar_CredColocAcumulada()
+        public static List<CreditoColocAcumulada> Listar_CredColocAcumulada(int Periodo)
         {
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Directorio_ColocAcumulada_Listar", ConstructorEntidad);
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Directorio_ColocAcumulada_Listar", p, ConstructorEntidad);
         }
 
         private static CreditoColocAcumulada ConstructorEntidad(DataRow row)

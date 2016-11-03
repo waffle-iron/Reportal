@@ -5,13 +5,15 @@ using System.Web;
 using Reportal.Data;
 using Reportal.Domain;
 
+
 namespace Reportal.Api.Models
 {
-    public class CreditoColocAcumuladaRepository
+    public class CredColoc_DiariaPromedio
     {
-        public List<CreditoColocAcumulada> Listar(int periodo)
+        public List<CreditoColoc_Diaria> Listar(int periodo)
         {
-            return CreditoColocAcumuladaDataAccess.Listar_CredColocAcumulada(periodo);
+           
+            return CredColocDiariaPromDataAccess.ListarCreditoProm(periodo);
         }
     }
 }

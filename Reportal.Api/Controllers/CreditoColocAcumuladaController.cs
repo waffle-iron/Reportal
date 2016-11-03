@@ -21,9 +21,9 @@ namespace Reportal.Api.Controllers
             CredAcumulada = new CreditoColocAcumuladaRepository();
         }
 
-        public IEnumerable<CreditoColocAcumulada> Get()
+        public IEnumerable<CreditoColocAcumulada> Get(int id)
         {
-            return CredAcumulada.Listar();
+            return CredAcumulada.Listar(id);
         }
     }
 }

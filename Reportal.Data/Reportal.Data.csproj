@@ -46,10 +46,12 @@
     <Compile Include="CastigosNetos_TotalDataAccess.cs" />
     <Compile Include="CastigosNetos_PensDataAccess.cs" />
     <Compile Include="Coloc_CumplimientoBrutoDataAccess.cs" />
+    <Compile Include="CredColocDiariaPromDataAccess.cs" />
     <Compile Include="CreditoColocAcumuladaDataAccess.cs" />
     <Compile Include="CreditoColocDiaria_PromDataAccess.cs" />
     <Compile Include="CreditoFinanciamentoDataAccess.cs" />
     <Compile Include="CreditoColoc_DiariaDataAccess.cs" />
+    <Compile Include="Cred_ColocDiariaTableDataAccess.cs" />
     <Compile Include="Cred_CumplimientoPptoDataAccess.cs" />
     <Compile Include="DetalleCampaniaDataAccess.cs" />
     <Compile Include="DetalleEmpresaDataAccess.cs" />
