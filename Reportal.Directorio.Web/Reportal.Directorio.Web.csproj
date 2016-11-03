@@ -43,6 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -126,6 +127,7 @@
     <Compile Include="Controllers\FinanciamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CreditoController.cs" />
+    <Compile Include="Controllers\SeguimientoPreaprobadosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2228,6 +2230,9 @@
     <Content Include="Views\Credito\Presupuesto.cshtml" />
     <Content Include="Views\Colocacion\Colocaciones.cshtml" />
     <Content Include="Views\Financiamento\Index.cshtml" />
+    <Content Include="Views\SeguimientoPreaprobados\Index.cshtml" />
+    <Content Include="Views\Layout\_Principal2.cshtml" />
+    <Content Include="Views\Layout\_Principal2_Oper.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2251,6 +2256,9 @@
       <Project>{9779a096-885a-48aa-827b-4f359b04f94d}</Project>
       <Name>Reportal.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
