@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reportal.Web", "Reportal.Web\Reportal.Web.csproj", "{C46270D3-AC34-477E-9C6F-809319A165A7}"
 EndProject
@@ -22,6 +22,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reportal.Api", "Reportal.Api\Reportal.Api.csproj", "{F359E313-1F96-43C0-A286-3C0BD26FAFA3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reportal.Directorio.Web", "Reportal.Directorio.Web\Reportal.Directorio.Web.csproj", "{7A5A8889-199D-4877-B5AF-5BCBB1720E00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IA.Security.Data", "IA.Security.Data\IA.Security.Data.csproj", "{E028889F-9C48-4693-B294-C61CECD355BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IA.Security.Domain", "IA.Security.Domain\IA.Security.Domain.csproj", "{AB9D073A-7B11-470E-9040-19803B3F204D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IA.Security.Api", "IA.Security.Api\IA.Security.Api.csproj", "{3B7F021B-5B01-4412-8726-7ACE18F063E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +59,18 @@ Global
 		{7A5A8889-199D-4877-B5AF-5BCBB1720E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A5A8889-199D-4877-B5AF-5BCBB1720E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A5A8889-199D-4877-B5AF-5BCBB1720E00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E028889F-9C48-4693-B294-C61CECD355BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E028889F-9C48-4693-B294-C61CECD355BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E028889F-9C48-4693-B294-C61CECD355BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E028889F-9C48-4693-B294-C61CECD355BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB9D073A-7B11-470E-9040-19803B3F204D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB9D073A-7B11-470E-9040-19803B3F204D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB9D073A-7B11-470E-9040-19803B3F204D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB9D073A-7B11-470E-9040-19803B3F204D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B7F021B-5B01-4412-8726-7ACE18F063E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B7F021B-5B01-4412-8726-7ACE18F063E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B7F021B-5B01-4412-8726-7ACE18F063E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B7F021B-5B01-4412-8726-7ACE18F063E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,5 +82,8 @@ Global
 		{BB1F9B85-DC6D-4D9B-9078-0BD09684B974} = {814080AD-E3F5-4CF6-9466-FE82AFEBFB54}
 		{F359E313-1F96-43C0-A286-3C0BD26FAFA3} = {BBE305EB-B335-4D1F-B76E-D1899FFE7B50}
 		{7A5A8889-199D-4877-B5AF-5BCBB1720E00} = {472DBCEF-4449-4A83-8231-D8178F08DDA0}
+		{E028889F-9C48-4693-B294-C61CECD355BE} = {814080AD-E3F5-4CF6-9466-FE82AFEBFB54}
+		{AB9D073A-7B11-470E-9040-19803B3F204D} = {814080AD-E3F5-4CF6-9466-FE82AFEBFB54}
+		{3B7F021B-5B01-4412-8726-7ACE18F063E2} = {BBE305EB-B335-4D1F-B76E-D1899FFE7B50}
 	EndGlobalSection
 EndGlobal

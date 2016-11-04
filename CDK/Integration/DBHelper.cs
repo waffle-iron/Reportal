@@ -24,6 +24,11 @@ namespace CDK.Integration
             get { return (_instanceCampanias = _instanceCampanias ?? new DBHelperBase("CN_CAMPANIAS")); }
         }
 
+        public static DBHelperBase InstanceSecurity
+        {
+            get { return (_instanceCampanias = _instanceCampanias ?? new DBHelperBase("CN_SECURITY")); }
+        }
+
         #endregion
     }
 }

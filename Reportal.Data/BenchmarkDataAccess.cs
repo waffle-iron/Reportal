@@ -20,7 +20,7 @@ namespace Reportal.Data
                 new Parametro("@Item",Item),
             };
            
-            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Reportal_Obtener_BenchMark", pram, ConstructorEntidad);
+            return DBHelper.InstanceSecurity.ObtenerColeccion("sp_Reportal_Obtener_BenchMark", pram, ConstructorEntidad);
         }
         
         private static Benchmark ConstructorEntidad(DataRow row)
