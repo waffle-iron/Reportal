@@ -8,7 +8,7 @@ namespace IA.Security.Domain
 {
     public class Usuario
     {
-        public int IdUsuario { get; set; }
+        public string IdUsuario { get; set; }
         public string Nombres { get; set; }
         public string ClaveAcceso { get; set; }
         public string Estado { get; set; }
