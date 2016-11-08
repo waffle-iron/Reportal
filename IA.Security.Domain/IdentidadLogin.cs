@@ -15,6 +15,12 @@ namespace IA.Security.Domain
 
         public IdentidadLogin() { }
 
+        public IdentidadLogin(Usuario usuario, List<Recurso> menus)
+        {
+            this.Usuario = usuario;
+            this.Menus = menus;
+        }
+
         public IdentidadLogin(Usuario usuario, List<Recurso> menus, string token)
         {
             this.Usuario = usuario;
@@ -22,7 +28,6 @@ namespace IA.Security.Domain
             this.Token = token; 
         }
 
-
-
+        
     }
 }

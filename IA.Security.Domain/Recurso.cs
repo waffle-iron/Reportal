@@ -20,5 +20,19 @@ namespace IA.Security.Domain
         {
             Hijos = new List<Recurso>();
         }
+
+        private static List<Recurso> Recursivo(Recurso r, List<Recurso> lr)
+        {
+            return lr.Where(x => x.IdRecursoPradre == r.IdRecurso).ToList();
+        }
+
+        public static List<Recurso> AsignarDesendencia(List<Recurso> recursos)
+        {
+            recursos.ForEach(x => {
+                x.Hijos.AddRange(Recursivo(x, recursos));
+            });
+
+            return recursos;
+        }
     }
 }

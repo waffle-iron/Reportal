@@ -27,12 +27,12 @@ namespace IA.Security.Data
         {
             return new Recurso
             {
-                IdRecurso = row["IdRecurso"] != DBNull.Value ? Convert.ToInt32(row["IdRecurso"]) : 0,
-                IdRecursoPradre = row["IdRecursoPradre"] != DBNull.Value ? Convert.ToInt32(row["IdRecursoPradre"]) : 0,
-                Nombre = row["Nombre"] != DBNull.Value ? row["Nombre"].ToString() : string.Empty,
-                Tipo = row["Tipo"] != DBNull.Value ? row["Tipo"].ToString() : string.Empty,
-                Url = row["Url"] != DBNull.Value ? row["Url"].ToString() : string.Empty,
-                Icono = row["Icono"] != DBNull.Value ? row["Icono"].ToString() : string.Empty,
+                IdRecurso = row["rec_id"] != DBNull.Value ? Convert.ToInt32(row["rec_id"]) : 0,
+                IdRecursoPradre = row["rec_id_padre"] != DBNull.Value ? Convert.ToInt32(row["rec_id_padre"]) : 0,
+                Nombre = row["rec_nombre"] != DBNull.Value ? row["rec_nombre"].ToString() : string.Empty,
+                Tipo = row["rec_tipo"] != DBNull.Value ? row["rec_tipo"].ToString() : string.Empty,
+                Url = row["rec_url"] != DBNull.Value ? row["rec_url"].ToString() : string.Empty,
+                Icono = row["rec_icono"] != DBNull.Value ? row["rec_icono"].ToString() : string.Empty,
             };
         }
     }
