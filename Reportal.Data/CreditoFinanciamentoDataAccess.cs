@@ -12,12 +12,12 @@ namespace Reportal.Data
 {
     public static class CreditoFinanciamentoDataAccess
     {
-        public static List<Cred_Financiamento> Listar(int Periodo, int iSegmento)
+        public static List<Cred_Financiamento> Listar(int Periodo)
         {
             Parametros pp = new Parametros
             {
-                new Parametro("@Periodo",Periodo),
-                new Parametro("@segmento",iSegmento)
+                new Parametro("@Periodo",Periodo)
+               // new Parametro("@segmento",iSegmento)
             };
 
 

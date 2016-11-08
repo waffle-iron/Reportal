@@ -43,7 +43,7 @@
         $(function () {
 
             //grafico neeto
-            $.getJSON('http://172.16.133.65:8080/api/D_CredPptoMensual/', function (data) {
+            $.getJSON('http://localhost:8080/api/D_CredPptoMensual/', function (data) {
 
                 $('#Lineal').highcharts({
                     colors: ['#42a5f5', '#8bc34a'],
@@ -106,7 +106,7 @@
                 });
             });
             // grafico bruto
-            $.getJSON('http://172.16.133.65:8080/api/D_CredPptoMensual/', function (data) {
+            $.getJSON('http://localhost:8080/api/D_CredPptoMensual/', function (data) {
 
                 $('#LinealBruto').highcharts({
                     colors: ['#42a5f5', '#8bc34a'],
@@ -171,7 +171,7 @@
                 });
             });
             // tabla Neto
-            $.getJSON("http://172.16.133.65:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
+            $.getJSON("http://localhost:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
 
                 $.each(respoonse, function (i, o) {
 
@@ -225,11 +225,11 @@
                 });
             });
 
-            $.getJSON("http://172.16.133.65:8080/api/FechaActualizacion/2/", function (respoonse) {
+            $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
                 $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
             });
             // tabla Bruto
-            $.getJSON("http://172.16.133.65:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
+            $.getJSON("http://localhost:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
 
                 $.each(respoonse, function (i, o) {
                     if (o.Item == "Cumplimiento") {
@@ -269,7 +269,7 @@
                 });
             });
 
-            $.getJSON("http://172.16.133.65:8080/api/CredCumplimiento_Neto", function (data) {
+            $.getJSON("http://localhost:8080/api/CredCumplimiento_Neto", function (data) {
                 $("#cReal").html(data[1].TotalNeto.toMoney())
                 $("#cPresupuesto").html(data[0].TotalNeto.toMoney())
                 // GAUGE PLUGIN demo-gauge_brutas
@@ -305,7 +305,7 @@
             });
 
 
-            $.getJSON("http://172.16.133.65:8080/api/CredCumplimiento_Bruto", function (data) {
+            $.getJSON("http://localhost:8080/api/CredCumplimiento_Bruto", function (data) {
                 $("#cRealBruto").html(data[1].Total.toMoney())
                 $("#PptoBruto").html(data[0].Total.toMoney())
                 // http://bernii.github.io/gauge.js/
@@ -432,7 +432,7 @@
                                 <h1 class="panel-title">Mensual</h1>
                             </div>
                             <div class="panel-body">
-                                <div class="table-responsive">
+                                <div class="table-responsive"  style="font-size: 11px;">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
