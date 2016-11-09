@@ -12,5 +12,12 @@ namespace IA.Security.Domain
         public string Nombres { get; set; }
         public string ClaveAcceso { get; set; }
         public string Estado { get; set; }
+
+
+        public Usuario() { }
+        public Usuario(string IdUsuario)
+        {
+            this.IdUsuario = IdUsuario;
+        }
     }
 }
