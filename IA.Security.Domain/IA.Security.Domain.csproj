@@ -41,6 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Grupo.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="IdentidadLogin.cs" />
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recurso.cs" />
     <Compile Include="Sistema.cs" />

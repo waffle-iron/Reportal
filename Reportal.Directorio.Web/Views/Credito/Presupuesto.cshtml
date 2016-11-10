@@ -43,7 +43,11 @@
         $(function () {
 
             //grafico neeto
+<<<<<<< HEAD
             $.getJSON('http://172.16.133.65:8080/api/D_CredPptoMensual/', function (data) {
+=======
+            $.getJSON('http://localhost:8080/api/D_CredPptoMensual/', function (data) {
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
 
                 $('#Lineal').highcharts({
                     colors: ['#42a5f5', '#8bc34a'],
@@ -106,7 +110,11 @@
                 });
             });
             // grafico bruto
+<<<<<<< HEAD
             $.getJSON('http://172.16.133.65:8080/api/D_CredPptoMensual/', function (data) {
+=======
+            $.getJSON('http://localhost:8080/api/D_CredPptoMensual/', function (data) {
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
 
                 $('#LinealBruto').highcharts({
                     colors: ['#42a5f5', '#8bc34a'],
@@ -171,7 +179,11 @@
                 });
             });
             // tabla Neto
+<<<<<<< HEAD
             $.getJSON("http://172.16.133.65:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
+=======
+            $.getJSON("http://localhost:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
 
                 $.each(respoonse, function (i, o) {
 
@@ -225,11 +237,19 @@
                 });
             });
 
+<<<<<<< HEAD
             $.getJSON("http://172.16.133.65:8080/api/FechaActualizacion/2/", function (respoonse) {
                 $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
             });
             // tabla Bruto
             $.getJSON("http://172.16.133.65:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
+=======
+            $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
+                $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
+            });
+            // tabla Bruto
+            $.getJSON("http://localhost:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
 
                 $.each(respoonse, function (i, o) {
                     if (o.Item == "Cumplimiento") {
@@ -269,7 +289,11 @@
                 });
             });
 
+<<<<<<< HEAD
             $.getJSON("http://172.16.133.65:8080/api/CredCumplimiento_Neto", function (data) {
+=======
+            $.getJSON("http://localhost:8080/api/CredCumplimiento_Neto", function (data) {
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
                 $("#cReal").html(data[1].TotalNeto.toMoney())
                 $("#cPresupuesto").html(data[0].TotalNeto.toMoney())
                 // GAUGE PLUGIN demo-gauge_brutas
@@ -305,7 +329,11 @@
             });
 
 
+<<<<<<< HEAD
             $.getJSON("http://172.16.133.65:8080/api/CredCumplimiento_Bruto", function (data) {
+=======
+            $.getJSON("http://localhost:8080/api/CredCumplimiento_Bruto", function (data) {
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
                 $("#cRealBruto").html(data[1].Total.toMoney())
                 $("#PptoBruto").html(data[0].Total.toMoney())
                 // http://bernii.github.io/gauge.js/
@@ -358,7 +386,11 @@
 
 
 <div class="boxed">
+<<<<<<< HEAD
         <div class="col-sm-12">
+=======
+        <div class="col-sm-13">
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
 
             <div class="panel">
                 <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
@@ -432,7 +464,11 @@
                                 <h1 class="panel-title">Mensual</h1>
                             </div>
                             <div class="panel-body">
+<<<<<<< HEAD
                                 <div class="table-responsive">
+=======
+                                <div class="table-responsive"  style="font-size: 11px;">
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>

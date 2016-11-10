@@ -17,7 +17,11 @@
     <AssemblyName>IA.Security.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+<<<<<<< HEAD
     <UseIISExpress>true</UseIISExpress>
+=======
+    <UseIISExpress>false</UseIISExpress>
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -41,7 +45,11 @@
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
+<<<<<<< HEAD
     <WarningLevel>4</WarningLevel>
+=======
+    <WarningLevel>3</WarningLevel>
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -206,6 +214,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Controllers\AuthController.cs" />
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -285,6 +297,19 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <ProjectReference Include="..\IA.Security.Data\IA.Security.Data.csproj">
+      <Project>{e028889f-9c48-4693-b294-c61cecd355be}</Project>
+      <Name>IA.Security.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IA.Security.Domain\IA.Security.Domain.csproj">
+      <Project>{ab9d073a-7b11-470e-9040-19803b3f204d}</Project>
+      <Name>IA.Security.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -303,7 +328,11 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63642</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
+<<<<<<< HEAD
           <IISUrl>http://localhost:63610/</IISUrl>
+=======
+          <IISUrl>http://localhost:9090</IISUrl>
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

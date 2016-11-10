@@ -6,7 +6,11 @@ html, body {
 body {
     background-color: #ecf0f5;
     font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+<<<<<<< HEAD
     font-size: 13px;
+=======
+    font-size: 12px;
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
     font-weight: normal;
     font-variant: normal;
     color: #758697;
@@ -819,7 +823,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
             content: '';
             position: absolute;
             display: block;
+<<<<<<< HEAD
             width: 100%;
+=======
+            width: 92%;
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
             height: 40px;
             background-color: #263238;
         }
@@ -910,6 +918,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 #mainnav {
     height: 100%;
+<<<<<<< HEAD
+=======
+    width: 92%;
+>>>>>>> 2c3a650d4a2c8ee9baf2829c290395fbdc8a1bec
     background-color: #263238;
 }
 
