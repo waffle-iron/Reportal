@@ -1,0 +1,460 @@
+﻿
+@{
+    ViewBag.Title = "Colocaciones - La Araucana";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+}
+@section script{
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <!-- Additional files for the Highslide popup effect -->
+    <script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
+    <script src="https://www.highcharts.com/samples/static/highslide.config.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
+    <script src="~/getstart/plugins/gauge-js/gauge.min.js"></script>
+    <script type="text/javascript">
+        Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
+            var n = this,
+            c = isNaN(decimals) ? 0 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
+            d = decimal_sep || ',', //if no decimal separator is passed we use the dot as default decimal separator (we MUST use a decimal separator)
+
+            /*
+            according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
+            the fastest way to check for not defined parameter is to use typeof value === 'undefined'
+            rather than doing value === undefined.
+            */
+            t = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep, //if you don't want to use a thousands separator you can pass empty string as thousands_sep value
+
+            sign = (n < 0) ? '-' : '',
+
+            //extracting the absolute value of the integer part of the number and converting to string
+            i = parseInt(n = Math.abs(n).toFixed(c)) + '',
+
+            j = ((j = i.length) > 3) ? j % 3 : 0;
+            var retorno = sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
+
+            return retorno;
+        }
+        $(function () {
+
+
+
+            /*PRUEBAS*/
+            /*Tasa*/
+            $.getJSON("http://localhost:8080/api/CredFinanciamentoTodo", function (respoonse) {
+
+                //console.log(respoonse);
+
+                $("#headFinanciamiento").append($("<tr class=\"primero\">"));
+                $("#headFinanciamiento > tr.primero").append($("<th>").attr("rowspan", "1").html("Tasa Promedio").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.Encabezado, function (i, e) {
+                    $("#headFinanciamiento > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                $("#headFinanciamiento").append($("<tr class=\"segundo\">"));
+                $.each(respoonse.Encabezado, function (i, e) {
+                    //$("#headFinanciamiento > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                  //  $("#headFinanciamiento > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                //
+                $("#bodyFinanciamiento").append($("<tr class=\"trabajador\">"));
+                $("#bodyFinanciamiento > tr.trabajador").append($("<th>").html("Trabajador").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.Trabajador, function (i, e) {
+                    $("#bodyFinanciamiento > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
+                   // $("#bodyFinanciamiento > tr.trabajador").append($("<td>").html(e.Spred.toMoney(2)));
+                });
+
+                $("#bodyFinanciamiento").append($("<tr class=\"pensionado\">"));
+                $("#bodyFinanciamiento > tr.pensionado").append($("<th>").html("Pensionado").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.Pensionado, function (i, e) {
+                    $("#bodyFinanciamiento > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
+                  //  $("#bodyFinanciamiento > tr.pensionado").append($("<td>").html(e.Spred.toMoney(2)));
+                });
+
+                $("#bodyFinanciamiento").append($("<tr class=\"total\">"));
+                $("#bodyFinanciamiento > tr.total").append($("<th>").html("Total").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF").css("font-weight", "bold"));
+                $.each(respoonse.Total, function (i, e) {
+                    $("#bodyFinanciamiento > tr.total").append($("<td>").html(e.Tasa.toMoney(2)).css("font-weight", "bold"));
+                    //$("#bodyFinanciamiento > tr.total").append($("<td>").html(e.Spred.toMoney(2)).css("font-weight", "bold"));
+                });
+
+
+
+            });
+
+            /*Spread*/
+            $.getJSON("http://localhost:8080/api/CredFinanciamentoTodo", function (respoonse) {
+
+                //console.log(respoonse);
+
+                $("#headFinanciamientoSpread").append($("<tr class=\"primero\">"));
+                $("#headFinanciamientoSpread > tr.primero").append($("<th>").attr("rowspan", "1").html("Spread").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.Encabezado, function (i, e) {
+                    $("#headFinanciamientoSpread > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                $("#headFinanciamientoSpread").append($("<tr class=\"segundo\">"));
+                $.each(respoonse.Encabezado, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                //
+                $("#bodyFinanciamientoSpread").append($("<tr class=\"trabajador\">"));
+                $("#bodyFinanciamientoSpread > tr.trabajador").append($("<th>").html("Trabajador").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.Trabajador, function (i, e) {
+                   // $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
+                     $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Spred.toMoney(2)));
+                });
+
+                $("#bodyFinanciamientoSpread").append($("<tr class=\"pensionado\">"));
+                $("#bodyFinanciamientoSpread > tr.pensionado").append($("<th>").html("Pensionado").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.Pensionado, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Spred.toMoney(2)));
+                });
+
+                $("#bodyFinanciamientoSpread").append($("<tr class=\"total\">"));
+                $("#bodyFinanciamientoSpread > tr.total").append($("<th>").html("Total").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF").css("font-weight", "bold"));
+                $.each(respoonse.Total, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.total").append($("<td>").html(e.Tasa.toMoney(2)).css("font-weight", "bold"));
+                    $("#bodyFinanciamientoSpread > tr.total").append($("<td>").html(e.Spred.toMoney(2)).css("font-weight", "bold"));
+                });
+
+
+
+            });
+
+
+            $("#slPeriodo").on("change", function () {
+                $("#LinealPensionado").html("");
+                $("#LinealSpread").html("");
+                
+                /*Tasa*/
+                $.getJSON("http://localhost:8080/api/CreditoFinanciamento/" + $("#slPeriodo").val(), function (data) {
+
+                    var dias = new Array();
+                    var tasaPromedio1 = new Array();
+                    var tasaPromedioT = new Array();
+                    var tasaPromedioTotal = new Array();
+
+
+                    $.each(data.Encabezado, function (i, e) {
+                        dias[i] = e.Mes;
+                    });
+
+                    $.each(data.Pensionado, function (i, e) {
+                        tasaPromedio1[i] = e.Tasa;
+                    });
+
+                    $.each(data.Trabajador, function (i, e) {
+                        tasaPromedioT[i] = e.Tasa;
+                    });
+                    $.each(data.Total, function (i, e) {
+                        tasaPromedioTotal[i] = e.Tasa;
+                    });
+
+                    $('#LinealPensionado').highcharts({
+                        colors: ['#42a5f5', '#8bc34a', '#ffa726'],
+                        title: {
+                            text: '',
+                            x: -20 //center
+                        },
+                        subtitle: {
+                            text: '',
+                            x: -20
+                        },
+                        xAxis: {
+                            categories: dias
+                        },
+                        yAxis: [{ // Primary yAxis
+                            labels: {
+                                format: '{value}',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            },
+                            title: {
+                                text: '%',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            }
+
+                        }],
+                        tooltip: {
+                            pointFormat: "{point.y:.2f}"
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        exporting: {
+                            enabled: false
+                        },
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'left',
+                            verticalAlign: 'top',
+                            borderWidth: 0
+                        },
+
+                        series: [{
+                            
+                            name: 'Pensionado',
+                            data: tasaPromedio1,
+                            tooltip: {
+                                pointFormat: 'Tasa: <b>{point.y:.2f}%</b><br/>',
+                                shared: true
+
+                            },
+                        },{
+                            name: 'Trabajador',
+                            data: tasaPromedioT,
+                            tooltip: {
+                                pointFormat: 'Tasa: <b>{point.y:.2f}%</b><br/>',
+                                shared: true
+
+                            },
+                        },{
+                            name: 'Total',
+                            data: tasaPromedioTotal,
+                            tooltip: {
+                                pointFormat: 'Tasa: <b>{point.y:.2f}%</b><br/>',
+                                shared: true
+
+                            },
+                        
+                        }]
+
+
+
+                    });
+                });
+
+                /*Spread*/
+                $.getJSON("http://localhost:8080/api/CreditoFinanciamento/" + $("#slPeriodo").val(), function (data) {
+
+                    var diasSpread = new Array();
+                    var SpreadPensionado = new Array();
+                    var SpreadTrabajador = new Array();
+                    var SpreadTotal = new Array();
+
+
+                    $.each(data.Encabezado, function (i, e) {
+                        diasSpread[i] = e.Mes;
+                    });
+
+                    $.each(data.Pensionado, function (i, e) {
+                        SpreadPensionado[i] = e.Spred;
+                    });
+
+                    $.each(data.Trabajador, function (i, e) {
+                        SpreadTrabajador[i] = e.Spred;
+                    });
+                    $.each(data.Total, function (i, e) {
+                        SpreadTotal[i] = e.Spred;
+                    });
+
+                    $('#LinealSpread').highcharts({
+                        colors: ['#42a5f5', '#8bc34a', '#ffa726'],
+                        title: {
+                            text: '',
+                            x: -20 //center
+                        },
+                        subtitle: {
+                            text: '',
+                            x: -20
+                        },
+                        xAxis: {
+                            categories: diasSpread
+                        },
+                        yAxis: [{ // Primary yAxis
+                            labels: {
+                                format: '{value}',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            },
+                            title: {
+                                text: '%',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            }
+
+                        }],
+                        tooltip: {
+                            pointFormat: "{point.y:.2f}"
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        exporting: {
+                            enabled: false
+                        },
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'left',
+                            verticalAlign: 'top',
+                            borderWidth: 0
+                        },
+
+                        series: [{
+
+                            name: 'Pensionado',
+                            data: SpreadPensionado,
+                            tooltip: {
+                                pointFormat: 'Spread: <b>{point.y:.2f}%</b><br/>',
+                                shared: true
+
+                            },
+                        }, {
+                            name: 'Trabajador',
+                            data: SpreadTrabajador,
+                            tooltip: {
+                                pointFormat: 'Spread: <b>{point.y:.2f}%</b><br/>',
+                                shared: true
+
+                            },
+                        }, {
+                            name: 'Total',
+                            data: SpreadTotal,
+                            tooltip: {
+                                pointFormat: 'Spread: <b>{point.y:.2f}%</b><br/>',
+                                shared: true
+
+                            },
+
+                        }]
+
+
+
+                    });
+                });
+
+                $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
+                    $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
+                });
+                $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
+                    $("#Leyend_FechaActualizacion2").html(respoonse.ActualizacionLeyenda);
+                });
+            });
+            $("#slPeriodo").trigger("change");
+
+        });
+    </script>
+}
+<div class="tab-base">
+
+    <!--Nav Tabs-->
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#pestanaTasa">Tasa</a> @*<span class="badge badge-purple">27</span>*@
+        </li>
+        <li>
+            <a data-toggle="tab" href="#pestanaSpread">Spread</a>
+        </li>
+        @* <li>
+                <a data-toggle="tab" href="#demo-lft-tab-3">Setting</a>
+            </li>*@
+    </ul>
+
+    <!--Tabs Content-->
+    <div class="tab-content">
+        
+        <div id="pestanaTasa" class="tab-pane fade active in">
+
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel">
+                        <span style="float:right; margin-left:auto;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
+                        Seleccione Periodo:
+                        <select id="slPeriodo">
+                            @* <option value="201611">Noviembre 2016</option>*@
+                            <option value="201611">Noviembre 2016</option>
+                            <option value="201610">Octubre 2016</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="panel">
+
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Evolución Mensual</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+
+
+                                <table class="table table-striped" align="center" style="margin: 0px auto;  width: 50%;  font-size: 11px;">
+                                    <thead id="headFinanciamiento"></thead>
+                                    <tbody id="bodyFinanciamiento"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Evolución Diaria</h1>
+                            </div>
+                            <div id="LinealPensionado" style="height:212px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="pestanaSpread"  class="tab-pane fade">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel">
+                        <span style="float:right; margin-left:auto;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion2">Martes, 18 de Octubre de 2016</span></span>
+                        Seleccione Periodo:
+                        <select id="slPeriodo">
+                            @* <option value="201611">Noviembre 2016</option>*@
+                            <option value="201611">Noviembre 2016</option>
+                            <option value="201610">Octubre 2016</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="panel">
+
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Evolución Mensual</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+
+
+                                <table class="table table-striped" align="center" style="margin: 0px auto;  width: 50%;  font-size: 11px;">
+                                    <thead id="headFinanciamientoSpread"></thead>
+                                    <tbody id="bodyFinanciamientoSpread"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Evolución Diaria</h1>
+                            </div>
+                            <div id="LinealSpread" style="height:212px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <div id="demo-lft-tab-3" class="tab-pane fade">
+            <p class="text-main text-semibold">Third Tab Content</p>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        </div>
+    </div>
+</div>
+
+

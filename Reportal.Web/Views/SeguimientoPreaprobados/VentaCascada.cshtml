@@ -1,0 +1,219 @@
+﻿
+@{
+
+    ViewBag.Title = "Seguimiento Preaprobados";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+    ViewBag.ActiveMenu = "Seguimiento Preaprobados";
+    ViewBag.ActiveMenuRoot = "Campañas";
+}
+
+
+
+@section script{
+
+
+    <script src="~/assets/js/jquery.core.js"></script>
+    <script src="~/assets/js/jquery.app.js"></script>
+    <script src="~/assets/js/jspdf.min.js"></script>
+
+
+
+
+    <script type="text/javascript">
+
+
+        Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
+            var n = this,
+            c = isNaN(decimals) ? 0 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
+            d = decimal_sep || ',', //if no decimal separator is passed we use the dot as default decimal separator (we MUST use a decimal separator)
+
+            /*
+            according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
+            the fastest way to check for not defined parameter is to use typeof value === 'undefined'
+            rather than doing value === undefined.
+            */
+            t = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep, //if you don't want to use a thousands separator you can pass empty string as thousands_sep value
+
+            sign = (n < 0) ? '-' : '',
+
+            //extracting the absolute value of the integer part of the number and converting to string
+            i = parseInt(n = Math.abs(n).toFixed(c)) + '',
+
+            j = ((j = i.length) > 3) ? j % 3 : 0;
+            var retorno = sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
+
+            return retorno;
+        }
+
+        $(function () {
+
+            $("#slPeriodo").on("change", function () { 
+
+                $("#ft_preaprobadosGlobal").html("");
+                $("#bdy_preaprobadosGlobal").html("");
+                $("#ft_preaprobadosSegmento").html("");
+                $("#bdy_preaprobadosSegmento").html("");
+                $("#bdy_preaprobadosNominas").html("");
+                $("#bdy_preaprobadosNominasPropen").html("");
+                $("#bdy_preaprobadosCanales").html("");
+                $("#bdy_preaprobadosCanalesPropen").html("");
+
+
+                $.getJSON("http://localhost:8080/api/SeguimientoVentaCascada?Periodo=" + $("#slPeriodo").val(), function (respoonse) {
+                    var cSegmento = 0, xSegmento='';
+                    $.each(respoonse, function (i, o) {
+
+                        if (o.Segmento != xSegmento)
+                        {
+                            cSegmento = 0;
+                            $("#bdy_preaprobadosGlobal").append(
+                                $("<tr>")
+                                    .append($("<td class=\"" + o.Segmento + "\">").html(o.Segmento).css("text-align", "center"))
+                                    .append($("<td>").html(o.Filtro).css("text-align", "left"))
+                                    .append($("<td>").html(o.N.toMoney(0)).css("text-align", "right"))
+                                    .append($("<td>").html(o.Oferta.toMoney(1)).css("text-align", "right"))
+                                    .append($("<td>").html(o.Compran.toMoney(1)).css("text-align", "right"))
+                                    .append($("<td>").html(o.Neto.toMoney(1)).css("text-align", "right"))
+                                    .append($("<td>").html(o.Bruto.toMoney(1)).css("text-align", "right"))
+                                    .append($("<td>").html(o.WR.toMoney(1) + "%").css("text-align", "right").css("font-weight", "bold"))
+                            );
+                        }
+                        else
+                        {
+                            cSegmento++;
+                            $("#bdy_preaprobadosGlobal").append(
+                               $("<tr>")
+                                   //.append($("<td class=\"" + o.Segmento + "\">").html(o.Segmento).css("text-align", "center"))
+                                   .append($("<td>").html(o.Filtro).css("text-align", "left"))
+                                   .append($("<td>").html(o.N.toMoney(0)).css("text-align", "right"))
+                                   .append($("<td>").html(o.Oferta.toMoney(1)).css("text-align", "right"))
+                                   .append($("<td>").html(o.Compran.toMoney(1)).css("text-align", "right"))
+                                   .append($("<td>").html(o.Neto.toMoney(1)).css("text-align", "right"))
+                                   .append($("<td>").html(o.Bruto.toMoney(1)).css("text-align", "right"))
+                                   .append($("<td>").html(o.WR.toMoney(1) + "%").css("text-align", "right").css("font-weight", "bold"))
+                           );
+                        }
+
+                        xSegmento = o.Segmento;
+                        $("." + o.Segmento).attr("rowspan", cSegmento + 1).css("vertical-align", "middle")
+                    });
+                });
+            });
+
+            $.getJSON("http://localhost:8080/api/FechaActualizacion/1/", function (respoonse) {
+                $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
+            });
+
+            $("#slPeriodo").trigger("change");
+
+
+
+        });
+
+    </script>
+}
+
+
+@section css{
+
+    <style type="text/css">
+        .head-tabla { /*#ebeff2*/
+            border: 2px solid #ebeff2;
+        }
+
+        .table-charlee > tbody > tr > td,
+        .table-charlee > tbody > tr > th,
+        .table-charlee > tfoot > tr > td,
+        .table-charlee > tfoot > tr > th,
+        .table-charlee > thead > tr > td,
+        .table-charlee > thead > tr > th {
+            border-top: 1px solid #ddd;
+            /*border-right: 2px solid #ffffff;*/
+            line-height: 1.42857;
+            padding: 3px !important;
+            vertical-align: top;
+            font-size: 12px;
+        }
+    </style>
+
+
+}
+
+<div class="container">
+
+
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="page-title">Universo Preaprobados</h4>
+            <ol class="breadcrumb">
+                <li><a href="#">Portal de Informacion</a></li>
+                <li class="active">Universo Preaprobados</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="col-lg-12">
+
+        <div class="card-box">
+            Seleccione Periodo:
+            <select id="slPeriodo">
+                <option value="201610">Octubre 2016</option>
+                <option value="201609">Septiembre 2016</option>
+            </select>
+            <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
+        </div>
+
+
+
+
+                <div class="card-box">
+                    <h3 class="m-t-0 header-title"><b>Seguimiento exclusiones cascadas</b></h3>
+                    <div class="p-20">
+                        <div>
+                            <table class="table table-charlee table-responsive table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th colspan="3" style="text-align:center; background: #0965ae none repeat scroll 0 0; color:#fff1f1;">Oferta</th>
+                                        <th colspan="5" style="text-align:center; background: #0965ae none repeat scroll 0 0; color:#fff1f1;">Resultado</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Segmento</th>
+                                        <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtros</th>
+                                        <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">N Exclusiones</th>
+                                        <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Oferta</th>
+                                        <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Compran</th>
+                                        <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Neto MM$</th>
+                                        <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Bruto MM$</th>
+                                        <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">#WR</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bdy_preaprobadosGlobal"></tbody>
+                                <tfoot id="ft_preaprobadosGlobal"></tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+               
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+</div>

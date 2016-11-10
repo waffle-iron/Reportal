@@ -1,0 +1,319 @@
+﻿
+@{
+    ViewBag.Title = "Colocaciones";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+    ViewBag.ActiveMenu = "colocación";
+    ViewBag.ActiveMenuRoot = "colocaciones";
+}
+
+
+
+@section css{
+
+    <link href="~/assets/plugins/nvd3/build/nv.d3.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/assets/plugins/morris/morris.css">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/core.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/components.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/pages.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+}
+@section script{
+    <script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/assets/js/jquery.core.js"></script>
+    <script src="~/assets/js/jquery.app.js"></script>
+    <script src="~/cdn.datatables.net/plug-ins/1.10.12/sorting/formatted-numbers.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+
+    <script src="assets/js/modernizr.min.js"></script>
+
+
+}
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="page-title">Colocaciones Acumuladas</h4>
+            <ol class="breadcrumb">
+                <li><a href="/Reportal">Portal de Información</a></li>
+                <li><a>Colocación</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="mini-stat clearfix card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Colocaciones Brutas Acumulado</h4>
+                <span class="mini-stat-icon bg-info"><i class="ion-social-usd text-white"></i></span>
+                <div class="text-right">
+                    <h4 class="text-dark">
+                        <b class="counter" id="totalAfiliadosCamp">1.178.000/130.800</b>
+                    </h4>
+                    <p class="text-muted">Real vs Presupuesto</p>
+                </div>
+                <div class="tiles-progress">
+                    <div class="m-t-20">
+                        <h5 class="text-uppercase">Real <span class="pull-right">80%</span></h5>
+                        <div class="progress progress-sm m-0">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                <span class="sr-only">80% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mini-stat clearfix card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Colocaciones Brutas Agosto</h4>
+                <span class="mini-stat-icon bg-info"><i class="ion-social-usd text-white"></i></span>
+                <div class="text-right">
+                    <h4 class="text-dark">
+                        <b class="counter" id="totalAfiliadosCamp">55.890/61.256</b>
+                    </h4>
+                    <p class="text-muted">Real vs Presupuesto</p>
+                </div>
+                <div class="tiles-progress">
+                    <div class="m-t-20">
+                        <h5 class="text-uppercase">Real <span class="pull-right">80%</span></h5>
+                        <div class="progress progress-sm m-0">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                <span class="sr-only">80% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-8">
+            <div class="card-box">
+                <h4 class="m-t-10 header-title"><b>Evolución Colocación Bruta</b></h4>
+                <div class="panel-collapse collapse in" id="portlet4">
+                    <div class="portlet-body">
+                        <div class="text-center">
+                            <ul class="list-inline chart-detail-list">
+                                <li>
+                                    <h5><i style="color: #5fbeaa;" class="fa fa-circle m-r-5"></i>Real</h5>
+                                </li>
+                                <li>
+                                    <h5><i style="color: #5d9cec;" class="fa fa-circle m-r-5"></i>Presupuesto</h5>
+                                </li>
+                            </ul>
+                        </div>
+                        <div style="height: 300px; width:600px; position: relative;" id="morris-line-example">
+                            <svg height="300" version="1.1" width="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: -0.25px;">
+                                <desc>Created with Raphaël 2.1.2</desc>
+                                <defs />
+                                <text style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" x="36.5" y="260" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" font-weight="normal"><tspan dy="4.5">0</tspan></text>
+                                <path style="" fill="none" stroke="#eef0f2" d="M49,260H468" stroke-width="0.5" />
+                                <text style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" x="36.5" y="201.25" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" font-weight="normal"><tspan dy="4.5">25</tspan></text>
+                                <path style="" fill="none" stroke="#eef0f2" d="M49,201.25H468" stroke-width="0.5" />
+                                <text style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" x="36.5" y="142.5" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" font-weight="normal"><tspan dy="4.5">50</tspan></text>
+                                <path style="" fill="none" stroke="#eef0f2" d="M49,142.5H468" stroke-width="0.5" />
+                                <text style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" x="36.5" y="83.75" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" font-weight="normal"><tspan dy="4.5">75</tspan></text>
+                                <path style="" fill="none" stroke="#eef0f2" d="M49,83.75H468" stroke-width="0.5" />
+                                <text style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" x="36.5" y="25" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" font-weight="normal"><tspan dy="4.5">100</tspan></text>
+                                <path style="" fill="none" stroke="#eef0f2" d="M49,25H468" stroke-width="0.5" />
+                                <text style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" x="468" y="272.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"><tspan dy="4.5">Diciembre</tspan></text>
+                                <text style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" x="384.2458926615553" y="272.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"><tspan dy="4.5">Noviembre</tspan></text>
+                                <text style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" x="300.4917853231106" y="272.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"><tspan dy="4.5">Octubre</tspan></text>
+                                <text style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" x="216.50821467688937" y="272.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"><tspan dy="4.5">Septiembre</tspan></text>
+                                <text style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" x="132.75410733844467" y="272.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"><tspan dy="4.5">Agosto</tspan></text>
+                                <text style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" x="49" y="272.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"><tspan dy="4.5">Julio</tspan></text>
+
+                                <path style="" fill="none" stroke="#5fbeaa" d="M49,213C69.93852683461117,201.25,111.8155805038335,179.21875,132.75410733844467,166C153.69263417305584,152.78125,195.5696878422782,107.25,216.50821467688937,107.25C237.50410733844467,107.25,279.4958926615553,166,300.4917853231106,166C321.4303121577218,166,363.3073658269441,121.9375,384.2458926615553,107.25C405.18441949616647,92.5625,447.0614731653888,63.1875,468,48.5" stroke-width="3" />
+                                <path style="" fill="none" stroke="#5d9cec" d="M49,189.5C69.93852683461117,177.75,111.8155805038335,155.71875,132.75410733844467,142.5C153.69263417305584,129.28125,195.5696878422782,83.75,216.50821467688937,83.75C237.50410733844467,83.75,279.4958926615553,142.5,300.4917853231106,142.5C321.4303121577218,142.5,363.3073658269441,98.4375,384.2458926615553,83.75C405.18441949616647,69.0625,447.0614731653888,39.6875,468,25" stroke-width="3" />
+
+                                <circle cx="49" cy="213" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                                <circle cx="132.75410733844467" cy="166" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                                <circle cx="216.50821467688937" cy="107.25" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                                <circle cx="300.4917853231106" cy="166" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                                <circle cx="384.2458926615553" cy="107.25" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                                <circle cx="468" cy="48.5" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                                <circle cx="49" cy="189.5" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                                <circle cx="132.75410733844467" cy="142.5" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                                <circle cx="216.50821467688937" cy="83.75" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                                <circle cx="300.4917853231106" cy="142.5" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                                <circle cx="384.2458926615553" cy="83.75" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                                <circle cx="468" cy="25" r="4" fill="#ffffff" stroke="#999999" style="" stroke-width="1" />
+                            </svg><div class="morris-hover morris-default-style" style="left: 396px; top: 35px; display: none;">
+                                <div class="morris-hover-row-label">2015</div><div style="color: #36404a" class="morris-hover-point">
+                                    Series A:
+                                    100
+                                </div><div style="color: #5fbeaa" class="morris-hover-point">
+                                    Series B:
+                                    90
+                                </div><div style="color: #5d9cec" class="morris-hover-point">
+                                    Series C:
+                                    65
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="mini-stat clearfix card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Colocaciones Brutas Privados</h4>
+                <span class="mini-stat-icon bg-pink"><i class="ion-android-contacts text-white"></i></span>
+                <div class="text-right">
+                    <h4 class="text-dark">
+                        <b class="counter" id="totalAfiliadosCamp">1.178.000/130.800</b>
+                    </h4>
+                    <p class="text-muted">Real vs Presupuesto</p>
+                </div>
+                <div class="tiles-progress">
+                    <div class="m-t-20">
+                        <h5 class="text-uppercase">Real <span class="pull-right">80%</span></h5>
+                        <div class="progress progress-sm m-0">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                <span class="sr-only">80% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="mini-stat clearfix card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Colocaciones Brutas Públicos</h4>
+                <span class="mini-stat-icon bg-pink"><i class="ion-android-contacts text-white"></i></span>
+                <div class="text-right">
+                    <h4 class="text-dark">
+                        <b class="counter" id="totalAfiliadosCamp">1.178.000/130.800</b>
+                    </h4>
+                    <p class="text-muted">Real vs Presupuesto</p>
+                </div>
+                <div class="tiles-progress">
+                    <div class="m-t-20">
+                        <h5 class="text-uppercase">Real <span class="pull-right">80%</span></h5>
+                        <div class="progress progress-sm m-0">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                <span class="sr-only">80% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="mini-stat clearfix card-box">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Colocaciones Brutas Pensionados</h4>
+                <span class="mini-stat-icon bg-pink"><i class="ion-android-contacts text-white"></i></span>
+                <div class="text-right">
+                    <h4 class="text-dark">
+                        <b class="counter" id="totalAfiliadosCamp">1.178.000/130.800</b>
+                    </h4>
+                    <p class="text-muted">Real vs Presupuesto</p>
+                </div>
+                <div class="tiles-progress">
+                    <div class="m-t-20">
+                        <h5 class="text-uppercase">Real <span class="pull-right">80%</span></h5>
+                        <div class="progress progress-sm m-0">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                <span class="sr-only">80% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="portlet">
+                <!-- /primary heading -->
+                <div class="portlet-heading">
+                    <h3 class="portlet-title text-dark"> Colocaciones </h3>
+
+                </div>
+                <div id="portlet4" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <div class="text-center">
+                            <ul class="list-inline chart-detail-list">
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5" style="color: #36404a;"></i>Privado</h5>
+                                </li>
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5" style="color: #5fbeaa;"></i>Público</h5>
+                                </li>
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Pensionado</h5>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="morris-line-example" style="height: 300px; position: relative;">
+                            <svg style="overflow: hidden; position: relative; top: -0.25px;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="493" version="1.1" height="300">
+                                <desc>Created with Raphaël 2.1.2</desc>
+                                <defs></defs>
+                                <text font-weight="normal" fill="#888888" stroke="none" font-size="12px" font-family="sans-serif" text-anchor="end" y="260" x="36.5" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.5">0</tspan></text>
+                                <path stroke-width="0.5" d="M49,260H468" stroke="#eef0f2" fill="none" style=""></path>
+                                <text font-weight="normal" fill="#888888" stroke="none" font-size="12px" font-family="sans-serif" text-anchor="end" y="201.25" x="36.5" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.5">25</tspan></text>
+                                <path stroke-width="0.5" d="M49,201.25H468" stroke="#eef0f2" fill="none" style=""></path>
+                                <text font-weight="normal" fill="#888888" stroke="none" font-size="12px" font-family="sans-serif" text-anchor="end" y="142.5" x="36.5" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.5">50</tspan></text>
+                                <path stroke-width="0.5" d="M49,142.5H468" stroke="#eef0f2" fill="none" style=""></path>
+                                <text font-weight="normal" fill="#888888" stroke="none" font-size="12px" font-family="sans-serif" text-anchor="end" y="83.75" x="36.5" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.5">75</tspan></text>
+                                <path stroke-width="0.5" d="M49,83.75H468" stroke="#eef0f2" fill="none" style=""></path>
+                                <text font-weight="normal" fill="#888888" stroke="none" font-size="12px" font-family="sans-serif" text-anchor="end" y="25" x="36.5" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.5">100</tspan></text>
+                                <path stroke-width="0.5" d="M49,25H468" stroke="#eef0f2" fill="none" style=""></path>
+                                <text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" fill="#888888" stroke="none" font-size="12px" font-family="sans-serif" text-anchor="middle" y="272.5" x="468" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.5">2015</tspan></text>
+                                <text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" fill="#888888" stroke="none" font-size="12px" font-family="sans-serif" text-anchor="middle" y="272.5" x="384.2458926615553" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.5">2014</tspan></text>
+                                <text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" fill="#888888" stroke="none" font-size="12px" font-family="sans-serif" text-anchor="middle" y="272.5" x="300.4917853231106" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.5">2013</tspan></text>
+                                <text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" fill="#888888" stroke="none" font-size="12px" font-family="sans-serif" text-anchor="middle" y="272.5" x="216.50821467688937" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.5">2012</tspan></text>
+                                <text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" fill="#888888" stroke="none" font-size="12px" font-family="sans-serif" text-anchor="middle" y="272.5" x="132.75410733844467" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.5">2011</tspan></text>
+                                <text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" fill="#888888" stroke="none" font-size="12px" font-family="sans-serif" text-anchor="middle" y="272.5" x="49" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.5">2010</tspan></text>
+                                <path stroke-width="3" d="M49,236.5C69.93852683461117,224.75,111.8155805038335,201.25,132.75410733844467,189.5C153.69263417305584,177.75,195.5696878422782,140.1532147742818,216.50821467688937,142.5C237.50410733844467,144.8532147742818,279.4958926615553,208.3,300.4917853231106,208.3C321.4303121577218,208.3,363.3073658269441,155.13125,384.2458926615553,142.5C405.18441949616647,129.86875,447.0614731653888,116.0625,468,107.25" stroke="#5d9cec" fill="none" style=""></path>
+                                <path stroke-width="3" d="M49,213C69.93852683461117,201.25,111.8155805038335,179.21875,132.75410733844467,166C153.69263417305584,152.78125,195.5696878422782,107.25,216.50821467688937,107.25C237.50410733844467,107.25,279.4958926615553,166,300.4917853231106,166C321.4303121577218,166,363.3073658269441,121.9375,384.2458926615553,107.25C405.18441949616647,92.5625,447.0614731653888,63.1875,468,48.5" stroke="#5fbeaa" fill="none" style=""></path>
+                                <path stroke-width="3" d="M49,189.5C69.93852683461117,177.75,111.8155805038335,155.71875,132.75410733844467,142.5C153.69263417305584,129.28125,195.5696878422782,83.75,216.50821467688937,83.75C237.50410733844467,83.75,279.4958926615553,142.5,300.4917853231106,142.5C321.4303121577218,142.5,363.3073658269441,98.4375,384.2458926615553,83.75C405.18441949616647,69.0625,447.0614731653888,39.6875,468,25" stroke="#36404a" fill="none" style=""></path>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="236.5" cx="49"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="189.5" cx="132.75410733844467"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="142.5" cx="216.50821467688937"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="208.3" cx="300.4917853231106"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="142.5" cx="384.2458926615553"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="107.25" cx="468"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="213" cx="49"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="166" cx="132.75410733844467"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="107.25" cx="216.50821467688937"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="166" cx="300.4917853231106"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="107.25" cx="384.2458926615553"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="48.5" cx="468"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="189.5" cx="49"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="142.5" cx="132.75410733844467"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="83.75" cx="216.50821467688937"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="142.5" cx="300.4917853231106"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="83.75" cx="384.2458926615553"></circle>
+                                <circle stroke-width="1" style="" stroke="#999999" fill="#ffffff" r="4" cy="25" cx="468"></circle>
+                            </svg><div style="left: 86.7541px; top: 34px; display: none;" class="morris-hover morris-default-style">
+                                <div class="morris-hover-row-label">2011</div><div class="morris-hover-point" style="color: #36404a">
+                                    Series A:
+                                    50
+                                </div><div class="morris-hover-point" style="color: #5fbeaa">
+                                    Series B:
+                                    40
+                                </div><div class="morris-hover-point" style="color: #5d9cec">
+                                    Series C:
+                                    30
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Portlet -->
+        </div>
+    </div>
+
+</div>

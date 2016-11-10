@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "MapaEmpresas";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+    ViewBag.ActiveMenu = "mapaempresas";
+    ViewBag.ActiveMenuRoot = "empresas";
+}
+@section script{
+    <script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/assets/js/jquery.core.js"></script>
+    <script src="~/assets/js/jquery.app.js"></script>
+    <script src="~/cdn.datatables.net/plug-ins/1.10.12/sorting/formatted-numbers.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+   
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.getJSON("http://localhost:8080/api/Empresa", function (data) {
+                // $("#idfechaproceso").text(data.Fecha_ProcesoEmpresa);
+                $.each(data, function (i, obj) {
+                    if (i == 1) {
+                        $("#idfechaproceso").html(obj.Fecha_ProcesoEmpresa);
+                    }
+                })
+            });
+
+
+            $('#datatable').dataTable({
+                ajax: {
+                    url: "http://localhost:8080/api/Empresa",
+                    dataSrc: ''
+                },
+                dom: 'Bfrtip',
+                buttons: [
+               'excelHtml5'
+                ],
+                "bSort": false,
+                aaSorting: [[]],
+                order: [],
+                columns: [
+                    { data: "Rut_DV" },
+                    {
+
+                        data: "NombreEmpresa",
+                        fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                            $(nTd).html("<a href='/Reportal/Empresas/DetalleMapaEmpresa/" + oData.Id + "/'>" + oData.NombreEmpresa + "</a>");
+                        }
+                    },
+                    { data: "HoldingEmpresa" },
+                    { data: "TipoEntidadEmpresa" },
+                    { data: "ClasificacionComercial" },
+                    { data: "TotalAfiliados" },
+                    { data: "Creditos_Vigentes" },
+                    { data: "penetracion" },
+                    { data: "Credito_Saldo_Vigente" },
+                    { data: "Credito_Mes" },
+                    { data: "Credito_Mes_Saldo" },
+
+                ],
+            });
+
+            //a.dt-button.buttons-excel.buttons-html5 
+
+            $(".dt-button").addClass("btn btn-success waves-effect waves-light btn-sm");
+            //console.log($(".dt-button"));
+        });
+    </script>
+}
+@section css{
+    <link href="~/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="container">
+    <div class="col-sm-12" align="right">
+        <b>Actualización:</b><b id="idfechaproceso">
+        </b>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="page-title">Listado de Empresa</h4>
+            <ol class="breadcrumb">
+                <li><a href="/Reportal">Portal de Información</a></li>
+                <li><a>Mapa Empresa</a></li>
+            </ol>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card-box table-responsive">
+
+                <table id="datatable" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Rut</th>
+                            <th>Nombre</th>
+                            <th>Holding </th>
+                            <th>Tipo Entidad</th>
+                            <th>Clasif. Comercial</th>
+                            <th>N° Afiliados</th>
+                            <th>N° Afiliados Credito</th>
+                            <th>% Afiliados Credito</th>
+                            <th>Saldo Vigente MM$</th>
+                            <th>N° Credito Mes</th>
+                            <th>Vta Credito Mes MM$</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> <!-- container -->
