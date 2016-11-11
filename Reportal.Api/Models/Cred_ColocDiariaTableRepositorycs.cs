@@ -14,5 +14,15 @@ namespace Reportal.Api.Models
             return Cred_ColocDiariaTableDataAccess.ListarCred_ColocDiariaTable(Periodo);
         }
 
+        public Cred_ColocDiariaTable OIbtenerDashboardVenta()
+        {
+            return Cred_ColocDiariaTableDataAccess.Obtener_DashboardVenta();
+        }
+        public Cred_ColocDashboard OIbtenerDashboardCumplimiento()
+        {
+            return Cred_ColocDiariaTableDataAccess.Obtener_DashboardCumplimiento();
+        }
+
+
     }
 }

@@ -13,5 +13,16 @@ namespace Reportal.Api.Models
         {
             return CreditoColoc_DiariaDataAccess.Listar_CredColocDiaria(periodo);
         }
+
+        public CreditoColoc_Diaria OIbtenerDashboard()
+        {
+            return CreditoColoc_DiariaDataAccess.Obtener_Dashboard();
+        }
+        public CreditoColoc_Diaria OIbtenerDashboardDiaAnt()
+        {
+            return CreditoColoc_DiariaDataAccess.Obtener_DashboardDiaAnt();
+        }
+
+     
     }
 }
