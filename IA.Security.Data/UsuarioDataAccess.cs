@@ -40,10 +40,10 @@ namespace IA.Security.Data
         {
             return new Usuario
             {
-                IdUsuario = row["IdUsuario"] != DBNull.Value ? row["IdUsuario"].ToString() : string.Empty,
-                Nombres = row["IdUsuario"] != DBNull.Value ? row["IdUsuario"].ToString() : string.Empty,
-                ClaveAcceso = row["IdUsuario"] != DBNull.Value ? row["IdUsuario"].ToString() : string.Empty,
-                Estado = row["IdUsuario"] != DBNull.Value ? row["IdUsuario"].ToString() : string.Empty,
+                IdUsuario = row["usr_id"] != DBNull.Value ? row["usr_id"].ToString() : string.Empty,
+                Nombres = row["usr_nombres"] != DBNull.Value ? row["usr_nombres"].ToString() : string.Empty,
+                ClaveAcceso = row["usr_clave"] != DBNull.Value ? row["usr_clave"].ToString() : string.Empty,
+                Estado = row["usr_estado"] != DBNull.Value ? row["usr_estado"].ToString() : string.Empty,
             };
         }
     }
