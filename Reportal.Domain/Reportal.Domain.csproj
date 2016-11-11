@@ -68,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SegPreaprobadosFull.cs" />
     <Compile Include="SegPreaprobadosGlobal.cs" />
+    <Compile Include="SeguimientoVentaCascadaEntity.cs" />
     <Compile Include="SeguroCesantia.cs" />
     <Compile Include="Reprogramaciones.cs" />
     <Compile Include="ResumenGlobalLicencia.cs" />

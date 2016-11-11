@@ -13,5 +13,12 @@ namespace Reportal.Web.Controllers
         {
             return View();
         }
+
+        // GET: SeguimientoPreaprobados
+        public ActionResult VentaCascada()
+        {
+            return View();
+        }
+
     }
 }

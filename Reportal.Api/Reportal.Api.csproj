@@ -237,6 +237,7 @@
     <Compile Include="Controllers\SegPreaprobadosPorNominasPropController.cs" />
     <Compile Include="Controllers\SegPreaprobadosPorCanalesController.cs" />
     <Compile Include="Controllers\SegPreaprobadosPorSegmentoController.cs" />
+    <Compile Include="Controllers\SeguimientoVentaCascadaController.cs" />
     <Compile Include="Controllers\SeguroCesantia_TotalController.cs" />
     <Compile Include="Controllers\SeguroCesantia_TrabController.cs" />
     <Compile Include="Controllers\SeguroCesantiaController.cs" />

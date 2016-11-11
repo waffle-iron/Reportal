@@ -496,6 +496,7 @@
     <Content Include="Views\IndRiesgoCredito\GeneraPdf.cshtml" />
     <Content Include="Views\SeguimientoPreaprobados\Index.cshtml" />
     <Content Include="Views\Indicadores\Index.cshtml" />
+    <Content Include="Views\SeguimientoPreaprobados\VentaCascada.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
