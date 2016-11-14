@@ -4,10 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using IA.Security.Api.Filters;
+using IA.Security.Api.ActionFilters;
 
 namespace IA.Security.Api.Controllers
 {
-    [Authorize]
+    [AuthorizationRequired]
     public class ValuesController : ApiController
     {
         // GET api/values
