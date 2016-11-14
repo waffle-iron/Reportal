@@ -14,7 +14,7 @@ namespace IA.Security.Api.ActionFilters
         {
             //  Get API key provider
             var provider = new IA.Security.Api.Providers.TokenService();
-
+            //filterContext.ControllerContext.RequestContext.Url
             if (filterContext.Request.Headers.Contains(Token))
             {
                 var tokenValue = filterContext.Request.Headers.GetValues(Token).First();
