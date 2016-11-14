@@ -139,6 +139,15 @@
                     }]
                 });
             });
+
+            $.getJSON("http://localhost:8080/api/CreditoColoc_DashboardGrafico", function (data) {
+                console.log(data[0].Descripcion)
+                $("#numCredito").html(data[0].Bruta_Table.toMoney());
+                $("#tMax").html(data[2].Bruta_Table.toMoney());
+                $("#tMin").html(data[3].Bruta_Table.toMoney());
+                $("#tProm").html(data[4].Bruta_Table.toMoney());
+
+            });
           
         });
 </script>
@@ -164,16 +173,47 @@
                             <div class="col-lg-8">
                                 <div class="media">
                                     <div class="media-left">
-                                        <div class="media">
-                                            <p class="text-semibold text-main">Crédito</p>
-                                            <div class="media-left pad-no">
-                                                <span class="text-2x text-semibold text-nowrap text-main">
-                                                    <i class="demo-pli-"></i> 55
+                                        <div class="media ">
+                                            <p class="text-semibold text-lg-left">Crédito</p>
+                                            <div class="text-center">
+                                                <span class="text-lg" id="numCredito">
+                                                    0
                                                 </span>
                                             </div>
-                                            <div class="media-body">
-                                                <p class="mar-no">°C</p>
+                                         
+                                        </div>
+                                    </div>
+                                    <div class="media-left">
+                                       <div class="">
+                                            <p class="text-semibold text-lg-left">Ticket Máximo</p>
+                                        <div class="text-center">
+                                            <span class="text-lg" id="tMax">
+                                                0
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                    <div class="media-left">
+                                        <div class="media">
+                                            <p class="text-semibold text-lg-left">Ticket Min</p>
+                                            <div class="text-center">
+                                                <span class="text-lg" id="tMin">
+                                                    0
+                                                </span>
                                             </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="media-left">
+                                        <div class="media ">
+                                            <p class="text-semibold text-lg-left">Ticket Promedio</p>
+                                            <div class="text-center">
+                                                <span class="text-lg" id="tProm">
+                                                    0
+                                                </span>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

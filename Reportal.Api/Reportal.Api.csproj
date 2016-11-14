@@ -137,6 +137,7 @@
     <Folder Include="Views\CreditoColocAcumulada\" />
     <Folder Include="Views\CreditoColocDiaria_Prom\" />
     <Folder Include="Views\CreditoColoc_DashboardAnt\" />
+    <Folder Include="Views\CreditoColoc_DashboardGrafico\" />
     <Folder Include="Views\CreditoColoc_Dashboard\" />
     <Folder Include="Views\CreditoColoc_Diaria\" />
     <Folder Include="Views\CreditoFinanciamento\" />
@@ -185,6 +186,7 @@
     <Compile Include="Controllers\CastigosNetos_PensController.cs" />
     <Compile Include="Controllers\CastigosNetos_Trab_PorcController.cs" />
     <Compile Include="Controllers\CredColocDiariaPromController.cs" />
+    <Compile Include="Controllers\CredColocDiariaEnGraficoController.cs" />
     <Compile Include="Controllers\CredColocDiariaTableController.cs" />
     <Compile Include="Controllers\CredCumplimiento_BrutoController.cs" />
     <Compile Include="Controllers\CredFinanciamentoTodoController.cs" />
@@ -193,6 +195,7 @@
     <Compile Include="Controllers\CreditoColocDiaria_PromController.cs" />
     <Compile Include="Controllers\CreditoColoc_DashboardAntController.cs" />
     <Compile Include="Controllers\CreditoColoc_DashboardCumplimientoController.cs" />
+    <Compile Include="Controllers\CreditoColoc_DashboardGraficoController.cs" />
     <Compile Include="Controllers\CreditoColoc_DashboardVentaController.cs" />
     <Compile Include="Controllers\CreditoColoc_DashboardController.cs" />
     <Compile Include="Controllers\CreditoColoc_DiariaController.cs" />

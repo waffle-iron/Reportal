@@ -13,7 +13,6 @@ namespace Reportal.Api.Models
         {
             return Cred_ColocDiariaTableDataAccess.ListarCred_ColocDiariaTable(Periodo);
         }
-
         public Cred_ColocDiariaTable OIbtenerDashboardVenta()
         {
             return Cred_ColocDiariaTableDataAccess.Obtener_DashboardVenta();
@@ -22,7 +21,9 @@ namespace Reportal.Api.Models
         {
             return Cred_ColocDiariaTableDataAccess.Obtener_DashboardCumplimiento();
         }
-
-
+        public List<Cred_ColocDiariaTable> ListarEnGrafico()
+        {
+            return Cred_ColocDiariaTableDataAccess.ListarEnGrafico();
+        }
     }
 }

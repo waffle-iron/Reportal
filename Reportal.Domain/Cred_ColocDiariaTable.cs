@@ -12,7 +12,7 @@ namespace Reportal.Domain
         public string Descripcion { get; set; }
         public int Bruta_Table { get; set; }
         public int Neta_Table { get; set; }
-
+        public int Iitem { get; set; }
         public int Periodo { get; set; }
     }
 }
