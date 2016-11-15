@@ -17,9 +17,9 @@ namespace IA.Security.Data
             return DBHelper.InstanceSecurity.ObtenerColeccion("sp_SCA_ListarRecursos", ConstructorEntidad);
         }
 
-        public static List<Recurso> MenusDeUsuario(Usuario usuario)
+        public static List<Recurso> MenusDeUsuario(string Token)
         {
-            Parametro p = new Parametro("@IdUsuario", usuario.IdUsuario);
+            Parametro p = new Parametro("@AuthToken", Token);
             return DBHelper.InstanceSecurity.ObtenerColeccion("sp_SCA_ListarRecursosDeUsuario", p, ConstructorEntidad);
         }
         

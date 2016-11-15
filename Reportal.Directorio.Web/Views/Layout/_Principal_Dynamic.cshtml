@@ -16,14 +16,12 @@
     <link href="~/getstart/plugins/morris-js/morris.min.css" rel="stylesheet" />
     <link href="~/getstart/plugins/magic-check/css/magic-check.min.css" rel="stylesheet" />
     <link href="~/getstart/plugins/pace/pace.min.css" rel="stylesheet">
-
-    <script src="~/getstart/js.app/Utilities.js"></script>
     <script src="~/getstart/plugins/pace/pace.min.js"></script>
     <script src="~/getstart/js/jquery-2.2.4.min.js"></script>
+    <script src="~/getstart/js.app/Utilities.js"></script>
     <script src="~/getstart/js.app/App.Security.js"></script>
     <script src="~/getstart/js/bootstrap.min.js"></script>
     <script src="~/getstart/js/nifty.js"></script>
-
 
     <script type="text/javascript">
 
@@ -32,24 +30,15 @@
             var ud = {}
             if (JSON.parse(sessionStorage.getItem('userdata')) != null) {
                 ud = JSON.parse(sessionStorage.getItem('userdata'));
-                $(".username").html("Bienvenido: " + ud.name);
+                $("#username_view").html(ud.name);
             }
-
-
-            $(".SalidaPe").on("click", function () {
-                $.SecPostJSON(getSecurityApiHost() + "api/Auth/kill", function (response) {
-                    sessionStorage.clear();
-                    location.href = getAplicationHost() + "Acceso";
-                });
-            });
-
         });
 
         var resizefunc = [];
     </script>
 </head>
 <body>
-    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+    <div id="container" class="effect aside-float aside-bright mainnav-lg navbar-fixed footer-fixed">
         <header id="navbar">
             <div id="navbar-container" class="boxed">
                 <div class="navbar-header">
@@ -68,41 +57,6 @@
                             </a>
                         </li>
                     </ul>
-
-                    <ul class="nav navbar-top-links pull-right">
-                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                        <!--User dropdown-->
-                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                        <li id="dropdown-user" class="dropdown">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right" aria-expanded="false">
-                                <span class="pull-right">
-                                    <!--<img class="img-circle img-user media-object" src="img/profile-photos/1.png" alt="Profile Picture">-->
-                                    <i class="demo-pli-male ic-user"></i>
-                                </span>
-                                <div class="username hidden-xs">Info. Analitica</div>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
-                                <ul class="head-list bord-btm">
-                                    <li>
-                                        <a href="#">
-                                            <i class="demo-pli-information icon-lg icon-fw"></i> Ayuda en Línea
-                                        </a>
-                                    </li>
-                                </ul>
-                                <!-- Dropdown footer -->
-                                <div class="pad-all text-right">
-                                    <a href="#" class="btn btn-primary SalidaPe">
-                                        <i class="demo-pli-unlock"></i> Salir
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                        <!--End user dropdown-->
-                    </ul>
-
-
                 </div>
             </div>
         </header>
@@ -128,9 +82,15 @@
                     <div id="mainnav-menu-wrap">
                         <div class="nano">
                             <div class="nano-content">
+                                <!--Profile Widget-->
+                                <!--================================-->
+                                <div id="mainnav-profile" class="nano-content">
+                                    <p class="mnp-name demo-psi-male">
+                                        <strong id="username_view"></strong>
+                                    </p>
+                                </div>
                                 <ul id="mainnav-menu" class="list-group">
                                     <li class="list-header">Navegación</li>
-
                                 </ul>
 
                             </div>

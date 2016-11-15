@@ -7,10 +7,12 @@ using System.Web.Http;
 using Reportal.Domain;
 using Reportal.Data;
 using System.Web.Http.Cors;
+using Reportal.Api.ActionFilters;
 
 namespace Reportal.Api.Controllers
 {
     [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
+    [AuthorizationRequired]
     public class SegPreaprobadosPorNominasController : ApiController
     {
         // GET: api/SegPreaprobadosPorNominas/

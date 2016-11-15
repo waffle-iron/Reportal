@@ -18,9 +18,46 @@
 
 
 
-
-
-
+/*Funciones personalizadas 
+ *   IA.Security.Client
+ *  Creado por Carlos Pradenas @cpradenasp@laaraucana.cl 
+ * 
+ */
+function Recxve(arreglo, elmBase) {
+    var ContLi, Anch, Icon, Text, ContUl
+    $.each(arreglo, function (i, o) {
+        var Recurso = o.Url === '#' ? "#" : "/" + o.Url
+        ContLi = $("<li>").attr("id-menu", o.IdRecurso);
+        if (o.Tipo === "ENC" && o.IdRecursoPradre == 0) {
+            ContLi.addClass("active-sub");
+            Anch = $("<a>").attr("href", Recurso);
+            Text = $("<span>").addClass("menu-title").html(o.Nombre);
+            Icon = $("<i>").addClass(o.Icono);
+            Anch.append(Icon).append(Text).append($("<i>").addClass("arrow"));
+            ContLi.append(Anch);
+            if (o.Hijos.length > 0) {
+                ContUl = $("<ul>").addClass("collapse").attr("aria-expanded", "false").css("height", "0px");
+                ContLi.append(ContUl);
+                Recxve(o.Hijos, ContUl);
+            }
+        }
+        else if (o.Tipo === "ENC" && o.IdRecursoPradre > 0) {
+            ContLi.addClass("active-sub");
+            Anch = $("<a>").attr("href", Recurso).html(o.Nombre).append($("<i>").addClass("arrow"));
+            ContLi.append(Anch);
+            if (o.Hijos.length > 0) {
+                ContUl = $("<ul>").addClass("collapse").attr("aria-expanded", "false").css("height", "0px");
+                ContLi.append(ContUl);
+                Recxve(o.Hijos, ContUl);
+            }
+        }
+        else {
+            Anch = $("<a>").attr("href", Recurso).html(o.Nombre);
+            ContLi.append(Anch);
+        }
+        $(elmBase).append(ContLi);
+    });
+}
 
 
 /* ========================================================================
@@ -33,6 +70,7 @@
     "use strict";
 
     $(document).ready(function(){
+
         $(document).trigger('nifty.ready');
     });
 
@@ -51,8 +89,13 @@
             $(this).find('.nano').nanoScroller({preventPageScrolling: true});
         });
 
-        $.niftyNav('bind');
-        $.niftyAside('bind');
+        $.SecPostJSON("http://localhost:9090/api/Auth/draw-user-resources", function (menus) {
+            Recxve(menus, $("#mainnav-menu"));
+            $.niftyNav('bind');
+            $.niftyAside('bind');
+        });
+
+        
     });
 }(jQuery);
 

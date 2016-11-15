@@ -26,5 +26,12 @@ namespace Reportal.Directorio.Web.Controllers
 
             return View();
         }
+
+
+        public ActionResult Pruebas()
+        {
+            return View();
+        }
+
     }
 }
