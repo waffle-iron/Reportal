@@ -58,7 +58,6 @@ namespace IA.Security.Api.Controllers
         {
             string url = ActionContext.Request.Headers.GetValues("Referer").First();
             string token = ActionContext.Request.Headers.GetValues("Token").First();
-            url = url.Replace("http://localhost/", "");
             return GetUserResource(token, url);
         }
 
@@ -96,19 +95,31 @@ namespace IA.Security.Api.Controllers
         private HttpResponseMessage GetAuthToken(string userId)
         {
             Token token = _tokenServices.GenerateToken(userId);
-            string NombreUsuario = UsuarioDataAccess.UsuarioData(userId).Nombres;
+            string NombreUsuario = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(UsuarioDataAccess.UsuarioData(userId).Nombres));
             var response = Request.CreateResponse(HttpStatusCode.OK, "Authorized");
             response.Headers.Add("Token", token.AuthToken);
             response.Headers.Add("TokenExpiry", ConfigurationManager.AppSettings["AuthTokenExpiry"]);
-            response.Headers.Add("Uname", NombreUsuario);
+            response.Headers.Add("Uname",  NombreUsuario);
             response.Headers.Add("Access-Control-Expose-Headers", "Token,TokenExpiry,Uname");
             return response;
         }
-
+        
         private HttpResponseMessage GetUserResource(string Token, string Resource)
         {
-            
             var response = Request.CreateResponse(HttpStatusCode.OK, "Authorized");
+
+            if (!Resource.Contains(ConfigurationManager.AppSettings["AplicationBaseUrl"]))
+            {
+                response = Request.CreateResponse(HttpStatusCode.Unauthorized, "UnAuthorized: Request host");
+                return response;
+            }
+            Resource = Resource.Replace(ConfigurationManager.AppSettings["AplicationBaseUrl"], "");
+            var MVC_CA = Resource.Split('/');
+            if(MVC_CA.Length <= 1 || (MVC_CA.Length == 2 && string.IsNullOrEmpty(MVC_CA[1])))
+            {
+                Resource = Resource.Replace("/","") + "/Index";
+            }
+            
             var ResourceList = RecursoDataAccess.MenusDeUsuario(Token);
             List<string> urels = new List<string>(); 
             ResourceList.ForEach(x => {

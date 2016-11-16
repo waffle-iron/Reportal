@@ -1,6 +1,5 @@
 ﻿$(function () {
 
-
     $("#bts").on("click", function () {
 
 	    var encryptedPass = $.md5($('#Password').val()).toString().toUpperCase();
@@ -12,10 +11,9 @@
 			},
 			success: function (data, textStatus, request) {
 			    var UserData = { 
-			        'name': request.getResponseHeader("Uname"),
+			        'name': atob(request.getResponseHeader("Uname")),
 			        'token': request.getResponseHeader("Token")
 			    };
-			    console.log(UserData);
 			    sessionStorage.setItem('userdata', JSON.stringify(UserData));
 
 			    var ur = httpGet("ur");
@@ -25,7 +23,7 @@
 			    }
 			    else
 			    {
-			        location.href = "http://localhost/DirectorioReportal/Home";
+			        location.href = "http://localhost/DirectorioReportal/Home/Index";
 			    }
 			},
 			error: function (request, textStatus, errorThrown) {

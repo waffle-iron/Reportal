@@ -26,7 +26,7 @@
 function Recxve(arreglo, elmBase) {
     var ContLi, Anch, Icon, Text, ContUl
     $.each(arreglo, function (i, o) {
-        var Recurso = o.Url === '#' ? "#" : "/" + o.Url
+        var Recurso = o.Url === '#' ? "#" : getAplicationHost() + o.Url
         ContLi = $("<li>").attr("id-menu", o.IdRecurso);
         if (o.Tipo === "ENC" && o.IdRecursoPradre == 0) {
             ContLi.addClass("active-sub");
@@ -70,12 +70,13 @@ function Recxve(arreglo, elmBase) {
     "use strict";
 
     $(document).ready(function(){
-
+       
         $(document).trigger('nifty.ready');
     });
 
 
     $(document).on('nifty.ready', function(){
+        
         //Activate the Bootstrap tooltips
         var tooltip = $('.add-tooltip');
         if (tooltip.length)tooltip.tooltip();
@@ -88,11 +89,12 @@ function Recxve(arreglo, elmBase) {
         $('#navbar-container .navbar-top-links').on('shown.bs.dropdown', '.dropdown', function () {
             $(this).find('.nano').nanoScroller({preventPageScrolling: true});
         });
+        
 
         $.SecPostJSON("http://localhost:9090/api/Auth/draw-user-resources", function (menus) {
+            $.niftyAside('bind');
             Recxve(menus, $("#mainnav-menu"));
             $.niftyNav('bind');
-            $.niftyAside('bind');
         });
 
         

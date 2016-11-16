@@ -11,6 +11,7 @@ namespace Reportal.Directorio.Web.Controllers
         // GET: Acceso
         public ActionResult Index()
         {
+
             return View();
         }
     }
