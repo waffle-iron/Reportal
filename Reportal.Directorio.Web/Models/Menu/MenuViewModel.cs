@@ -7,7 +7,6 @@ namespace Reportal.Directorio.Web.Models.Menu
 {
     public class MenuViewModel
     {
-
-         
+                 
     }
 }

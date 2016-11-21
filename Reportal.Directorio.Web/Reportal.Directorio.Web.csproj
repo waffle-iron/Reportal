@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\ColocacionController.cs" />
     <Compile Include="Controllers\DirectorioController.cs" />
     <Compile Include="Controllers\FinanciamentoController.cs" />
@@ -586,7 +587,10 @@
     <Content Include="getstart\img\thumbs\mega-menu-4.jpg" />
     <Content Include="getstart\img\thumbs\mega-menu-5.jpg" />
     <Content Include="getstart\img\thumbs\mega-menu-6.jpg" />
+    <Content Include="getstart\js.app\App.Menu.js" />
+    <Content Include="getstart\js.app\App.Security.js" />
     <Content Include="getstart\js.app\presupuesto.js" />
+    <Content Include="getstart\js.app\Utilities.js" />
     <Content Include="getstart\js\bootstrap.js" />
     <Content Include="getstart\js\bootstrap.min.js" />
     <Content Include="getstart\js\demo\bg-images.js" />
@@ -612,6 +616,7 @@
     <Content Include="getstart\js\demo\ui-panels.js" />
     <Content Include="getstart\js\demo\widgets.js" />
     <Content Include="getstart\js\jquery-2.2.4.min.js" />
+    <Content Include="getstart\js\jquery.md5.js" />
     <Content Include="getstart\js\nifty.js" />
     <Content Include="getstart\js\nifty.min.js" />
     <Content Include="getstart\plugins\animate-css\animate.css" />
@@ -2194,6 +2199,7 @@
     <Content Include="getstart\Highcharts-5.0.0\api\fonts\fontawesome-webfont.woff2" />
     <Content Include="getstart\Highcharts-5.0.0\api\images\Highcharts.svg" />
     <Content Include="getstart\Highcharts-5.0.0\api\js\highcharts.json" />
+    <Content Include="getstart\js.app\App.Public.Secure.js" />
     <None Include="Properties\PublishProfiles\DirectorioWeb.pubxml" />
     <None Include="Properties\PublishProfiles\Perfilnew.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -2233,6 +2239,9 @@
     <Content Include="Views\SeguimientoPreaprobados\Index.cshtml" />
     <Content Include="Views\Layout\_Principal2.cshtml" />
     <Content Include="Views\Layout\_Principal2_Oper.cshtml" />
+    <Content Include="Views\Home\Pruebas.cshtml" />
+    <Content Include="Views\Acceso\Index.cshtml" />
+    <Content Include="Views\Layout\_Principal_Dynamic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

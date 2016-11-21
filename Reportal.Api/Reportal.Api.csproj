@@ -148,6 +148,8 @@
     <Folder Include="Views\SegPreaprobadosBySegmento\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\AuthorizationRequiredAttribute.cs" />
+    <Compile Include="ActionFilters\TokenService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -372,6 +374,14 @@
     <ProjectReference Include="..\CDK\CDK.csproj">
       <Project>{6765a812-8ae2-4200-9bb0-c77b2fa4c9fb}</Project>
       <Name>CDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IA.Security.Data\IA.Security.Data.csproj">
+      <Project>{e028889f-9c48-4693-b294-c61cecd355be}</Project>
+      <Name>IA.Security.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IA.Security.Domain\IA.Security.Domain.csproj">
+      <Project>{ab9d073a-7b11-470e-9040-19803b3f204d}</Project>
+      <Name>IA.Security.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Reportal.Data\Reportal.Data.csproj">
       <Project>{bb1f9b85-dc6d-4d9b-9078-0bd09684b974}</Project>

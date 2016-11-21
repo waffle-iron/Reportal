@@ -7,26 +7,21 @@ using System.Web.Http.Filters;
 using System.Text;
 using System.Security.Principal;
 using System.Threading;
-using IA.Security.Api.Filters;
 
 
-namespace IA.Security.Api.ActionFilters
+namespace Reportal.Api.ActionFilters
 {
     public class AuthorizationRequiredAttribute : ActionFilterAttribute
     {
         private const string Token = "Token";
-        
+
 
         public override void OnActionExecuting(HttpActionContext filterContext)
         {
-            //  Get API key provider
-            var provider = new IA.Security.Api.Providers.TokenService();
-            //filterContext.ControllerContext.RequestContext.Url
+            var provider = new TokenService();
             if (filterContext.Request.Headers.Contains(Token))
             {
                 var tokenValue = filterContext.Request.Headers.GetValues(Token).First();
-
-                // Validate Token
                 if (provider != null && !provider.ValidateToken(tokenValue))
                 {
                     var responseMessage = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = "Invalid Request" };
@@ -37,13 +32,11 @@ namespace IA.Security.Api.ActionFilters
             {
                 filterContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
             }
-            
+
             base.OnActionExecuting(filterContext);
 
         }
 
 
-
-        
     }
 }
