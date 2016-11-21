@@ -17,6 +17,10 @@ namespace Reportal.Data
             Parametro p = new Parametro("@Periodo", Periodo);
             return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Directorio_Cred_ColocDiaria_Listar", p, ConstructorEntidad);
         }
+        public static List<DirectorioDashboard> ListarDashboardReal()
+        {
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Directorio_DashboardReal", ConstructorEntidadDashRP);
+        }
         public static CreditoColoc_Diaria Obtener_Dashboard()
         {
             return DBHelper.InstanceReporteria.ObtenerEntidad("sp_Directorio_Cred_ColocDiariaListarDashboard", ConstructorEntidad);
@@ -41,6 +45,21 @@ namespace Reportal.Data
             };
         }
         
+        private static DirectorioDashboard ConstructorEntidadDashRP(DataRow row)
+        {
+            return new DirectorioDashboard
+            {
+
+                Fecha = row["Fecha"] != DBNull.Value ? row["Fecha"].ToString() : string.Empty,
+                DiaGraf = row["DiaGrafico"] != DBNull.Value ? row["DiaGrafico"].ToString() : string.Empty,
+                RealBruta = row["Real_Bruta"] != DBNull.Value ? Convert.ToInt32(row["Real_Bruta"]) : 0,
+                RealNeta = row["Real_Neta"] != DBNull.Value ? Convert.ToInt32(row["Real_Neta"]) : 0,
+                PptBruta = row["Ppto_Bruto"] != DBNull.Value ? Convert.ToInt32(row["Ppto_Bruto"]) : 0,
+                PptNeta = row["Ppto_Neto"] != DBNull.Value ? Convert.ToInt32(row["Ppto_Neto"]) : 0
+
+
+            };
+        }
 
     }
 }

@@ -4,7 +4,6 @@
     Layout = "~/Views/Layout/_Principal.cshtml";
 }
 @section script{
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -37,9 +36,6 @@
             return retorno;
         }
         $(function () {
-
-
-
             /*PRUEBAS*/
             /*Tasa*/
             $.getJSON("http://localhost:8080/api/CredFinanciamentoTodo", function (respoonse) {
@@ -47,7 +43,7 @@
                 //console.log(respoonse);
 
                 $("#headFinanciamiento").append($("<tr class=\"primero\">"));
-                $("#headFinanciamiento > tr.primero").append($("<th>").attr("rowspan", "1").html("Tasa Promedio").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $("#headFinanciamiento > tr.primero").append($("<th>").attr("rowspan", "1").html("").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 $.each(respoonse.Encabezado, function (i, e) {
                     $("#headFinanciamiento > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 });
@@ -55,42 +51,41 @@
                 $("#headFinanciamiento").append($("<tr class=\"segundo\">"));
                 $.each(respoonse.Encabezado, function (i, e) {
                     //$("#headFinanciamiento > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                  //  $("#headFinanciamiento > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    //  $("#headFinanciamiento > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 });
 
                 //
                 $("#bodyFinanciamiento").append($("<tr class=\"trabajador\">"));
                 $("#bodyFinanciamiento > tr.trabajador").append($("<th>").html("Trabajador").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 $.each(respoonse.Trabajador, function (i, e) {
-                    $("#bodyFinanciamiento > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
-                   // $("#bodyFinanciamiento > tr.trabajador").append($("<td>").html(e.Spred.toMoney(2)));
+                    $("#bodyFinanciamiento > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2) + '%'));
+                    // $("#bodyFinanciamiento > tr.trabajador").append($("<td>").html(e.Spred.toMoney(2)));
                 });
 
                 $("#bodyFinanciamiento").append($("<tr class=\"pensionado\">"));
                 $("#bodyFinanciamiento > tr.pensionado").append($("<th>").html("Pensionado").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 $.each(respoonse.Pensionado, function (i, e) {
-                    $("#bodyFinanciamiento > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
-                  //  $("#bodyFinanciamiento > tr.pensionado").append($("<td>").html(e.Spred.toMoney(2)));
+                    $("#bodyFinanciamiento > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2) + '%'));
+                    //  $("#bodyFinanciamiento > tr.pensionado").append($("<td>").html(e.Spred.toMoney(2)));
                 });
 
                 $("#bodyFinanciamiento").append($("<tr class=\"total\">"));
                 $("#bodyFinanciamiento > tr.total").append($("<th>").html("Total").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF").css("font-weight", "bold"));
                 $.each(respoonse.Total, function (i, e) {
-                    $("#bodyFinanciamiento > tr.total").append($("<td>").html(e.Tasa.toMoney(2)).css("font-weight", "bold"));
+                    $("#bodyFinanciamiento > tr.total").append($("<td>").html(e.Tasa.toMoney(2) + '%').css("font-weight", "bold"));
                     //$("#bodyFinanciamiento > tr.total").append($("<td>").html(e.Spred.toMoney(2)).css("font-weight", "bold"));
                 });
 
 
 
             });
-
             /*Spread*/
             $.getJSON("http://localhost:8080/api/CredFinanciamentoTodo", function (respoonse) {
 
                 //console.log(respoonse);
 
                 $("#headFinanciamientoSpread").append($("<tr class=\"primero\">"));
-                $("#headFinanciamientoSpread > tr.primero").append($("<th>").attr("rowspan", "1").html("Spread").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $("#headFinanciamientoSpread > tr.primero").append($("<th>").attr("rowspan", "1").html("").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 $.each(respoonse.Encabezado, function (i, e) {
                     $("#headFinanciamientoSpread > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 });
@@ -105,32 +100,71 @@
                 $("#bodyFinanciamientoSpread").append($("<tr class=\"trabajador\">"));
                 $("#bodyFinanciamientoSpread > tr.trabajador").append($("<th>").html("Trabajador").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 $.each(respoonse.Trabajador, function (i, e) {
-                   // $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
-                     $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Spred.toMoney(2)));
+                    // $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Spred.toMoney(2) + '%'));
                 });
 
                 $("#bodyFinanciamientoSpread").append($("<tr class=\"pensionado\">"));
                 $("#bodyFinanciamientoSpread > tr.pensionado").append($("<th>").html("Pensionado").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 $.each(respoonse.Pensionado, function (i, e) {
                     //$("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
-                    $("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Spred.toMoney(2)));
+                    $("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Spred.toMoney(2) + '%'));
                 });
 
                 $("#bodyFinanciamientoSpread").append($("<tr class=\"total\">"));
                 $("#bodyFinanciamientoSpread > tr.total").append($("<th>").html("Total").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF").css("font-weight", "bold"));
                 $.each(respoonse.Total, function (i, e) {
                     //$("#bodyFinanciamientoSpread > tr.total").append($("<td>").html(e.Tasa.toMoney(2)).css("font-weight", "bold"));
-                    $("#bodyFinanciamientoSpread > tr.total").append($("<td>").html(e.Spred.toMoney(2)).css("font-weight", "bold"));
+                    $("#bodyFinanciamientoSpread > tr.total").append($("<td>").html(e.Spred.toMoney(2) + '%').css("font-weight", "bold"));
+                });
+
+
+
+            });
+            /* Plazo Promedio*/
+            $.getJSON("http://localhost:8080/api/CredFinanciamentoTodo", function (respoonse) {
+
+                $("#headFinanciamientoPlazo").append($("<tr class=\"primero\">"));
+                $("#headFinanciamientoPlazo > tr.primero").append($("<th>").attr("rowspan", "1").html("").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.Encabezado, function (i, e) {
+                    $("#headFinanciamientoPlazo > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                $("#headFinanciamientoPlazo").append($("<tr class=\"segundo\">"));
+                $.each(respoonse.Encabezado, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                //
+                $("#bodyFinanciamientoPlazo").append($("<tr class=\"trabajador\">"));
+                $("#bodyFinanciamientoPlazo > tr.trabajador").append($("<th>").html("Trabajador").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.Trabajador, function (i, e) {
+                    // $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyFinanciamientoPlazo > tr.trabajador").append($("<td>").html(e.Pplazo));
+                });
+
+                $("#bodyFinanciamientoPlazo").append($("<tr class=\"pensionado\">"));
+                $("#bodyFinanciamientoPlazo > tr.pensionado").append($("<th>").html("Pensionado").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.Pensionado, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyFinanciamientoPlazo > tr.pensionado").append($("<td>").html(e.Pplazo ));
+                });
+
+                $("#bodyFinanciamientoPlazo").append($("<tr class=\"total\">"));
+                $("#bodyFinanciamientoPlazo > tr.total").append($("<th>").html("Total").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF").css("font-weight", "bold"));
+                $.each(respoonse.Total, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.total").append($("<td>").html(e.Tasa.toMoney(2)).css("font-weight", "bold"));
+                    $("#bodyFinanciamientoPlazo > tr.total").append($("<td>").html(e.Pplazo).css("font-weight", "bold"));
                 });
 
 
 
             });
 
-
             $("#slPeriodo").on("change", function () {
                 $("#LinealPensionado").html("");
-                
+
                 /*Tasa*/
                 $.getJSON("http://localhost:8080/api/CreditoFinanciamento/" + $("#slPeriodo").val(), function (data) {
 
@@ -200,7 +234,7 @@
                         },
 
                         series: [{
-                            
+
                             name: 'Pensionado',
                             data: tasaPromedio1,
                             tooltip: {
@@ -208,7 +242,7 @@
                                 shared: true
 
                             },
-                        },{
+                        }, {
                             name: 'Trabajador',
                             data: tasaPromedioT,
                             tooltip: {
@@ -216,7 +250,7 @@
                                 shared: true
 
                             },
-                        },{
+                        }, {
                             name: 'Total',
                             data: tasaPromedioTotal,
                             tooltip: {
@@ -224,7 +258,7 @@
                                 shared: true
 
                             },
-                        
+
                         }]
 
 
@@ -233,12 +267,12 @@
                 });
 
                 /*Spread*/
-              
+
 
                 $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
                     $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
                 });
-               
+
             });
             $("#slPeriodo2").on("change", function () {
                 $("#LinealSpread").html("");
@@ -345,14 +379,115 @@
                 $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
                     $("#Leyend_FechaActualizacion2").html(respoonse.ActualizacionLeyenda);
                 });
+                $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
+                    $("#Leyend_FechaActualizacion3").html(respoonse.ActualizacionLeyenda);
+                });
+
             });
+            $("#slPeriodo3").on("change", function () {
+                $("#LinealPlazo").html("");
+                $.getJSON("http://localhost:8080/api/CreditoFinanciamento/" + $("#slPeriodo3").val(), function (data) {
+
+                    var diasPlazo = new Array();
+                    var PlazoPensionado = new Array();
+                    var PlazoTrabajador = new Array();
+                    var PlazoTotal = new Array();
+
+
+                    $.each(data.Encabezado, function (i, e) {
+                        diasPlazo[i] = e.Mes;
+                    });
+
+                    $.each(data.Pensionado, function (i, e) {
+                        PlazoPensionado[i] = e.Pplazo;
+                    });
+
+                    $.each(data.Trabajador, function (i, e) {
+                        PlazoTrabajador[i] = e.Pplazo;
+                    });
+                    $.each(data.Total, function (i, e) {
+                        PlazoTotal[i] = e.Pplazo;
+                    });
+
+                    $('#LinealPlazo').highcharts({
+                        colors: ['#42a5f5', '#8bc34a', '#ffa726'],
+                        title: {
+                            text: '',
+                            x: -20 //center
+                        },
+                        subtitle: {
+                            text: '',
+                            x: -20
+                        },
+                        xAxis: {
+                            categories: diasPlazo
+                        },
+                        yAxis: {
+                            title: {
+                                text: ''
+                            },
+                            plotLines: [{
+                                value: 0,
+                                width: 1,
+                                color: '#808080'
+                            }]
+                        },
+                        tooltip: {
+                            format: '{value}'
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        exporting: {
+                            enabled: false
+                        },
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'left',
+                            verticalAlign: 'top',
+                            borderWidth: 0
+                        },
+                        series: [{
+
+                            name: 'Pensionado',
+                            data: PlazoPensionado,
+                            tooltip: {
+                            },
+                        }, {
+                            name: 'Trabajador',
+                            data: PlazoTrabajador,
+                            tooltip: {
+                            },
+                        }, {
+                            name: 'Total',
+                            data: PlazoTotal,
+                            tooltip: {
+                            },
+
+                        }]
+                    });
+                });
+                $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
+                    $("#Leyend_FechaActualizacion2").html(respoonse.ActualizacionLeyenda);
+                });
+            });
+
             $("#slPeriodo").trigger("change");
-            $("#slPeriodo2").trigger("change");
+            
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+                if ($(this).attr("href") === "#pestanaSpread")
+                    $("#slPeriodo2").trigger("change");
+
+                if ($(this).attr("href") === "#pestanaPlazo")
+                    $("#slPeriodo3").trigger("change");
+
+            })
         });
     </script>
 }
 <div class="tab-base">
-
     <!--Nav Tabs-->
     <ul class="nav nav-tabs">
         <li class="active">
@@ -361,18 +496,14 @@
         <li>
             <a data-toggle="tab" href="#pestanaSpread">Spread</a>
         </li>
-        @* <li>
-                <a data-toggle="tab" href="#demo-lft-tab-3">Setting</a>
-            </li>*@
+        <li>
+            <a data-toggle="tab" href="#pestanaPlazo">Plazo</a>
+        </li>
     </ul>
-
     <!--Tabs Content-->
     <div class="tab-content">
-        
+
         <div id="pestanaTasa" class="tab-pane fade active in">
-
-
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel">
@@ -387,14 +518,11 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="panel">
-
                         <div class="panel-heading">
-                            <h1 class="panel-title">Evolución Mensual</h1>
+                            <h1 class="panel-title">Evolución Mensual Tasa Promedio</h1>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-
-
                                 <table class="table table-striped" align="center" style="margin: 0px auto;  width: 50%;  font-size: 11px;">
                                     <thead id="headFinanciamiento"></thead>
                                     <tbody id="bodyFinanciamiento"></tbody>
@@ -405,7 +533,7 @@
                     <div class="col-lg-12">
                         <div class="panel">
                             <div class="panel-heading">
-                                <h1 class="panel-title">Evolución Diaria</h1>
+                                <h1 class="panel-title">Evolución Diaria Tasa Promedio</h1>
                             </div>
                             <div id="LinealPensionado" style="height:212px"></div>
                         </div>
@@ -413,7 +541,7 @@
                 </div>
             </div>
         </div>
-        <div id="pestanaSpread"  class="tab-pane fade">
+        <div id="pestanaSpread" class="tab-pane fade">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel">
@@ -428,14 +556,11 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="panel">
-
                         <div class="panel-heading">
-                            <h1 class="panel-title">Evolución Mensual</h1>
+                            <h1 class="panel-title">Evolución Mensual Spread</h1>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-
-
                                 <table class="table table-striped" align="center" style="margin: 0px auto;  width: 50%;  font-size: 11px;">
                                     <thead id="headFinanciamientoSpread"></thead>
                                     <tbody id="bodyFinanciamientoSpread"></tbody>
@@ -446,19 +571,53 @@
                     <div class="col-lg-12">
                         <div class="panel">
                             <div class="panel-heading">
-                                <h1 class="panel-title">Evolución Diaria</h1>
+                                <h1 class="panel-title">Evolución Diaria Spread</h1>
                             </div>
                             <div id="LinealSpread" style="height:212px"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        
         </div>
-        <div id="demo-lft-tab-3" class="tab-pane fade">
-            <p class="text-main text-semibold">Third Tab Content</p>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        <div id="pestanaPlazo" class="tab-pane fade">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel">
+                        <span style="float:right; margin-left:auto;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion3">Martes, 18 de Octubre de 2016</span></span>
+                        Seleccione Periodo:
+                        <select id="slPeriodo3">
+                            @* <option value="201611">Noviembre 2016</option>*@
+                            <option value="201611">Noviembre 2016</option>
+                            <option value="201610">Octubre 2016</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Evolución Mensual Plazo Promedio</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped" align="center" style="margin: 0px auto;  width: 50%;  font-size: 11px;">
+                                    <thead id="headFinanciamientoPlazo"></thead>
+                                    <tbody id="bodyFinanciamientoPlazo"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Evolución Diaria Plazo Promedio</h1>
+                            </div>
+                            <div id="LinealPlazo" style="height:212px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
 

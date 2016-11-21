@@ -30,6 +30,7 @@ namespace Reportal.Api.Models
     {
         public decimal Tasa { get; set; }
         public decimal Spred { get; set; }
+        public int Pplazo { get; set; }
 
     }   
 }

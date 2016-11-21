@@ -16,6 +16,14 @@ namespace Reportal.Data
         {
             return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Directorio_Cred_Ppto_Mensual_Listar", ConstructorEntidad);
         }
+        public static List<CrededitoPptoMensual> ListarByGrafico()
+        {
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Directorio_Cred_Ppto_MensualByGrafico", ConstructorByTodos);
+        }
+        public static List<CrededitoPptoMensual> ListarByTodos()
+        {
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Directorio_Cred_Ppto_MensualByListar", ConstructorByTodos);
+        }
 
 
         private static D_CredPptoMensual ConstructorEntidad(DataRow row)
@@ -51,5 +59,19 @@ namespace Reportal.Data
             };
         }
 
+        private static CrededitoPptoMensual ConstructorByTodos(DataRow row)
+        {
+            return new CrededitoPptoMensual
+            {
+                Periodo = row["Periodo"] != DBNull.Value ? Convert.ToInt32(row["Periodo"]) : 0,
+                FecActualizacion = row["FechaActualizacion"] != DBNull.Value ? Convert.ToInt32(row["FechaActualizacion"]) : 0,
+                Mes = row["Mes"] != DBNull.Value ? row["Mes"].ToString() : string.Empty,
+                iItem= row["iItem"] != DBNull.Value ? Convert.ToInt32(row["iItem"]) : 0,
+                Item = row["Item"] != DBNull.Value ? row["Item"].ToString() : string.Empty,
+                PptoNeto= row["Neto"] != DBNull.Value ? Convert.ToInt32(row["Neto"]) : 0,
+                PptoBruto = row["Bruto"] != DBNull.Value ? Convert.ToInt32(row["Bruto"]) : 0
+            };
+
+        }
     }
 }

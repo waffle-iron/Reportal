@@ -3,11 +3,7 @@
     ViewBag.Title = "Presupuesto - La Araucana";
     Layout = "~/Views/Layout/_Principal.cshtml";
 }
-
-
-
 @section script{
-
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -40,15 +36,28 @@
 
             return retorno;
         }
-
-
-
-
-
         $(function () {
-
             //grafico neeto
-            $.getJSON('http://localhost:8080/api/D_CredPptoMensual/', function (data) {
+            $.getJSON('http://localhost:8080/api/CreditoPresupuesto/', function (data) {
+
+
+                var diasNeto = new Array();
+                var realNeto = new Array();
+                var pptoNeto = new Array();
+
+
+                $.each(data.EncabezadoPpto, function (i, e) {
+                    diasNeto[i] = e.Mes;
+                });
+
+                $.each(data.RealPpto, function (i, e) {
+                    realNeto[i] = e.PptoNeto;
+                });
+
+                $.each(data.PresupuestoPpto, function (i, e) {
+                    pptoNeto[i] = e.PptoNeto;
+                });
+
 
                 $('#Lineal').highcharts({
                     colors: ['#42a5f5', '#8bc34a'],
@@ -61,12 +70,10 @@
                         x: -20
                     },
                     xAxis: {
-                        categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-                            'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+                        categories: diasNeto
                     },
                     yAxis: [{ // Primary yAxis
                         labels: {
-                            // format: '{value}',
                             formatter: function () {
                                 return this.value.toMoney();
                             },
@@ -75,7 +82,7 @@
                             }
                         },
                         title: {
-                            text: 'M$',
+                            text: '',
                             formatter: function () {
                                 return this.value.toMoney();
                             },
@@ -84,34 +91,54 @@
                             }
                         }
                     }],
-                    tooltip: {
-                        valueSuffix: ' M$'
 
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    exporting: {
-                        enabled: false
-                    },
+                    credits: { enabled: false },
+                    exporting: { enabled: false },
                     legend: {
                         layout: 'horizontal',
                         align: 'left',
                         verticalAlign: 'top',
                         borderWidth: 0
                     },
-
                     series: [{
-                        name: data[0].Item,
-                        data: [data[0].Enero_Neto, data[0].Febrero_Neto, data[0].Marzo_Neto, data[0].Abril_Neto, data[0].Mayo_Neto, data[0].Junio_Neto, data[0].Julio_Neto, data[0].Agosto_Neto, data[0].Septiembre_Neto, data[0].Octubre_Neto]//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        name: 'Real',
+                        data: realNeto,//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        tooltip: {
+                            formatter: function () {
+                                return this.value.toMoney();
+                            },
+                            valueSuffix: ' MM$'
+                        }
                     }, {
-                        name: data[1].Item,
-                        data: [data[1].Enero_Neto, data[1].Febrero_Neto, data[1].Marzo_Neto, data[1].Abril_Neto, data[1].Mayo_Neto, data[1].Junio_Neto, data[1].Julio_Neto, data[1].Agosto_Neto, data[1].Septiembre_Neto, data[1].Octubre_Neto]//, data[1].Noviembre_Neto, data[1].Diciembre_Neto]
+                        name: 'Presupuesto',
+                        data: pptoNeto,//, data[1].Noviembre_Bruto, data[1].Diciembre_Bruto]
+                        tooltip: {
+                            valueSuffix: 'MM$'
+                        }
                     }]
                 });
             });
             // grafico bruto
-            $.getJSON('http://localhost:8080/api/D_CredPptoMensual/', function (data) {
+            $.getJSON('http://localhost:8080/api/CreditoPresupuesto/', function (data) {
+
+
+                var diasBruto = new Array();
+                var realBruto = new Array();
+                var pptoBruto = new Array();
+
+
+                $.each(data.EncabezadoPpto, function (i, e) {
+                    diasBruto[i] = e.Mes;
+                });
+
+                $.each(data.RealPpto, function (i, e) {
+                    realBruto[i] = e.PptoBruto;
+                });
+
+                $.each(data.PresupuestoPpto, function (i, e) {
+                    pptoBruto[i] = e.PptoBruto;
+                });
+
 
                 $('#LinealBruto').highcharts({
                     colors: ['#42a5f5', '#8bc34a'],
@@ -124,18 +151,9 @@
                         x: -20
                     },
                     xAxis: {
-                        categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-                            'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+                        categories: diasBruto
                     },
-                    yAxis: {
-                        //title: {
-                        //    text: 'Temperature (°C)'
-                        //},
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }],
+                    yAxis: [{ // Primary yAxis
                         labels: {
                             formatter: function () {
                                 return this.value.toMoney();
@@ -145,7 +163,7 @@
                             }
                         },
                         title: {
-                            text: 'M$',
+                            text: '',
                             formatter: function () {
                                 return this.value.toMoney();
                             },
@@ -153,127 +171,133 @@
                                 color: Highcharts.getOptions().colors[1]
                             }
                         }
-                    },
-                    tooltip: {
-                        valueSuffix: ' MM$'
-                    },
-                    exporting: { enabled: false },
+                    }],
+
                     credits: { enabled: false },
+                    exporting: { enabled: false },
                     legend: {
                         layout: 'horizontal',
                         align: 'left',
                         verticalAlign: 'top',
                         borderWidth: 0
                     },
-                    exporting: { enabled: false },
                     series: [{
-                        name: data[0].Item,
-                        data: [data[0].Enero_Bruto, data[0].Febrero_Bruto, data[0].Marzo_Bruto, data[0].Abril_Bruto, data[0].Mayo_Bruto, data[0].Junio_Bruto, data[0].Julio_Bruto, data[0].Agosto_Bruto, data[0].Septiembre_Bruto, data[0].Octubre_Bruto]//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        name: 'Real',
+                        data: realBruto,//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        tooltip: {
+                            formatter: function () {
+                                return this.value.toMoney();
+                            },
+                            valueSuffix: 'MM$'
+                        }
                     }, {
-                        name: data[1].Item,
-                        data: [data[1].Enero_Bruto, data[1].Febrero_Bruto, data[1].Marzo_Bruto, data[1].Abril_Bruto, data[1].Mayo_Bruto, data[1].Junio_Bruto, data[1].Julio_Bruto, data[1].Agosto_Bruto, data[1].Septiembre_Bruto, data[1].Octubre_Bruto]//, data[1].Noviembre_Bruto, data[1].Diciembre_Bruto]
+                        name: 'Presupuesto',
+                        data: pptoBruto,//, data[1].Noviembre_Bruto, data[1].Diciembre_Bruto]
+                        tooltip: {
+                            valueSuffix: 'MM$'
+                        }
                     }]
                 });
             });
             // tabla Neto
-            $.getJSON("http://localhost:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
+            $.getJSON("http://localhost:8080/api/CreditoPresupuesto", function (respoonse) {
 
-                $.each(respoonse, function (i, o) {
+                //console.log(respoonse);
 
-
-                    if (o.Item == "Cumplimiento") {
-                        $("#D_CredPptoMensual").append(
-                                $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
-                                .append($("<td>").html(o.Enero_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Febrero_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Marzo_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Abril_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Mayo_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Junio_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Julio_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Agosto_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Septiembre_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Octubre_Neto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                //.append($("<td>").html(o.Noviembre_Neto.toMoney() + "%").css("text-align", "center"))
-                                //.append($("<td>").html(o.Diciembre_Neto.toMoney() + "%").css("text-align", "center"))
-                           );
-                    } else {
-
-                        $("#D_CredPptoMensual").append(
-                                $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
-                                //.append($("<td>").html(o.Enero_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Enero_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Febrero_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Febrero_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Marzo_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Marzo_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Abril_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Abril_Neto.toMoney()).css("text-align", "center"))
-                               // .append($("<td>").html(o.Mayo_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Mayo_Neto.toMoney()).css("text-align", "center"))
-                               // .append($("<td>").html(o.Junio_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Junio_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Julio_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Julio_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Agosto_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Agosto_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Septiembre_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Septiembre_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Octubre_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Octubre_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Noviembre_Bruto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Noviembre_Neto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Diciembre_Bruto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Diciembre_Neto.toMoney()).css("text-align", "center"))
-                        );
-                    }
+                $("#headPresupuestoNeto").append($("<tr class=\"primero\">"));
+                $("#headPresupuestoNeto > tr.primero").append($("<th>").attr("rowspan", "1").html("").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.EncabezadoPpto, function (i, e) {
+                    $("#headPresupuestoNeto > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 });
-            });
 
+                $("#headPresupuestoNeto").append($("<tr class=\"segundo\">"));
+                $.each(respoonse.EncabezadoPpto, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                //
+                $("#bodyPresupuestoNeto").append($("<tr class=\"Presupuesto\">"));
+                $("#bodyPresupuestoNeto > tr.Presupuesto").append($("<th>").html("Presupuesto").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.PresupuestoPpto, function (i, e) {
+                    // $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyPresupuestoNeto > tr.Presupuesto").append($("<td>").html(e.PptoNeto.toMoney()));
+                });
+
+                $("#bodyPresupuestoNeto").append($("<tr class=\"Real\">"));
+                $("#bodyPresupuestoNeto > tr.Real").append($("<th>").html("Real").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.RealPpto, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyPresupuestoNeto > tr.Real").append($("<td>").html(e.PptoNeto.toMoney()));
+                });
+
+                $("#bodyPresupuestoNeto").append($("<tr class=\"GAP\">"));
+                $("#bodyPresupuestoNeto > tr.GAP").append($("<th>").html("GAP").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.GapPpto, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.total").append($("<td>").html(e.Tasa.toMoney(2)).css("font-weight", "bold"));
+                    $("#bodyPresupuestoNeto > tr.GAP").append($("<td>").html(e.PptoNeto.toMoney()));
+                });
+                $("#bodyPresupuestoNeto").append($("<tr class=\"Cumplimiento\">"));
+                $("#bodyPresupuestoNeto > tr.Cumplimiento").append($("<th>").html("Cumplimiento").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF").css("font-weight", "bold"));
+                $.each(respoonse.CumplimientoPpto, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.total").append($("<td>").html(e.Tasa.toMoney(2)).css("font-weight", "bold"));
+                    $("#bodyPresupuestoNeto > tr.Cumplimiento").append($("<td>").html(e.PptoNeto.toMoney() + '%').css("font-weight", "bold"));
+                });
+
+
+
+            });
             $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
                 $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
             });
             // tabla Bruto
-            $.getJSON("http://localhost:8080/api/D_CredPptoMensual/" + $(this).val(), function (respoonse) {
+            $.getJSON("http://localhost:8080/api/CreditoPresupuesto", function (respoonse) {
 
-                $.each(respoonse, function (i, o) {
-                    if (o.Item == "Cumplimiento") {
-                        $("#D_CredPptoMensualBruto").append(
-                                $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
-                                .append($("<td>").html(o.Enero_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Febrero_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Marzo_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Abril_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Mayo_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Junio_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Julio_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Agosto_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Septiembre_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                .append($("<td>").html(o.Octubre_Bruto.toMoney() + "%").css("text-align", "center").css("font-weight", "bold"))
-                                //.append($("<td>").html(o.Noviembre_Bruto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Diciembre_Bruto.toMoney()).css("text-align", "center"))
-                           );
-                    } else {
+                //console.log(respoonse);
 
-                        $("#D_CredPptoMensualBruto").append(
-                                $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
-                                .append($("<td>").html(o.Enero_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Febrero_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Marzo_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Abril_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Mayo_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Junio_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Julio_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Agosto_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Septiembre_Bruto.toMoney()).css("text-align", "center"))
-                                .append($("<td>").html(o.Octubre_Bruto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Noviembre_Bruto.toMoney()).css("text-align", "center"))
-                                //.append($("<td>").html(o.Diciembre_Bruto.toMoney()).css("text-align", "center"))
-                        );
-                    }
+                $("#headPresupuestoBruto").append($("<tr class=\"primero\">"));
+                $("#headPresupuestoBruto > tr.primero").append($("<th>").attr("rowspan", "1").html("").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.EncabezadoPpto, function (i, e) {
+                    $("#headPresupuestoBruto > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 });
-            });
 
+                $("#headPresupuestoBruto").append($("<tr class=\"segundo\">"));
+                $.each(respoonse.EncabezadoPpto, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                //
+                $("#bodyPresupuestoBruto").append($("<tr class=\"Presupuesto\">"));
+                $("#bodyPresupuestoBruto > tr.Presupuesto").append($("<th>").html("Presupuesto").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.PresupuestoPpto, function (i, e) {
+                    // $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyPresupuestoBruto > tr.Presupuesto").append($("<td>").html(e.PptoBruto.toMoney()));
+                });
+
+                $("#bodyPresupuestoBruto").append($("<tr class=\"Real\">"));
+                $("#bodyPresupuestoBruto > tr.Real").append($("<th>").html("Real").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.RealPpto, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyPresupuestoBruto > tr.Real").append($("<td>").html(e.PptoBruto.toMoney()));
+                });
+
+                $("#bodyPresupuestoBruto").append($("<tr class=\"GAP\">"));
+                $("#bodyPresupuestoBruto > tr.GAP").append($("<th>").html("GAP").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.GapPpto, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.total").append($("<td>").html(e.Tasa.toMoney(2)).css("font-weight", "bold"));
+                    $("#bodyPresupuestoBruto > tr.GAP").append($("<td>").html(e.PptoBruto.toMoney()));
+                });
+                $("#bodyPresupuestoBruto").append($("<tr class=\"Cumplimiento\">"));
+                $("#bodyPresupuestoBruto > tr.Cumplimiento").append($("<th>").html("Cumplimiento").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF").css("font-weight", "bold"));
+                $.each(respoonse.CumplimientoPpto, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.total").append($("<td>").html(e.Tasa.toMoney(2)).css("font-weight", "bold"));
+                    $("#bodyPresupuestoBruto > tr.Cumplimiento").append($("<td>").html(e.PptoBruto.toMoney() + '%').css("font-weight", "bold"));
+                });
+
+
+
+            });
             $.getJSON("http://localhost:8080/api/CredCumplimiento_Neto", function (data) {
                 $("#cReal").html(data[1].TotalNeto.toMoney())
                 $("#cPresupuesto").html(data[0].TotalNeto.toMoney())
@@ -308,8 +332,6 @@
                 gauge.setTextField(document.getElementById("demo-gauge-text"));
 
             });
-
-
             $.getJSON("http://localhost:8080/api/CredCumplimiento_Bruto", function (data) {
                 $("#cRealBruto").html(data[1].Total.toMoney())
                 $("#PptoBruto").html(data[0].Total.toMoney())
@@ -336,281 +358,182 @@
                 var gauge1 = new Gauge(target1).setOptions(opts1); // create sexy gauge!
                 gauge1.maxValue = 100; // set max gauge value
                 gauge1.animationSpeed = 32; // set animation speed (32 is default value)
-                gauge1.set(data[1].Total / data[0].Total*100); // set actual value
+                gauge1.set(data[1].Total / data[0].Total * 100); // set actual value
                 gauge1.setTextField(document.getElementById("demo-gauge_brutas-text"));
             });
-
-
             $("#select_Colocacion").on("change", function () {
 
                 if ($(this).val() == 13) {
-                    $("#bdy_Netas").css("display", "block");
-                    $("#bdy_Brutas").css("display", "none");
+                    $("#bdy_Brutas").css("display", "block");
+                    $("#bdy_Netas").css("display", "none");
                 } else if ($(this).val() == 14) {
 
-                    $("#bdy_Netas").css("display", "none");
-                    $("#bdy_Brutas").css("display", "block");
+                    $("#bdy_Brutas").css("display", "none");
+                    $("#bdy_Netas").css("display", "block");
                 }
 
             });
-
         });
-
     </script>
-
-
 }
-
-
 <div class="boxed">
-        <div class="col-sm-13">
-
-            <div class="panel">
-                <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
-                <div class="panel-heading">
-
-                    <h3 class="panel-title">
-                        Colocaciones
-                        <select id="select_Colocacion">
-                            <option value="13">Netas</option>
-                            <option value="14">Brutas</option>
-                        </select>
-                    </h3>
-                    
+    <div class="col-sm-13">
+        <div class="panel">
+            <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Colocaciones
+                    <select id="select_Colocacion">
+                        <option value="13">Brutas</option>
+                        <option value="14">Netas</option>
+                    </select>
+                </h3>
+            </div>
+            <div id="bdy_Netas" class="panel-body" style="display:none;">
+                <div class="col-sm-8">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Evolución de Colocaciones Netas MM$</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div id="Lineal" style="height:212px"></div>
+                        </div>
+                    </div>
                 </div>
-                <div id="bdy_Netas" class="panel-body">
-                    <div class="col-sm-8">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h1 class="panel-title">Evolución Neta</h1>
+                <div class="col-sm-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Cumplimiento Acumulado</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="panel panel-success panel-colorful">
+                                <div class="pad-all text-center">
+
+                                    <!--Gauge placeholder-->
+                                    <canvas id="demo-gauge" height="107" class="canvas-responsive"></canvas>
+                                    <p>
+                                        <span id="demo-gauge-text" class="text-lg text-semibold"></span>% Cumplimiento
+                                    </p>
+                                </div>
+                                <div class="pad-ver bg-trans-light">
+                                    <ul class="list-unstyled row text-center">
+
+                                        <!--Gauge info-->
+                                        <li>
+                                        </li>
+                                        <li class="col-xs-3">
+                                            <p></p>
+                                        </li>
+                                        <li class="col-xs-3">
+                                            <b><p>Real</p></b>
+                                            <span id="cReal"> </span>
+                                        </li>
+                                        <li class="col-xs-3">
+                                            <b><p>Presupuesto</p></b>
+                                            <span id="cPresupuesto"> </span>
+                                        </li>
+                                        <li class="col-xs-3">
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="panel-body">
-                                <div id="Lineal" style="height:212px"></div>
-                            </div>
+
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Cumplimiento</h3>
-                            </div>
-                            <div class="panel-body">
-
-                                <div class="panel panel-success panel-colorful">
-                                    <div class="pad-all text-center">
-
-                                        <!--Gauge placeholder-->
-                                        <canvas id="demo-gauge" height="107" class="canvas-responsive"></canvas>
-                                        <p>
-                                            <span id="demo-gauge-text" class="text-lg text-semibold"></span>% Cumplimiento
-                                        </p>
-                                    </div>
-                                    <div class="pad-ver bg-trans-light">
-                                        <ul class="list-unstyled row text-center">
-
-                                            <!--Gauge info-->
-                                            <li>
-                                            </li>
-                                            <li class="col-xs-3">
-                                                <p></p>
-                                            </li>
-                                            <li class="col-xs-3">
-                                                <b><p>Real</p></b> 
-                                                <span id="cReal"> </span>
-                                            </li>
-                                            <li class="col-xs-3">
-                                                <b><p>Presupuesto</p></b>
-                                                <span id="cPresupuesto"> </span>
-                                            </li>
-                                            <li class="col-xs-3">
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                            </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Colocaciones Mensuales Netas MM$</h1>
                         </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h1 class="panel-title">Mensual</h1>
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive"  style="font-size: 11px;">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                @*<th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">&nbsp;</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Enero</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Febrero</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Marzo</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Abril</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Mayo</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Junio</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Julio</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Agosto</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Septiembre</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Octubre</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Noviembre</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Diciembre</th>*@
-                                            </tr>
-                                            <tr>
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0;color:#FFFFFF;">&nbsp;MM$</th>
-                                                @* <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Ene</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Feb</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Mar</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Abr</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">May</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Jun</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Jul</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Ago</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Sept</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Oct</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Nov</th>
-                                                    @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Dic</th>*@
-                                            </tr>
-                                        </thead>
-                                        <tbody id="D_CredPptoMensual"></tbody>
-                                    </table>
+                        <div class="panel-body">
+                            <div class="table-responsive">
 
-                                </div>
+
+                                <table class="table table-striped" align="center" style="margin: 0px auto;  width: 100%;  font-size: 10px;">
+                                    <thead id="headPresupuestoNeto"></thead>
+                                    <tbody id="bodyPresupuestoNeto"></tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                <div id="bdy_Brutas" class="panel-body" style="display:none;">
-                    <div class="col-sm-8">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h1 class="panel-title">Evolución</h1>
-                            </div>
-                            <div class="panel-body">
-                                <div id="LinealBruto" style="height:212px"></div>
-                            </div>
+            </div>
+            <div id="bdy_Brutas" class="panel-body">
+                <div class="col-sm-8">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Evolución de Colocaciones Brutas MM$</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div id="LinealBruto" style="height:212px"></div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Cumplimiento</h3>
-                            </div>
-                            <div class="panel-body">
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Cumplimiento Acumulado</h3>
+                        </div>
+                        <div class="panel-body">
 
-                                <div class="panel panel-success panel-colorful">
-                                    <div class="pad-all text-center">
+                            <div class="panel panel-success panel-colorful">
+                                <div class="pad-all text-center">
 
-                                        <!--Gauge placeholder-->
-                                        <canvas id="demo-gauge_brutas" height="107" class="canvas-responsive"></canvas>
-                                        <p>
-                                            <span id="demo-gauge_brutas-text" class="text-lg text-semibold"></span>% Cumplimiento
-                                        </p>
-                                    </div>
-                                    <div class="pad-ver bg-trans-light">
-                                        <ul class="list-unstyled row text-center">
-
-                                            <!--Gauge info-->
-                                            <li>
-
-                                            </li>
-                                            <li class="col-xs-3">
-                                                <p></p>
-                                            </li>
-                                            <li class="col-xs-3">
-                                                <b><p>Real</p></b>
-                                                <span id="cRealBruto"></span>
-                                            </li>
-                                            <li class="col-xs-3">
-                                                <b><p>Presupuesto</p></b>
-                                                <span id="PptoBruto"></span>
-                                            </li>
-                                            <li class="col-xs-3">
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <!--Gauge placeholder-->
+                                    <canvas id="demo-gauge_brutas" height="107" class="canvas-responsive"></canvas>
+                                    <p>
+                                        <span id="demo-gauge_brutas-text" class="text-lg text-semibold"></span>% Cumplimiento
+                                    </p>
                                 </div>
+                                <div class="pad-ver bg-trans-light">
+                                    <ul class="list-unstyled row text-center">
 
+                                        <!--Gauge info-->
+                                        <li>
+
+                                        </li>
+                                        <li class="col-xs-3">
+                                            <p></p>
+                                        </li>
+                                        <li class="col-xs-3">
+                                            <b><p>Real</p></b>
+                                            <span id="cRealBruto"></span>
+                                        </li>
+                                        <li class="col-xs-3">
+                                            <b><p>Presupuesto</p></b>
+                                            <span id="PptoBruto"></span>
+                                        </li>
+                                        <li class="col-xs-3">
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
+
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h1 class="panel-title">Mensual</h1>
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                @*<th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">&nbsp;</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Enero</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Febrero</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Marzo</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Abril</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Mayo</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Junio</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Julio</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Agosto</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Septiembre</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Octubre</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Noviembre</th>
-                                                    <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0;">Diciembre</th>*@
-                                            </tr>
-                                            <tr>
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0;color:#FFFFFF;">&nbsp;MM$</th>
-                                                @* <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Ene</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Feb</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Mar</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Abr</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">May</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Jun</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Jul</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Ago</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Sept</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                <th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Oct</th>
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Nov</th>
-                                                    @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;"> Bruto</th>*@
-                                                @*<th style="text-align:center; background: #42a5f5 none repeat scroll 0 0; color:#FFFFFF;">Dic</th>*@
-                                            </tr>
-                                        </thead>
-                                        <tbody id="D_CredPptoMensualBruto"></tbody>
-                                    </table>
+                </div>
+                <div class="col-sm-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Colocaciones Mensuales Brutas MM$</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
 
-                                </div>
+
+                                <table class="table table-striped" align="center" style="margin: 0px auto;  width: 100%;  font-size: 10px;">
+                                    <thead id="headPresupuestoBruto"></thead>
+                                    <tbody id="bodyPresupuestoBruto"></tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
+</div>
 
 

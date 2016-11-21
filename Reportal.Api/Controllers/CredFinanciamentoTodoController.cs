@@ -48,7 +48,8 @@ namespace Reportal.Api.Controllers
                 Auxiliar Trab = new Auxiliar
                 {
                     Spred = Convert.ToDecimal(cft.sPread),
-                    Tasa = Convert.ToDecimal(cft.tasaPromedio)
+                    Tasa = Convert.ToDecimal(cft.tasaPromedio),
+                    Pplazo = Convert.ToInt32(cft.plazoPromedio)
                 };
                 c.Trabajador.Add(Trab);
             }
@@ -59,7 +60,8 @@ namespace Reportal.Api.Controllers
                 Auxiliar Pens = new Auxiliar
                 {
                     Spred = Convert.ToDecimal(cfp.sPread),
-                    Tasa = Convert.ToDecimal(cfp.tasaPromedio)
+                    Tasa = Convert.ToDecimal(cfp.tasaPromedio),
+                    Pplazo = Convert.ToInt32(cfp.plazoPromedio)
                 };
                 c.Pensionado.Add(Pens);
             }
@@ -70,7 +72,8 @@ namespace Reportal.Api.Controllers
                 Auxiliar Totales = new Auxiliar
                 {
                     Spred = Convert.ToDecimal(cftot.sPread),
-                    Tasa = Convert.ToDecimal(cftot.tasaPromedio)
+                    Tasa = Convert.ToDecimal(cftot.tasaPromedio),
+                    Pplazo = Convert.ToInt32(cftot.plazoPromedio)
                 };
                 c.Total.Add(Totales);
             }
