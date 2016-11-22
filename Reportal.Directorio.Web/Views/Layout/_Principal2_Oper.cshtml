@@ -18,15 +18,15 @@
     <link href="~/getstart/plugins/pace/pace.min.css" rel="stylesheet">
 
     <script src="~/getstart/js.app/Utilities.js"></script>
-    <script src="~/getstart/plugins/pace/pace.min.js"></script>
     <script src="~/getstart/js/jquery-2.2.4.min.js"></script>
+    <script src="~/getstart/plugins/pace/pace.min.js"></script>
     <script src="~/getstart/js.app/App.Security.js"></script>
     <script src="~/getstart/js/bootstrap.min.js"></script>
     <script src="~/getstart/js/nifty.js"></script>
 
 
     <script type="text/javascript">
-
+        var resizefunc = [];
 
         $(function () {
             var ud = {}
@@ -44,11 +44,11 @@
             });
         });
 
-        var resizefunc = [];
+        
     </script>
 </head>
 <body>
-    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+    <div id="container" class="effect aside-float aside-bright mainnav-lg navbar-fixed footer-fixed">
         <header id="navbar">
             <div id="navbar-container" class="boxed">
                 <div class="navbar-header">
@@ -110,7 +110,21 @@
             <!--CONTENT CONTAINER-->
             <!--===================================================-->
             <div id="content-container">
-                @RenderBody()
+                <div id="page-title">
+                    <!--Searchbox-->
+                    @*  <div class="searchbox">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search..">
+                                <span class="input-group-btn">
+                                    <button class="text-muted" type="button"><i class="demo-pli-magnifi-glass"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    *@
+                </div>
+                <div id="page-content">
+                    @RenderBody()
+                </div>
             </div>
             <!--===================================================-->
             <!--END CONTENT CONTAINER-->
