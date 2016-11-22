@@ -1,8 +1,8 @@
 ﻿(function (window, undefined) {
 
     var ud = {}
-    if(JSON.parse(sessionStorage.getItem('userdata')) != null){
-        ud = JSON.parse(sessionStorage.getItem('userdata'));
+    if (JSON.parse(localStorage.getItem('userdata')) != null) {
+        ud = JSON.parse(localStorage.getItem('userdata'));
     }
 
 jQuery.each(["SecGetJSON", "SecPostJSON"], function (i, method) {

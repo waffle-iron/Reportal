@@ -30,15 +30,15 @@
 
         $(function () {
             var ud = {}
-            if (JSON.parse(sessionStorage.getItem('userdata')) != null) {
-                ud = JSON.parse(sessionStorage.getItem('userdata'));
+            if (JSON.parse(localStorage.getItem('userdata')) != null) {
+                ud = JSON.parse(localStorage.getItem('userdata'));
                 $(".username").html("Bienvenido: " + ud.name);
             }
 
 
             $(".SalidaPe").on("click", function () {
-                $.SecPostJSON(getSecurityApiHost() + "api/Auth/kill", function (response) {
-                    sessionStorage.clear();
+                $.SecPostJSON(getSecurityApiHost() + "api/Auth/kill").always(function () {
+                    localStorage.removeItem("userdata");
                     location.href = getAplicationHost() + "Acceso";
                 });
             });

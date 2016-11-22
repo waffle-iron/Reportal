@@ -25,6 +25,7 @@
                 $("#bdy_preaprobadosNominasPropen").html("");
                 $("#bdy_preaprobadosCanales").html("");
                 $("#bdy_preaprobadosCanalesPropen").html("");
+                $("#bdy_preaprobadosExclusiones").html("");
 
 
                 $.SecGetJSON(getReportalApiHost() + "api/SegPreaprobados/" + $("#slPeriodo").val(), function (respoonse) {
@@ -62,6 +63,7 @@
                     });
 
                 });
+
 
                 $.SecGetJSON(getReportalApiHost() + "api/SegPreaprobadosPorSegmento/" + $("#slPeriodo").val(), function (respoonse) {
 
@@ -115,8 +117,7 @@
 
                 });
 
-
-
+                
                 $.SecGetJSON(getReportalApiHost() + "api/SegPreaprobadosPorNominas/" + $("#slPeriodo").val(), function (respoonse) {
 
                     $.each(respoonse, function (i, o) {
@@ -207,6 +208,45 @@
 
                             ////.append($("<td>").html(o.WR.toMoney(1)).css("text-align", "center").css("color", "rgb(254, 86, 22)"))
                         );
+                    });
+                });
+
+
+                $.SecGetJSON(getReportalApiHost() + "api/SeguimientoVentaCascada?Periodo=" + $("#slPeriodo").val(), function (respoonse) {
+                    var cSegmento = 0, xSegmento = '';
+                    $.each(respoonse, function (i, o) {
+
+                        if (o.Segmento != xSegmento) {
+                            cSegmento = 0;
+                            $("#bdy_preaprobadosExclusiones").append(
+                                $("<tr>")
+                                    .append($("<td class=\"" + o.Segmento + "\">").html(o.Segmento).css("text-align", "center"))
+                                    .append($("<td>").html(o.Filtro).css("text-align", "left"))
+                                    .append($("<td>").html(o.N.toMoney(0)).css("text-align", "right"))
+                                    .append($("<td>").html(o.Oferta.toMoney(1)).css("text-align", "right"))
+                                    .append($("<td>").html(o.Compran.toMoney(1)).css("text-align", "right"))
+                                    .append($("<td>").html(o.Neto.toMoney(1)).css("text-align", "right"))
+                                    .append($("<td>").html(o.Bruto.toMoney(1)).css("text-align", "right"))
+                                    .append($("<td>").html(o.WR.toMoney(1) + "%").css("text-align", "right").css("font-weight", "bold"))
+                            );
+                        }
+                        else {
+                            cSegmento++;
+                            $("#bdy_preaprobadosExclusiones").append(
+                               $("<tr>")
+                                   //.append($("<td class=\"" + o.Segmento + "\">").html(o.Segmento).css("text-align", "center"))
+                                   .append($("<td>").html(o.Filtro).css("text-align", "left"))
+                                   .append($("<td>").html(o.N.toMoney(0)).css("text-align", "right"))
+                                   .append($("<td>").html(o.Oferta.toMoney(1)).css("text-align", "right"))
+                                   .append($("<td>").html(o.Compran.toMoney(1)).css("text-align", "right"))
+                                   .append($("<td>").html(o.Neto.toMoney(1)).css("text-align", "right"))
+                                   .append($("<td>").html(o.Bruto.toMoney(1)).css("text-align", "right"))
+                                   .append($("<td>").html(o.WR.toMoney(1) + "%").css("text-align", "right").css("font-weight", "bold"))
+                           );
+                        }
+
+                        xSegmento = o.Segmento;
+                        $("." + o.Segmento).attr("rowspan", cSegmento + 1).css("vertical-align", "middle")
                     });
                 });
 
@@ -311,6 +351,9 @@
                     </li>
                     <li class="">
                         <a data-toggle="tab" href="#demo-lft-tab-3" aria-expanded="false">Canales</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#exclisiones" aria-expanded="false">Exclusiones</a>
                     </li>
                 </ul>
 
@@ -487,8 +530,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="panel">
                             <div class="panel-heading">
                                 <h1 class="panel-title">Apertura por Propensión de Compra</h1>
@@ -525,6 +566,39 @@
                                         </thead>
                                         <tbody id="bdy_preaprobadosCanalesPropen"></tbody>
                                         <tfoot id="ft_preaprobadosCanalesPropen"></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="exclisiones" class="tab-pane fade">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Seguimiento exclusiones cascadas</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div>
+                                    <table class="table table-charlee table-responsive table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>&nbsp;</th>
+                                                <th>&nbsp;</th>
+                                                <th colspan="3" style="text-align:center; background: #0965ae none repeat scroll 0 0; color:#fff1f1;">Oferta</th>
+                                                <th colspan="5" style="text-align:center; background: #0965ae none repeat scroll 0 0; color:#fff1f1;">Resultado</th>
+                                            </tr>
+                                            <tr>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Segmento</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtros</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">N Exclusiones</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Oferta<br />MM$</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Compran</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Neto<br />MM$</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Bruto<br />MM$</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">#WR</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bdy_preaprobadosExclusiones"></tbody>
+                                        <tfoot id="ft_preaprobadosExclusiones"></tfoot>
                                     </table>
                                 </div>
                             </div>
