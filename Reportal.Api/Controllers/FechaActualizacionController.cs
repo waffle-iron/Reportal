@@ -8,10 +8,12 @@ using Reportal.Domain;
 using Reportal.Data;
 using Reportal.Api.Models;
 using System.Web.Http.Cors;
+using Reportal.Api.ActionFilters;
 
 namespace Reportal.Api.Controllers
 {
     [EnableCors(origins: "http://localhost, http://serv-55", headers: "*", methods: "*")]
+    [AuthorizationRequired]
     public class FechaActualizacionController : ApiController
     {
         public FechaActualizacion Get(int id)
