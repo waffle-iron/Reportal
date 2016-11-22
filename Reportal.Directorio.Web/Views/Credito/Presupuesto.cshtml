@@ -5,7 +5,7 @@
 }
 @section script{
 
-    
+
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -15,31 +15,9 @@
     <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
     <script src="~/getstart/plugins/gauge-js/gauge.min.js"></script>
     <script type="text/javascript">
-        Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
-            var n = this,
-            c = isNaN(decimals) ? 0 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
-            d = decimal_sep || ',', //if no decimal separator is passed we use the dot as default decimal separator (we MUST use a decimal separator)
-
-            /*
-            according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
-            the fastest way to check for not defined parameter is to use typeof value === 'undefined'
-            rather than doing value === undefined.
-            */
-            t = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep, //if you don't want to use a thousands separator you can pass empty string as thousands_sep value
-
-            sign = (n < 0) ? '-' : '',
-
-            //extracting the absolute value of the integer part of the number and converting to string
-            i = parseInt(n = Math.abs(n).toFixed(c)) + '',
-
-            j = ((j = i.length) > 3) ? j % 3 : 0;
-            var retorno = sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
-
-            return retorno;
-        }
         $(function () {
             //grafico neeto
-            $.getJSON('http://localhost:8080/api/CreditoPresupuesto/', function (data) {
+            $.SecGetJSON(getReportalApiHost() + "api/CreditoPresupuesto/", function (data) {
 
 
                 var diasNeto = new Array();
@@ -120,7 +98,7 @@
                 });
             });
             // grafico bruto
-            $.getJSON('http://localhost:8080/api/CreditoPresupuesto/', function (data) {
+             $.SecGetJSON(getReportalApiHost() + "api/CreditoPresupuesto/", function (data) {
 
 
                 var diasBruto = new Array();
@@ -201,7 +179,7 @@
                 });
             });
             // tabla Neto
-            $.getJSON("http://localhost:8080/api/CreditoPresupuesto", function (respoonse) {
+            $.SecGetJSON(getReportalApiHost() + "api/CreditoPresupuesto", function (respoonse) {
 
                 //console.log(respoonse);
 
@@ -248,11 +226,11 @@
 
 
             });
-            $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
+            $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/2/", function (respoonse) {
                 $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
             });
             // tabla Bruto
-            $.getJSON("http://localhost:8080/api/CreditoPresupuesto", function (respoonse) {
+            $.SecGetJSON(getReportalApiHost() + "api/CreditoPresupuesto", function (respoonse) {
 
                 //console.log(respoonse);
 
@@ -299,7 +277,7 @@
 
 
             });
-            $.getJSON("http://localhost:8080/api/CredCumplimiento_Neto", function (data) {
+            $.SecGetJSON(getReportalApiHost() + "api/CredCumplimiento_Neto", function (data) {
                 $("#cReal").html(data[1].TotalNeto.toMoney())
                 $("#cPresupuesto").html(data[0].TotalNeto.toMoney())
                 // GAUGE PLUGIN demo-gauge_brutas
@@ -333,7 +311,7 @@
                 gauge.setTextField(document.getElementById("demo-gauge-text"));
 
             });
-            $.getJSON("http://localhost:8080/api/CredCumplimiento_Bruto", function (data) {
+            $.SecGetJSON(getReportalApiHost() + "api/CredCumplimiento_Bruto", function (data) {
                 $("#cRealBruto").html(data[1].Total.toMoney())
                 $("#PptoBruto").html(data[0].Total.toMoney())
                 // http://bernii.github.io/gauge.js/

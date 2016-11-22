@@ -48,7 +48,7 @@
                 $("#LinealDiariaPromedio").html("");
                 $("#LinealDiariaPromedioRenta").html("");
 
-                $.getJSON("http://localhost:8080/api/CreditoColocAcumulada/" + $("#slPeriodo").val(), function (respoonse) {
+              $.SecGetJSON(getReportalApiHost() + "api/CreditoColocAcumulada/" + $("#slPeriodo").val(), function (respoonse) {
                     $.each(respoonse, function (i, o) {
                         $("#CreditoColocAcumulada").append(
                                 $("<tr>").append($("<th>").html(o.Item).attr("scope", "row"))
@@ -59,7 +59,7 @@
                         );
                     });
                 });
-                $.getJSON("http://localhost:8080/api/CredColocDiariaTable/" + $("#slPeriodo").val(), function (respoonse) {
+              $.SecGetJSON(getReportalApiHost() + "api/CredColocDiariaTable/" + $("#slPeriodo").val(), function (respoonse) {
                     $.each(respoonse, function (i, o) {
                         if (o.Descripcion == "N° Créditos") {
                             $("#CreditoColocAcumulada1").append(
@@ -78,7 +78,7 @@
                         }
                     });
                 });
-                $.getJSON("http://localhost:8080/api/CreditoColoc_Diaria/" + $("#slPeriodo").val(), function (data) {
+              $.SecGetJSON(getReportalApiHost() + "api/CreditoColoc_Diaria/" + $("#slPeriodo").val(), function (data) {
 
 
 
@@ -155,7 +155,7 @@
                         }]
                     });
                 });
-                $.getJSON("http://localhost:8080/api/CreditoColoc_Diaria/" + $("#slPeriodo").val(), function (data) {
+              $.SecGetJSON(getReportalApiHost() + "api/CreditoColoc_Diaria/" + $("#slPeriodo").val(), function (data) {
 
 
 
@@ -223,7 +223,7 @@
                         }]
                     });
                 });
-                $.getJSON("http://localhost:8080/api/CredColocDiariaProm/" + $("#slPeriodo").val(), function (data) {
+              $.SecGetJSON(getReportalApiHost() + "api/CredColocDiariaProm/" + $("#slPeriodo").val(), function (data) {
                     var dias = new Array();
                     var bruta = new Array();
                     var neta = new Array();
@@ -303,7 +303,7 @@
                         }]
                     });
                 });
-                $.getJSON("http://localhost:8080/api/CreditoColocDiaria_Prom/" + $("#slPeriodo").val(), function (data) {
+              $.SecGetJSON(getReportalApiHost() + "api/CreditoColocDiaria_Prom/" + $("#slPeriodo").val(), function (data) {
                     var dias = new Array();
                     var renta = new Array();
                     $.each(data, function (i, e) {
@@ -367,7 +367,7 @@
                         }]
                     });
                 });
-                $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
+              $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/2/", function (respoonse) {
                     $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
                 });
             });

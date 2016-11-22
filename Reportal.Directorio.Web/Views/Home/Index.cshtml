@@ -16,31 +16,9 @@
     <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
     <script src="~/getstart/plugins/gauge-js/gauge.min.js"></script>
     <script type="text/javascript">
-        Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
-            var n = this,
-            c = isNaN(decimals) ? 0 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
-            d = decimal_sep || ',', //if no decimal separator is passed we use the dot as default decimal separator (we MUST use a decimal separator)
-
-            /*
-            according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
-            the fastest way to check for not defined parameter is to use typeof value === 'undefined'
-            rather than doing value === undefined.
-            */
-            t = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep, //if you don't want to use a thousands separator you can pass empty string as thousands_sep value
-
-            sign = (n < 0) ? '-' : '',
-
-            //extracting the absolute value of the integer part of the number and converting to string
-            i = parseInt(n = Math.abs(n).toFixed(c)) + '',
-
-            j = ((j = i.length) > 3) ? j % 3 : 0;
-            var retorno = sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
-
-            return retorno;
-        }
 
         function Cargar1() {
-            $.getJSON("http://localhost:8080/api/DirectorioDashboard", function (data) {
+            $.SecGetJSON(getReportalApiHost() + "api/DirectorioDashboard", function (data) {
 
 
 
@@ -117,24 +95,24 @@
                     }]
                 });
 
-               
+
             });
         }
 
         $(function () {
-            $.getJSON("http://localhost:8080/api/CreditoColoc_Dashboard", function (respoonse) {
+            $.SecGetJSON(getReportalApiHost() + "api/CreditoColoc_Dashboard", function (respoonse) {
                 $("#idNetoHoy").html(respoonse.Neta.toMoney());
                 $("#idBrutoHoy").html(respoonse.Bruta.toMoney());
             });
-            $.getJSON("http://localhost:8080/api/CreditoColoc_DashboardAnt", function (respoonse) {
+            $.SecGetJSON(getReportalApiHost() + "api/CreditoColoc_DashboardAnt", function (respoonse) {
                 $("#idNetoAnt").html(respoonse.Neta.toMoney());
                 $("#idBrutoAnt").html(respoonse.Bruta.toMoney());
             });
-            $.getJSON("http://localhost:8080/api/CreditoColoc_DashboardVenta", function (respoonse) {
+            $.SecGetJSON(getReportalApiHost() + "api/CreditoColoc_DashboardVenta", function (respoonse) {
                 $("#idNetoAcumulado").html(respoonse.Neta_Table.toMoney());
                 $("#idBrutoAcumulado").html(respoonse.Bruta_Table.toMoney());
             });
-            $.getJSON("http://localhost:8080/api/CreditoColoc_DashboardCumplimiento", function (respoonse) {
+            $.SecGetJSON(getReportalApiHost() + "api/CreditoColoc_DashboardCumplimiento", function (respoonse) {
                 $("#idNetocumplimiento").html(respoonse.Neta_Table.toMoney() + "%");
                 $("#idBrutocumplimiento").html(respoonse.Bruta_Table.toMoney() + "%");
                 $("#progresNeta").css("width", respoonse.Neta_Table + '%')
@@ -143,7 +121,7 @@
                 $("#progresBruta1").html(respoonse.Bruta_Table + "%");
 
             });
-            $.getJSON("http://localhost:8080/api/DirectorioDashboard", function (data) {
+            $.SecGetJSON(getReportalApiHost() + "api/DirectorioDashboard", function (data) {
 
 
 
@@ -227,7 +205,7 @@
                 });
             });
             //Cargar1();
-            $.getJSON("http://localhost:8080/api/CreditoColoc_DashboardGrafico", function (data) {
+            $.SecGetJSON(getReportalApiHost() + "api/CreditoColoc_DashboardGrafico", function (data) {
                 console.log(data[0].Descripcion)
                 $("#numCredito").html(data[0].Bruta_Table.toMoney());
                 $("#tMax").html(data[2].Bruta_Table.toMoney());
@@ -238,13 +216,13 @@
 
                 $("#LinealDiaria").css("display", "block")
                 $("#LinealPpto").css("display", "none")
-           
+
             });
             $("#btnStats1").on("click", function () {
                 Cargar1()
                 $("#LinealDiaria").css("display", "none")
                 $("#LinealPpto").css("display", "inline")
-            
+
             });
         });
 

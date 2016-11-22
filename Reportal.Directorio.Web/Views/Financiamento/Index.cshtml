@@ -4,7 +4,7 @@
     Layout = "~/Views/Layout/_Principal2_Oper.cshtml";
 }
 @section script{
-    
+
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -17,7 +17,7 @@
         $(function () {
             /*PRUEBAS*/
             /*Tasa*/
-            $.getJSON("http://localhost:8080/api/CredFinanciamentoTodo", function (respoonse) {
+            $.SecGetJSON(getReportalApiHost() + "api/CredFinanciamentoTodo", function (respoonse) {
 
                 //console.log(respoonse);
 
@@ -59,7 +59,7 @@
 
             });
             /*Spread*/
-            $.getJSON("http://localhost:8080/api/CredFinanciamentoTodo", function (respoonse) {
+            $.SecGetJSON(getReportalApiHost() + "api/CredFinanciamentoTodo", function (respoonse) {
 
                 //console.log(respoonse);
 
@@ -101,7 +101,7 @@
 
             });
             /* Plazo Promedio*/
-            $.getJSON("http://localhost:8080/api/CredFinanciamentoTodo", function (respoonse) {
+            $.SecGetJSON(getReportalApiHost() + "api/CredFinanciamentoTodo", function (respoonse) {
 
                 $("#headFinanciamientoPlazo").append($("<tr class=\"primero\">"));
                 $("#headFinanciamientoPlazo > tr.primero").append($("<th>").attr("rowspan", "1").html("").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
@@ -127,7 +127,7 @@
                 $("#bodyFinanciamientoPlazo > tr.pensionado").append($("<th>").html("Pensionado").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 $.each(respoonse.Pensionado, function (i, e) {
                     //$("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
-                    $("#bodyFinanciamientoPlazo > tr.pensionado").append($("<td>").html(e.Pplazo ));
+                    $("#bodyFinanciamientoPlazo > tr.pensionado").append($("<td>").html(e.Pplazo));
                 });
 
                 $("#bodyFinanciamientoPlazo").append($("<tr class=\"total\">"));
@@ -145,7 +145,7 @@
                 $("#LinealPensionado").html("");
 
                 /*Tasa*/
-                $.getJSON("http://localhost:8080/api/CreditoFinanciamento/" + $("#slPeriodo").val(), function (data) {
+                $.SecGetJSON(getReportalApiHost() + "api/CreditoFinanciamento/" + $("#slPeriodo").val(), function (data) {
 
                     var dias = new Array();
                     var tasaPromedio1 = new Array();
@@ -248,14 +248,14 @@
                 /*Spread*/
 
 
-                $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
+                $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/2/", function (respoonse) {
                     $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
                 });
 
             });
             $("#slPeriodo2").on("change", function () {
                 $("#LinealSpread").html("");
-                $.getJSON("http://localhost:8080/api/CreditoFinanciamento/" + $("#slPeriodo2").val(), function (data) {
+                $.SecGetJSON(getReportalApiHost() + "api/CreditoFinanciamento/" + $("#slPeriodo2").val(), function (data) {
 
                     var diasSpread = new Array();
                     var SpreadPensionado = new Array();
@@ -355,17 +355,17 @@
                     });
                 });
 
-                $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
+                $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/2/", function (respoonse) {
                     $("#Leyend_FechaActualizacion2").html(respoonse.ActualizacionLeyenda);
                 });
-                $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
+                $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/2/", function (respoonse) {
                     $("#Leyend_FechaActualizacion3").html(respoonse.ActualizacionLeyenda);
                 });
 
             });
             $("#slPeriodo3").on("change", function () {
                 $("#LinealPlazo").html("");
-                $.getJSON("http://localhost:8080/api/CreditoFinanciamento/" + $("#slPeriodo3").val(), function (data) {
+                $.SecGetJSON(getReportalApiHost() + "api/CreditoFinanciamento/" + $("#slPeriodo3").val(), function (data) {
 
                     var diasPlazo = new Array();
                     var PlazoPensionado = new Array();
@@ -446,13 +446,13 @@
                         }]
                     });
                 });
-                $.getJSON("http://localhost:8080/api/FechaActualizacion/2/", function (respoonse) {
+                $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/2/", function (respoonse) {
                     $("#Leyend_FechaActualizacion2").html(respoonse.ActualizacionLeyenda);
                 });
             });
 
             $("#slPeriodo").trigger("change");
-            
+
 
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
