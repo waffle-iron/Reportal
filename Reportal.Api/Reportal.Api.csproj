@@ -141,6 +141,8 @@
     <Folder Include="Views\CreditoColoc_Dashboard\" />
     <Folder Include="Views\CreditoColoc_Diaria\" />
     <Folder Include="Views\CreditoFinanciamento\" />
+    <Folder Include="Views\CreditoPptoByGrafico\" />
+    <Folder Include="Views\CreditoPresupuesto\" />
     <Folder Include="Views\D_CredPptoMensual\" />
     <Folder Include="Views\Reprogramaciones\" />
     <Folder Include="Views\SegPreaprobadosBySegmento\" />
@@ -200,6 +202,9 @@
     <Compile Include="Controllers\CreditoColoc_DashboardGraficoController.cs" />
     <Compile Include="Controllers\CreditoColoc_DashboardVentaController.cs" />
     <Compile Include="Controllers\CreditoColoc_DashboardController.cs" />
+    <Compile Include="Controllers\CreditoPptoByGraficoController.cs" />
+    <Compile Include="Controllers\CreditoPresupuestoController.cs" />
+    <Compile Include="Controllers\DirectorioDashboardController.cs" />
     <Compile Include="Controllers\CreditoColoc_DiariaController.cs" />
     <Compile Include="Controllers\CreditoFinanciamentoController.cs" />
     <Compile Include="Controllers\DetalleCampaniaController.cs" />
@@ -264,6 +269,7 @@
     <Compile Include="Models\CastigosNetos_PensRepository.cs" />
     <Compile Include="Models\CastigosNetos_Trab_PorcRepository.cs" />
     <Compile Include="Models\ContenedorBase.cs" />
+    <Compile Include="Models\ContenedorBasePpto.cs" />
     <Compile Include="Models\CredColoc_DiariaPromedio.cs" />
     <Compile Include="Models\CredFinanciamentoTodo.cs" />
     <Compile Include="Models\CredCumplimiento_Neto.cs" />

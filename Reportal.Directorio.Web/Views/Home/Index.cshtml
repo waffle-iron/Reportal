@@ -1,22 +1,126 @@
 ﻿@{
     ViewBag.Title = "Directorio - La Araucana";
-    Layout = "~/Views/Layout/_Principal2_Oper.cshtml";
+    Layout = "~/Views/Layout/_Principal.cshtml";
     ViewBag.ActiveMenu = "";
     ViewBag.ActiveMenuRoot = "";
 
 }
 
 @section script{
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<!-- Additional files for the Highslide popup effect -->
-<script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
-<script src="https://www.highcharts.com/samples/static/highslide.config.js" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
-<script src="~/getstart/plugins/gauge-js/gauge.min.js"></script>
-   <script type="text/javascript">
-       
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <!-- Additional files for the Highslide popup effect -->
+    <script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
+    <script src="https://www.highcharts.com/samples/static/highslide.config.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
+    <script src="~/getstart/plugins/gauge-js/gauge.min.js"></script>
+    <script type="text/javascript">
+        Number.prototype.toMoney = function (decimals, decimal_sep, thousands_sep) {
+            var n = this,
+            c = isNaN(decimals) ? 0 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
+            d = decimal_sep || ',', //if no decimal separator is passed we use the dot as default decimal separator (we MUST use a decimal separator)
+
+            /*
+            according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
+            the fastest way to check for not defined parameter is to use typeof value === 'undefined'
+            rather than doing value === undefined.
+            */
+            t = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep, //if you don't want to use a thousands separator you can pass empty string as thousands_sep value
+
+            sign = (n < 0) ? '-' : '',
+
+            //extracting the absolute value of the integer part of the number and converting to string
+            i = parseInt(n = Math.abs(n).toFixed(c)) + '',
+
+            j = ((j = i.length) > 3) ? j % 3 : 0;
+            var retorno = sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
+
+            return retorno;
+        }
+
+        function Cargar1() {
+            $.getJSON("http://localhost:8080/api/DirectorioDashboard", function (data) {
+
+
+
+                var dias = new Array();
+                var Realneta = new Array();
+                var Pptneta = new Array();
+                $.each(data, function (i, e) {
+                    dias[i] = e.DiaGraf;
+                    Realneta[i] = e.RealNeta;
+                    Pptneta[i] = e.PptNeta;
+                });
+                $('#LinealPpto').highcharts({
+                    colors: ['#8bc34a', '#FF0000'],//FF0000
+                    title: {
+                        style: {
+                            color: '#758697',
+                            fontFamily: 'Open Sans',
+                            fontSize: '15px'
+                        },
+                        text: '<b>Colocaciones Netas M$</b>',
+                        x: 10, //center
+                        y: 5
+                    },
+                    subtitle: {
+                        text: '',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: dias
+                    },
+                    yAxis: [{ // Primary yAxis
+                        labels: {
+                            formatter: function () {
+                                return this.value.toMoney();
+                            },
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        },
+                        title: {
+                            text: '',
+                            formatter: function () {
+                                return this.value.toMoney();
+                            },
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        }
+                    }],
+
+                    credits: { enabled: false },
+                    exporting: { enabled: false },
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'left',
+                        verticalAlign: 'top',
+                        borderWidth: 0
+                    },
+                    series: [{
+                        name: 'Real',
+                        data: Realneta,//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        tooltip: {
+                            formatter: function () {
+                                return this.value.toMoney();
+                            },
+                            valueSuffix: ' M$'
+                        }
+                    }, {
+                        name: 'Ppto',
+                        data: Pptneta,//, data[1].Noviembre_Bruto, data[1].Diciembre_Bruto]
+                        tooltip: {
+                            valueSuffix: 'M$'
+                        }
+                    }]
+                });
+
+               
+            });
+        }
+
         $(function () {
             $.getJSON("http://localhost:8080/api/CreditoColoc_Dashboard", function (respoonse) {
                 $("#idNetoHoy").html(respoonse.Neta.toMoney());
@@ -37,21 +141,19 @@
                 $("#progresNeta1").html(respoonse.Neta_Table + "%");
                 $("#progresBruta").css("width", respoonse.Bruta_Table.toMoney() + '%')
                 $("#progresBruta1").html(respoonse.Bruta_Table + "%");
-               
-            });
 
-            $.getJSON("http://localhost:8080/api/CreditoColoc_Diaria/201611/", function (data) {
+            });
+            $.getJSON("http://localhost:8080/api/DirectorioDashboard", function (data) {
 
 
 
                 var dias = new Array();
-                var bruta = new Array();
-                var neta = new Array();
-                var repac = new Array();
+                var Realbruta = new Array();
+                var Pptbruta = new Array();
                 $.each(data, function (i, e) {
                     dias[i] = e.DiaGraf;
-                    bruta[i] = e.Bruta;
-                    neta[i] = e.Neta;
+                    Realbruta[i] = e.RealBruta;
+                    Pptbruta[i] = e.PptBruta;
 
 
                 });
@@ -59,14 +161,21 @@
                 //  console.log(dias)
 
                 $('#LinealDiaria').highcharts({
-                    colors: ['#42a5f5', '#8bc34a'],
+                    colors: ['#00bcd4', '#FF0000'],
                     title: {
-                        text: '',
-                        x: -20 //center
+                        style: {
+                            color: '#758697',
+                            fontFamily: 'Open Sans',
+                            fontSize: '15px'
+                        },
+                        text: '<b>Colocaciones Brutas M$</b>',
+                        x: 10, //center
+                        y: 5
                     },
                     subtitle: {
                         text: '',
-                        x: -20
+                        x: -20,
+                        y: 20
                     },
                     xAxis: {
                         categories: dias
@@ -81,7 +190,7 @@
                             }
                         },
                         title: {
-                            text: 'M$',
+                            text: '',
                             formatter: function () {
                                 return this.value.toMoney();
                             },
@@ -101,7 +210,7 @@
                     },
                     series: [{
                         name: 'Real',
-                        data: bruta,//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        data: Realbruta,//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
                         tooltip: {
                             formatter: function () {
                                 return this.value.toMoney();
@@ -109,230 +218,250 @@
                             valueSuffix: ' M$'
                         }
                     }, {
-                        name: 'Presupuesto',
-                        data: neta,//, data[1].Noviembre_Bruto, data[1].Diciembre_Bruto]
+                        name: 'Ppto',
+                        data: Pptbruta,//, data[1].Noviembre_Bruto, data[1].Diciembre_Bruto]
                         tooltip: {
                             valueSuffix: 'M$'
                         }
                     }]
                 });
             });
-
+            //Cargar1();
             $.getJSON("http://localhost:8080/api/CreditoColoc_DashboardGrafico", function (data) {
                 console.log(data[0].Descripcion)
                 $("#numCredito").html(data[0].Bruta_Table.toMoney());
                 $("#tMax").html(data[2].Bruta_Table.toMoney());
                 $("#tMin").html(data[3].Bruta_Table.toMoney());
                 $("#tProm").html(data[4].Bruta_Table.toMoney());
-
             });
-          
+            $("#btnStats").on("click", function () {
+
+                $("#LinealDiaria").css("display", "block")
+                $("#LinealPpto").css("display", "none")
+           
+            });
+            $("#btnStats1").on("click", function () {
+                Cargar1()
+                $("#LinealDiaria").css("display", "none")
+                $("#LinealPpto").css("display", "inline")
+            
+            });
         });
-</script>
+
+    </script>
 }
 <div id="page-title">
-    <h1 class="page-header text-overflow">Dashboard</h1>
-    </div>
+</div>
 <div class="tab-content">
     <div>
-    <div class="panel">
-    <div class="panel-body">
-        <div class="col-lg-7">
-            <div id="demo-panel-network" class="panel">
-                @*<div class="panel-heading">
-                    <h3 class="panel-title">Network</h3>
-                </div>*@
-                <!--Graficos segun seleccione-->
+        <div class="panel">
+            <div class="panel-body">
+                <div class="col-lg-7">
+                    @*<div class="panel-heading">
+                            <h3 class="panel-title">Network</h3>
+                        </div>*@
+                    <!--Graficos segun seleccione-->
+                    <div id="LinealDiaria" class="morris-full-content"></div>
+                    <div id="LinealPpto" class="morris-full-content" style="display:none;"></div>
 
-                <div id="LinealDiaria" class="morris-full-content"></div>
-                    <!--Chart information-->
-                    <div class="panel-body">
-                        <div class="row pad-top">
-                            <div class="col-lg-8">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <div class="media ">
-                                            <p class="text-semibold text-lg-left">Crédito</p>
-                                            <div class="text-center">
-                                                <span class="text-lg" id="numCredito">
-                                                    0
-                                                </span>
+                    @*
+                        <!--Chart information-->
+                          <div class="panel-body">
+                              <div class="row pad-top">
+                                  <div class="col-lg-8">
+                                      <div class="media">
+                                          <div class="media-left">
+                                              <div class="media ">
+                                                  <p class="text-semibold text-lg-left">Crédito</p>
+                                                  <div class="text-center">
+                                                      <span class="text-lg" id="numCredito">
+                                                          0
+                                                      </span>
+                                                  </div>
+
+                                              </div>
+                                          </div>
+                                          <div class="media-left">
+                                              <div class="media">
+                                                  <p class="text-semibold text-lg-left"></p>
+                                                  <div class="text-center">
+                                                      <span class="text-lg">
+
+                                                      </span>
+                                                  </div>
+
+                                              </div>
+                                          </div>
+                                          <div class="media-left">
+                                             <div class="">
+                                                  <p class="text-semibold text-lg-left">Ticket Máximo</p>
+                                              <div class="text-center">
+                                                  <span class="text-lg" id="tMax">
+                                                      0
+                                                  </span>
+                                              </div>
+
+                                          </div>
+                                          </div>
+                                          <div class="media-left">
+                                              <div class="media">
+                                                  <p class="text-semibold text-lg-left">Ticket Min</p>
+                                                  <div class="text-center">
+                                                      <span class="text-lg" id="tMin">
+                                                          0
+                                                      </span>
+                                                  </div>
+
+                                              </div>
+                                          </div>
+                                          <div class="media-left">
+                                              <div class="media ">
+                                                  <p class="text-semibold text-lg-left">Ticket Promedio</p>
+                                                  <div class="text-center">
+                                                      <span class="text-lg" id="tProm">
+                                                          0
+                                                      </span>
+                                                  </div>
+
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                              </div>
+                          </div>
+                    *@
+
+                </div>
+                <div class="col-lg-5">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-6">
+                            <div class="panel panel-info panel-colorful" id="btnStats">
+                                <div class="pad-all">
+                                    <span class="text-bold">Colocaciones Brutas M$</span>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idBrutoHoy">M$0</span>
+                                        Hoy
+                                    </p>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idBrutoAnt">0</span>
+                                        Ayer
+                                    </p>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idBrutoAcumulado">0</span>
+                                        Acumulado
+                                    </p>
+                                </div>
+                                <div class="pad-all">
+                                    <ul class="list-group list-unstyled">
+                                        <li class="mar-btm">
+                                            <span class="pull-right text-bold" id="progresBruta1">0%</span>
+                                            <p>Cumplimiento</p>
+                                            <div class="progress progress-md">
+                                                <div id="progresBruta" style="width: 0%;" class="progress-bar progress-bar-light">
+                                                    <span class="sr-only">0%</span>
+                                                </div>
                                             </div>
-                                         
-                                        </div>
-                                    </div>
-                                    <div class="media-left">
-                                       <div class="">
-                                            <p class="text-semibold text-lg-left">Ticket Máximo</p>
-                                        <div class="text-center">
-                                            <span class="text-lg" id="tMax">
-                                                0
-                                            </span>
-                                        </div>
-
-                                    </div>
-                                    </div>
-                                    <div class="media-left">
-                                        <div class="media">
-                                            <p class="text-semibold text-lg-left">Ticket Min</p>
-                                            <div class="text-center">
-                                                <span class="text-lg" id="tMin">
-                                                    0
-                                                </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-6">
+                            <div style="background:#8bc34a; color:#fff" id="btnStats1">
+                                <div class="pad-all">
+                                    <span class="text-bold">Colocaciones Netas M$</span>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idNetoHoy">0</span>
+                                        Hoy
+                                    </p>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idNetoAnt">0</span>
+                                        Ayer
+                                    </p>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idNetoAcumulado">0</span>
+                                        Acumulado
+                                    </p>
+                                </div>
+                                <div class="pad-all">
+                                    <ul class="list-group list-unstyled">
+                                        <li class="mar-btm">
+                                            <span class="pull-right text-bold" id="progresNeta1">15%</span>
+                                            <p>Cumplimiento</p>
+                                            <div class="progress progress-md">
+                                                <div id="progresNeta" style="width: 0%;" class="progress-bar progress-bar-light">
+                                                    <span class="sr-only">0%</span>
+                                                </div>
                                             </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
-                                        </div>
+                    </div>
+
+                    @*
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-6">
+
+                                <!--Sparkline bar chart -->
+                                <div class="panel panel-purple panel-colorful">
+                                    <div class="pad-all">
+                                        <p class="text-lg text-semibold"><i class="demo-pli-bag-coins icon-fw"></i> Sales</p>
+                                        <p class="mar-no">
+                                            <span class="pull-right text-bold">$764</span>
+                                            Today
+                                        </p>
+                                        <p class="mar-no">
+                                            <span class="pull-right text-bold">$1,332</span>
+                                            Last 7 Day
+                                        </p>
                                     </div>
-                                    <div class="media-left">
-                                        <div class="media ">
-                                            <p class="text-semibold text-lg-left">Ticket Promedio</p>
-                                            <div class="text-center">
-                                                <span class="text-lg" id="tProm">
-                                                    0
-                                                </span>
-                                            </div>
+                                    <div class="pad-all text-center">
 
-                                        </div>
+                                        <!--Placeholder-->
+                                        <div id="demo-sparkline-bar" class="box-inline"></div>
+
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-6 col-lg-6">
 
-                        </div>
-                    </div>
-                </div>
-        </div>
-        <div class="col-lg-5">
-            <div class="row">
-                <div class="col-sm-6 col-lg-6">
-                    <!--Sparkline Line Chart-->
-                    <div class="panel panel-info panel-colorful">
-                        <div class="pad-all">
-                            <p class="text-lg text-semibold"> Colocaciones Brutas</p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold" id="idBrutoHoy">M$0</span>
-                                Hoy
-                            </p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold" id="idBrutoAnt">0</span>
-                                Ayer
-                            </p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold" id="idBrutoAcumulado">0</span>
-                                Acumulado
-                            </p>
-                        </div>
-                        <div class="pad-all">
-                            <ul class="list-group list-unstyled">
-                                <li class="mar-btm">
-                                    <span class="label  pull-right" id="progresBruta1">0%</span>
-                                    <p>Cumplimiento</p>
-                                    <div class="progress progress-md">
-                                        <div id="progresBruta" style="width: 0%;" class="progress-bar progress-bar-light">
-                                            <span class="sr-only">0%</span>
-                                        </div>
+                                <!--Sparkline pie chart -->
+                                <div class="panel panel-warning panel-colorful">
+                                    <div class="pad-all">
+                                        <p class="text-lg text-semibold"><i class="demo-pli-check icon-fw"></i> Task Progress</p>
+                                        <p class="mar-no">
+                                            <span class="pull-right text-bold">34</span>
+                                            Completed
+                                        </p>
+                                        <p class="mar-no">
+                                            <span class="pull-right text-bold">79</span>
+                                            Total
+                                        </p>
                                     </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-6">
-
-                    <!--Sparkline Area Chart-->
-                    <div style="background:#8bc34a; color:#fff">
-                        <div class="pad-all">
-                            <p class="text-lg text-semibold">Colocaciones Netas</p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold" id="idNetoHoy">0</span>
-                               Hoy
-                            </p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold" id="idNetoAnt">0</span>
-                                Ayer
-                            </p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold" id="idNetoAcumulado">0</span>
-                                Acumulado
-                            </p>
-                        </div>
-                        <div class="pad-all">
-                            <ul class="list-group list-unstyled">
-                                <li class="mar-btm">
-                                    <span class="label  pull-right" id="progresNeta1">15%</span>
-                                    <p>Cumplimiento</p>
-                                    <div class="progress progress-md">
-                                        <div id="progresNeta"  style="width: 0%;" class="progress-bar progress-bar-light">
-                                            <span class="sr-only">0%</span>
-                                        </div>
+                                    <div class="pad-all">
+                                        <ul class="list-group list-unstyled">
+                                            <li class="mar-btm">
+                                                <span class="label label-warning pull-right">15%</span>
+                                                <p>Progress</p>
+                                                <div class="progress progress-md">
+                                                    <div style="width: 15%;" class="progress-bar progress-bar-light">
+                                                        <span class="sr-only">15%</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-              
-            </div>
 
-            @*
-            <div class="row">
-                <div class="col-sm-6 col-lg-6">
-
-                    <!--Sparkline bar chart -->
-                    <div class="panel panel-purple panel-colorful">
-                        <div class="pad-all">
-                            <p class="text-lg text-semibold"><i class="demo-pli-bag-coins icon-fw"></i> Sales</p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">$764</span>
-                                Today
-                            </p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">$1,332</span>
-                                Last 7 Day
-                            </p>
-                        </div>
-                        <div class="pad-all text-center">
-
-                            <!--Placeholder-->
-                            <div id="demo-sparkline-bar" class="box-inline"></div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-6">
-
-                    <!--Sparkline pie chart -->
-                    <div class="panel panel-warning panel-colorful">
-                        <div class="pad-all">
-                            <p class="text-lg text-semibold"><i class="demo-pli-check icon-fw"></i> Task Progress</p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">34</span>
-                                Completed
-                            </p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">79</span>
-                                Total
-                            </p>
-                        </div>
-                        <div class="pad-all">
-                            <ul class="list-group list-unstyled">
-                                <li class="mar-btm">
-                                    <span class="label label-warning pull-right">15%</span>
-                                    <p>Progress</p>
-                                    <div class="progress progress-md">
-                                        <div style="width: 15%;" class="progress-bar progress-bar-light">
-                                            <span class="sr-only">15%</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    *@
                 </div>
             </div>
-
-            *@
         </div>
     </div>
-    </div>
-        </div>
 </div>

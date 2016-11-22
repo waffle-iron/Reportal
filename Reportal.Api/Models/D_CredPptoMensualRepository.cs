@@ -12,5 +12,10 @@ namespace Reportal.Api.Models
         {
             return D_CredPptoMensualDataAccess.ListarD_CredPptoMensual();
         }
+
+        public List<CrededitoPptoMensual> ListarByGrafico()
+        {
+            return D_CredPptoMensualDataAccess.ListarByGrafico();
+        }
     }
 }
