@@ -94,6 +94,7 @@ namespace IA.Security.Api.Controllers
 
         private HttpResponseMessage GetAuthToken(string userId)
         {
+            //si en algun momento se necesita validar con ldap de araucana, vamos a ocupar este metodo para trabajarlo
             Token token = _tokenServices.GenerateToken(userId);
             string NombreUsuario = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(UsuarioDataAccess.UsuarioData(userId).Nombres));
             var response = Request.CreateResponse(HttpStatusCode.OK, "Authorized");

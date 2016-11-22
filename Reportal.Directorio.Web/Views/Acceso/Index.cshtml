@@ -26,7 +26,7 @@
     <link href="~/getstart/css/nifty.min.css" rel="stylesheet">
 
 
-    
+
     <!--Magic Checkbox [ OPTIONAL ]-->
     <link href="~/getstart/plugins/magic-check/css/magic-check.min.css" rel="stylesheet">
 
@@ -57,10 +57,8 @@
 
 
     <script src="~/getstart/js/jquery.md5.js"></script>
-    <script type="text/javascript" src="~/getstart/js.app/App.Public.Secure.js"></script>
     <script src="~/getstart/js.app/Utilities.js"></script>
-
-
+    <script type="text/javascript" src="~/getstart/js.app/App.Public.Secure.js"></script>
 
 
 </head>
@@ -80,11 +78,11 @@
                 <div class="panel-body">
                     <div class="mar-ver pad-btm">
                         <h3 class="h4 mar-no">Acceso a Portal de Reportes Unificado</h3>
-                        <p class="text-muted">Ingrese sus datos de ususario</p>
+                        <p class="text-muted">Ingrese sus datos de usuario</p>
                     </div>
                     <form>
                         <div class="form-group">
-                            <input type="text" id="Username" class="form-control" placeholder="Username" value="@Html.Raw(User.Identity.Name)" autofocus>
+                            <input type="text" id="Username" class="form-control" placeholder="Username" autofocus>
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" placeholder="Password" id="Password">
@@ -103,13 +101,8 @@
                 </div>
             </div>
         </div>
-
-        @Html.Raw(User.Identity.Name);
-
     </div>
     <!--===================================================-->
     <!-- END OF CONTAINER -->
-
-
 </body>
 </html>

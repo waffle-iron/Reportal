@@ -1,7 +1,6 @@
 ﻿$(function () {
 
     $("#bts").on("click", function () {
-
 	    var encryptedPass = $.md5($('#Password').val()).toString().toUpperCase();
 	    jQuery.ajax({
 			url: "http://localhost:9090/api/Auth/authenticate",

@@ -39,12 +39,10 @@ namespace IA.Security.Api.Filters
         /// <returns></returns>
         protected override bool OnAuthorizeUser(string username, string password, HttpActionContext actionContext)
         {
-            //var provider = actionContext.ControllerContext.Configuration.DependencyResolver.GetService(typeof(IUserServices)) as IUserServices;
-
             Usuario ur = UsuarioDataAccess.UsuarioData(username);
             if (ur != null) {
                 if (ur.IdUsuario == username && ur.ClaveAcceso == password)
-                {
+                {    
                     var userId = ur.IdUsuario;
                     var basicAuthenticationIdentity = Thread.CurrentPrincipal.Identity as BasicAuthenticationIdentity;
                     if (basicAuthenticationIdentity != null)
