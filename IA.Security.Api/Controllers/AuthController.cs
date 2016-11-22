@@ -16,7 +16,7 @@ using System.Web.Http.Cors;
 namespace IA.Security.Api.Controllers
 {
     [RoutePrefix("api/Auth")]
-    [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost, http://serv-55", headers: "*", methods: "*")]
     public class AuthController : ApiController
     {
         private readonly TokenService _tokenServices;

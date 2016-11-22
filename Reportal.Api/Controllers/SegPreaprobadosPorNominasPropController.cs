@@ -11,7 +11,7 @@ using Reportal.Api.ActionFilters;
 
 namespace Reportal.Api.Controllers
 {
-    [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost, http://serv-55", headers: "*", methods: "*")]
     [AuthorizationRequired]
     public class SegPreaprobadosPorNominasPropController : ApiController
     {

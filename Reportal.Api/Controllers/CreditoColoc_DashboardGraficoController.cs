@@ -9,7 +9,7 @@ using Reportal.Api.Models;
 using System.Web.Http.Cors;
 namespace Reportal.Api.Controllers
 {
-    [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost, http://serv-55", headers: "*", methods: "*")]
     public class CreditoColoc_DashboardGraficoController : ApiController
     {
 

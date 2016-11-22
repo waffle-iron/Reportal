@@ -37,7 +37,7 @@ jQuery.each(["SecGetJSON", "SecPostJSON"], function (i, method) {
 $("body").css("display","none");
 //Validar los permisos de url
 jQuery.ajax({
-    url: getApiHost() + "api/Auth/permission",
+    url: getSecurityApiHost() + "api/Auth/permission",
     type: "post",
     headers: {
         "Token": ud.token,
@@ -46,7 +46,7 @@ jQuery.ajax({
     },
     statusCode: {
         401: function (a) {
-            location.href = "/DirectorioReportal/Acceso?ru=" + location.pathname
+            location.href = getAplicationHost() + "Acceso?ru=" + location.pathname
         },
         200: function () {
             $("body").css("display", "block");
