@@ -23,12 +23,26 @@ namespace Reportal.Data
 
             return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Directorio_Cred_FinanciamientoListar", pp, ConstructorEntidad);
         }
-
+        public static List<Cred_Financiamento> ListarFinanGraf()
+        {
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_sp_Cred_FinanDashBoardGraf",  ConstructorEntidad);
+        }
 
         public static List<Cred_Financiamento> ListarByTodos()
         {
             return DBHelper.InstanceReporteria.ObtenerColeccion("sp_Directorio_Cred_FinanciamientoListarTodo",  FinanciamentoTodos);
         }
+
+        public static Cred_Financiamento Obtener_Dashboard()
+        {
+            return DBHelper.InstanceReporteria.ObtenerEntidad("sp_Cred_FinanDashBoard", ConstructorEntidad);
+        }
+
+        public static Cred_Financiamento Obtener_DashboardAnterior()
+        {
+            return DBHelper.InstanceReporteria.ObtenerEntidad("sp_Cred_FinanDashBoardAnt", ConstructorEntidad);
+        }
+
 
         private static Cred_Financiamento ConstructorEntidad(DataRow row)
         {

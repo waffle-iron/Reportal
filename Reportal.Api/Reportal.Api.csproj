@@ -143,6 +143,8 @@
     <Folder Include="Views\CreditoFinanciamento\" />
     <Folder Include="Views\CreditoPptoByGrafico\" />
     <Folder Include="Views\CreditoPresupuesto\" />
+    <Folder Include="Views\DirectorioDashboardFinaGrafico\" />
+    <Folder Include="Views\DirectorioDashboardFinan\" />
     <Folder Include="Views\D_CredPptoMensual\" />
     <Folder Include="Views\Reprogramaciones\" />
     <Folder Include="Views\SegPreaprobadosBySegmento\" />
@@ -209,6 +211,9 @@
     <Compile Include="Controllers\CreditoFinanciamentoController.cs" />
     <Compile Include="Controllers\DetalleCampaniaController.cs" />
     <Compile Include="Controllers\DetalleEmpresaController.cs" />
+    <Compile Include="Controllers\DirectorioDashboardFinaGraficoController.cs" />
+    <Compile Include="Controllers\DirectorioDashboardFinanAntController.cs" />
+    <Compile Include="Controllers\DirectorioDashboardFinanController.cs" />
     <Compile Include="Controllers\D_CredPptoMensualController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EncabezadoEmpresaController.cs" />

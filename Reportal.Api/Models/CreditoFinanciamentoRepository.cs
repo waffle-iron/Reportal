@@ -13,5 +13,17 @@ namespace Reportal.Api.Models
         {
             return CreditoFinanciamentoDataAccess.Listar(id);
         }
+        public List<Cred_Financiamento> ListarDashGraf()
+        {
+            return CreditoFinanciamentoDataAccess.ListarFinanGraf();
+        }
+        public Cred_Financiamento OIbtenerDashboard()
+        {
+            return CreditoFinanciamentoDataAccess.Obtener_Dashboard();
+        }
+        public Cred_Financiamento OIbtenerDashboardAnt()
+        {
+            return CreditoFinanciamentoDataAccess.Obtener_DashboardAnterior();
+        }
     }
 }

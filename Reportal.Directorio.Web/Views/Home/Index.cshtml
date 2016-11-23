@@ -98,7 +98,6 @@
 
             });
         }
-
         $(function () {
             $.SecGetJSON(getReportalApiHost() + "api/CreditoColoc_Dashboard", function (respoonse) {
                 $("#idNetoHoy").html(respoonse.Neta.toMoney());
@@ -122,9 +121,6 @@
 
             });
             $.SecGetJSON(getReportalApiHost() + "api/DirectorioDashboard", function (data) {
-
-
-
                 var dias = new Array();
                 var Realbruta = new Array();
                 var Pptbruta = new Array();
@@ -132,12 +128,7 @@
                     dias[i] = e.DiaGraf;
                     Realbruta[i] = e.RealBruta;
                     Pptbruta[i] = e.PptBruta;
-
-
                 });
-
-                //  console.log(dias)
-
                 $('#LinealDiaria').highcharts({
                     colors: ['#00bcd4', '#FF0000'],
                     title: {
@@ -206,109 +197,199 @@
             });
             //Cargar1();
             $.SecGetJSON(getReportalApiHost() + "api/CreditoColoc_DashboardGrafico", function (data) {
-                console.log(data[0].Descripcion)
                 $("#numCredito").html(data[0].Bruta_Table.toMoney());
                 $("#tMax").html(data[2].Bruta_Table.toMoney());
                 $("#tMin").html(data[3].Bruta_Table.toMoney());
                 $("#tProm").html(data[4].Bruta_Table.toMoney());
             });
+            $.SecGetJSON(getReportalApiHost() + "api/DirectorioDashboardFinan", function (data) {
+                $("#idTasaHoy").html(data.tasaPromedio.toMoney(2) + '%');
+                $("#idPlazoHoy").html(data.plazoPromedio);
+            });
+            $.SecGetJSON(getReportalApiHost() + "api/DirectorioDashboardFinanAnt", function (data) {
+                $("#idTasaAyer").html(data.tasaPromedio.toMoney(2) + '%');
+                $("#idPlazoAyer").html(data.plazoPromedio);
+            });
+            $.SecGetJSON(getReportalApiHost() + "api/DirectorioDashboardFinaGrafico", function (data) {
+                var dias = new Array();
+                var Tasa = new Array();
+                $.each(data, function (i, e) {
+                    dias[i] = e.diaGrafico;
+                    Tasa[i] = e.tasaPromedio;
+                });
+                $('#LinealTasa').highcharts({
+                    colors: ['#ba68c8'],
+                    title: {
+                        style: {
+                            color: '#758697',
+                            fontFamily: 'Open Sans',
+                            fontSize: '15px'
+                        },
+                        text: '<b>Tasa Promedio</b>',
+                        x: 10, //center
+                        y: 5
+                    },
+                    subtitle: {
+                        text: '',
+                        x: -20,
+                        y: 20
+                    },
+                    xAxis: {
+                        categories: dias
+                    },
+                    yAxis: [{ // Primary yAxis
+                        labels: {
+                            formatter: function () {
+                                return this.value.toMoney(2);
+                            },
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        },
+                        title: {
+                            text: '',
+                            formatter: function () {
+                                return this.value.toMoney(2);
+                            },
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        }
+                    }],
+
+                    credits: { enabled: false },
+                    exporting: { enabled: false },
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'left',
+                        verticalAlign: 'top',
+                        borderWidth: 0
+                    },
+                    series: [{
+                        name: 'Tasa Promedio',
+                        data: Tasa,//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        tooltip: {
+                            pointFormat: 'Tasa Promedio: <b>{point.y:.2f}%</b><br/>',
+                            shared: true
+
+                        },
+                    
+                    }]
+                });
+            });
+            $.SecGetJSON(getReportalApiHost() + "api/DirectorioDashboardFinaGrafico", function (data) {
+                var dias = new Array();
+                var Plazo = new Array();
+                $.each(data, function (i, e) {
+                    dias[i] = e.diaGrafico;
+                    Plazo[i] = e.plazoPromedio;
+                });
+                $('#LinealPlazo').highcharts({
+                    colors: ['#ffa726'],
+                    title: {
+                        style: {
+                            color: '#758697',
+                            fontFamily: 'Open Sans',
+                            fontSize: '15px'
+                        },
+                        text: '<b>Plazo Promedio</b>',
+                        x: 10, //center
+                        y: 5
+                    },
+                    subtitle: {
+                        text: '',
+                        x: -20,
+                        y: 20
+                    },
+                    xAxis: {
+                        categories: dias
+                    },
+                    yAxis: [{ // Primary yAxis
+                        labels: {
+                            formatter: function () {
+                                return this.value.toMoney();
+                            },
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        },
+                        title: {
+                            text: '',
+                            formatter: function () {
+                                return this.value.toMoney();
+                            },
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        }
+                    }],
+
+                    credits: { enabled: false },
+                    exporting: { enabled: false },
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'left',
+                        verticalAlign: 'top',
+                        borderWidth: 0
+                    },
+                    series: [{
+                        name: 'Plazo Promedio',
+                        data: Plazo,//, data[0].Noviembre_Neto, data[0].Diciembre_Neto]
+                        tooltip: {
+                        },
+
+                    }]
+                });
+            });
+
+
             $("#btnStats").on("click", function () {
 
                 $("#LinealDiaria").css("display", "block")
                 $("#LinealPpto").css("display", "none")
+                $("#LinealTasa").css("display", "none")
+                $("#LinealPlazo").css("display", "none")
 
             });
             $("#btnStats1").on("click", function () {
                 Cargar1()
                 $("#LinealDiaria").css("display", "none")
                 $("#LinealPpto").css("display", "inline")
-
+                $("#LinealTasa").css("display", "none")
+                $("#LinealPlazo").css("display", "none")
+            });
+            $("#btnStats2").on("click", function () {
+                Cargar1()
+                $("#LinealDiaria").css("display", "none")
+                $("#LinealPpto").css("display", "none")
+                $("#LinealTasa").css("display", "inline")
+                $("#LinealPlazo").css("display", "none")
+            });
+            $("#btnStats3").on("click", function () {
+                Cargar1()
+                $("#LinealDiaria").css("display", "none")
+                $("#LinealPpto").css("display", "none")
+                $("#LinealTasa").css("display", "none")
+                $("#LinealPlazo").css("display", "inline")
             });
         });
-
     </script>
 }
 <div id="page-title">
 </div>
 <div class="tab-content">
     <div>
-        <div class="panel">
+        <div class="panel col-lg-12">
             <div class="panel-body">
                 <div class="col-lg-7">
                     @*<div class="panel-heading">
-                            <h3 class="panel-title">Network</h3>
-                        </div>*@
+                    <h3 class="panel-title">Network</h3>
+                </div>*@
                     <!--Graficos segun seleccione-->
                     <div id="LinealDiaria" class="morris-full-content"></div>
                     <div id="LinealPpto" class="morris-full-content" style="display:none;"></div>
-
-                    @*
-                        <!--Chart information-->
-                          <div class="panel-body">
-                              <div class="row pad-top">
-                                  <div class="col-lg-8">
-                                      <div class="media">
-                                          <div class="media-left">
-                                              <div class="media ">
-                                                  <p class="text-semibold text-lg-left">Crédito</p>
-                                                  <div class="text-center">
-                                                      <span class="text-lg" id="numCredito">
-                                                          0
-                                                      </span>
-                                                  </div>
-
-                                              </div>
-                                          </div>
-                                          <div class="media-left">
-                                              <div class="media">
-                                                  <p class="text-semibold text-lg-left"></p>
-                                                  <div class="text-center">
-                                                      <span class="text-lg">
-
-                                                      </span>
-                                                  </div>
-
-                                              </div>
-                                          </div>
-                                          <div class="media-left">
-                                             <div class="">
-                                                  <p class="text-semibold text-lg-left">Ticket Máximo</p>
-                                              <div class="text-center">
-                                                  <span class="text-lg" id="tMax">
-                                                      0
-                                                  </span>
-                                              </div>
-
-                                          </div>
-                                          </div>
-                                          <div class="media-left">
-                                              <div class="media">
-                                                  <p class="text-semibold text-lg-left">Ticket Min</p>
-                                                  <div class="text-center">
-                                                      <span class="text-lg" id="tMin">
-                                                          0
-                                                      </span>
-                                                  </div>
-
-                                              </div>
-                                          </div>
-                                          <div class="media-left">
-                                              <div class="media ">
-                                                  <p class="text-semibold text-lg-left">Ticket Promedio</p>
-                                                  <div class="text-center">
-                                                      <span class="text-lg" id="tProm">
-                                                          0
-                                                      </span>
-                                                  </div>
-
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-
-                              </div>
-                          </div>
-                    *@
+                    <div id="LinealTasa" class="morris-full-content" style="display:none;"></div>
+                    <div id="LinealPlazo" class="morris-full-content" style="display:none;"></div>
 
                 </div>
                 <div class="col-lg-5">
@@ -379,67 +460,52 @@
                         </div>
 
                     </div>
-
-                    @*
-                        <div class="row">
-                            <div class="col-sm-6 col-lg-6">
-
-                                <!--Sparkline bar chart -->
-                                <div class="panel panel-purple panel-colorful">
-                                    <div class="pad-all">
-                                        <p class="text-lg text-semibold"><i class="demo-pli-bag-coins icon-fw"></i> Sales</p>
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">$764</span>
-                                            Today
-                                        </p>
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">$1,332</span>
-                                            Last 7 Day
-                                        </p>
-                                    </div>
-                                    <div class="pad-all text-center">
-
-                                        <!--Placeholder-->
-                                        <div id="demo-sparkline-bar" class="box-inline"></div>
-
-                                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-6">
+                            <div class="panel panel-purple panel-colorful" id="btnStats2">
+                                <div class="pad-all">
+                                    <p class="text-bold">Tasa Promedio</p>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idTasaHoy">0</span>
+                                        Hoy
+                                    </p>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idTasaAyer">0</span>
+                                        Ayer
+                                    </p>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idTasaAcumulado">0</span>
+                                        Acumulado
+                                    </p>
                                 </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-6">
 
-                                <!--Sparkline pie chart -->
-                                <div class="panel panel-warning panel-colorful">
-                                    <div class="pad-all">
-                                        <p class="text-lg text-semibold"><i class="demo-pli-check icon-fw"></i> Task Progress</p>
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">34</span>
-                                            Completed
-                                        </p>
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">79</span>
-                                            Total
-                                        </p>
-                                    </div>
-                                    <div class="pad-all">
-                                        <ul class="list-group list-unstyled">
-                                            <li class="mar-btm">
-                                                <span class="label label-warning pull-right">15%</span>
-                                                <p>Progress</p>
-                                                <div class="progress progress-md">
-                                                    <div style="width: 15%;" class="progress-bar progress-bar-light">
-                                                        <span class="sr-only">15%</span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+                        <div class="col-sm-6 col-lg-6">
+                            <!--Sparkline pie chart -->
+                            <div class="panel panel-warning panel-colorful" id="btnStats3">
+                                <div class="pad-all">
+                                    <p class="text-bold">Plazo Promedio</p>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idPlazoHoy">0</span>
+                                        Hoy
+                                    </p>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idPlazoAyer">0</span>
+                                        Ayer
+                                    </p>
+                                    <p class="mar-no">
+                                        <span class="pull-right text-bold" id="idPlazoAcumulado">0</span>
+                                        Acumulado
+                                    </p>
+                                </div>
 
-                    *@
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 </div>
             </div>
-        </div>
-    </div>
+            </div>
 </div>

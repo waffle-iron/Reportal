@@ -12,20 +12,20 @@ using Reportal.Api.ActionFilters;
 namespace Reportal.Api.Controllers
 {
     [EnableCors(origins: "http://localhost, http://serv-55", headers: "*", methods: "*")]
-   // [AuthorizationRequired]
-    public class CreditoColoc_DashboardAntController : ApiController
+  //  [AuthorizationRequired]
+    public class DirectorioDashboardFinanAntController : ApiController
     {
         // GET: CreditoColoc_Diaria
-        private CreditoColoc_DiariaRepository ColocDiariaDashAnt;
+        private CreditoFinanciamentoRepository Ppto;
 
-        public CreditoColoc_DashboardAntController()
+        public DirectorioDashboardFinanAntController()
         {
-            ColocDiariaDashAnt = new CreditoColoc_DiariaRepository();
+            Ppto = new CreditoFinanciamentoRepository();
         }
-
-        public CreditoColoc_Diaria Get()
+        public Cred_Financiamento Get()
         {
-            return ColocDiariaDashAnt.OIbtenerDashboardDiaAnt();
+            return Ppto.OIbtenerDashboardAnt();
         }
+    
     }
 }
