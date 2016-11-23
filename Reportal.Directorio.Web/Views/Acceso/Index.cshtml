@@ -76,28 +76,32 @@
         <div class="cls-content">
             <div class="cls-content-sm panel">
                 <div class="panel-body">
+                    <img src="~/getstart/img/laaraucana.jpg" alt="Logo La Araucana CAFF" />
+
                     <div class="mar-ver pad-btm">
-                        <h3 class="h4 mar-no">Acceso a Portal de Reportes Unificado</h3>
+
+                        
+                        <h3 class="h4 mar-no">Acceso a Portal</h3>
                         <p class="text-muted">Ingrese sus datos de usuario</p>
                     </div>
                     <form>
                         <div class="form-group">
-                            <input type="text" id="Username" class="form-control" placeholder="Username" autofocus>
+                            <input type="text" id="Username" class="form-control" placeholder="Rut Ej. 11111111-1" autofocus required>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password" id="Password">
+                            <input type="password" class="form-control" placeholder="Clave" id="Password" required>
                         </div>
                         <div class="checkbox pad-btm text-left">
-                            <input id="demo-form-checkbox" class="magic-checkbox" type="checkbox">
-                            <label for="demo-form-checkbox">Recordarme</label>
+                            <input id="rememberme-form-checkbox" class="magic-checkbox" type="checkbox">
+                            <label for="rememberme-form-checkbox">Recordarme en este Equipo</label>
                         </div>
                         <button class="btn btn-primary btn-lg btn-block" type="button" id="bts">Ingresar</button>
                     </form>
                 </div>
 
                 <div class="pad-all">
-                    <a href="pages-password-reminder.html" class="btn-link mar-rgt">Olvidó su password ?</a>
-                    <a href="pages-password-reminder.html" class="btn-link mar-lft">Solicitar Acceso</a>
+                    <a style="display:none;" href="pages-password-reminder.html" class="btn-link mar-rgt">Olvidó su password ?</a>
+                    <a href="mailto:cpradenasp@laaraucana.cl" class="btn-link mar-lft">Solicitar Acceso</a>
                 </div>
             </div>
         </div>

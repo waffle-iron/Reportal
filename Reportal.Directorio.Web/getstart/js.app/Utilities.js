@@ -17,9 +17,14 @@ function getReportalApiHost() {
     return "http://localhost:8080/";
 }
 
-function getAplicationHost() {
-    return "http://localhost/DirectorioReportal/";
+function getRootAplicationHost() {
+    return "http://localhost/";
 }
+
+function getAplicationHost() {
+    return getRootAplicationHost() + "DirectorioReportal/";
+}
+
 
 
 
