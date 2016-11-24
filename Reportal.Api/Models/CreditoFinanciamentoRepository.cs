@@ -25,5 +25,9 @@ namespace Reportal.Api.Models
         {
             return CreditoFinanciamentoDataAccess.Obtener_DashboardAnterior();
         }
+        public Cred_Financiamento OIbtenerDashboardCumplimiento()
+        {
+            return CreditoFinanciamentoDataAccess.Obtener_DashboardAcumulada();
+        }
     }
 }

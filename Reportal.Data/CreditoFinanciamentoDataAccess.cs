@@ -43,6 +43,11 @@ namespace Reportal.Data
             return DBHelper.InstanceReporteria.ObtenerEntidad("sp_Cred_FinanDashBoardAnt", ConstructorEntidad);
         }
 
+        public static Cred_Financiamento Obtener_DashboardAcumulada()
+        {
+            return DBHelper.InstanceReporteria.ObtenerEntidad("sp_Cred_FinanDashBoardAcumulado", FinanciamentoTodos);
+        }
+
 
         private static Cred_Financiamento ConstructorEntidad(DataRow row)
         {
