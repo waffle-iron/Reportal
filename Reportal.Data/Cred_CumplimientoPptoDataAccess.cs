@@ -20,9 +20,8 @@ namespace Reportal.Data
         {
             return new Cred_CumplimientoPpto
             {
-                Periodo = row["Periodo"] != DBNull.Value ? Convert.ToInt32(row["Periodo"]) : 0,
                 Item = row["Item"] != DBNull.Value ? row["Item"].ToString() : string.Empty,
-                indx = row["indx"] != DBNull.Value ? Convert.ToInt32(row["indx"]) : 0,
+                indx = row["iitem"] != DBNull.Value ? Convert.ToInt32(row["iitem"]) : 0,
                 TotalNeto = row["TotalNeto"] != DBNull.Value ? Convert.ToInt32(row["TotalNeto"]) : 0,
             };
         }

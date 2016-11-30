@@ -20,9 +20,8 @@ namespace Reportal.Data
         {
             return new Coloc_Cumplimiento
             {
-                Periodo = row["Periodo"] != DBNull.Value ? row["Periodo"].ToString() : string.Empty,
                 Item = row["Item"] != DBNull.Value ? row["Item"].ToString() : string.Empty,
-                ind =row["indx"] != DBNull.Value ? Convert.ToInt32(row["indx"]) : 0,
+                ind =row["iitem"] != DBNull.Value ? Convert.ToInt32(row["iitem"]) : 0,
                 Total = row["TotalBruto"] != DBNull.Value ? Convert.ToInt32(row["TotalBruto"]) : 0,
             };
         }

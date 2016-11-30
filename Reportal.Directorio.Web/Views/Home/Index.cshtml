@@ -20,11 +20,6 @@
 
 
         $(function () {
-            
-          
-          
-         
-
             $.SecGetJSON(getReportalApiHost() + "api/CreditoColoc_Dashboard", function (respoonse) {
                 $("#idNetoHoy").html(respoonse.Neta.toMoney());
                 $("#idBrutoHoy").html(respoonse.Bruta.toMoney());
@@ -46,7 +41,7 @@
                 $("#progresBruta1").html(respoonse.Bruta_Table + "%");
 
             });
-          
+
             $.SecGetJSON(getReportalApiHost() + "api/CreditoColoc_DashboardGrafico", function (data) {
                 $("#numCredito").html(data[0].Bruta_Table.toMoney());
                 $("#tMax").html(data[2].Bruta_Table.toMoney());
@@ -68,15 +63,12 @@
                 $("#idPlazoAcumulado").html(data.plazoPromedio);
                 $("#idSpreadAcumulado").html(data.sPread.toMoney(2) + '%');
             });
-
-            
             $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/2/", function (respoonse) {
                 $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
             });
-        
-          
-          
-
+            $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/3/", function (respoonse) {
+                $("#Leyend_NombreMes").html(respoonse.ActualizacionLeyenda);
+            });
             $("#btnStats").on("click", function () {
                 $.SecGetJSON(getReportalApiHost() + "api/DirectorioDashboard", function (data) {
                     var dias = new Array();
@@ -88,7 +80,7 @@
                         Pptbruta[i] = e.PptBruta;
                     });
                     $('#GraficoEstandar').highcharts({
-                        colors: ['#00bcd4', '#FF0000'],
+                        colors: ['#42a5f5', '#FF0000'],
                         title: {
                             style: {
                                 color: '#758697',
@@ -145,7 +137,7 @@
                                 valueSuffix: ' M$'
                             }
                         }, {
-                            name: 'Ppto',
+                            name: 'Presupuesto',
                             data: Pptbruta,//, data[1].Noviembre_Bruto, data[1].Diciembre_Bruto]
                             tooltip: {
                                 valueSuffix: 'M$'
@@ -226,7 +218,7 @@
                                 valueSuffix: ' M$'
                             }
                         }, {
-                            name: 'Ppto',
+                            name: 'Presupuesto',
                             data: Pptneta,//, data[1].Noviembre_Bruto, data[1].Diciembre_Bruto]
                             tooltip: {
                                 valueSuffix: 'M$'
@@ -381,7 +373,7 @@
                         Spread[i] = e.sPread;
                     });
                     $('#GraficoEstandar').highcharts({
-                        colors: ['#ef5350'],
+                        colors: ['#ec407a'],
                         title: {
                             style: {
                                 color: '#758697',
@@ -448,19 +440,26 @@
 </div>
 <div class="tab-content">
     <div>
-      
-        <div class="panel col-lg-12">
+        <div class="panel col-lg-13">
             <span style="float:right; margin-left:auto;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span> Pulso Diario</span> - 
+                    <span id="Leyend_NombreMes"></span>
+                </h3>
+                
+            </div>
             <div class="panel-body">
                 <div class="col-lg-12">
                     <div id="GraficoEstandar" class="morris-full-content"></div>
                 </div>
             </div>
-        <br />
             <br />
-            <div class="row">
+            <br />
+            <br />
+            <div class="row" style="margin:auto">
                 <div class="col-sm-3 col-lg-3">
-                    <div class="panel panel-info panel-colorful" id="btnStats">
+                    <div class="panel panel-primary panel-colorful" id="btnStats">
                         <div class="pad-all">
                             <span class="text-bold">Colocaciones Brutas M$</span>
                             <p class="mar-no">
@@ -540,9 +539,7 @@
                                 Acumulado
                             </p>
                         </div>
-
                     </div>
-
                 </div>
                 <div class="col-sm-2 col-lg-2">
                     <div class="panel panel-warning panel-colorful" id="btnStats3">
@@ -561,12 +558,11 @@
                                 Acumulado
                             </p>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-sm-2 col-lg-2">
                     <!--Sparkline pie chart -->
-                    <div class="panel media middle panel-colorful panel-danger" id="btnStats4">
+                    <div class="panel media middle panel-colorful panel-pink" id="btnStats4">
                         <div class="pad-all">
                             <p class="text-bold">Spread</p>
                             <p class="mar-no">
@@ -582,11 +578,9 @@
                                 Acumulado
                             </p>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

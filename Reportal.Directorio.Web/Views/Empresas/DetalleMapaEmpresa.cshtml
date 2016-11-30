@@ -1,0 +1,248 @@
+﻿
+@{
+    ViewBag.Title = "DetalleMapaEmpresa";
+    Layout = "~/Views/Layout/_Principal.cshtml";
+}
+
+
+@section css{
+
+    <link href="~/assets/plugins/nvd3/build/nv.d3.min.css" rel="stylesheet" type="text/css" />
+
+}
+
+@section script{
+
+    <script src="~/assets/plugins/peity/jquery.peity.min.js"></script>
+    <script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/assets/plugins/jquery-knob/jquery.knob.js"></script>
+    <script src="~/assets/plugins/d3/d3.min.js"></script>
+    <script src="~/assets/plugins/nvd3/build/nv.d3.min.js"></script>
+    <script src="~/assets/pages/jquery.nvd3.init.js"></script>
+    <script src="~/assets/plugins/Chart.js/Chart.min.js"></script>
+    <script src="~/assets/js.app/empresas.js"></script>
+    <script src="~/assets/js/jqPlugin.js"></script>
+    <script src="~/assets/js/svg_to_pdf.js"></script>
+
+
+
+
+
+
+}
+
+<div class="boxed" id="DivCompleto">
+    <!-- Page-Title -->
+    <div class="row">
+        <div>
+
+        </div>
+        <div class="col-sm-12">
+            <p align="right">
+                <b>
+                    @*Actualización : @Html.Raw(ViewBag.Empresa.Fecha_ProcesoEmpresa)*@
+                </b>
+            </p>
+        </div>
+        <div class="col-sm-12">
+           @* <h4 class="page-title">@Html.Raw(ViewBag.Empresa.NombreEmpresa)</h4>*@
+            <ol class="breadcrumb">
+                <li><a href="/DirectorioReportal">Portal de Información</a></li>
+                <li><a href="/DirectorioReportal/Empresas/MapaEmpresas">Mapa Empresa</a></li>
+                <li class="active">@*@Html.Raw(ViewBag.Empresa.NombreEmpresa)*@</li>
+            </ol>
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <a href="/DirectorioReportal/Empresas/MapaEmpresas">
+                                <button type="button" class="btn btn-default waves-effect waves-block">
+                                    <span class="btn-label">
+                                        <i class="fa fa-arrow-left"></i>
+                                    </span>Volver Atrás
+                                </button>
+                            </a>
+                        </th>
+                        <th></th>
+                        @*<th>
+                                <button onclick="return xepOnline.Formatter.Format('DivCompleto', { pageWidth: '11in', pageHeight: '8.5in', render: 'download' });"class="btn btn-default waves-effect waves-block" visibility=hidden>
+                                        <span class="btn-label">
+                                            <i class="fa fa-arrow-down"></i>
+                                        </span>Descargar PDF
+                                    </button>
+                            </th>*@
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+
+    </div>
+
+    <div class="row" id="dvContainer">
+        <div class="panel col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th>Rut Empresa</th>
+                            @*<td id="empresaRut"></td>*@
+                            <td id="empresaRutDv"></td>
+                            <th>Empresa Segmento</th>
+                            <td id="empresaSegmento"></td>
+                        </tr>
+                        <tr>
+                            <th>Empresa Nombre</th>
+                            <td id="empresaNombre"></td>
+                            <th>Empresa Segmento NSE</th>
+                            <td id="empresaNSE"></td>
+                        </tr>
+                        <tr>
+                            <th>Empresa Tipo</th>
+                            <td id="empresaTipo"></td>
+                            <th>Cantidad de trabajadores</th>
+                            <td id="empresaNumTrabajadores"></td>
+                        </tr>
+                        <tr>
+                            <th>Holding</th>
+                            <td id="perteneceholding"></td>
+                            <th>Trabajadores con email</th>
+                            <td id="empresaTrabajadorMail"></td>
+                        </tr>
+                        <tr>
+                            @*<th>Empresa Sector Económico</th>
+                            <td id="empresaSectorEconomico"></td>*@
+                            <th>Empresa Sector Económico</th>
+                            <td id="empresaSectorEconomico"></td>
+                            <th>Trabajadores con celular</th>
+                            <td id="empresaTrabajadorCelular"></td>
+                        </tr>
+                        <tr>
+                            @*<th>Clasificación de Riesgo</th>
+                            <td id="clasificacionRiesgo"></td>*@
+
+                            <th>Clasificación Comercial</th>
+                            <td id="clasificacionComercial"></td>
+                            <th>Trabajadores con email o celular</th>
+                            <td id="empresaTrabajadorMailCelular"></td>
+                        </tr>
+                        <tr>
+                            <th>Antigüedad(Años)</th>
+                            <td id="antiguedadempresa"></td>
+                            <th>Trabajadores con Tarjeta Digital</th>
+                            <td id="empresaTrabajadorTarjeta"></td>
+                        </tr>
+                        <tr>
+
+                            <th>Renta Promedio</th>
+                            <td id="empresaTrabajadorRentaPromedio"></td>
+                            <th>Edad Promedio</th>
+                            <td id="empresatrabajadorpromedio"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    <div class="row">
+        <div class="col-lg-4 panel">
+            
+                <h4 class="text-dark header-title m-t-0 m-b-30">Ciclo de Vida</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafCicloVida">
+                        <svg style="height: 250px; width: 100%;"></svg>
+
+                    </div>
+                </div>
+        </div>
+        <div class="col-lg-4 panel">
+            <h4 class="text-dark header-title m-t-0 m-b-30">Nivel Socioeconómico</h4>
+            <div class="widget-chart text-center">
+                <div id="grafNSE">
+                    <svg style="height: 250px; width: 100%;"></svg>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 panel">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tramo Asignación Familiar</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafTramoAF">
+                        <svg style="height: 250px; width: 100%;"></svg>
+                    </div>
+                </div>
+        </div>
+        <div class="col-lg-4 panel">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tramo Etario Afiliados</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafTramoEtarioA">
+                        <svg style="height: 250px; width: 100%;"></svg>
+                    </div>
+                </div>
+           
+        </div>
+        <div class="col-lg-4 panel">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Régimen de Salud</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafRegimenSalud">
+                        <svg style="height: 250px; width: 100%;"></svg>
+                    </div>
+                </div>
+         
+        </div>
+        <div class="col-lg-4 panel">
+                <h4 class="text-dark header-title m-t-0 m-b-30">Genéro</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafGenero">
+                        <svg style="height: 250px; width: 100%;"></svg>
+                    </div>
+                </div>
+        </div>
+        <div class="col-lg-4 panel">
+           
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tenencia de Cargas</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafCargas">
+                        <svg style="height: 250px; width: 100%;"></svg>
+                    </div>
+
+                </div>
+           
+        </div>
+        <div class="col-lg-4 panel">
+           
+                <h4 class="text-dark header-title m-t-0 m-b-30">Tipo de Carga</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafTipoCarga">
+                        <svg style="height: 250px; width: 100%;"></svg>
+                    </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4 panel" >
+                <h4 class="text-dark header-title m-t-0 m-b-30">Distribución carga hijos por edad</h4>
+                <div class="widget-chart text-center">
+                    <div id="grafTipoCargaHijosporEdad">
+                        <svg style="height: 250px; width: 100%;"></svg>
+                    </div>
+            </div>
+        </div>
+        @*<p align="right">
+                <a href="~/Empresas/DetalleMapaEmpresaV2" class="btn btn-default btn-rounded waves-effect waves-light" role="button">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-right"></i>
+                    </span>Siguiente
+                </a>
+            </p>*@
+    </div>
+    <input type="hidden" value="@Html.Raw(ViewBag.Empresa.Id)" id="IdEmpresa" />
+    <input type="hidden" id="TotalEmpresaCalculo" />
+</div>
+
+
+
+
+
+
+

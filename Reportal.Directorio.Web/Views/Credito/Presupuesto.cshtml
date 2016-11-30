@@ -280,12 +280,15 @@
             $.SecGetJSON(getReportalApiHost() + "api/CredCumplimiento_Neto", function (data) {
                 $("#cReal").html(data[1].TotalNeto.toMoney())
                 $("#cPresupuesto").html(data[0].TotalNeto.toMoney())
+            });
+            $.SecGetJSON(getReportalApiHost() + "api/CredCumplimiento_Neto", function (data) {
                 // GAUGE PLUGIN demo-gauge_brutas
                 // =================================================================
                 // Require Gauge.js
                 // -----------------------------------------------------------------
                 // http://bernii.github.io/gauge.js/
                 // =================================================================
+
                 var opts = {
                     lines: 10, // The number of lines to draw
                     angle: 0, // The length of each line
@@ -314,6 +317,8 @@
             $.SecGetJSON(getReportalApiHost() + "api/CredCumplimiento_Bruto", function (data) {
                 $("#cRealBruto").html(data[1].Total.toMoney())
                 $("#PptoBruto").html(data[0].Total.toMoney())
+            });
+            $.SecGetJSON(getReportalApiHost() + "api/CredCumplimiento_Bruto", function (data) {
                 // http://bernii.github.io/gauge.js/
                 // =================================================================
                 var opts1 = {
