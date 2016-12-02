@@ -1,0 +1,314 @@
+﻿
+@{
+    ViewBag.Title = "Nominas";
+    Layout = "~/Views/Layout/_Principal2_Oper.cshtml";
+}
+
+
+@section css{
+    <!--Premium Line Icons [ OPTIONAL ]-->
+    <link href="~/getstart/premium/icon-sets/icons/line-icons/premium-line-icons.css" rel="stylesheet">
+}
+
+<div class="boxed">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="well well-sm">
+                Seleccione Periodo:
+                <select id="slPeriodo">
+                    <option value="201611" selected="selected">Noviembre 2016</option>
+                    <option value="201610">Octubre 2016</option>
+                    <option value="201609">Septiembre 2016</option>
+                </select>
+
+                <button class="btn-xs btn-default btn-icon">Descargar todo <i class="pli-folder-zip icon-lg"></i></button>
+
+                <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!--Default Tabs (Left Aligned)-->
+            <!--===================================================-->
+            <div class="tab-base">
+
+                <!--Nav Tabs-->
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab-resumen" aria-expanded="true">Resumen</a>
+                    </li>
+                </ul>
+
+                <!--Tabs Content-->
+                <div class="tab-content">
+                    <div id="tab-resumen" class="tab-pane fade active in">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Resumen Canal</h1>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-charlee table-responsive table-striped">
+                                            <tr>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Canal</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">N</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Email</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SMS</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Call</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-7">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Resumen Nóminas</h1>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-charlee table-responsive table-striped">
+                                            <tr>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Canal</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Nómina</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">N</th>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="2" style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">SMS</td>
+                                                <td>Trabajador</td>
+                                                <td>40.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pensionado</td>
+                                                <td>20.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="6" style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Email</td>
+                                                <td>Trabajador con credito</td>
+                                                <td>30.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Trabajador sin credito</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pensionado con credito</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pensionado sin credito</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Trabajador invitación</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Trabajador intercaja</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Call</td>
+                                                <td>Trabajador</td>
+                                                <td>30.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">FFVV</td>
+                                                <td>FFVV</td>
+                                                <td>30.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">QMS-WEB</td>
+                                                <td>QMS-WEB</td>
+                                                <td>30.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pre Aprobados</td>
+                                                <td>Pre Aprobados</td>
+                                                <td>30.000</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h1 class="panel-title">Resumen Cascadas</h1>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="col-lg-6">
+                                        <table class="table table-charlee table-responsive table-striped">
+                                            <tr>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Segmento</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtro</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Caen</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pasan</th>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="11" style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pensionados</td>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Total Pre Aprobados</td>
+                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">100.000</td>
+                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">100.000</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <table class="table table-charlee table-responsive table-striped">
+                                            <tr>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Segmento</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtro</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Caen</th>
+                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pasan</th>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="11" style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Trabajadores</td>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1.- Pre Aprobados Riesgo > 0</td>
+                                                <td>100.000</td>
+                                                <td>100.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Total Pre Aprobados</td>
+                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">100.000</td>
+                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">100.000</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            
+                            
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--===================================================-->
+            <!--End Default Tabs (Left Aligned)-->
+            <!--Icon Tabs (Left Aligned)-->
+            <!--===================================================-->
+
+
+        </div>
+    </div>
+</div>
+<!--===================================================-->
+<!--End page content-->

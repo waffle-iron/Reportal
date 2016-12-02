@@ -123,6 +123,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccesoController.cs" />
+    <Compile Include="Controllers\CampaniasController.cs" />
     <Compile Include="Controllers\ColocacionController.cs" />
     <Compile Include="Controllers\DirectorioController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
@@ -2556,6 +2557,7 @@
     <Content Include="Views\Empresas\ClasificacionEmpresa.cshtml" />
     <Content Include="Views\Empresas\DetalleMapaEmpresa.cshtml" />
     <Content Include="Views\Empresas\MapaEmpresas.cshtml" />
+    <Content Include="Views\Campanias\Nominas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
