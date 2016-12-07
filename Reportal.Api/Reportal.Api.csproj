@@ -247,6 +247,7 @@
     <Compile Include="Controllers\RcPeriodosController.cs" />
     <Compile Include="Controllers\Reprogramaciones_TodosController.cs" />
     <Compile Include="Controllers\Reprogramaciones_TrabController.cs" />
+    <Compile Include="Controllers\ResumenesNominasController.cs" />
     <Compile Include="Controllers\SegPreaprobadosController.cs" />
     <Compile Include="Controllers\SegPreaprobadosPorCanalesPropensionController.cs" />
     <Compile Include="Controllers\SegPreaprobadosPorNominasController.cs" />

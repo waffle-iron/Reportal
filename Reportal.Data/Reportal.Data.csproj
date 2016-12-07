@@ -91,6 +91,10 @@
     <Compile Include="Reprogramaciones_PensDataAcces.cs" />
     <Compile Include="Reprogramaciones_TodosDataAcces.cs" />
     <Compile Include="Reprogramaciones_TrabDataAcces.cs" />
+    <Compile Include="ResumenNominasRowDataAccess.cs" />
+    <Compile Include="ResumenNominasDataAccess.cs" />
+    <Compile Include="ResumenCanalDataAccess.cs" />
+    <Compile Include="ResumenCascadasDataAccess.cs" />
     <Compile Include="SegPreaprobadosGlobalDataAccess.cs" />
     <Compile Include="SeguimientoVentaCascadaDataAccess.cs" />
     <Compile Include="SeguroCesantia_TotalDataAcces.cs" />

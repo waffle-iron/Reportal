@@ -4,6 +4,164 @@
     Layout = "~/Views/Layout/_Principal2_Oper.cshtml";
 }
 
+@section script{
+
+
+    <script type="text/javascript">
+
+
+        $(function () {
+
+            $("#slPeriodo").on("change", function () {
+                $("#tbl_ResTrabajadores").html("");
+                $("#tbl_ResPensionados").html("");
+                $("#tbl_ResCanales").html("");
+
+                $.SecGetJSON(getReportalApiHost() + "api/resumenes-nominas/resumen-cascadas-pensionados?periodo=" + $("#slPeriodo").val(), function (respoonse) {
+                   
+                    var totales = { caen:0, pasan:0 };
+                    $.each(respoonse, function (i, o) {
+                        if (i === 0) {
+                            $("#tbl_ResPensionados").append(
+                                $("<tr>")
+                                    .append($("<td>").html("Pensionados").attr("rowspan", respoonse.length + 1).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("vertical-align", "middle"))
+                                    .append($("<td>").html(o.Filtro))
+                                    .append($("<td>").html(o.Caen.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.Pasan.toMoney()).css("text-align", "right"))
+                            );
+                        } else {
+                            $("#tbl_ResPensionados").append(
+                                $("<tr>")
+                                    .append($("<td>").html(o.Filtro))
+                                    .append($("<td>").html(o.Caen.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.Pasan.toMoney()).css("text-align", "right"))
+                            );
+                        }
+
+                        totales.caen = totales.caen + o.Caen;
+                        totales.pasan = totales.caen + o.Pasan;
+
+                    });
+                    //foot
+                    $("#tbl_ResPensionados").append(
+                                $("<tr>")
+                                    .append($("<td>").html("Total Pre Aprobados").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<td>").html(totales.caen.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<td>").html(totales.pasan.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                        );
+
+                });
+
+                $.SecGetJSON(getReportalApiHost() + "api/resumenes-nominas/resumen-cascadas-trabajadores?periodo=" + $("#slPeriodo").val(), function (respoonse) {
+                    
+                    var totales = { caen: 0, pasan: 0 };
+                    $.each(respoonse, function (i, o) {
+                        if (i === 0) {
+                            $("#tbl_ResTrabajadores").append(
+                                $("<tr>")
+                                    .append($("<td>").html("Trabajadores").attr("rowspan", respoonse.length + 1).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("vertical-align", "middle"))
+                                    .append($("<td>").html(o.Filtro))
+                                    .append($("<td>").html(o.Caen.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.Pasan.toMoney()).css("text-align", "right"))
+
+                            );
+                        } else {
+                            $("#tbl_ResTrabajadores").append(
+                                $("<tr>")
+                                    .append($("<td>").html(o.Filtro))
+                                    .append($("<td>").html(o.Caen.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.Pasan.toMoney()).css("text-align", "right"))
+                            );
+                        }
+
+                        totales.caen = totales.caen + o.Caen;
+                        totales.pasan = totales.caen + o.Pasan;
+
+                    });
+                    //foot
+                    $("#tbl_ResTrabajadores").append(
+                                $("<tr>")
+                                    .append($("<td>").html("Total Pre Aprobados").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<td>").html(totales.caen.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<td>").html(totales.pasan.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                        );
+                });
+
+                $.SecGetJSON(getReportalApiHost() + "api/resumenes-nominas/resumen-canales?periodo=" + $("#slPeriodo").val(), function (respoonse) {
+
+                    $.each(respoonse, function (i, o) {
+                        $("#tbl_ResCanales").append(
+                            $("<tr>")
+                                .append($("<td>").html(o.Canal))
+                                .append($("<td>").html(o.Cantidad.toMoney()).css("text-align","right"))
+                        );
+                    });
+                });
+
+                $.SecGetJSON(getReportalApiHost() + "api/resumenes-nominas/resumen-nominas?periodo=" + $("#slPeriodo").val(), function (respoonse) {
+                    var i = 0, canal = '';
+                    $.each(respoonse.ResumenNominas, function (i, o) {
+                        
+                        if (canal != o.Canal) {
+                            i = 0;
+                        }
+
+                        console.log(ObtenerRowspan(o.Canal, respoonse.RowsCanales));
+                        if (ObtenerRowspan(o.Canal, respoonse.RowsCanales) <= 1) {
+                            $("#tbl_ResNominas").append(
+                                 $("<tr>")
+                                    .append($("<td>").html(o.Canal).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<td>").html(o.Nomina))
+                                    .append($("<td>").html(o.Cantidad.toMoney()).css("text-align", "right"))
+                            );
+                        }
+                        else if (ObtenerRowspan(o.Canal, respoonse.RowsCanales) > 1 && i === 0)
+                        {
+                            $("#tbl_ResNominas").append(
+                                $("<tr>")
+                                   .append($("<td>").html(o.Canal).attr("rowspan", ObtenerRowspan(o.Canal, respoonse.RowsCanales)).css("vertical-align", "middle").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                   .append($("<td>").html(o.Nomina))
+                                   .append($("<td>").html(o.Cantidad.toMoney()).css("text-align", "right"))
+                            );
+                            i++;
+                        }
+                        else if (ObtenerRowspan(o.Canal, respoonse.RowsCanales) > 1 && i > 0)
+                        {
+                            $("#tbl_ResNominas").append(
+                                $("<tr>")
+                                   .append($("<td>").html(o.Nomina))
+                                   .append($("<td>").html(o.Cantidad.toMoney()).css("text-align", "right"))
+                            );
+                            i++;
+                        }
+
+                        canal = o.Canal;
+                    });
+                });
+            });
+
+            $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/1/", function (respoonse) {
+                $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
+            });
+
+            $("#slPeriodo").trigger("change");
+
+        });
+
+
+        function ObtenerRowspan(key, array) {
+            var r = 0;
+            $.each(array, function (i, o) {
+                if (key === o.Canal) {
+                    r = o.Cantidad
+                }        
+            });
+
+            return r;
+        }
+
+    </script>
+}
 
 @section css{
     <!--Premium Line Icons [ OPTIONAL ]-->
@@ -16,7 +174,8 @@
             <div class="well well-sm">
                 Seleccione Periodo:
                 <select id="slPeriodo">
-                    <option value="201611" selected="selected">Noviembre 2016</option>
+                    <option value="201612" selected="selected">Diciembre 2016</option>
+                    <option value="201611">Noviembre 2016</option>
                     <option value="201610">Octubre 2016</option>
                     <option value="201609">Septiembre 2016</option>
                 </select>
@@ -54,22 +213,14 @@
                                     </div>
                                     <div class="panel-body">
                                         <table class="table table-charlee table-responsive table-striped">
-                                            <tr>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Canal</th>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">N</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Email</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SMS</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Call</td>
-                                                <td>100.000</td>
-                                            </tr>
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Canal</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">N</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_ResCanales"></tbody>
+                                            
                                         </table>
                                     </div>
                                 </div>
@@ -82,65 +233,14 @@
                                     </div>
                                     <div class="panel-body">
                                         <table class="table table-charlee table-responsive table-striped">
-                                            <tr>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Canal</th>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Nómina</th>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">N</th>
-                                            </tr>
-                                            <tr>
-                                                <td rowspan="2" style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">SMS</td>
-                                                <td>Trabajador</td>
-                                                <td>40.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pensionado</td>
-                                                <td>20.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td rowspan="6" style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Email</td>
-                                                <td>Trabajador con credito</td>
-                                                <td>30.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Trabajador sin credito</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pensionado con credito</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pensionado sin credito</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Trabajador invitación</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Trabajador intercaja</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Call</td>
-                                                <td>Trabajador</td>
-                                                <td>30.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">FFVV</td>
-                                                <td>FFVV</td>
-                                                <td>30.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">QMS-WEB</td>
-                                                <td>QMS-WEB</td>
-                                                <td>30.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pre Aprobados</td>
-                                                <td>Pre Aprobados</td>
-                                                <td>30.000</td>
-                                            </tr>
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Canal</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Nómina</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">N</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_ResNominas"></tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -155,138 +255,30 @@
                                     <h1 class="panel-title">Resumen Cascadas</h1>
                                 </div>
                                 <div class="panel-body">
-
                                     <div class="col-lg-6">
-                                        <table class="table table-charlee table-responsive table-striped">
-                                            <tr>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Segmento</th>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtro</th>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Caen</th>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pasan</th>
-                                            </tr>
-                                            <tr>
-                                                <td rowspan="11" style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pensionados</td>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Total Pre Aprobados</td>
-                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">100.000</td>
-                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">100.000</td>
-                                            </tr>
+                                        <table class="table table-responsive table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Segmento</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtro</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Caen</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pasan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_ResPensionados"></tbody>
                                         </table>
                                     </div>
                                     <div class="col-lg-6">
-                                        <table class="table table-charlee table-responsive table-striped">
-                                            <tr>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Segmento</th>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtro</th>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Caen</th>
-                                                <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pasan</th>
-                                            </tr>
-                                            <tr>
-                                                <td rowspan="11" style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Trabajadores</td>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1.- Pre Aprobados Riesgo > 0</td>
-                                                <td>100.000</td>
-                                                <td>100.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Total Pre Aprobados</td>
-                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">100.000</td>
-                                                <td style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">100.000</td>
-                                            </tr>
+                                        <table class="table table-responsive table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Segmento</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtro</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Caen</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pasan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_ResTrabajadores"></tbody>
                                         </table>
                                     </div>
                                 </div>
