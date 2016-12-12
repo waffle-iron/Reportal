@@ -16,6 +16,7 @@
                 $("#tbl_ResTrabajadores").html("");
                 $("#tbl_ResPensionados").html("");
                 $("#tbl_ResCanales").html("");
+                $("#tbl_ResNominas").html("");
 
                 $.SecGetJSON(getReportalApiHost() + "api/resumenes-nominas/resumen-cascadas-pensionados?periodo=" + $("#slPeriodo").val(), function (respoonse) {
                    
@@ -106,7 +107,6 @@
                             i = 0;
                         }
 
-                        console.log(ObtenerRowspan(o.Canal, respoonse.RowsCanales));
                         if (ObtenerRowspan(o.Canal, respoonse.RowsCanales) <= 1) {
                             $("#tbl_ResNominas").append(
                                  $("<tr>")
@@ -144,10 +144,68 @@
                 $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
             });
 
+            $("#Descarga-zip").on("click", function () {
+                //var myWindow = window.open("", "_blank");
+                /*$.SecGetBLOB(getReportalApiHost() + "api/resumenes-nominas/descarga-archivos-zip", function (blob) {
+                    var url = URL.createObjectURL(blob);
+                });*/
+                $(this).attr("disabled", true);
+                $("#slPeriodo").attr("disabled", true);
+                $("#mensajes_pers").html("Preparando descarga....");
+
+               
+                var ud = {}, xhr = new XMLHttpRequest();
+                if (JSON.parse(localStorage.getItem('userdata')) != null) {
+                    ud = JSON.parse(localStorage.getItem('userdata'));
+                }
+
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var f = new Date();
+                        var tmstp = f.getDate() + "" + (f.getMonth() + 1) + "" + f.getFullYear();
+                        saveData(this.response, "nominas_" + $("#slPeriodo").val()+ "_" + tmstp + ".zip");
+                        $("#Descarga-zip").attr("disabled", false);
+                        $("#mensajes_pers").html("");
+                        $("#slPeriodo").attr("disabled", false);
+                    }
+
+                    if (this.readyState == 4 && this.status == 404)
+                    {
+                        $("#Descarga-zip").attr("disabled", false);
+                        $("#mensajes_pers").html("Sin Archivos para el Periodo");
+                        $("#slPeriodo").attr("disabled", false);
+                    }
+
+                }
+                xhr.open('GET', getReportalApiHost() + "api/resumenes-nominas/descarga-archivos-zip?periodo=" + $("#slPeriodo").val());
+                xhr.responseType = 'blob';
+                xhr.setRequestHeader("Token", ud.token);
+                xhr.setRequestHeader("TokenExpiry", "900");
+                xhr.setRequestHeader("Access-Control-Expose-Headers", "Token,TokenExpiry");
+                xhr.send();
+            });
+
+            var saveData = (function () {
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "display: none";
+                return function (data, fileName) {
+                    var url = window.URL || window.webkitURL,
+                        enlace = url.createObjectURL(data);
+                        
+                    a.href = enlace;
+                    a.download = fileName;
+                    a.click();
+                    url.revokeObjectURL(url);
+                };
+            }());
+
             $("#slPeriodo").trigger("change");
 
         });
 
+
+       
 
         function ObtenerRowspan(key, array) {
             var r = 0;
@@ -180,7 +238,8 @@
                     <option value="201609">Septiembre 2016</option>
                 </select>
 
-                <button class="btn-xs btn-default btn-icon">Descargar todo <i class="pli-folder-zip icon-lg"></i></button>
+                <button id="Descarga-zip" class="btn-xs btn-default btn-icon">Descargar todo <i class="pli-folder-zip icon-lg"></i></button>
+                <span id="mensajes_pers"></span>
 
                 <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
             </div>
@@ -190,6 +249,11 @@
 
     <div class="row">
         <div class="col-lg-12">
+
+
+            
+
+
 
             <!--Default Tabs (Left Aligned)-->
             <!--===================================================-->

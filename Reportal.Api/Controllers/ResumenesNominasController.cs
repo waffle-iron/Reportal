@@ -8,6 +8,8 @@ using System.Web.Http.Cors;
 using Reportal.Data;
 using Reportal.Domain;
 using Reportal.Api.ActionFilters;
+using System.IO;
+using System.Net.Http.Headers;
 
 namespace Reportal.Api.Controllers
 {
@@ -47,5 +49,32 @@ namespace Reportal.Api.Controllers
             return retorno;
         }
 
+
+        [HttpGet]
+        [Route("descarga-archivos-zip")]
+        public HttpResponseMessage DownLoad(string periodo)
+        {
+            string rutaSalida = System.Configuration.ConfigurationManager.AppSettings["rutaNominaSalida"]; 
+            string path = System.Configuration.ConfigurationManager.AppSettings["rutaNominas"].Replace("{{periodo}}", periodo);
+            if (System.IO.File.Exists(rutaSalida))
+            {
+                System.IO.File.Delete(rutaSalida);
+            }
+
+            try
+            {
+                System.IO.Compression.ZipFile.CreateFromDirectory(path, rutaSalida);
+                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+                var stream = new FileStream(rutaSalida, FileMode.Open);
+                result.Content = new StreamContent(stream);
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
+                return result;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.NotFound);
+                return result;
+            }
+        }
     }
 }
