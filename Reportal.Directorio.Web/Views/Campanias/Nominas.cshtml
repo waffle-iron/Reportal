@@ -25,7 +25,7 @@
                         if (i === 0) {
                             $("#tbl_ResPensionados").append(
                                 $("<tr>")
-                                    .append($("<td>").html("Pensionados").attr("rowspan", respoonse.length + 1).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("vertical-align", "middle"))
+                                    //.append($("<td>").html("Pensionados").attr("rowspan", respoonse.length + 1).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("vertical-align", "middle"))
                                     .append($("<td>").html(o.Filtro))
                                     .append($("<td>").html(o.Caen.toMoney()).css("text-align", "right"))
                                     .append($("<td>").html(o.Pasan.toMoney()).css("text-align", "right"))
@@ -46,9 +46,9 @@
                     //foot
                     $("#tbl_ResPensionados").append(
                                 $("<tr>")
-                                    .append($("<td>").html("Total Pre Aprobados").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
-                                    .append($("<td>").html(totales.caen.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
-                                    .append($("<td>").html(totales.pasan.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<td>").html("Total Pre Aprobados").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
+                                    .append($("<td>").html(totales.caen.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
+                                    .append($("<td>").html(totales.pasan.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
                         );
 
                 });
@@ -60,7 +60,7 @@
                         if (i === 0) {
                             $("#tbl_ResTrabajadores").append(
                                 $("<tr>")
-                                    .append($("<td>").html("Trabajadores").attr("rowspan", respoonse.length + 1).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("vertical-align", "middle"))
+                                    //.append($("<td>").html("Trabajadores").attr("rowspan", respoonse.length + 1).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("vertical-align", "middle"))
                                     .append($("<td>").html(o.Filtro))
                                     .append($("<td>").html(o.Caen.toMoney()).css("text-align", "right"))
                                     .append($("<td>").html(o.Pasan.toMoney()).css("text-align", "right"))
@@ -82,9 +82,9 @@
                     //foot
                     $("#tbl_ResTrabajadores").append(
                                 $("<tr>")
-                                    .append($("<td>").html("Total Pre Aprobados").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
-                                    .append($("<td>").html(totales.caen.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
-                                    .append($("<td>").html(totales.pasan.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<td>").html("Total Pre Aprobados").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight","bold"))
+                                    .append($("<td>").html(totales.caen.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
+                                    .append($("<td>").html(totales.pasan.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
                         );
                 });
 
@@ -110,7 +110,7 @@
                         if (ObtenerRowspan(o.Canal, respoonse.RowsCanales) <= 1) {
                             $("#tbl_ResNominas").append(
                                  $("<tr>")
-                                    .append($("<td>").html(o.Canal).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                    .append($("<td>").html(o.Canal).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
                                     .append($("<td>").html(o.Nomina))
                                     .append($("<td>").html(o.Cantidad.toMoney()).css("text-align", "right"))
                             );
@@ -119,7 +119,7 @@
                         {
                             $("#tbl_ResNominas").append(
                                 $("<tr>")
-                                   .append($("<td>").html(o.Canal).attr("rowspan", ObtenerRowspan(o.Canal, respoonse.RowsCanales)).css("vertical-align", "middle").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1"))
+                                   .append($("<td>").html(o.Canal).attr("rowspan", ObtenerRowspan(o.Canal, respoonse.RowsCanales)).css("vertical-align", "middle").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
                                    .append($("<td>").html(o.Nomina))
                                    .append($("<td>").html(o.Cantidad.toMoney()).css("text-align", "right"))
                             );
@@ -224,6 +224,27 @@
 @section css{
     <!--Premium Line Icons [ OPTIONAL ]-->
     <link href="~/getstart/premium/icon-sets/icons/line-icons/premium-line-icons.css" rel="stylesheet">
+
+    <style type="text/css">
+        .head-tabla { /*#ebeff2*/
+            border: 2px solid #ebeff2;
+        }
+
+        .table-charlee > tbody > tr > td,
+        .table-charlee > tbody > tr > th,
+        .table-charlee > tfoot > tr > td,
+        .table-charlee > tfoot > tr > th,
+        .table-charlee > thead > tr > td,
+        .table-charlee > thead > tr > th{
+            border-top: 1px solid #ddd;
+            /*border-right: 2px solid #ffffff;*/
+            line-height: 1.42857;
+            padding: 3px !important;
+            vertical-align: top;
+            font-size: 12px;
+        }
+    </style>
+
 }
 
 <div class="boxed">
@@ -233,12 +254,9 @@
                 Seleccione Periodo:
                 <select id="slPeriodo">
                     <option value="201612" selected="selected">Diciembre 2016</option>
-                    <option value="201611">Noviembre 2016</option>
-                    <option value="201610">Octubre 2016</option>
-                    <option value="201609">Septiembre 2016</option>
                 </select>
 
-                <button id="Descarga-zip" class="btn-xs btn-default btn-icon">Descargar todo <i class="pli-folder-zip icon-lg"></i></button>
+                <button id="Descarga-zip" class="btn-xs btn-default btn-icon">Descargar Nóminas <i class="pli-folder-zip icon-lg"></i></button>
                 <span id="mensajes_pers"></span>
 
                 <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
@@ -320,10 +338,12 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="col-lg-6">
-                                        <table class="table table-responsive table-striped">
+                                        <table class="table table-charlee table-responsive table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Segmento</th>
+                                                    <th colspan="3" style="text-align:center; background: #0965ae none repeat scroll 0 0; color:#fff1f1;">Pensionados</th>
+                                                </tr>
+                                                <tr>
                                                     <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtro</th>
                                                     <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Caen</th>
                                                     <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pasan</th>
@@ -333,10 +353,12 @@
                                         </table>
                                     </div>
                                     <div class="col-lg-6">
-                                        <table class="table table-responsive table-striped">
+                                        <table class="table table-charlee table-responsive table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Segmento</th>
+                                                    <th colspan="3" style="text-align:center; background: #0965ae none repeat scroll 0 0; color:#fff1f1;">Trabajadores</th>
+                                                </tr>
+                                                <tr>
                                                     <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtro</th>
                                                     <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Caen</th>
                                                     <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pasan</th>
