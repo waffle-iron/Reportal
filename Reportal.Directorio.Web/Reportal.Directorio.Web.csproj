@@ -341,7 +341,6 @@
     <Content Include="assets\plugins\jquery-validation\dist\jquery.validate.min.js" />
     <Content Include="assets\plugins\jquery.easy-pie-chart\dist\easypiechart.min.js" />
     <Content Include="assets\plugins\jquery.easy-pie-chart\dist\jquery.easypiechart.min.js" />
-    <Content Include="assets\plugins\jquery.steps\build\jquery.steps.min.js" />
     <Content Include="assets\plugins\jquery.steps\demo\css\jquery.steps.css" />
     <Content Include="assets\plugins\jvectormap\gdp-data.js" />
     <Content Include="assets\plugins\jvectormap\jquery-jvectormap-2.0.2.css" />
@@ -374,8 +373,6 @@
     <Content Include="assets\plugins\nestable\jquery.nestable.js" />
     <Content Include="assets\plugins\notifications\notify-metro.js" />
     <Content Include="assets\plugins\notifyjs\dist\notify.min.js" />
-    <Content Include="assets\plugins\nvd3\build\nv.d3.min.css" />
-    <Content Include="assets\plugins\nvd3\build\nv.d3.min.js" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.carousel.min.css" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.theme.default.min.css" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.video.play.png" />
@@ -2563,6 +2560,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="assets\plugins\jquery.steps\build\" />
+    <Folder Include="assets\plugins\nvd3\build\" />
     <Folder Include="getstart\plugins\flot-charts\examples\gauge\" />
     <Folder Include="Views\Presupuesto\" />
   </ItemGroup>
