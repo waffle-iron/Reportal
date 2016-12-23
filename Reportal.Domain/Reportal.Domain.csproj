@@ -55,6 +55,11 @@
     <Compile Include="D_CredPptoMensual.cs" />
     <Compile Include="Empresa.cs" />
     <Compile Include="CastigosNetos.cs" />
+    <Compile Include="EmpresaBeneficio_A.cs" />
+    <Compile Include="EmpresaLicencia.cs" />
+    <Compile Include="EmpresaLicenciaA.cs" />
+    <Compile Include="EmpresaLicenciaB.cs" />
+    <Compile Include="EmpresaLicenciaC.cs" />
     <Compile Include="EvolucionCamadas_12M.cs" />
     <Compile Include="FechaActualizacion.cs" />
     <Compile Include="MatrizTransicionDD.cs" />

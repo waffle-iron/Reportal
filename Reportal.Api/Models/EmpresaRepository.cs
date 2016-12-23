@@ -8,10 +8,7 @@ namespace Reportal.Api.Models
 {
     public class EmpresaRepository
     {
-        public List<Empresa> Listar()
-        {
-            return EmpresaDataAccess.ListarEmpresa();
-        }
+     
         public Empresa Obtener(int id)
         {
             //return CampaniaDataAccess.Obtener(id);
@@ -27,6 +24,12 @@ namespace Reportal.Api.Models
         public IdentidadEncabezadoEmpresa ObtenerEncabezado(int id)
         {
             return EncabezadoEmpresaDataAccess.ObtenerEncabezado(id);
+        }
+
+        public List<EmpresaLicenciaC> ListarLicenciaTop20(int RutEmpresa)
+        {
+            return EmpresaDataAccess.MostrarLicenciaTop20(RutEmpresa);
+
         }
 
     }

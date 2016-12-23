@@ -146,6 +146,11 @@
     <Folder Include="Views\DirectorioDashboardFinaGrafico\" />
     <Folder Include="Views\DirectorioDashboardFinan\" />
     <Folder Include="Views\D_CredPptoMensual\" />
+    <Folder Include="Views\EmpresaBeneficio\" />
+    <Folder Include="Views\EmpresaLicenciasPagadas\" />
+    <Folder Include="Views\EmpresaLicenciaTop20\" />
+    <Folder Include="Views\EmpresaLicenciaVigentes\" />
+    <Folder Include="Views\EmpresaLicencia\" />
     <Folder Include="Views\Reprogramaciones\" />
     <Folder Include="Views\SegPreaprobadosBySegmento\" />
   </ItemGroup>
@@ -216,7 +221,12 @@
     <Compile Include="Controllers\DirectorioDashboardFinanAcumuladoController.cs" />
     <Compile Include="Controllers\DirectorioDashboardFinanController.cs" />
     <Compile Include="Controllers\D_CredPptoMensualController.cs" />
+    <Compile Include="Controllers\EmpresaBeneficioController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\EmpresaLicenciaController.cs" />
+    <Compile Include="Controllers\EmpresaLicenciasPagadasController.cs" />
+    <Compile Include="Controllers\EmpresaLicenciaTop20Controller.cs" />
+    <Compile Include="Controllers\EmpresaLicenciaVigentesController.cs" />
     <Compile Include="Controllers\EncabezadoEmpresaController.cs" />
     <Compile Include="Controllers\CastigosNetos_TrabController.cs" />
     <Compile Include="Controllers\EvolucionCamadas_12MController.cs" />
@@ -275,6 +285,9 @@
     <Compile Include="Models\CastigosNetos_PensRepository.cs" />
     <Compile Include="Models\CastigosNetos_Trab_PorcRepository.cs" />
     <Compile Include="Models\ContenedorBase.cs" />
+    <Compile Include="Models\ContenedorBaseBeneficio.cs" />
+    <Compile Include="Models\ContenedorBaseLicencia.cs" />
+    <Compile Include="Models\ContenedorBaseLicenciaVi.cs" />
     <Compile Include="Models\ContenedorBasePpto.cs" />
     <Compile Include="Models\CredColoc_DiariaPromedio.cs" />
     <Compile Include="Models\CredFinanciamentoTodo.cs" />
@@ -286,6 +299,7 @@
     <Compile Include="Models\CreditoFinanciamentoRepository.cs" />
     <Compile Include="Models\Cred_ColocDiariaTableRepositorycs.cs" />
     <Compile Include="Models\D_CredPptoMensualRepository.cs" />
+    <Compile Include="Models\EmpresaLicenciaPaRepository.cs" />
     <Compile Include="Models\EmpresaRepository.cs" />
     <Compile Include="Models\CastigosNetos_TrabRepository.cs" />
     <Compile Include="Models\EvolucionCamadas_12MRepository.cs" />

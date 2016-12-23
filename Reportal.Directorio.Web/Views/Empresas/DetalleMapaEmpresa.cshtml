@@ -12,7 +12,13 @@
 }
 
 @section script{
-
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <!-- Additional files for the Highslide popup effect -->
+    <script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
+    <script src="https://www.highcharts.com/samples/static/highslide.config.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
     <script src="~/assets/plugins/peity/jquery.peity.min.js"></script>
     <script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
     <script src="~/assets/plugins/jquery-knob/jquery.knob.js"></script>
@@ -23,225 +29,603 @@
     <script src="~/assets/js.app/empresas.js"></script>
     <script src="~/assets/js/jqPlugin.js"></script>
     <script src="~/assets/js/svg_to_pdf.js"></script>
+    <script type="text/javascript">
+
+
+        $(function () {
+            //Tabla Licencia
+            $.getJSON("http://localhost:8080/api/EmpresaLicencia/" + $("#IdEmpresa").val(), function (respoonse) {
+
+                $("#headEmpresaLicencia").append($("<tr class=\"primero\">"));
+                $("#headEmpresaLicencia > tr.primero").append($("<th>").attr("rowspan", "1").html("Indice Licencias").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.EncabezadoLicencia, function (i, e) {
+                    $("#headEmpresaLicencia > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                $("#headEmpresaLicencia").append($("<tr class=\"segundo\">"));
+                $.each(respoonse.EncabezadoLicencia, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+
+                $("#bodyEmpresaLicencia").append($("<tr class=\"Presupuesto\">"));
+                $("#bodyEmpresaLicencia > tr.Presupuesto").append($("<th>").html("Afiliados con Licencia / Trabajadores").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.PorcentajeLicencia, function (i, e) {
+                    // $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyEmpresaLicencia > tr.Presupuesto").append($("<td>").html(e.PorcentajeLicencia.toMoney(2) + '%'));
+                });
+            });
+            //Tabla Beneficio
+            $.getJSON("http://localhost:8080/api/EmpresaBeneficio/" + $("#IdEmpresa").val(), function (respoonse) {
+
+                $("#headBeneficio").append($("<tr class=\"primero\">"));
+                $("#headBeneficio > tr.primero").append($("<th>").attr("rowspan", "1").html("Uso de Beneficios").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.EncabezadoBeneficio, function (i, e) {
+                    $("#headBeneficio > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                $("#headBeneficio").append($("<tr class=\"segundo\">"));
+                $.each(respoonse.EncabezadoBeneficio, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+
+                $("#bodyBeneficio").append($("<tr class=\"Beneficio\">"));
+                $("#bodyBeneficio > tr.Beneficio").append($("<th>").html("Descripción / Período").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.PorcentajeBeneficio, function (i, e) {
+                    // $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyBeneficio > tr.Beneficio").append($("<td>").html(e.PorcentajeBeneficio.toMoney(2) + '%'));
+                });
+            });
 
 
 
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                if ($(this).attr("href") === "#demo-lft-tab-3")
+                $.getJSON("http://localhost:8080/api/EmpresaLicencia/" + $("#IdEmpresa").val(), function (data) {
+
+                        var diasPlazo = new Array();
+                        var porcentajeLi = new Array();
+
+
+
+                        $.each(data.EncabezadoLicencia, function (i, e) {
+                            diasPlazo[i] = e.Mes;
+                        });
+
+                        $.each(data.PorcentajeLicencia, function (i, e) {
+                            porcentajeLi[i] = e.PorcentajeLicencia;
+                        });
+
+                        $('#LinealLicencia').highcharts({
+                            colors: ['#42a5f5'],
+                            title: {
+                                text: '',
+                                x: -20 //center
+                            },
+                            subtitle: {
+                                text: '',
+                                x: -20
+                            },
+                            xAxis: {
+                                categories: diasPlazo
+                            },
+                            yAxis: {
+                                title: {
+                                    text: ''
+                                },
+                                plotLines: [{
+                                    value: 0,
+                                    width: 1,
+                                    color: '#808080'
+                                }]
+                            },
+                            tooltip: {
+                                pointFormat: "{point.y:.2f}"
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            exporting: {
+                                enabled: false
+                            },
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'left',
+                                verticalAlign: 'top',
+                                borderWidth: 0
+                            },
+                            series: [{
+
+                                name: 'Licencia',
+                                data: porcentajeLi,
+                                tooltip: {
+                                    pointFormat: 'Licencia: <b>{point.y:.2f}%</b><br/>',
+                                    shared: true
+
+                                }
+
+                            }]
+                        });
+                    });
+                $.getJSON("http://localhost:8080/api/EmpresaLicenciasPagadas/" + $("#IdEmpresa").val(), function (data) {
+                    var dias = new Array();
+                    var Pagadas = new Array();
+                    var NoPagadas = new Array();
+                    $.each(data, function (i, e) {
+                        dias[i] = e.fInicio;
+                        Pagadas[i] = e.Lpagadas;
+                        NoPagadas[i] = e.LNoPagadas;
+                    });
+
+                    $('#LinealLicenciaPagadas').highcharts({
+                        colors: ['#42a5f5', '#8bc34a'],
+                        title: {
+                            text: '',
+                            x: -20 //center
+                        },
+                        subtitle: {
+                            text: '',
+                            x: -20
+                        },
+                        xAxis: {
+                            categories: dias
+                        },
+                        yAxis: [{ // Primary yAxis
+                            labels: {
+                                format: '{value}',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            },
+                            title: {
+                                text: '%',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            }
+
+                        }],
+                        tooltip: {
+                            pointFormat: "{point.y:.0f}"
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        exporting: {
+                            enabled: false
+                        },
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'left',
+                            verticalAlign: 'top',
+                            borderWidth: 0
+                        },
+
+                        series: [{
+
+                            name: 'Pagadas',
+                            data: Pagadas,
+                            tooltip: {
+                                pointFormat: 'Pagadas: <b>{point.y:.0f}%</b><br/>',
+                                shared: true
+
+                            },
+                        }, {
+                            name: 'No Pagadas',
+                            data: NoPagadas,
+                            tooltip: {
+                                pointFormat: 'No Pagadas: <b>{point.y:.0f}%</b><br/>',
+                                shared: true
+
+                            },
+
+                        }]
+
+
+
+                    });
+
+
+                });
+                $.getJSON("http://localhost:8080/api/EmpresaLicenciaVigentes/" + $("#IdEmpresa").val(), function (respoonse) {
+
+
+                    //console.log(respoonse);
+
+                    $("#headLicenciaVigente").append($("<tr class=\"primero\">"));
+                    $("#headLicenciaVigente > tr.primero").append($("<th>").attr("rowspan", "1").html("Estado de Licencias").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    $.each(respoonse.EncabezadoLicenciaVi, function (i, e) {
+                        $("#headLicenciaVigente > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    });
+
+                    $("#headLicenciaVigente").append($("<tr class=\"segundo\">"));
+                    $.each(respoonse.EncabezadoLicenciaVi, function (i, e) {
+                        //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                        //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    });
+
+                    //
+                    $("#bodyLicenciaVigente").append($("<tr class=\"LicAutorizada\">"));
+                    $("#bodyLicenciaVigente > tr.LicAutorizada").append($("<th>").html("Licencia Autorizada").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    $.each(respoonse.LicAutorizada, function (i, e) {
+                        $("#bodyLicenciaVigente > tr.LicAutorizada").append($("<td>").html(e.Valor.toMoney()));
+                    });
+                    $("#bodyLicenciaVigente").append($("<tr class=\"LicPendientes\">"));
+                    $("#bodyLicenciaVigente > tr.LicPendientes").append($("<th>").html("Licencias Pendientes").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    $.each(respoonse.LicPendientes, function (i, e) {
+                        $("#bodyLicenciaVigente > tr.LicPendientes").append($("<td>").html(e.Valor.toMoney()));
+                    });
+                    $("#bodyLicenciaVigente").append($("<tr class=\"LicSinDerecho\">"));
+                    $("#bodyLicenciaVigente > tr.LicSinDerecho").append($("<th>").html("Licencias Sin Derecho").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    $.each(respoonse.LicSinDerecho, function (i, e) {
+                        $("#bodyLicenciaVigente > tr.LicSinDerecho").append($("<td>").html(e.Valor.toMoney()));
+                    });
+                    $("#bodyLicenciaVigente").append($("<tr class=\"LicObjetada\">"));
+                    $("#bodyLicenciaVigente > tr.LicObjetada").append($("<th>").html("Licencia Objectada").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    $.each(respoonse.LicObjetada, function (i, e) {
+                        $("#bodyLicenciaVigente > tr.LicObjetada").append($("<td>").html(e.Valor.toMoney()));
+                    });
+                    $("#bodyLicenciaVigente").append($("<tr class=\"LicRechazada\">"));
+                    $("#bodyLicenciaVigente > tr.LicRechazada").append($("<th>").html("Licencias Rechazadas").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    $.each(respoonse.LicRechazada, function (i, e) {
+                        $("#bodyLicenciaVigente > tr.LicRechazada").append($("<td>").html(e.Valor.toMoney()));
+                    });
+
+                    $("#bodyLicenciaVigente").append($("<tr class=\"LicTotal\">"));
+                    $("#bodyLicenciaVigente > tr.LicTotal").append($("<th>").html("Total de Licencias x Mes").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    $.each(respoonse.LicTotal, function (i, e) {
+                        $("#bodyLicenciaVigente > tr.LicTotal").append($("<td>").html(e.Valor.toMoney()).css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    });
+
+                    $("#bodyLicenciaVigente").append($("<tr class=\"LicPagadas\">"));
+                    $("#bodyLicenciaVigente > tr.LicPagadas").append($("<th>").html("Licencias Pagadas").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    $.each(respoonse.LicPagadas, function (i, e) {
+                        $("#bodyLicenciaVigente > tr.LicPagadas").append($("<td>").html(e.Valor.toMoney()));
+                    });
+                    $("#bodyLicenciaVigente").append($("<tr class=\"LicNoPagadas\">"));
+                    $("#bodyLicenciaVigente > tr.LicNoPagadas").append($("<th>").html("Licencia No Pagadas").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    $.each(respoonse.LicNoPagadas, function (i, e) {
+                        $("#bodyLicenciaVigente > tr.LicNoPagadas").append($("<td>").html(e.Valor.toMoney()));
+                    });
+
+                });
+                $.getJSON("http://localhost:8080/api/EmpresaLicenciaTop20/" + $("#IdEmpresa").val(), function (data) {
+                    var dias = new Array();
+                    var Descripcion = new Array();
+                    var cantidad = new Array();
+                    $.each(data, function (i, e) {
+                        dias[i] = e.Diagnostico;
+                        Descripcion[i] = e.Descripcion;
+                        cantidad[i] = e.Cantidad;
+
+                    });
+                    console.log(Descripcion)
+                    $('#BarraTop').highcharts({
+                        chart: {
+                            type: 'column',
+                        },
+                        colors: ['#8bc34a'],
+                        title: {
+                            text: '',
+                            x: -20 //center
+                        },
+                        subtitle: {
+                            text: '',
+                            x: -20
+                        },
+                        xAxis: {
+                            categories: Descripcion
+                        },
+                        yAxis: [{ // Primary yAxis
+                            labels: {
+                                formatter: function () {
+                                    return this.value.toMoney();
+                                },
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            },
+                            title: {
+                                text: '',
+                                formatter: function () {
+                                    return this.value.toMoney();
+                                },
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            }
+                        }],
+                        credits: { enabled: false },
+                        exporting: { enabled: false },
+                      plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                      series: [{
+                          name: 'Tokyo',
+                            data: cantidad
+
+                        }]
+                    });
+                });
+
+
+
+            });
+        });
+
+        
+    </script>
 
 
 
 }
 
 <div class="boxed" id="DivCompleto">
-    <!-- Page-Title -->
     <div class="row">
-        <div>
+        <div class="col-lg-12">
+            <div class="tab-base">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#demo-lft-tab-1" aria-expanded="true">Demográficos</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#demo-lft-tab-2" aria-expanded="false">Beneficios</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#demo-lft-tab-3" aria-expanded="false">Licencias Médicas</a>
+                    </li>
+                    
+                </ul>
+                <div class="tab-content">
+                    <div id="demo-lft-tab-1" class="tab-pane fade active in">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Detalle Mapa Empresa</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <a href="/DirectorioReportal/Empresas/MapaEmpresas">
+                                                            <button type="button" class="btn btn-default waves-effect waves-block">
+                                                                <span class="btn-label">
+                                                                    <i class="fa fa-arrow-left"></i>
+                                                                </span>Volver Atrás
+                                                            </button>
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <div class="panel col-lg-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Rut Empresa</th>
+                                                        @*<td id="empresaRut"></td>*@
+                                                        <td id="empresaRutDv"></td>
+                                                        <th>Empresa Segmento</th>
+                                                        <td id="empresaSegmento"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Empresa Nombre</th>
+                                                        <td id="empresaNombre"></td>
+                                                        <th>Empresa Segmento NSE</th>
+                                                        <td id="empresaNSE"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Empresa Tipo</th>
+                                                        <td id="empresaTipo"></td>
+                                                        <th>Cantidad de trabajadores</th>
+                                                        <td id="empresaNumTrabajadores"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Holding</th>
+                                                        <td id="perteneceholding"></td>
+                                                        <th>Trabajadores con email</th>
+                                                        <td id="empresaTrabajadorMail"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        @*<th>Empresa Sector Económico</th>
+                                                            <td id="empresaSectorEconomico"></td>*@
+                                                        <th>Empresa Sector Económico</th>
+                                                        <td id="empresaSectorEconomico"></td>
+                                                        <th>Trabajadores con celular</th>
+                                                        <td id="empresaTrabajadorCelular"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        @*<th>Clasificación de Riesgo</th>
+                                                            <td id="clasificacionRiesgo"></td>*@
 
+                                                        <th>Clasificación Comercial</th>
+                                                        <td id="clasificacionComercial"></td>
+                                                        <th>Trabajadores con email o celular</th>
+                                                        <td id="empresaTrabajadorMailCelular"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Antigüedad(Años)</th>
+                                                        <td id="antiguedadempresa"></td>
+                                                        <th>Trabajadores con Tarjeta Digital</th>
+                                                        <td id="empresaTrabajadorTarjeta"></td>
+                                                    </tr>
+                                                    <tr>
+
+                                                        <th>Renta Promedio</th>
+                                                        <td id="empresaTrabajadorRentaPromedio"></td>
+                                                        <th>Edad Promedio</th>
+                                                        <td id="empresatrabajadorpromedio"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="panel col-lg-12">
+                                        <div class="col-lg-4 panel">
+                                            <h5 class="text-dark header-title m-t-0 m-b-30">Ciclo de Vida</h5>
+                                            <div class="widget-chart text-center">
+                                                <div id="grafCicloVida">
+                                                    <svg style="height: 250px; width: 100%;"></svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 panel">
+                                            <h5 class="text-dark header-title m-t-0 m-b-30">Nivel Socioeconómico</h5>
+                                            <div class="widget-chart text-center">
+                                                <div id="grafNSE">
+                                                    <svg style="height: 250px; width: 100%;"></svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 panel">
+                                            <h5 class="text-dark header-title m-t-0 m-b-30">Tramo Asignación Familiar</h5>
+                                            <div class="widget-chart text-center">
+                                                <div id="grafTramoAF">
+                                                    <svg style="height: 250px; width: 100%;"></svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 panel">
+                                            <h5 class="text-dark header-title m-t-0 m-b-30">Tramo Etario Afiliados</h5>
+                                            <div class="widget-chart text-center">
+                                                <div id="grafTramoEtarioA">
+                                                    <svg style="height: 250px; width: 100%;"></svg>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-4 panel">
+                                            <h5 class="text-dark header-title m-t-0 m-b-30">Régimen de Salud</h5>
+                                            <div class="widget-chart text-center">
+                                                <div id="grafRegimenSalud">
+                                                    <svg style="height: 250px; width: 100%;"></svg>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-4 panel">
+                                            <h5 class="text-dark header-title m-t-0 m-b-30">Genéro</h5>
+                                            <div class="widget-chart text-center">
+                                                <div id="grafGenero">
+                                                    <svg style="height: 250px; width: 100%;"></svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 panel">
+
+                                            <h5 class="text-dark header-title m-t-0 m-b-30">Tenencia de Cargas</h5>
+                                            <div class="widget-chart text-center">
+                                                <div id="grafCargas">
+                                                    <svg style="height: 250px; width: 100%;"></svg>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-4 panel">
+
+                                            <h5 class="text-dark header-title m-t-0 m-b-30">Tipo de Carga</h5>
+                                            <div class="widget-chart text-center">
+                                                <div id="grafTipoCarga">
+                                                    <svg style="height: 250px; width: 100%;"></svg>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 panel">
+                                            <h5 class="text-dark header-title m-t-0 m-b-30">Distribución carga hijos por edad</h5>
+                                            <div class="widget-chart text-center">
+                                                <div id="grafTipoCargaHijosporEdad">
+                                                    <svg style="height: 250px; width: 100%;"></svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" value="@Html.Raw(ViewBag.Empresa.Id)" id="IdEmpresa" />
+                                    <input type="hidden" id="TotalEmpresaCalculo" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="demo-lft-tab-2" class="tab-pane fade">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Beneficios</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" align="center" style="margin: 0px auto;  width: 100%;  font-size: 10px;">
+                                        <thead id="headBeneficio"></thead>
+                                        <tbody id="bodyBeneficio"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="demo-lft-tab-3" class="tab-pane fade">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Licencias Médicas</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" align="center" style="margin: 0px auto;  width: 100%;  font-size: 10px;">
+                                        <thead id="headEmpresaLicencia"></thead>
+                                        <tbody id="bodyEmpresaLicencia"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Evolución Diaria Plazo Promedio</h1>
+                            </div>
+                            <div id="LinealLicencia" style="height:212px"></div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Estado Licencia Médicas</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" align="center" style="margin: 0px auto;  width: 100%;  font-size: 10px;">
+                                        <thead id="headLicenciaVigente"></thead>
+                                        <tbody id="bodyLicenciaVigente"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Licencia Pagadas y no Pagadas por Mes</h1>
+                            </div>
+                            <div id="LinealLicenciaPagadas" style="height:212px"></div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Licencia Pagadas y no Pagadas por Mes</h1>
+                            </div>
+                            <div id="BarraTop" style="height:212px"></div>
+                        </div>
+                    </div>
+              
+                </div>
+            </div>
         </div>
-        <div class="col-sm-12">
-            <p align="right">
-                <b>
-                    @*Actualización : @Html.Raw(ViewBag.Empresa.Fecha_ProcesoEmpresa)*@
-                </b>
-            </p>
-        </div>
-        <div class="col-sm-12">
-           @* <h4 class="page-title">@Html.Raw(ViewBag.Empresa.NombreEmpresa)</h4>*@
-            <ol class="breadcrumb">
-                <li><a href="/DirectorioReportal">Portal de Información</a></li>
-                <li><a href="/DirectorioReportal/Empresas/MapaEmpresas">Mapa Empresa</a></li>
-                <li class="active">@*@Html.Raw(ViewBag.Empresa.NombreEmpresa)*@</li>
-            </ol>
-
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <a href="/DirectorioReportal/Empresas/MapaEmpresas">
-                                <button type="button" class="btn btn-default waves-effect waves-block">
-                                    <span class="btn-label">
-                                        <i class="fa fa-arrow-left"></i>
-                                    </span>Volver Atrás
-                                </button>
-                            </a>
-                        </th>
-                        <th></th>
-                        @*<th>
-                                <button onclick="return xepOnline.Formatter.Format('DivCompleto', { pageWidth: '11in', pageHeight: '8.5in', render: 'download' });"class="btn btn-default waves-effect waves-block" visibility=hidden>
-                                        <span class="btn-label">
-                                            <i class="fa fa-arrow-down"></i>
-                                        </span>Descargar PDF
-                                    </button>
-                            </th>*@
-                    </tr>
-                </thead>
-            </table>
-        </div>
-
-
     </div>
-
-    <div class="row" id="dvContainer">
-        <div class="panel col-lg-12">
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <tbody>
-                        <tr>
-                            <th>Rut Empresa</th>
-                            @*<td id="empresaRut"></td>*@
-                            <td id="empresaRutDv"></td>
-                            <th>Empresa Segmento</th>
-                            <td id="empresaSegmento"></td>
-                        </tr>
-                        <tr>
-                            <th>Empresa Nombre</th>
-                            <td id="empresaNombre"></td>
-                            <th>Empresa Segmento NSE</th>
-                            <td id="empresaNSE"></td>
-                        </tr>
-                        <tr>
-                            <th>Empresa Tipo</th>
-                            <td id="empresaTipo"></td>
-                            <th>Cantidad de trabajadores</th>
-                            <td id="empresaNumTrabajadores"></td>
-                        </tr>
-                        <tr>
-                            <th>Holding</th>
-                            <td id="perteneceholding"></td>
-                            <th>Trabajadores con email</th>
-                            <td id="empresaTrabajadorMail"></td>
-                        </tr>
-                        <tr>
-                            @*<th>Empresa Sector Económico</th>
-                            <td id="empresaSectorEconomico"></td>*@
-                            <th>Empresa Sector Económico</th>
-                            <td id="empresaSectorEconomico"></td>
-                            <th>Trabajadores con celular</th>
-                            <td id="empresaTrabajadorCelular"></td>
-                        </tr>
-                        <tr>
-                            @*<th>Clasificación de Riesgo</th>
-                            <td id="clasificacionRiesgo"></td>*@
-
-                            <th>Clasificación Comercial</th>
-                            <td id="clasificacionComercial"></td>
-                            <th>Trabajadores con email o celular</th>
-                            <td id="empresaTrabajadorMailCelular"></td>
-                        </tr>
-                        <tr>
-                            <th>Antigüedad(Años)</th>
-                            <td id="antiguedadempresa"></td>
-                            <th>Trabajadores con Tarjeta Digital</th>
-                            <td id="empresaTrabajadorTarjeta"></td>
-                        </tr>
-                        <tr>
-
-                            <th>Renta Promedio</th>
-                            <td id="empresaTrabajadorRentaPromedio"></td>
-                            <th>Edad Promedio</th>
-                            <td id="empresatrabajadorpromedio"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        </div>
-    <div class="row">
-        <div class="col-lg-4 panel">
-            
-                <h4 class="text-dark header-title m-t-0 m-b-30">Ciclo de Vida</h4>
-                <div class="widget-chart text-center">
-                    <div id="grafCicloVida">
-                        <svg style="height: 250px; width: 100%;"></svg>
-
-                    </div>
-                </div>
-        </div>
-        <div class="col-lg-4 panel">
-            <h4 class="text-dark header-title m-t-0 m-b-30">Nivel Socioeconómico</h4>
-            <div class="widget-chart text-center">
-                <div id="grafNSE">
-                    <svg style="height: 250px; width: 100%;"></svg>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 panel">
-                <h4 class="text-dark header-title m-t-0 m-b-30">Tramo Asignación Familiar</h4>
-                <div class="widget-chart text-center">
-                    <div id="grafTramoAF">
-                        <svg style="height: 250px; width: 100%;"></svg>
-                    </div>
-                </div>
-        </div>
-        <div class="col-lg-4 panel">
-                <h4 class="text-dark header-title m-t-0 m-b-30">Tramo Etario Afiliados</h4>
-                <div class="widget-chart text-center">
-                    <div id="grafTramoEtarioA">
-                        <svg style="height: 250px; width: 100%;"></svg>
-                    </div>
-                </div>
-           
-        </div>
-        <div class="col-lg-4 panel">
-                <h4 class="text-dark header-title m-t-0 m-b-30">Régimen de Salud</h4>
-                <div class="widget-chart text-center">
-                    <div id="grafRegimenSalud">
-                        <svg style="height: 250px; width: 100%;"></svg>
-                    </div>
-                </div>
-         
-        </div>
-        <div class="col-lg-4 panel">
-                <h4 class="text-dark header-title m-t-0 m-b-30">Genéro</h4>
-                <div class="widget-chart text-center">
-                    <div id="grafGenero">
-                        <svg style="height: 250px; width: 100%;"></svg>
-                    </div>
-                </div>
-        </div>
-        <div class="col-lg-4 panel">
-           
-                <h4 class="text-dark header-title m-t-0 m-b-30">Tenencia de Cargas</h4>
-                <div class="widget-chart text-center">
-                    <div id="grafCargas">
-                        <svg style="height: 250px; width: 100%;"></svg>
-                    </div>
-
-                </div>
-           
-        </div>
-        <div class="col-lg-4 panel">
-           
-                <h4 class="text-dark header-title m-t-0 m-b-30">Tipo de Carga</h4>
-                <div class="widget-chart text-center">
-                    <div id="grafTipoCarga">
-                        <svg style="height: 250px; width: 100%;"></svg>
-                    </div>
-
-            </div>
-        </div>
-        <div class="col-lg-4 panel" >
-                <h4 class="text-dark header-title m-t-0 m-b-30">Distribución carga hijos por edad</h4>
-                <div class="widget-chart text-center">
-                    <div id="grafTipoCargaHijosporEdad">
-                        <svg style="height: 250px; width: 100%;"></svg>
-                    </div>
-            </div>
-        </div>
-        @*<p align="right">
-                <a href="~/Empresas/DetalleMapaEmpresaV2" class="btn btn-default btn-rounded waves-effect waves-light" role="button">
-                    <span class="btn-label">
-                        <i class="fa fa-arrow-right"></i>
-                    </span>Siguiente
-                </a>
-            </p>*@
-    </div>
-    <input type="hidden" value="@Html.Raw(ViewBag.Empresa.Id)" id="IdEmpresa" />
-    <input type="hidden" id="TotalEmpresaCalculo" />
 </div>
-
-
-
 
 
 

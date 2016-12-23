@@ -30,7 +30,8 @@ namespace Reportal.Api.Controllers
             List<string> Encs = Todos.Select(t => t.diaGrafico).Distinct().ToList();
             List<Cred_Financiamento> Trabajadores = Todos.Where(t => t.iSegmento == 2).ToList();
             List<Cred_Financiamento> Pensionados = Todos.Where(t => t.iSegmento == 1).ToList();
-            List<Cred_Financiamento> Total = Todos.Where(t => t.iSegmento == 3).ToList();
+            List<Cred_Financiamento> Total = Todos.Where(t => t.iSegmento == 4).ToList();
+            List<Cred_Financiamento> DDirecto = Todos.Where(t => t.iSegmento == 3).ToList();
 
 
             ContenedorBase c = new ContenedorBase();
@@ -78,6 +79,16 @@ namespace Reportal.Api.Controllers
                     Pplazo = Convert.ToInt32(cftot.plazoPromedio)
                 };
                 c.Total.Add(Totales);
+            }
+            foreach(Cred_Financiamento cfdd in DDirecto)
+            {
+                Auxiliar DedudorDir = new Auxiliar
+                {
+                    Spred = Convert.ToDecimal(cfdd.sPread),
+                    Tasa = Convert.ToDecimal(cfdd.tasaPromedio),
+                    Pplazo = Convert.ToInt32(cfdd.plazoPromedio)
+                };
+                c.DDirecto.Add(DedudorDir);
             }
 
             return c;

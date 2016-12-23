@@ -469,55 +469,10 @@ $(document).ready(function () {
 
                 return chartTipoCargaHijosEdad;
             });
-            $.getJSON("http://localhost:8080/api/TendenciaResumen", function (data) {
-
-                //Grafico de barras
-                var BarChart = {
-                    labels: ["Enero - 2016", "Febrero - 2016"],
-                    datasets: [
-                        {
-                            fillColor: 'rgba(95, 190, 170, 0.7)',
-                            strokeColor: 'rgba(95, 190, 170, 1)',
-                            highlightFill: 'rgba(95, 190, 170, 1)',
-                            highlightStroke: 'rgba(95, 190, 170, 0.9)',
-                            data: [75, 100]
-                        }
-                    ]
-                }
-
-
-                var selector = $("#bar");
-                var ctx = selector.get(0).getContext("2d");
-                var container = $(selector).parent();
-                var ww = selector.attr('width', $(container).width());
-                var sal = new Chart(ctx).Bar(data);
-            });
 
         });//ciere local
 
-        $.getJSON("http://localhost:8080/api/ResumenLicencia/" + $("#IdEmpresa").val(), function (data) {
-
-            //Grafico de barras
-            var BarChart = {
-                labels: ["Enero - 2016", "Febrero - 2016"],
-                datasets: [
-                    {
-                        fillColor: 'rgba(95, 190, 170, 0.7)',
-                        strokeColor: 'rgba(95, 190, 170, 1)',
-                        highlightFill: 'rgba(95, 190, 170, 1)',
-                        highlightStroke: 'rgba(95, 190, 170, 0.9)',
-                        data: [75, 100] / 100
-                    }
-                ]
-            }
-
-
-            var selector = $("#bar2");
-            var ctx = selector.get(0).getContext("2d");
-            var container = $(selector).parent();
-            var ww = selector.attr('width', $(container).width());
-            var sal = new Chart(ctx).Bar(data);
-        });
+       
     }
 
     InicializaGraficas();

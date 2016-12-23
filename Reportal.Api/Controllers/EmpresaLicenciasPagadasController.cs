@@ -12,20 +12,18 @@ using Reportal.Api.ActionFilters;
 namespace Reportal.Api.Controllers
 {
     [EnableCors(origins: "http://localhost, http://serv-55", headers: "*", methods: "*")]
-  //  [AuthorizationRequired]
-    public class DirectorioDashboardController : ApiController
+    //[AuthorizationRequired]
+    public class EmpresaLicenciasPagadasController : ApiController
     {
-        // GET: CreditoColoc_Diaria
-        private CreditoColoc_DiariaRepository ColocDiaria;
-
-        public DirectorioDashboardController()
+        private EmpresaLicenciaPaRepository LicPa;
+        public EmpresaLicenciasPagadasController()
         {
-            ColocDiaria = new CreditoColoc_DiariaRepository();
+            LicPa = new EmpresaLicenciaPaRepository();
         }
 
-        public IEnumerable<DirectorioDashboard> Get()
+        public IEnumerable<EmpresaLicenciaB> Get(int id)
         {
-            return ColocDiaria.Listar();
+            return LicPa.ListarLicenciaPagadas(id);
         }
     }
 }

@@ -48,6 +48,14 @@
                     //  $("#bodyFinanciamiento > tr.pensionado").append($("<td>").html(e.Spred.toMoney(2)));
                 });
 
+                $("#bodyFinanciamiento").append($("<tr class=\"ddirecto\">"));
+                $("#bodyFinanciamiento > tr.ddirecto").append($("<th>").html("Deudor Directo").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.DDirecto, function (i, e) {
+                    $("#bodyFinanciamiento > tr.ddirecto").append($("<td>").html(e.Tasa.toMoney(2) + '%'));
+                    //  $("#bodyFinanciamiento > tr.pensionado").append($("<td>").html(e.Spred.toMoney(2)));
+                });
+
+
                 $("#bodyFinanciamiento").append($("<tr class=\"total\">"));
                 $("#bodyFinanciamiento > tr.total").append($("<th>").html("Total").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF").css("font-weight", "bold"));
                 $.each(respoonse.Total, function (i, e) {
@@ -89,6 +97,14 @@
                     //$("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
                     $("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Spred.toMoney(2) + '%'));
                 });
+                $("#bodyFinanciamientoSpread").append($("<tr class=\"ddirecto\">"));
+                $("#bodyFinanciamientoSpread > tr.ddirecto").append($("<th>").html("Deudor Directo").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.DDirecto, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyFinanciamientoSpread > tr.ddirecto").append($("<td>").html(e.Spred.toMoney(2) + '%'));
+                });
+           
+
 
                 $("#bodyFinanciamientoSpread").append($("<tr class=\"total\">"));
                 $("#bodyFinanciamientoSpread > tr.total").append($("<th>").html("Total").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF").css("font-weight", "bold"));
@@ -129,6 +145,13 @@
                     //$("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
                     $("#bodyFinanciamientoPlazo > tr.pensionado").append($("<td>").html(e.Pplazo));
                 });
+                $("#bodyFinanciamientoPlazo").append($("<tr class=\"ddirecto\">"));
+                $("#bodyFinanciamientoPlazo > tr.ddirecto").append($("<th>").html("Deudor Directo").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.DDirecto, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.pensionado").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyFinanciamientoPlazo > tr.ddirecto").append($("<td>").html(e.Pplazo));
+                });
+            
 
                 $("#bodyFinanciamientoPlazo").append($("<tr class=\"total\">"));
                 $("#bodyFinanciamientoPlazo > tr.total").append($("<th>").html("Total").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF").css("font-weight", "bold"));
@@ -150,7 +173,9 @@
                     var dias = new Array();
                     var tasaPromedio1 = new Array();
                     var tasaPromedioT = new Array();
+                    var TasaPromedioDD = new Array();
                     var tasaPromedioTotal = new Array();
+
 
 
                     $.each(data.Encabezado, function (i, e) {
@@ -164,12 +189,15 @@
                     $.each(data.Trabajador, function (i, e) {
                         tasaPromedioT[i] = e.Tasa;
                     });
+                    $.each(data.DDirecto, function (i, e) {
+                        TasaPromedioDD[i] = e.Tasa;
+                    });
                     $.each(data.Total, function (i, e) {
                         tasaPromedioTotal[i] = e.Tasa;
                     });
 
                     $('#LinealPensionado').highcharts({
-                        colors: ['#42a5f5', '#8bc34a', '#ffa726'],
+                        colors: ['#42a5f5', '#8bc34a', '#ec407a', '#ffa726'],
                         title: {
                             text: '',
                             x: -20 //center
@@ -229,7 +257,15 @@
                                 shared: true
 
                             },
-                        }, {
+                        },{
+                        name: 'Deudor Directo',
+                        data: TasaPromedioDD,
+                    tooltip: {
+                        pointFormat: 'Tasa Promedio: <b>{point.y:.2f}%</b><br/>',
+                        shared: true
+
+                    },
+                    }, {
                             name: 'Total',
                             data: tasaPromedioTotal,
                             tooltip: {
@@ -260,6 +296,7 @@
                     var diasSpread = new Array();
                     var SpreadPensionado = new Array();
                     var SpreadTrabajador = new Array();
+                    var SpreadDeudorD = new Array();
                     var SpreadTotal = new Array();
 
 
@@ -274,12 +311,15 @@
                     $.each(data.Trabajador, function (i, e) {
                         SpreadTrabajador[i] = e.Spred;
                     });
+                    $.each(data.DDirecto, function (i, e) {
+                        SpreadDeudorD[i] = e.Spred;
+                    });
                     $.each(data.Total, function (i, e) {
                         SpreadTotal[i] = e.Spred;
                     });
 
                     $('#LinealSpread').highcharts({
-                        colors: ['#42a5f5', '#8bc34a', '#ffa726'],
+                        colors: ['#42a5f5', '#8bc34a', '#ec407a', '#ffa726'],
                         title: {
                             text: '',
                             x: -20 //center
@@ -339,7 +379,16 @@
                                 shared: true
 
                             },
-                        }, {
+                        },
+                        {
+                            name: 'Deudor Directo',
+                            data: SpreadDeudorD,
+                            tooltip: {
+                                pointFormat: 'Spread: <b>{point.y:.2f}%</b><br/>',
+                                shared: true
+
+                            },
+                        },{
                             name: 'Total',
                             data: SpreadTotal,
                             tooltip: {
@@ -370,6 +419,7 @@
                     var diasPlazo = new Array();
                     var PlazoPensionado = new Array();
                     var PlazoTrabajador = new Array();
+                    var PlazoDeudorDirecto = new Array();
                     var PlazoTotal = new Array();
 
 
@@ -384,12 +434,15 @@
                     $.each(data.Trabajador, function (i, e) {
                         PlazoTrabajador[i] = e.Pplazo;
                     });
+                    $.each(data.DDirecto, function (i, e) {
+                        PlazoDeudorDirecto[i] = e.Pplazo;
+                    });
                     $.each(data.Total, function (i, e) {
                         PlazoTotal[i] = e.Pplazo;
                     });
 
                     $('#LinealPlazo').highcharts({
-                        colors: ['#42a5f5', '#8bc34a', '#ffa726'],
+                        colors: ['#42a5f5', '#8bc34a', '#ec407a', '#ffa726'],
                         title: {
                             text: '',
                             x: -20 //center
@@ -438,6 +491,11 @@
                             tooltip: {
                             },
                         }, {
+                            name: 'Deudor Directo',
+                            data: PlazoDeudorDirecto,
+                            tooltip: {
+                            },
+                        }, {
                             name: 'Total',
                             data: PlazoTotal,
                             tooltip: {
@@ -452,8 +510,6 @@
             });
 
             $("#slPeriodo").trigger("change");
-
-
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
                 if ($(this).attr("href") === "#pestanaSpread")

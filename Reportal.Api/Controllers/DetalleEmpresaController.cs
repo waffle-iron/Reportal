@@ -11,8 +11,9 @@ using Reportal.Api.ActionFilters;
 
 namespace Reportal.Api.Controllers
 {
+ 
     [EnableCors(origins: "http://localhost, http://serv-55", headers: "*", methods: "*")]
-    //[AuthorizationRequired]
+   //[AuthorizationRequired]
     public class DetalleEmpresaController : ApiController
     {
         private EmpresaRepository empresarepositorio;
@@ -21,7 +22,7 @@ namespace Reportal.Api.Controllers
         {
             empresarepositorio = new EmpresaRepository();
         }
-
+       
         public IdentidadDetalleEmpresa Get(int id)
         {
 
@@ -34,5 +35,6 @@ namespace Reportal.Api.Controllers
                 throw ex;
             }            
         }
+
     }
 }

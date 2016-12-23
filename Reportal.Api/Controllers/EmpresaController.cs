@@ -13,7 +13,7 @@ namespace Reportal.Api.Controllers
 {
 
     [EnableCors(origins: "http://localhost, http://serv-55", headers: "*", methods: "*")]
-   // [AuthorizationRequired]
+   //[AuthorizationRequired]
     public class EmpresaController : ApiController
     {
         private EmpresaRepository emprerepositorio;
@@ -22,10 +22,7 @@ namespace Reportal.Api.Controllers
             emprerepositorio = new EmpresaRepository();
         }
 
-        public IEnumerable<Empresa> Get()
-        {
-            return emprerepositorio.Listar();
-        }
+    
         public Empresa Get(int id)
         {
             //  return camprepositorio.Obtener(id);
