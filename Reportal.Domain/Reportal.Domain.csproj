@@ -73,6 +73,7 @@
     <Compile Include="PensionadoPeriodo.cs" />
     <Compile Include="PensionadosResumen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResumenCascadas.cs" />
     <Compile Include="SegPreaprobadosFull.cs" />
     <Compile Include="SegPreaprobadosGlobal.cs" />
     <Compile Include="SeguimientoVentaCascadaEntity.cs" />

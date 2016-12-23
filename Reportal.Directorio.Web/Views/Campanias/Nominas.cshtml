@@ -1,0 +1,392 @@
+﻿
+@{
+    ViewBag.Title = "Nominas";
+    Layout = "~/Views/Layout/_Principal2_Oper.cshtml";
+}
+
+@section script{
+
+
+    <script type="text/javascript">
+
+
+        $(function () {
+
+            $("#slPeriodo").on("change", function () {
+                $("#tbl_ResTrabajadores").html("");
+                $("#tbl_ResPensionados").html("");
+                $("#tbl_ResCanales").html("");
+                $("#tbl_ResNominas").html("");
+
+                $.SecGetJSON(getReportalApiHost() + "api/resumenes-nominas/resumen-cascadas-pensionados?periodo=" + $("#slPeriodo").val(), function (respoonse) {
+                   
+                    var totales = { caen:0, pasan:0 };
+                    $.each(respoonse, function (i, o) {
+                        if (i === 0) {
+                            $("#tbl_ResPensionados").append(
+                                $("<tr>")
+                                    //.append($("<td>").html("Pensionados").attr("rowspan", respoonse.length + 1).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("vertical-align", "middle"))
+                                    .append($("<td>").html(o.Filtro))
+                                    .append($("<td>").html(o.Caen.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.Pasan.toMoney()).css("text-align", "right"))
+                            );
+                        } else {
+                            $("#tbl_ResPensionados").append(
+                                $("<tr>")
+                                    .append($("<td>").html(o.Filtro))
+                                    .append($("<td>").html(o.Caen.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.Pasan.toMoney()).css("text-align", "right"))
+                            );
+                        }
+
+                        totales.caen = totales.caen + o.Caen;
+                        totales.pasan = totales.caen + o.Pasan;
+
+                    });
+                    //foot
+                    $("#tbl_ResPensionados").append(
+                                $("<tr>")
+                                    .append($("<td>").html("Total Pre Aprobados").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
+                                    .append($("<td>").html(totales.caen.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
+                                    .append($("<td>").html(totales.pasan.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
+                        );
+
+                });
+
+                $.SecGetJSON(getReportalApiHost() + "api/resumenes-nominas/resumen-cascadas-trabajadores?periodo=" + $("#slPeriodo").val(), function (respoonse) {
+                    
+                    var totales = { caen: 0, pasan: 0 };
+                    $.each(respoonse, function (i, o) {
+                        if (i === 0) {
+                            $("#tbl_ResTrabajadores").append(
+                                $("<tr>")
+                                    //.append($("<td>").html("Trabajadores").attr("rowspan", respoonse.length + 1).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("vertical-align", "middle"))
+                                    .append($("<td>").html(o.Filtro))
+                                    .append($("<td>").html(o.Caen.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.Pasan.toMoney()).css("text-align", "right"))
+
+                            );
+                        } else {
+                            $("#tbl_ResTrabajadores").append(
+                                $("<tr>")
+                                    .append($("<td>").html(o.Filtro))
+                                    .append($("<td>").html(o.Caen.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.Pasan.toMoney()).css("text-align", "right"))
+                            );
+                        }
+
+                        totales.caen = totales.caen + o.Caen;
+                        totales.pasan = totales.caen + o.Pasan;
+
+                    });
+                    //foot
+                    $("#tbl_ResTrabajadores").append(
+                                $("<tr>")
+                                    .append($("<td>").html("Total Pre Aprobados").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight","bold"))
+                                    .append($("<td>").html(totales.caen.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
+                                    .append($("<td>").html(totales.pasan.toMoney()).css("text-align", "right").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
+                        );
+                });
+
+                $.SecGetJSON(getReportalApiHost() + "api/resumenes-nominas/resumen-canales?periodo=" + $("#slPeriodo").val(), function (respoonse) {
+
+                    $.each(respoonse, function (i, o) {
+                        $("#tbl_ResCanales").append(
+                            $("<tr>")
+                                .append($("<td>").html(o.Canal))
+                                .append($("<td>").html(o.Cantidad.toMoney()).css("text-align","right"))
+                        );
+                    });
+                });
+
+                $.SecGetJSON(getReportalApiHost() + "api/resumenes-nominas/resumen-nominas?periodo=" + $("#slPeriodo").val(), function (respoonse) {
+                    var i = 0, canal = '';
+                    $.each(respoonse.ResumenNominas, function (i, o) {
+                        
+                        if (canal != o.Canal) {
+                            i = 0;
+                        }
+
+                        if (ObtenerRowspan(o.Canal, respoonse.RowsCanales) <= 1) {
+                            $("#tbl_ResNominas").append(
+                                 $("<tr>")
+                                    .append($("<td>").html(o.Canal).css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
+                                    .append($("<td>").html(o.Nomina))
+                                    .append($("<td>").html(o.Cantidad.toMoney()).css("text-align", "right"))
+                            );
+                        }
+                        else if (ObtenerRowspan(o.Canal, respoonse.RowsCanales) > 1 && i === 0)
+                        {
+                            $("#tbl_ResNominas").append(
+                                $("<tr>")
+                                   .append($("<td>").html(o.Canal).attr("rowspan", ObtenerRowspan(o.Canal, respoonse.RowsCanales)).css("vertical-align", "middle").css("text-align", "center").css("background", "#1f8fe0 none repeat scroll 0 0").css("color", "#fff1f1").css("font-weight", "bold"))
+                                   .append($("<td>").html(o.Nomina))
+                                   .append($("<td>").html(o.Cantidad.toMoney()).css("text-align", "right"))
+                            );
+                            i++;
+                        }
+                        else if (ObtenerRowspan(o.Canal, respoonse.RowsCanales) > 1 && i > 0)
+                        {
+                            $("#tbl_ResNominas").append(
+                                $("<tr>")
+                                   .append($("<td>").html(o.Nomina))
+                                   .append($("<td>").html(o.Cantidad.toMoney()).css("text-align", "right"))
+                            );
+                            i++;
+                        }
+
+                        canal = o.Canal;
+                    });
+                });
+            });
+
+            $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/1/", function (respoonse) {
+                $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
+            });
+
+            $("#Descarga-zip").on("click", function () {
+                //var myWindow = window.open("", "_blank");
+                /*$.SecGetBLOB(getReportalApiHost() + "api/resumenes-nominas/descarga-archivos-zip", function (blob) {
+                    var url = URL.createObjectURL(blob);
+                });*/
+                $(this).attr("disabled", true);
+                $("#slPeriodo").attr("disabled", true);
+                $("#mensajes_pers").html("Preparando descarga....");
+
+               
+                var ud = {}, xhr = new XMLHttpRequest();
+                if (JSON.parse(localStorage.getItem('userdata')) != null) {
+                    ud = JSON.parse(localStorage.getItem('userdata'));
+                }
+
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var f = new Date();
+                        var tmstp = f.getDate() + "" + (f.getMonth() + 1) + "" + f.getFullYear();
+                        saveData(this.response, "nominas_" + $("#slPeriodo").val()+ "_" + tmstp + ".zip");
+                        $("#Descarga-zip").attr("disabled", false);
+                        $("#mensajes_pers").html("");
+                        $("#slPeriodo").attr("disabled", false);
+                    }
+
+                    if (this.readyState == 4 && this.status == 404)
+                    {
+                        $("#Descarga-zip").attr("disabled", false);
+                        $("#mensajes_pers").html("Sin Archivos para el Periodo");
+                        $("#slPeriodo").attr("disabled", false);
+                    }
+
+                }
+                xhr.open('GET', getReportalApiHost() + "api/resumenes-nominas/descarga-archivos-zip?periodo=" + $("#slPeriodo").val());
+                xhr.responseType = 'blob';
+                xhr.setRequestHeader("Token", ud.token);
+                xhr.setRequestHeader("TokenExpiry", "900");
+                xhr.setRequestHeader("Access-Control-Expose-Headers", "Token,TokenExpiry");
+                xhr.send();
+            });
+
+            var saveData = (function () {
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "display: none";
+                return function (data, fileName) {
+                    var url = window.URL || window.webkitURL,
+                        enlace = url.createObjectURL(data);
+                        
+                    a.href = enlace;
+                    a.download = fileName;
+                    a.click();
+                    url.revokeObjectURL(url);
+                };
+            }());
+
+            $("#slPeriodo").trigger("change");
+
+        });
+
+
+       
+
+        function ObtenerRowspan(key, array) {
+            var r = 0;
+            $.each(array, function (i, o) {
+                if (key === o.Canal) {
+                    r = o.Cantidad
+                }        
+            });
+
+            return r;
+        }
+
+    </script>
+}
+
+@section css{
+    <!--Premium Line Icons [ OPTIONAL ]-->
+    <link href="~/getstart/premium/icon-sets/icons/line-icons/premium-line-icons.css" rel="stylesheet">
+
+    <style type="text/css">
+        .head-tabla { /*#ebeff2*/
+            border: 2px solid #ebeff2;
+        }
+
+        .table-charlee > tbody > tr > td,
+        .table-charlee > tbody > tr > th,
+        .table-charlee > tfoot > tr > td,
+        .table-charlee > tfoot > tr > th,
+        .table-charlee > thead > tr > td,
+        .table-charlee > thead > tr > th{
+            border-top: 1px solid #ddd;
+            /*border-right: 2px solid #ffffff;*/
+            line-height: 1.42857;
+            padding: 3px !important;
+            vertical-align: top;
+            font-size: 12px;
+        }
+    </style>
+
+}
+
+<div class="boxed">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="well well-sm">
+                Seleccione Periodo:
+                <select id="slPeriodo">
+                    <option value="201612" selected="selected">Diciembre 2016</option>
+                </select>
+
+                <button id="Descarga-zip" class="btn-xs btn-default btn-icon">Descargar Nóminas <i class="pli-folder-zip icon-lg"></i></button>
+                <span id="mensajes_pers"></span>
+
+                <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+
+            
+
+
+
+            <!--Default Tabs (Left Aligned)-->
+            <!--===================================================-->
+            <div class="tab-base">
+
+                <!--Nav Tabs-->
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab-resumen" aria-expanded="true">Resumen</a>
+                    </li>
+                </ul>
+
+                <!--Tabs Content-->
+                <div class="tab-content">
+                    <div id="tab-resumen" class="tab-pane fade active in">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Resumen Canal</h1>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-charlee table-responsive table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Canal</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">N</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_ResCanales"></tbody>
+                                            
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-7">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Resumen Nóminas</h1>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-charlee table-responsive table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Canal</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Nómina</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">N</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_ResNominas"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h1 class="panel-title">Resumen Cascadas</h1>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="col-lg-6">
+                                        <table class="table table-charlee table-responsive table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="3" style="text-align:center; background: #0965ae none repeat scroll 0 0; color:#fff1f1;">Pensionados</th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtro</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Caen</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pasan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_ResPensionados"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <table class="table table-charlee table-responsive table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="3" style="text-align:center; background: #0965ae none repeat scroll 0 0; color:#fff1f1;">Trabajadores</th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Filtro</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Caen</th>
+                                                    <th style="text-align:center; background: #1f8fe0 none repeat scroll 0 0; color:#fff1f1;">Pasan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_ResTrabajadores"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            
+                            
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--===================================================-->
+            <!--End Default Tabs (Left Aligned)-->
+            <!--Icon Tabs (Left Aligned)-->
+            <!--===================================================-->
+
+
+        </div>
+    </div>
+</div>
+<!--===================================================-->
+<!--End page content-->

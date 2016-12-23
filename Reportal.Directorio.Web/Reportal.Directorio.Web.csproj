@@ -63,6 +63,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -123,6 +125,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccesoController.cs" />
+    <Compile Include="Controllers\CampaniasController.cs" />
     <Compile Include="Controllers\ColocacionController.cs" />
     <Compile Include="Controllers\DirectorioController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
@@ -338,7 +341,6 @@
     <Content Include="assets\plugins\jquery-validation\dist\jquery.validate.min.js" />
     <Content Include="assets\plugins\jquery.easy-pie-chart\dist\easypiechart.min.js" />
     <Content Include="assets\plugins\jquery.easy-pie-chart\dist\jquery.easypiechart.min.js" />
-    <Content Include="assets\plugins\jquery.steps\build\jquery.steps.min.js" />
     <Content Include="assets\plugins\jquery.steps\demo\css\jquery.steps.css" />
     <Content Include="assets\plugins\jvectormap\gdp-data.js" />
     <Content Include="assets\plugins\jvectormap\jquery-jvectormap-2.0.2.css" />
@@ -371,8 +373,6 @@
     <Content Include="assets\plugins\nestable\jquery.nestable.js" />
     <Content Include="assets\plugins\notifications\notify-metro.js" />
     <Content Include="assets\plugins\notifyjs\dist\notify.min.js" />
-    <Content Include="assets\plugins\nvd3\build\nv.d3.min.css" />
-    <Content Include="assets\plugins\nvd3\build\nv.d3.min.js" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.carousel.min.css" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.theme.default.min.css" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.video.play.png" />
@@ -2556,9 +2556,12 @@
     <Content Include="Views\Empresas\ClasificacionEmpresa.cshtml" />
     <Content Include="Views\Empresas\DetalleMapaEmpresa.cshtml" />
     <Content Include="Views\Empresas\MapaEmpresas.cshtml" />
+    <Content Include="Views\Campanias\Nominas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="assets\plugins\jquery.steps\build\" />
+    <Folder Include="assets\plugins\nvd3\build\" />
     <Folder Include="getstart\plugins\flot-charts\examples\gauge\" />
     <Folder Include="Views\Presupuesto\" />
   </ItemGroup>

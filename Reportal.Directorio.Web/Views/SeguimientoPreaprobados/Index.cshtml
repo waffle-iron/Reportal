@@ -17,6 +17,9 @@
 
             $("#slPeriodo").on("change", function () {
 
+
+                $(".periodo-seleccionado").html($("#slPeriodo option:selected").text());
+
                 $("#ft_preaprobadosGlobal").html("");
                 $("#bdy_preaprobadosGlobal").html("");
                 $("#ft_preaprobadosSegmento").html("");
@@ -29,6 +32,8 @@
 
 
                 $.SecGetJSON(getReportalApiHost() + "api/SegPreaprobados/" + $("#slPeriodo").val(), function (respoonse) {
+
+
 
                     $.each(respoonse, function (i, o) {
 
@@ -117,7 +122,7 @@
 
                 });
 
-                
+
                 $.SecGetJSON(getReportalApiHost() + "api/SegPreaprobadosPorNominas/" + $("#slPeriodo").val(), function (respoonse) {
 
                     $.each(respoonse, function (i, o) {
@@ -268,7 +273,9 @@
 @section css{
 
     <style type="text/css">
-        .head-tabla { /*#ebeff2*/
+        .head-tabla 
+        { 
+            /*#ebeff2*/
             border: 2px solid #ebeff2;
         }
 
@@ -277,7 +284,8 @@
         .table-charlee > tfoot > tr > td,
         .table-charlee > tfoot > tr > th,
         .table-charlee > thead > tr > td,
-        .table-charlee > thead > tr > th {
+        .table-charlee > thead > tr > th 
+        {
             border-top: 1px solid #ddd;
             /*border-right: 2px solid #ffffff;*/
             line-height: 1.42857;
@@ -285,6 +293,31 @@
             vertical-align: top;
             font-size: 12px;
         }
+
+        .charlee-pintado
+        {
+            color:#fff1f1 !important;
+            background: #1f8fe0 none repeat scroll 0 0; 
+            text-align:center;
+        }
+
+        .charlee-pintado-bold
+        {
+            color:#fff1f1 !important;
+            background: #1f8fe0 none repeat scroll 0 0; 
+            text-align:center;
+            font-weight:bold;
+        }
+
+        .charlee-pintado-bold-ralign
+        {
+            color:#fff1f1 !important;
+            background: #1f8fe0 none repeat scroll 0 0; 
+            text-align:right;
+            font-weight:bold;
+        }
+
+
     </style>
 
 }
@@ -342,7 +375,6 @@
             <!--Default Tabs (Left Aligned)-->
             <!--===================================================-->
             <div class="tab-base">
-
                 <!--Nav Tabs-->
                 <ul class="nav nav-tabs">
                     <li class="active">
@@ -356,6 +388,12 @@
                     </li>
                     <li class="">
                         <a data-toggle="tab" href="#exclisiones" aria-expanded="false">Exclusiones</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#another1" aria-expanded="false">Another 1</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#another2" aria-expanded="false">Another 2</a>
                     </li>
                 </ul>
 
@@ -602,6 +640,137 @@
                                         <tbody id="bdy_preaprobadosExclusiones"></tbody>
                                         <tfoot id="ft_preaprobadosExclusiones"></tfoot>
                                     </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="another1" class="tab-pane fade">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Universo Pre-aprobados</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div>
+                                    <table class="table table-charlee table-responsive table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" class="charlee-pintado periodo-seleccionado" style="vertical-align:middle;"></th>
+                                                <th colspan="2" class="charlee-pintado">Pensionado</th>
+                                                <th colspan="2" class="charlee-pintado">Trabajador</th>
+                                                <th colspan="2" class="charlee-pintado">Total</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="charlee-pintado">N° Afiliados</th>
+                                                <th class="charlee-pintado">%</th>
+                                                <th class="charlee-pintado">N° Afiliados</th>
+                                                <th class="charlee-pintado">%</th>
+                                                <th class="charlee-pintado">N° Afiliados</th>
+                                                <th class="charlee-pintado">%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Total</td>
+                                                <td class="n_total_pensionado" style="text-align:right;">255.695</td>
+                                                <td class="p_total_pensionado" style="text-align:right;">100%</td>
+                                                <td class="n_total_trabajador" style="text-align:right;">810.085</td>
+                                                <td class="p_total_trabajador" style="text-align:right;">100%</td>
+                                                <td class="n_total_total" style="text-align:right;">810.085</td>
+                                                <td class="p_total_total" style="text-align:right;">100%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pre-aprobados Por Riesgo</td>
+                                                <td class="n_pa-riesgo_pensionado" style="text-align:right;">255.695</td>
+                                                <td class="p_pa-riesgo_pensionado" style="text-align:right;">100%</td>
+                                                <td class="n_pa-riesgo_trabajador" style="text-align:right;">810.085</td>
+                                                <td class="p_pa-riesgo_trabajador" style="text-align:right;">100%</td>
+                                                <td class="n_pa-riesgo_total" style="text-align:right;">810.085</td>
+                                                <td class="p_pa-riesgo_total" style="text-align:right;">100%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="charlee-pintado-bold">Pre-aprobados Final</td>
+                                                <td class="n_pa-final_pensionado charlee-pintado-bold-ralign">255.695</td>
+                                                <td class="p_pa-final_pensionado charlee-pintado-bold-ralign">100%</td>
+                                                <td class="n_pa-final_trabajador charlee-pintado-bold-ralign">810.085</td>
+                                                <td class="p_pa-final_trabajador charlee-pintado-bold-ralign">100%</td>
+                                                <td class="n_pa-final_total charlee-pintado-bold-ralign">810.085</td>
+                                                <td class="p_pa-final_total charlee-pintado-bold-ralign">100%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Universo Gestionable</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div id="tabla-1">
+                                    <table class="table table-charlee table-responsive table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" class="charlee-pintado" style="vertical-align:middle;">Segmento</th>
+                                                <th rowspan="2" class="charlee-pintado" style="vertical-align:middle;">N° Afiliados</th>
+                                                <th colspan="2" class="charlee-pintado">Email</th>
+                                                <th colspan="2" class="charlee-pintado">Celular</th>
+                                                <th colspan="2" class="charlee-pintado">Celular o Fijo</th>
+                                                <th colspan="2" class="charlee-pintado">Email o Fonos</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="charlee-pintado">N°</th>
+                                                <th class="charlee-pintado">%</th>
+                                                <th class="charlee-pintado">N°</th>
+                                                <th class="charlee-pintado">%</th>
+                                                <th class="charlee-pintado">N°</th>
+                                                <th class="charlee-pintado">%</th>
+                                                <th class="charlee-pintado">N°</th>
+                                                <th class="charlee-pintado">%</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Universo Campañado</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div id="tabla-1">
+                                    <table class="table table-charlee table-responsive table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" class="charlee-pintado" style="vertical-align:middle;">Segmento</th>
+                                                <th colspan="2" class="charlee-pintado">Email</th>
+                                                <th colspan="2" class="charlee-pintado">SMS</th>
+                                                <th colspan="2" class="charlee-pintado">Call Center</th>
+                                                <th colspan="2" class="charlee-pintado">Total Canales Virtuales</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="charlee-pintado">N°</th>
+                                                <th class="charlee-pintado">%</th>
+                                                <th class="charlee-pintado">N°</th>
+                                                <th class="charlee-pintado">%</th>
+                                                <th class="charlee-pintado">N°</th>
+                                                <th class="charlee-pintado">%</th>
+                                                <th class="charlee-pintado">N°</th>
+                                                <th class="charlee-pintado">%</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="another2" class="tab-pane fade">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Seguimiento exclusiones cascadas</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div>
+                                    Helo Another#2
                                 </div>
                             </div>
                         </div>

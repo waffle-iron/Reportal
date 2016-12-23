@@ -5,13 +5,17 @@
         ud = JSON.parse(localStorage.getItem('userdata'));
     }
 
-jQuery.each(["SecGetJSON", "SecPostJSON"], function (i, method) {
+jQuery.each(["SecGetJSON", "SecPostJSON", "SecGetBLOB"], function (i, method) {
     jQuery[method] = function (url, data, callback) {
-
+        var typdat = 'json';
         var metodo_peticion = 'get';
         if (method === 'SecPostJSON')
         {
             metodo_peticion = 'post'
+        }
+
+        if (method === 'SecGetBLOB') {
+            typdat = 'blob'
         }
 
         if (jQuery.isFunction(data)) {
@@ -27,7 +31,7 @@ jQuery.each(["SecGetJSON", "SecPostJSON"], function (i, method) {
                 "TokenExpiry": "900",
                 "Access-Control-Expose-Headers": "Token,TokenExpiry"
             },
-            dataType: 'json',
+            dataType: typdat,
             data: data,
             success: callback
         });

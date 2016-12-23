@@ -56,6 +56,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
       <Private>True</Private>
@@ -257,6 +259,7 @@
     <Compile Include="Controllers\RcPeriodosController.cs" />
     <Compile Include="Controllers\Reprogramaciones_TodosController.cs" />
     <Compile Include="Controllers\Reprogramaciones_TrabController.cs" />
+    <Compile Include="Controllers\ResumenesNominasController.cs" />
     <Compile Include="Controllers\SegPreaprobadosController.cs" />
     <Compile Include="Controllers\SegPreaprobadosPorCanalesPropensionController.cs" />
     <Compile Include="Controllers\SegPreaprobadosPorNominasController.cs" />
