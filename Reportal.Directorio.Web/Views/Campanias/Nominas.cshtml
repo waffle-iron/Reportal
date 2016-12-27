@@ -40,7 +40,7 @@
                         }
 
                         totales.caen = totales.caen + o.Caen;
-                        totales.pasan = totales.caen + o.Pasan;
+                        totales.pasan = o.Pasan;
 
                     });
                     //foot
@@ -76,7 +76,7 @@
                         }
 
                         totales.caen = totales.caen + o.Caen;
-                        totales.pasan = totales.caen + o.Pasan;
+                        totales.pasan =  o.Pasan;
 
                     });
                     //foot
@@ -253,7 +253,8 @@
             <div class="well well-sm">
                 Seleccione Periodo:
                 <select id="slPeriodo">
-                    <option value="201612" selected="selected">Diciembre 2016</option>
+                    <option value="201701" selected="selected">Enero 2017</option>
+                    <option value="201612">Diciembre 2016</option>
                 </select>
 
                 <button id="Descarga-zip" class="btn-xs btn-default btn-icon">Descargar Nóminas <i class="pli-folder-zip icon-lg"></i></button>

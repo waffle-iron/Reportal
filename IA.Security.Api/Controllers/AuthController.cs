@@ -46,6 +46,7 @@ namespace IA.Security.Api.Controllers
             }
             return null;
         }
+
         /// <summary>
         /// Asegura que los permisos a los recursos del sistema no sean vulnerados.
         /// </summary>
@@ -61,8 +62,6 @@ namespace IA.Security.Api.Controllers
             return GetUserResource(token, url);
         }
 
-
-
         /// <summary>
         /// Dibuja el menu de usuarios en el sistema
         /// </summary>
@@ -77,7 +76,6 @@ namespace IA.Security.Api.Controllers
             return Recurso.AsignarDesendencia(rc).Where(x => x.IdRecursoPradre == 0).ToList();
         }
 
-
         /// <summary>
         /// Dibuja el menu de usuarios en el sistema
         /// </summary>
@@ -91,17 +89,18 @@ namespace IA.Security.Api.Controllers
             return KillToken(ActionContext.Request.Headers.GetValues("Token").First());
         }
 
-
         private HttpResponseMessage GetAuthToken(string userId)
         {
             //si en algun momento se necesita validar con ldap de araucana, vamos a ocupar este metodo para trabajarlo
             Token token = _tokenServices.GenerateToken(userId);
             string NombreUsuario = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(UsuarioDataAccess.UsuarioData(userId).Nombres));
+            Recurso r = this.PaginaInicio(token.AuthToken);
             var response = Request.CreateResponse(HttpStatusCode.OK, "Authorized");
             response.Headers.Add("Token", token.AuthToken);
             response.Headers.Add("TokenExpiry", ConfigurationManager.AppSettings["AuthTokenExpiry"]);
             response.Headers.Add("Uname",  NombreUsuario);
-            response.Headers.Add("Access-Control-Expose-Headers", "Token,TokenExpiry,Uname");
+            response.Headers.Add("Uindex", r.Url);
+            response.Headers.Add("Access-Control-Expose-Headers", "Token,TokenExpiry,Uname,Uindex");
             return response;
         }
         
@@ -116,9 +115,13 @@ namespace IA.Security.Api.Controllers
             }
             Resource = Resource.Replace(ConfigurationManager.AppSettings["AplicationBaseUrl"], "");
             var MVC_CA = Resource.Split('/');
-            if(MVC_CA.Length <= 1 || (MVC_CA.Length == 2 && string.IsNullOrEmpty(MVC_CA[1])))
+            if (MVC_CA.Length <= 1 || (MVC_CA.Length == 2 && string.IsNullOrEmpty(MVC_CA[1])))
             {
                 Resource = Resource.Replace("/","") + "/Index";
+            }
+            else if(MVC_CA.Length > 2)
+            {
+                Resource = MVC_CA[0] + "/" + MVC_CA[1];
             }
             
             var ResourceList = RecursoDataAccess.MenusDeUsuario(Token);
@@ -137,15 +140,19 @@ namespace IA.Security.Api.Controllers
 
             return response;
         }
-
-
+        
         private HttpResponseMessage KillToken(string Token)
         {
             _tokenServices.Kill(Token);
             var response = Request.CreateResponse(HttpStatusCode.OK, "Authorized");
             return response;
         }
-
+        
+        private Recurso PaginaInicio(string token)
+        {
+            List<Recurso> rc = RecursoDataAccess.MenusDeUsuario(token);
+            return rc.Where(y => !y.Url.Equals("#")).FirstOrDefault();
+        }
     }
 
 
