@@ -7,23 +7,23 @@ using System.Web.Http;
 using Reportal.Domain;
 using Reportal.Api.Models;
 using System.Web.Http.Cors;
-using Reportal.Api.ActionFilters;
+
 
 namespace Reportal.Api.Controllers
 {
     [EnableCors(origins: "http://localhost, http://serv-55", headers: "*", methods: "*")]
+    //[AuthorizationRequired]
     public class EmpresaClasificacionController : ApiController
     {
-        // GET: EmpresaClasificacion
         private EmpresaRepository emprerepositorio;
 
         public EmpresaClasificacionController()
         {
             emprerepositorio = new EmpresaRepository();
         }
-        public IEnumerable<EmpresaClasif> Get()
+        public IEnumerable<EmpresaClasif> Get(int id)
         {
-            return emprerepositorio.ListarClas();
+            return emprerepositorio.ListarClas(id);
         }
     }
 }

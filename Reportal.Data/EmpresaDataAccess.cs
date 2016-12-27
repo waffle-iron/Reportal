@@ -54,6 +54,11 @@ namespace Reportal.Data
             Parametro Bene2 = new Parametro("@rut", RutEmpresa);
             return DBHelper.InstanceReporteria.ObtenerColeccion("sp_MapaEmpresaBeneficio_2", Bene2, EntidadBeneficio_B);
         }
+        public static List<EmpresaClasif> ListarEmpresaCla(int Periodo)
+        {
+            Parametro per = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_ListarEmpresaClasificacion_Desa", per, ConstructorClasificacion);
+        }
         private static Empresa ConstructorEntidad(DataRow row)
         {
             return new Empresa
@@ -138,6 +143,22 @@ namespace Reportal.Data
                 total = row["Total"] != DBNull.Value ? Convert.ToInt32(row["Total"]) : 0,
                 concepto = row["concepto_CDG"] != DBNull.Value ? row["concepto_CDG"].ToString() : string.Empty,
 
+            };
+        }
+
+        private static EmpresaClasif ConstructorClasificacion(DataRow row)
+        {
+            return new EmpresaClasif
+            {
+                Periodo = row["Periodo"] != DBNull.Value ? row["Periodo"].ToString() : string.Empty,
+                RutEmp = row["RutEmpresa"] != DBNull.Value ? Convert.ToInt32(row["RutEmpresa"]) : 0,
+                NomEmpresa = row["NombreEmpresa"] != DBNull.Value ? row["NombreEmpresa"].ToString() : string.Empty,
+                TipoEmpresa = row["TipoEmpresa"] != DBNull.Value ? row["TipoEmpresa"].ToString() : string.Empty,
+                NumTrabEmp = row["Trabajadores"] != DBNull.Value ? Convert.ToInt32(row["Trabajadores"]) : 0,
+                Holding = row["Holding"] != DBNull.Value ? row["Holding"].ToString() : string.Empty,
+                ClasFinal = row["Clasificacion_Final"] != DBNull.Value ? row["Clasificacion_Final"].ToString() : string.Empty,
+                Interes = row["Interes"] != DBNull.Value ? Convert.ToInt32(row["Interes"]) : 0,
+                CostoPrev = row["CostoProvision"] != DBNull.Value ? Convert.ToInt32(row["CostoProvision"]) : 0
             };
         }
     }

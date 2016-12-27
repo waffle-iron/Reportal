@@ -1,28 +1,34 @@
 ﻿
 @{
     ViewBag.Title = "ClasificacionEmpresa";
-    Layout = "~/Views/Layout/_Principal.cshtml";
+    Layout = "~/Views/Layout/_Principal2_Oper.cshtml";
 }
 
 @section script{
- <script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="~/assets/plugins/datatables/dataTables.bootstrap.js"></script>
-<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/formatted-numbers.js"></script>
+<script src="~/assets/plugins/datatables/formatted-numbers.js"></script>
 
-<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="~/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="~/assets/plugins/datatables/jszip.min.js"></script>
+<script src="~/assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="~/assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="~/assets/plugins/datatables/buttons.html5.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-
+            var udmapa = {}
+            if (JSON.parse(localStorage.getItem('userdata')) != null) {
+                udmapa = JSON.parse(localStorage.getItem('userdata'));
+            }
 
 
             $('#datatable').dataTable({
                 ajax: {
                     url: "http://localhost:8080/api/EmpresaClasificacion",
-                    dataSrc: ''
+                    dataSrc: '',
+                    "Token": udmapa.token,
+                    "TokenExpiry": "900",
+                    "Access-Control-Expose-Headers": "Token,TokenExpiry"
                 },
                 dom: 'Bfrtip',
                 buttons: [

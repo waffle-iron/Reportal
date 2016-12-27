@@ -39,6 +39,9 @@ namespace Reportal.Api.Models
         {
             return EmpresaDataAccess.MostrarBeneficioB(RutEmpresa);
         }
-
+        public List<EmpresaClasif> ListarClas(int Periodo)
+        {
+            return EmpresaDataAccess.ListarEmpresaCla(Periodo);
+        }
     }
 }
