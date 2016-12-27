@@ -50,16 +50,16 @@
 			        localStorage.removeItem('rep_recordarme');
 			        localStorage.removeItem('rep_recordata');
 			    }
-			    //sessionStorage.setItem('userdata', JSON.stringify(UserData));
-
+			   
 			    var ur = httpGet("ur");
+                console.log(ur)
 			    if (typeof ur != "undefined")
 			    {
 			        location.href = (getRootAplicationHost() + ur).replace("//","/");
 			    }
 			    else
 			    {
-			        location.href = getAplicationHost() + "Home/Index";
+			        location.href = getAplicationHost() + request.getResponseHeader("Uindex");
 			    }
 			},
 			error: function (request, textStatus, errorThrown) {

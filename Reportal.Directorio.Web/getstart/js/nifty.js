@@ -51,6 +51,7 @@ function Recxve(arreglo, elmBase) {
                 Recxve(o.Hijos, ContUl);
             }
         }
+        else if(o.Tipo === "INT"){}
         else {
             Anch = $("<a>").attr("href", Recurso).html(o.Nombre);
             ContLi.append(Anch);
