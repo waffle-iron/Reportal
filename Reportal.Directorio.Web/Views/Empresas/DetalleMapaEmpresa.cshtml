@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "DetalleMapaEmpresa";
-    Layout = "~/Views/Layout/_Principal.cshtml";
+    Layout = "~/Views/Layout/_Principal2_Oper.cshtml";
 }
 
 
@@ -12,13 +12,13 @@
 }
 
 @section script{
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/data.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="~/assets/js/highcharts.js"></script>
+    <script src="~/assets/js/data.js"></script>
+    <script src="~/assets/js/exporting.js"></script>
     <!-- Additional files for the Highslide popup effect -->
-    <script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
-    <script src="https://www.highcharts.com/samples/static/highslide.config.js" charset="utf-8"></script>
-    <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
+    <script src="~/assets/js/highslide-full.min.js"></script>
+    <script src="~/assets/js/highslide.config.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="~/assets/js/highslide.css" />
     <script src="~/assets/plugins/peity/jquery.peity.min.js"></script>
     <script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
     <script src="~/assets/plugins/jquery-knob/jquery.knob.js"></script>
@@ -33,7 +33,110 @@
 
 
         $(function () {
-            //Tabla Licencia
+           
+            $.getJSON("http://localhost:8080/api/EmpresaBeneficio/" + $("#IdEmpresa").val(), function (respoonse) {
+
+                $("#headBeneficioCantidad").append($("<tr class=\"primero\">"));
+                $("#headBeneficioCantidad > tr.primero").append($("<th>").attr("rowspan", "1").html("Uso de Beneficios").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.EncabezadoBeneficio, function (i, e) {
+                    $("#headBeneficioCantidad > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                $("#headBeneficioCantidad").append($("<tr class=\"segundo\">"));
+                $.each(respoonse.EncabezadoBeneficio, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+
+                $("#bodyBeneficioCantidad").append($("<tr class=\"BeneficioCantidad\">"));
+                $("#bodyBeneficioCantidad > tr.BeneficioCantidad").append($("<th>").html("Beneficios").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.CantidadBeneficio, function (i, e) {
+                    // $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyBeneficioCantidad > tr.BeneficioCantidad").append($("<td>").html(e.CantidadBeneficio.toMoney()));
+                });
+            });
+            $.getJSON("http://localhost:8080/api/EmpresaBeneficio/" + $("#IdEmpresa").val(), function (respoonse) {
+
+                $("#headBeneficio").append($("<tr class=\"primero\">"));
+                $("#headBeneficio > tr.primero").append($("<th>").attr("rowspan", "1").html("Uso de Beneficios").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.EncabezadoBeneficio, function (i, e) {
+                    $("#headBeneficio > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                $("#headBeneficio").append($("<tr class=\"segundo\">"));
+                $.each(respoonse.EncabezadoBeneficio, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+
+                $("#bodyBeneficio").append($("<tr class=\"Beneficio\">"));
+                $("#bodyBeneficio > tr.Beneficio").append($("<th>").html("Trab Con Beneficio").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.PorcentajeBeneficio, function (i, e) {
+                    // $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
+                    $("#bodyBeneficio > tr.Beneficio").append($("<td>").html(e.PorcentajeBeneficio.toMoney(2) + '%'));
+                });
+            });
+            $.getJSON("http://localhost:8080/api/EmpresaLicenciaVigentes/" + $("#IdEmpresa").val(), function (respoonse) {
+
+                $("#headLicenciaVigente").append($("<tr class=\"primero\">"));
+                $("#headLicenciaVigente > tr.primero").append($("<th>").attr("rowspan", "1").html("Estado de Licencias").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.EncabezadoLicenciaVi, function (i, e) {
+                    $("#headLicenciaVigente > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                $("#headLicenciaVigente").append($("<tr class=\"segundo\">"));
+                $.each(respoonse.EncabezadoLicenciaVi, function (i, e) {
+                    //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                    //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                //
+                $("#bodyLicenciaVigente").append($("<tr class=\"LicAutorizada\">"));
+                $("#bodyLicenciaVigente > tr.LicAutorizada").append($("<th>").html("Licencia Autorizada").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.LicAutorizada, function (i, e) {
+                    $("#bodyLicenciaVigente > tr.LicAutorizada").append($("<td>").html(e.Valor.toMoney()));
+                });
+                $("#bodyLicenciaVigente").append($("<tr class=\"LicPendientes\">"));
+                $("#bodyLicenciaVigente > tr.LicPendientes").append($("<th>").html("Licencias Pendientes").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.LicPendientes, function (i, e) {
+                    $("#bodyLicenciaVigente > tr.LicPendientes").append($("<td>").html(e.Valor.toMoney()));
+                });
+                $("#bodyLicenciaVigente").append($("<tr class=\"LicSinDerecho\">"));
+                $("#bodyLicenciaVigente > tr.LicSinDerecho").append($("<th>").html("Licencias Sin Derecho").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.LicSinDerecho, function (i, e) {
+                    $("#bodyLicenciaVigente > tr.LicSinDerecho").append($("<td>").html(e.Valor.toMoney()));
+                });
+                $("#bodyLicenciaVigente").append($("<tr class=\"LicObjetada\">"));
+                $("#bodyLicenciaVigente > tr.LicObjetada").append($("<th>").html("Licencia Objectada").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.LicObjetada, function (i, e) {
+                    $("#bodyLicenciaVigente > tr.LicObjetada").append($("<td>").html(e.Valor.toMoney()));
+                });
+                $("#bodyLicenciaVigente").append($("<tr class=\"LicRechazada\">"));
+                $("#bodyLicenciaVigente > tr.LicRechazada").append($("<th>").html("Licencias Rechazadas").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.LicRechazada, function (i, e) {
+                    $("#bodyLicenciaVigente > tr.LicRechazada").append($("<td>").html(e.Valor.toMoney()));
+                });
+
+                $("#bodyLicenciaVigente").append($("<tr class=\"LicTotal\">"));
+                $("#bodyLicenciaVigente > tr.LicTotal").append($("<th>").html("Total de Licencias x Mes").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.LicTotal, function (i, e) {
+                    $("#bodyLicenciaVigente > tr.LicTotal").append($("<td>").html(e.Valor.toMoney()).css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                });
+
+                $("#bodyLicenciaVigente").append($("<tr class=\"LicPagadas\">"));
+                $("#bodyLicenciaVigente > tr.LicPagadas").append($("<th>").html("Licencias Pagadas").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.LicPagadas, function (i, e) {
+                    $("#bodyLicenciaVigente > tr.LicPagadas").append($("<td>").html(e.Valor.toMoney()));
+                });
+                $("#bodyLicenciaVigente").append($("<tr class=\"LicNoPagadas\">"));
+                $("#bodyLicenciaVigente > tr.LicNoPagadas").append($("<th>").html("Licencia No Pagadas").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+                $.each(respoonse.LicNoPagadas, function (i, e) {
+                    $("#bodyLicenciaVigente > tr.LicNoPagadas").append($("<td>").html(e.Valor.toMoney()));
+                });
+
+            });
             $.getJSON("http://localhost:8080/api/EmpresaLicencia/" + $("#IdEmpresa").val(), function (respoonse) {
 
                 $("#headEmpresaLicencia").append($("<tr class=\"primero\">"));
@@ -56,32 +159,137 @@
                     $("#bodyEmpresaLicencia > tr.Presupuesto").append($("<td>").html(e.PorcentajeLicencia.toMoney(2) + '%'));
                 });
             });
-            //Tabla Beneficio
-            $.getJSON("http://localhost:8080/api/EmpresaBeneficio/" + $("#IdEmpresa").val(), function (respoonse) {
 
-                $("#headBeneficio").append($("<tr class=\"primero\">"));
-                $("#headBeneficio > tr.primero").append($("<th>").attr("rowspan", "1").html("Uso de Beneficios").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                $.each(respoonse.EncabezadoBeneficio, function (i, e) {
-                    $("#headBeneficio > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                if ($(this).attr("href") === "#demo-lft-tab-2")
+
+                $.getJSON("http://localhost:8080/api/EmpresaBeneficio/" + $("#IdEmpresa").val(), function (data) {
+                        var dias = new Array();
+                        var cantidad = new Array();
+
+                        $.each(data.EncabezadoBeneficio, function (i, e) {
+                            dias[i] = e.Mes;
+                        });
+
+                        $.each(data.PorcentajeBeneficio, function (i, e) {
+                            cantidad[i] = e.PorcentajeBeneficio;
+                        });
+
+                        $('#BarraPenetracionBeneficios').highcharts({
+                            chart: {
+                                type: 'column',
+                            },
+                            colors: ['#8bc34a'],
+                            title: {
+                                text: '',
+                                x: -20 //center
+                            },
+                            subtitle: {
+                                text: '',
+                                x: -20
+                            },
+                            xAxis: {
+                                categories: dias
+                            },
+                            yAxis: [{ // Primary yAxis
+                                labels: {
+                                    format: '{value}',
+                                    style: {
+                                        color: Highcharts.getOptions().colors[1]
+                                    }
+                                },
+                                title: {
+                                    text: '%',
+                                    style: {
+                                        color: Highcharts.getOptions().colors[1]
+                                    }
+                                }
+
+                            }],
+                            tooltip: {
+                                pointFormat: "{point.y:.2f}"
+                            },
+                            credits: { enabled: false },
+                            exporting: { enabled: false },
+                            plotOptions: {
+                                column: {
+                                    pointPadding: 0.2,
+                                    borderWidth: 0
+                                }
+                            },
+                            series: [{
+                                name: 'Penetración',
+                                data: cantidad,
+                                tooltip: {
+                            pointFormat: 'Porcentaje: <b>{point.y:.2f}%</b><br/>',
+                            shared: true
+
+                        }
+                            }]
+                        });
+                    });
+                $.getJSON("http://localhost:8080/api/EmpresaBeneficio_B/" + $("#IdEmpresa").val(), function (data) {
+                    var Descripcion = new Array();
+                    var cantidad = new Array();
+                    $.each(data, function (i, e) {
+                        Descripcion[i] = e.concepto;
+                        cantidad[i] = e.total;
+
+                    });
+
+                    $('#BarraBenefTipo').highcharts({
+                        chart: {
+                            type: 'column',
+                        },
+                        colors: ['#ffa726'],
+                        title: {
+                            text: '',
+                            x: -20 //center
+                        },
+                        subtitle: {
+                            text: '',
+                            x: -20
+                        },
+                        xAxis: {
+                            categories: Descripcion
+                        },
+                        yAxis: [{ // Primary yAxis
+                            labels: {
+                                formatter: function () {
+                                    return this.value.toMoney();
+                                },
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            },
+                            title: {
+                                text: '',
+                                formatter: function () {
+                                    return this.value.toMoney();
+                                },
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            }
+                        }],
+                       credits: { enabled: false },
+                        exporting: { enabled: false },
+                        plotOptions: {
+                            series: {
+                                dataLabels: {
+                                    enabled: true,
+                                    
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'Tipo',
+                            data: cantidad
+
+                        }]
+                    });
                 });
-
-                $("#headBeneficio").append($("<tr class=\"segundo\">"));
-                $.each(respoonse.EncabezadoBeneficio, function (i, e) {
-                    //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                });
-
-
-                $("#bodyBeneficio").append($("<tr class=\"Beneficio\">"));
-                $("#bodyBeneficio > tr.Beneficio").append($("<th>").html("Descripción / Período").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                $.each(respoonse.PorcentajeBeneficio, function (i, e) {
-                    // $("#bodyFinanciamientoSpread > tr.trabajador").append($("<td>").html(e.Tasa.toMoney(2)));
-                    $("#bodyBeneficio > tr.Beneficio").append($("<td>").html(e.PorcentajeBeneficio.toMoney(2) + '%'));
-                });
-            });
-
-
-
+});
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 if ($(this).attr("href") === "#demo-lft-tab-3")
                 $.getJSON("http://localhost:8080/api/EmpresaLicencia/" + $("#IdEmpresa").val(), function (data) {
@@ -230,68 +438,6 @@
 
 
                 });
-                $.getJSON("http://localhost:8080/api/EmpresaLicenciaVigentes/" + $("#IdEmpresa").val(), function (respoonse) {
-
-
-                    //console.log(respoonse);
-
-                    $("#headLicenciaVigente").append($("<tr class=\"primero\">"));
-                    $("#headLicenciaVigente > tr.primero").append($("<th>").attr("rowspan", "1").html("Estado de Licencias").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    $.each(respoonse.EncabezadoLicenciaVi, function (i, e) {
-                        $("#headLicenciaVigente > tr.primero").append($("<th>").attr("colspan", "1").html(e.Mes).css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    });
-
-                    $("#headLicenciaVigente").append($("<tr class=\"segundo\">"));
-                    $.each(respoonse.EncabezadoLicenciaVi, function (i, e) {
-                        //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                        //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    });
-
-                    //
-                    $("#bodyLicenciaVigente").append($("<tr class=\"LicAutorizada\">"));
-                    $("#bodyLicenciaVigente > tr.LicAutorizada").append($("<th>").html("Licencia Autorizada").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    $.each(respoonse.LicAutorizada, function (i, e) {
-                        $("#bodyLicenciaVigente > tr.LicAutorizada").append($("<td>").html(e.Valor.toMoney()));
-                    });
-                    $("#bodyLicenciaVigente").append($("<tr class=\"LicPendientes\">"));
-                    $("#bodyLicenciaVigente > tr.LicPendientes").append($("<th>").html("Licencias Pendientes").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    $.each(respoonse.LicPendientes, function (i, e) {
-                        $("#bodyLicenciaVigente > tr.LicPendientes").append($("<td>").html(e.Valor.toMoney()));
-                    });
-                    $("#bodyLicenciaVigente").append($("<tr class=\"LicSinDerecho\">"));
-                    $("#bodyLicenciaVigente > tr.LicSinDerecho").append($("<th>").html("Licencias Sin Derecho").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    $.each(respoonse.LicSinDerecho, function (i, e) {
-                        $("#bodyLicenciaVigente > tr.LicSinDerecho").append($("<td>").html(e.Valor.toMoney()));
-                    });
-                    $("#bodyLicenciaVigente").append($("<tr class=\"LicObjetada\">"));
-                    $("#bodyLicenciaVigente > tr.LicObjetada").append($("<th>").html("Licencia Objectada").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    $.each(respoonse.LicObjetada, function (i, e) {
-                        $("#bodyLicenciaVigente > tr.LicObjetada").append($("<td>").html(e.Valor.toMoney()));
-                    });
-                    $("#bodyLicenciaVigente").append($("<tr class=\"LicRechazada\">"));
-                    $("#bodyLicenciaVigente > tr.LicRechazada").append($("<th>").html("Licencias Rechazadas").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    $.each(respoonse.LicRechazada, function (i, e) {
-                        $("#bodyLicenciaVigente > tr.LicRechazada").append($("<td>").html(e.Valor.toMoney()));
-                    });
-
-                    $("#bodyLicenciaVigente").append($("<tr class=\"LicTotal\">"));
-                    $("#bodyLicenciaVigente > tr.LicTotal").append($("<th>").html("Total de Licencias x Mes").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    $.each(respoonse.LicTotal, function (i, e) {
-                        $("#bodyLicenciaVigente > tr.LicTotal").append($("<td>").html(e.Valor.toMoney()).css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    });
-
-                    $("#bodyLicenciaVigente").append($("<tr class=\"LicPagadas\">"));
-                    $("#bodyLicenciaVigente > tr.LicPagadas").append($("<th>").html("Licencias Pagadas").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    $.each(respoonse.LicPagadas, function (i, e) {
-                        $("#bodyLicenciaVigente > tr.LicPagadas").append($("<td>").html(e.Valor.toMoney()));
-                    });
-                    $("#bodyLicenciaVigente").append($("<tr class=\"LicNoPagadas\">"));
-                    $("#bodyLicenciaVigente > tr.LicNoPagadas").append($("<th>").html("Licencia No Pagadas").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
-                    $.each(respoonse.LicNoPagadas, function (i, e) {
-                        $("#bodyLicenciaVigente > tr.LicNoPagadas").append($("<td>").html(e.Valor.toMoney()));
-                    });
-
-                });
                 $.getJSON("http://localhost:8080/api/EmpresaLicenciaTop20/" + $("#IdEmpresa").val(), function (data) {
                     var dias = new Array();
                     var Descripcion = new Array();
@@ -302,7 +448,7 @@
                         cantidad[i] = e.Cantidad;
 
                     });
-                    console.log(Descripcion)
+                    
                     $('#BarraTop').highcharts({
                         chart: {
                             type: 'column',
@@ -347,15 +493,12 @@
                             }
                         },
                       series: [{
-                          name: 'Tokyo',
+                          name: 'Diagnóstico',
                             data: cantidad
 
                         }]
                     });
                 });
-
-
-
             });
         });
 
@@ -567,11 +710,33 @@
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped" align="center" style="margin: 0px auto;  width: 100%;  font-size: 10px;">
+                                        <thead id="headBeneficioCantidad"></thead>
+                                        <tbody id="bodyBeneficioCantidad"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" align="center" style="margin: 0px auto;  width: 100%;  font-size: 10px;">
                                         <thead id="headBeneficio"></thead>
                                         <tbody id="bodyBeneficio"></tbody>
                                     </table>
                                 </div>
                             </div>
+                        </div>
+                        
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Penetración de Beneficios</h1>
+                            </div>
+                            <div id="BarraPenetracionBeneficios" style="height:212px"></div>
+
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Uso de beneficios por tipo</h1>
+                            </div>
+                            <div id="BarraBenefTipo" style="height:212px"></div>
                         </div>
                     </div>
                     <div id="demo-lft-tab-3" class="tab-pane fade">

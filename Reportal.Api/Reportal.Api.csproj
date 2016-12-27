@@ -149,6 +149,7 @@
     <Folder Include="Views\DirectorioDashboardFinan\" />
     <Folder Include="Views\D_CredPptoMensual\" />
     <Folder Include="Views\EmpresaBeneficio\" />
+    <Folder Include="Views\EmpresaBeneficio_B\" />
     <Folder Include="Views\EmpresaLicenciasPagadas\" />
     <Folder Include="Views\EmpresaLicenciaTop20\" />
     <Folder Include="Views\EmpresaLicenciaVigentes\" />
@@ -224,6 +225,7 @@
     <Compile Include="Controllers\DirectorioDashboardFinanController.cs" />
     <Compile Include="Controllers\D_CredPptoMensualController.cs" />
     <Compile Include="Controllers\EmpresaBeneficioController.cs" />
+    <Compile Include="Controllers\EmpresaBeneficio_BController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EmpresaLicenciaController.cs" />
     <Compile Include="Controllers\EmpresaLicenciasPagadasController.cs" />

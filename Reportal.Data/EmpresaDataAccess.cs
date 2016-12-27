@@ -18,11 +18,15 @@ namespace Reportal.Data
             Parametro p = new Parametro("@RutEmpresa", RutEmpresas);
             return DBHelper.InstanceReporteria.ObtenerEntidad("sp_ObtenerEmpresas", p, ConstructorEntidad);
         }
-     
+
         public static List<EmpresaLicencia> MostrarLicencia(int RutEmpresa)
         {
             Parametro pp = new Parametro("@rut", RutEmpresa);
             return DBHelper.InstanceReporteria.ObtenerColeccion("sp_MapaEmpresaLicencia_1", pp, EntidadLicencia);
+        }
+        public static List<Empresa> ListarEmpresa()
+        {
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_ListarEmpresas", ConstructorEntidad);
         }
 
         public static List<EmpresaLicenciaA> MostrarLicenciaVigentes(int RutEmpresa)
@@ -44,6 +48,11 @@ namespace Reportal.Data
         {
             Parametro Bene = new Parametro("@rut", RutEmpresa);
             return DBHelper.InstanceReporteria.ObtenerColeccion("sp_MapaEmpresaBeneficio_1", Bene, EntidadBeneficio_A);
+        }
+        public static List<EmpresaBeneficio_B>MostrarBeneficioB(int RutEmpresa)
+        {
+            Parametro Bene2 = new Parametro("@rut", RutEmpresa);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_MapaEmpresaBeneficio_2", Bene2, EntidadBeneficio_B);
         }
         private static Empresa ConstructorEntidad(DataRow row)
         {
@@ -116,9 +125,19 @@ namespace Reportal.Data
             return new EmpresaBeneficio_A
             {
                 Fecha = row["Fecha_Beneficio"] != DBNull.Value ? row["Fecha_Beneficio"].ToString() : string.Empty,
-                Descripcion= row["Descripcion"] != DBNull.Value ? row["Descripcion"].ToString() : string.Empty,
+                Descripcion = row["Descripcion"] != DBNull.Value ? row["Descripcion"].ToString() : string.Empty,
                 Porcentaje = row["porcentaje"] != DBNull.Value ? Convert.ToSingle(row["porcentaje"]) : 0,
+                Cantidad = row["Cantidad"] != DBNull.Value ? Convert.ToInt32(row["Cantidad"]) : 0,
                 Item = row["Item"] != DBNull.Value ? Convert.ToInt32(row["Item"]) : 0
+            };
+        }
+        private static EmpresaBeneficio_B EntidadBeneficio_B(DataRow row)
+        {
+            return new EmpresaBeneficio_B
+            {
+                total = row["Total"] != DBNull.Value ? Convert.ToInt32(row["Total"]) : 0,
+                concepto = row["concepto_CDG"] != DBNull.Value ? row["concepto_CDG"].ToString() : string.Empty,
+
             };
         }
     }

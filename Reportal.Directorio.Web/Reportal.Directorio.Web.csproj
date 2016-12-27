@@ -149,6 +149,7 @@
     <Content Include="assets\css\buttons.datatables.min.css" />
     <Content Include="assets\css\components.css" />
     <Content Include="assets\css\core.css" />
+    <Content Include="assets\css\highslide.css" />
     <Content Include="assets\css\icons.css" />
     <Content Include="assets\css\pages.css" />
     <Content Include="assets\css\responsive.css" />
@@ -222,8 +223,13 @@
     <Content Include="assets\js\app.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\canvas2image.js" />
+    <Content Include="assets\js\data.js" />
     <Content Include="assets\js\detect.js" />
+    <Content Include="assets\js\exporting.js" />
     <Content Include="assets\js\fastclick.js" />
+    <Content Include="assets\js\highcharts.js" />
+    <Content Include="assets\js\highslide-full.min.js" />
+    <Content Include="assets\js\highslide.config.js" />
     <Content Include="assets\js\html2canvas.js" />
     <Content Include="assets\js\jqPlugin.js" />
     <Content Include="assets\js\jquery-2.1.3.js" />
@@ -307,6 +313,7 @@
     <Content Include="assets\plugins\custombox\dist\legacy.min.js" />
     <Content Include="assets\plugins\d3\d3.min.js" />
     <Content Include="assets\plugins\datatables\dataTables.bootstrap.js" />
+    <Content Include="assets\plugins\datatables\formatted-numbers.js" />
     <Content Include="assets\plugins\datatables\jquery.dataTables.min.css" />
     <Content Include="assets\plugins\datatables\jquery.dataTables.min.js" />
     <Content Include="assets\plugins\dropzone\dist\dropzone.css" />

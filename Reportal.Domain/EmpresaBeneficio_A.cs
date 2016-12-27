@@ -12,6 +12,7 @@ namespace Reportal.Domain
         public string Fecha { get; set; }
         public string Descripcion { get; set; }
         public float Porcentaje { get; set; }
+        public int Cantidad { get; set; }
         public int Item { get; set; }
     }
 }

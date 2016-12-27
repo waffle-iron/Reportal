@@ -8,30 +8,22 @@ using Reportal.Domain;
 using Reportal.Api.Models;
 using System.Web.Http.Cors;
 using Reportal.Api.ActionFilters;
-
 namespace Reportal.Api.Controllers
 {
-
     [EnableCors(origins: "http://localhost, http://serv-55", headers: "*", methods: "*")]
     //[AuthorizationRequired]
-    public class EmpresaController : ApiController
+    public class EmpresaBeneficio_BController : ApiController
     {
-        private EmpresaRepository emprerepositorio;
-                public EmpresaController()
+        private EmpresaRepository Top;
+        public EmpresaBeneficio_BController()
         {
-            emprerepositorio = new EmpresaRepository();
-        }
-        public IEnumerable<Empresa> Get()
-        {
-            return emprerepositorio.Listar();
+            Top = new EmpresaRepository();
         }
 
-        public Empresa Get(int id)
+        public IEnumerable<EmpresaBeneficio_B> Get(int id)
         {
-            //  return camprepositorio.Obtener(id);
-            return emprerepositorio.Obtener(id);
+            return Top.ListarBeneficio2(id);
         }
-
 
     }
 }

@@ -22,6 +22,7 @@ namespace Reportal.Api.Controllers
             List<EmpresaBeneficio_A> Todos = EmpresaDataAccess.MostrarBeneficio(id);
             List<string> Encs = Todos.Select(t => t.Fecha).Distinct().ToList();
             List<EmpresaBeneficio_A> PorcentajeBeneficio = Todos.Where(t => t.Item == 1).ToList();
+            List<EmpresaBeneficio_A> CantidadBenefinicio = Todos.Where(t => t.Item == 1).ToList();
 
             ContenedorBaseBeneficio cbl = new ContenedorBaseBeneficio();
 
@@ -41,6 +42,14 @@ namespace Reportal.Api.Controllers
                     PorcentajeBeneficio = Convert.ToDecimal(empBene.Porcentaje)
                 };
                 cbl.PorcentajeBeneficio.Add(Porc);
+            }
+            foreach (EmpresaBeneficio_A emprBeneCa in CantidadBenefinicio)
+            {
+                AuxiliarBeneficio CantBenef = new AuxiliarBeneficio
+                {
+                    CantidadBeneficio = Convert.ToInt32(emprBeneCa.Cantidad)
+                };
+                cbl.CantidadBeneficio.Add(CantBenef);
             }
             return cbl;
         }

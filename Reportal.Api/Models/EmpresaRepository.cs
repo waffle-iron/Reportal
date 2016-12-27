@@ -15,6 +15,10 @@ namespace Reportal.Api.Models
             return EmpresaDataAccess.Obtener(id);
 
         }
+        public List<Empresa> Listar()
+        {
+            return EmpresaDataAccess.ListarEmpresa();
+        }
 
         public IdentidadDetalleEmpresa ObtenerDetalle(int id)
         {
@@ -30,6 +34,10 @@ namespace Reportal.Api.Models
         {
             return EmpresaDataAccess.MostrarLicenciaTop20(RutEmpresa);
 
+        }
+        public List<EmpresaBeneficio_B> ListarBeneficio2(int RutEmpresa)
+        {
+            return EmpresaDataAccess.MostrarBeneficioB(RutEmpresa);
         }
 
     }
