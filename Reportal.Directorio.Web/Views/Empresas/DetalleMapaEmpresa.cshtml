@@ -23,9 +23,10 @@
     <script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
     <script src="~/assets/plugins/jquery-knob/jquery.knob.js"></script>
     <script src="~/assets/plugins/d3/d3.min.js"></script>
-    <script src="~/assets/plugins/nvd3/build/nv.d3.min.js"></script>
-    <script src="~/assets/pages/jquery.nvd3.init.js"></script>
+  
     <script src="~/assets/plugins/Chart.js/Chart.min.js"></script>
+    <script src="~/assets/pages/jquery.nvd3.init.js"></script>
+   <script src="~/assets/plugins/nvd3/build/nv.d3.min.js"></script>
     <script src="~/assets/js.app/empresas.js"></script>
     <script src="~/assets/js/jqPlugin.js"></script>
     <script src="~/assets/js/svg_to_pdf.js"></script>
@@ -210,9 +211,13 @@
                             credits: { enabled: false },
                             exporting: { enabled: false },
                             plotOptions: {
-                                column: {
-                                    pointPadding: 0.2,
-                                    borderWidth: 0
+                                series: {
+                                    dataLabels: {
+                                        enabled: true,
+                                        formatter: function () {
+                                            return Highcharts.numberFormat(this.y, 2);
+                                        }
+                                    }
                                 }
                             },
                             series: [{
@@ -276,8 +281,9 @@
                             series: {
                                 dataLabels: {
                                     enabled: true,
-                                    
+                                                                      
                                 }
+
                             }
                         },
                         series: [{
@@ -451,7 +457,7 @@
                         chart: {
                             type: 'column',
                         },
-                        colors: ['#8bc34a'],
+                        colors: ['#ffa726'],
                         title: {
                             text: '',
                             x: -20 //center
@@ -482,12 +488,15 @@
                                 }
                             }
                         }],
+                       
                         credits: { enabled: false },
                         exporting: { enabled: false },
-                      plotOptions: {
-                            column: {
-                                pointPadding: 0.2,
-                                borderWidth: 0
+                        plotOptions: {
+                            series: {
+                                dataLabels: {
+                                    enabled: true,
+
+                                }
                             }
                         },
                       series: [{

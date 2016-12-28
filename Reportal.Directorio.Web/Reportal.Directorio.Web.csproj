@@ -385,6 +385,8 @@
     <Content Include="assets\plugins\nestable\jquery.nestable.js" />
     <Content Include="assets\plugins\notifications\notify-metro.js" />
     <Content Include="assets\plugins\notifyjs\dist\notify.min.js" />
+    <Content Include="assets\plugins\nvd3\build\nv.d3.min.css" />
+    <Content Include="assets\plugins\nvd3\build\nv.d3.min.js" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.carousel.min.css" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.theme.default.min.css" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.video.play.png" />
@@ -2573,7 +2575,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\plugins\jquery.steps\build\" />
-    <Folder Include="assets\plugins\nvd3\build\" />
     <Folder Include="getstart\plugins\flot-charts\examples\gauge\" />
     <Folder Include="Views\Presupuesto\" />
   </ItemGroup>
