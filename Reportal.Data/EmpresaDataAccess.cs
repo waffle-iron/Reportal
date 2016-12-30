@@ -34,6 +34,11 @@ namespace Reportal.Data
             Parametro ppp = new Parametro("@rut", RutEmpresa);
             return DBHelper.InstanceReporteria.ObtenerColeccion("sp_MapaEmpresaLicencia_2", ppp, EntidadLicenciaVigente);
         }
+        public static List<EmpresaLicenciaD> MostrarLicenciaVigentesA(int RutEmpresa)
+        {
+            Parametro ppp = new Parametro("@rut", RutEmpresa);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_MapaEmpresaLicencia_5", ppp, EntidadLicenciaVigenteA);
+        }
         public static List<EmpresaLicenciaB> MostrarLicenciasPagadas(int RutEmpresa)
         {
             Parametro LP = new Parametro("@rut", RutEmpresa);
@@ -159,6 +164,19 @@ namespace Reportal.Data
                 ClasFinal = row["Clasificacion_Final"] != DBNull.Value ? row["Clasificacion_Final"].ToString() : string.Empty,
                 Interes = row["Interes"] != DBNull.Value ? Convert.ToInt32(row["Interes"]) : 0,
                 CostoPrev = row["CostoProvision"] != DBNull.Value ? Convert.ToInt32(row["CostoProvision"]) : 0
+            };
+        }
+
+        private static EmpresaLicenciaD EntidadLicenciaVigenteA(DataRow row)
+        {
+            return new EmpresaLicenciaD
+            {
+                empresaRut2 = row["Empresa_Rut"] != DBNull.Value ? Convert.ToInt32(row["Empresa_Rut"]) : 0,
+                fInicio2= row["Licencia_fInicio"] != DBNull.Value ? row["Licencia_fInicio"].ToString() : string.Empty,
+                fAnio2 = row["Licencia_fInicio_Año"] != DBNull.Value ? row["Licencia_fInicio_Año"].ToString() : string.Empty,
+                Isegmento2 = row["iSegmento"] != DBNull.Value ? Convert.ToInt32(row["iSegmento"]) : 0,
+                Descripcion2 = row["Descripcion"] != DBNull.Value ? row["Descripcion"].ToString() : string.Empty,
+                Valor2 = row["Valor"] != DBNull.Value ? Convert.ToSingle(row["Valor"]) : 0
             };
         }
     }

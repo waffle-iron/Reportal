@@ -90,8 +90,7 @@
                     //$("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Tasa").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                     //  $("#bodyFinanciamientoSpread > tr.segundo").append($("<th>").html("Spred").css("text-align", "center").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 });
-
-                //
+                              
                 $("#bodyLicenciaVigente").append($("<tr class=\"LicAutorizada\">"));
                 $("#bodyLicenciaVigente > tr.LicAutorizada").append($("<th>").html("Licencia Autorizada").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 $.each(respoonse.LicAutorizada, function (i, e) {
@@ -124,6 +123,9 @@
                     $("#bodyLicenciaVigente > tr.LicTotal").append($("<td>").html(e.Valor.toMoney()).css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 });
 
+                $("#bodyLicenciaVigente").append($("<tr class=\"LicTotal2\">"));
+                $("#bodyLicenciaVigente > tr.LicTotal2").append($("<th>").html("").css("text-align", "left").css("background", "#ffffff none repeat scroll 0 0").css("color", "#FFFFFF"));
+            
                 $("#bodyLicenciaVigente").append($("<tr class=\"LicPagadas\">"));
                 $("#bodyLicenciaVigente > tr.LicPagadas").append($("<th>").html("Licencias Pagadas").css("text-align", "left").css("background", "#42a5f5 none repeat scroll 0 0").css("color", "#FFFFFF"));
                 $.each(respoonse.LicPagadas, function (i, e) {
@@ -215,7 +217,7 @@
                                     dataLabels: {
                                         enabled: true,
                                         formatter: function () {
-                                            return Highcharts.numberFormat(this.y, 2);
+                                            return Highcharts.numberFormat(this.y, 2)+"%";
                                         }
                                     }
                                 }
@@ -506,6 +508,90 @@
                         }]
                     });
                 });
+
+                $.getJSON("http://localhost:8080/api/EmpresaLicenciaVigentes2/" + $("#IdEmpresa").val(), function (data3) {
+           
+                var diasPlazo = new Array();
+                var LPendientes = new Array();
+                var LObjetada = new Array();
+                var LSDerecho = new Array();
+                var LRecha = new Array();
+                var LAuto = new Array();
+
+
+
+                $.each(data3.EncabezadoLicenciaVi2, function (i, e) {
+                    diasPlazo[i] = e.Mes;
+                });
+
+                $.each(data3.LicPendientes2, function (i, e) {
+                    LPendientes[i] = e.Valor;
+                });
+                $.each(data3.LicObjetada2, function (i, e) {
+                    LObjetada[i] = e.Valor;
+                });
+                $.each(data3.LicSinDerecho2, function (i, e) {
+                    LSDerecho[i] = e.Valor;
+                });
+                $.each(data3.LicRechazada2, function (i, e) {
+                    LSDerecho[i] = e.Valor;
+                });
+                $.each(data3.LicAutorizada2, function (i, e) {
+                    LAuto[i] = e.Valor;
+                });
+                
+
+                $('#BarraTodoLicencia').highcharts({
+                    colors: ['#42a5f5', '#8bc34a', '#00bcd4', '##ffa726', '#ba68c8'],
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: diasPlazo
+                    },
+                    yAxis: {
+                        min: 0
+                    },
+                    tooltip: {
+                        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{}</b> ({point.percentage:.0f}%)<br/>',
+                        shared: true
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    exporting: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: 'percent'
+                        }
+                    },
+                    series: [{
+                        name: 'Licencias Pendientes',
+                        data: LPendientes//, LSDerecho, LRecha, LAuto
+                    },{  
+                        name: 'Licencias Objetadas',
+                        data: LObjetada
+                    }, {
+                        name: 'Licencias Sin Derecho',
+                        data:LSDerecho
+                    }, {
+                        name: 'Licencias Rechazadas',
+                        data:  LRecha
+                    }, {
+                        name: 'Licencias Autorizadas',
+                        data:  LAuto
+                    }]
+
+                });
+            });
+
+
+
             });
         });
 
@@ -530,7 +616,6 @@
                     <li class="">
                         <a data-toggle="tab" href="#demo-lft-tab-3" aria-expanded="false">Licencias Médicas</a>
                     </li>
-                    
                 </ul>
                 <div class="tab-content">
                     <div id="demo-lft-tab-1" class="tab-pane fade active in">
@@ -741,7 +826,7 @@
                         </div>
                         <div class="panel">
                             <div class="panel-heading">
-                                <h1 class="panel-title">Uso de beneficios por tipo</h1>
+                                <h1 class="panel-title">Uso de beneficios por Tipo (Últimos 12 meses)</h1>
                             </div>
                             <div id="BarraBenefTipo" style="height:212px"></div>
                         </div>
@@ -781,13 +866,19 @@
                         </div>
                         <div class="panel">
                             <div class="panel-heading">
+                                <h1 class="panel-title">Porcentaje Licencia por Mes</h1>
+                            </div>
+                            <div id="BarraTodoLicencia" style="height:212px"></div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
                                 <h1 class="panel-title">Licencia Pagadas y no Pagadas por Mes</h1>
                             </div>
                             <div id="LinealLicenciaPagadas" style="height:212px"></div>
                         </div>
                         <div class="panel">
                             <div class="panel-heading">
-                                <h1 class="panel-title">Licencia Pagadas y no Pagadas por Mes</h1>
+                                <h1 class="panel-title">Top 20 - Licencias Médicas (últimos 12 meses)</h1>
                             </div>
                             <div id="BarraTop" style="height:212px"></div>
                         </div>

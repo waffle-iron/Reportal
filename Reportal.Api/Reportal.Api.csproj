@@ -153,6 +153,7 @@
     <Folder Include="Views\EmpresaClasificacion\" />
     <Folder Include="Views\EmpresaLicenciasPagadas\" />
     <Folder Include="Views\EmpresaLicenciaTop20\" />
+    <Folder Include="Views\EmpresaLicenciaVigente2\" />
     <Folder Include="Views\EmpresaLicenciaVigentes\" />
     <Folder Include="Views\EmpresaLicencia\" />
     <Folder Include="Views\Reprogramaciones\" />
@@ -232,6 +233,7 @@
     <Compile Include="Controllers\EmpresaLicenciaController.cs" />
     <Compile Include="Controllers\EmpresaLicenciasPagadasController.cs" />
     <Compile Include="Controllers\EmpresaLicenciaTop20Controller.cs" />
+    <Compile Include="Controllers\EmpresaLicenciaVigente2Controller.cs" />
     <Compile Include="Controllers\EmpresaLicenciaVigentesController.cs" />
     <Compile Include="Controllers\EncabezadoEmpresaController.cs" />
     <Compile Include="Controllers\CastigosNetos_TrabController.cs" />
@@ -295,6 +297,7 @@
     <Compile Include="Models\ContenedorBaseBeneficio.cs" />
     <Compile Include="Models\ContenedorBaseLicencia.cs" />
     <Compile Include="Models\ContenedorBaseLicenciaVi.cs" />
+    <Compile Include="Models\ContenedorBaseLicenciaVi2.cs" />
     <Compile Include="Models\ContenedorBasePpto.cs" />
     <Compile Include="Models\CredColoc_DiariaPromedio.cs" />
     <Compile Include="Models\CredFinanciamentoTodo.cs" />

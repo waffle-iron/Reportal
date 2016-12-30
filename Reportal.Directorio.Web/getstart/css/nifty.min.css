@@ -5910,9 +5910,9 @@ blockquote {
     }
 
 .btn-default-basic, .btn-default, .btn-default:focus, .btn-default.disabled:hover, .btn-default:disabled:hover, .btn-hover-default:hover, .btn-hover-default:active, .btn-hover-default.active, .btn.btn-active-default:active, .btn.btn-active-default.active, .dropdown.open > .btn.btn-active-default, .btn-group.open .dropdown-toggle.btn.btn-active-default {
-    background-color: #fafafa;
+    background-color: #337ab7;
     border-color: #d1d9de;
-    color: #758697;
+    color: #ffffff;
 }
 
     .btn-default:hover, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {

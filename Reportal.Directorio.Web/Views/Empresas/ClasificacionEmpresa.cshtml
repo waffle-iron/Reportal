@@ -57,10 +57,13 @@
                         { data: "TipoEmpresa" },
                         { data: "NumTrabEmp" },
                         { data: "Holding" },
-                        { data: "ClasFinal" }
+                        { data: "ClasFinal" },
+                        { data: "Interes" },
+                        { data: "CostoPrev" }
 
 
                     ],
+                    "bDestroy": true
                 });
 
                 //a.dt-button.buttons-excel.buttons-html5
@@ -77,20 +80,21 @@
     <link href="~/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 }
 <div class="boxed">
-    <div class="col-sm-12" align="right">
+    <div class="col-sm-13" align="right">
         <b>Actualización:</b><b id="idfechaproceso">
         </b>
     </div>
-    <div class="col-lg-12">
+    <div class="col-lg-13">
         <div class="panel">
             <div class="panel-heading">
-                <h1 class="panel-title">
-                    Seleccione Periodo:
+              
+                    <span class="panel-title">Seleccione Periodo:</span>
                     <select id="slPeriodo">
                         <option value="201611">Noviembre 2016</option>
                         <option value="201610">Octubre 2016</option>
                     </select>
-                </h1>
+              
+                <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="idfechaproceso"></span></span>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
