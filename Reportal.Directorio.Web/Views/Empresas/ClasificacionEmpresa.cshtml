@@ -1,56 +1,77 @@
 ﻿
 @{
     ViewBag.Title = "ClasificacionEmpresa";
-    Layout = "~/Views/Layout/_Principal.cshtml";
+    Layout = "~/Views/Layout/_Principal2_Oper.cshtml";
 }
 
 @section script{
- <script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="~/assets/plugins/datatables/dataTables.bootstrap.js"></script>
-<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/formatted-numbers.js"></script>
+    <script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/assets/plugins/datatables/formatted-numbers.js"></script>
 
-<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="~/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="~/assets/plugins/datatables/jszip.min.js"></script>
+    <script src="~/assets/plugins/datatables/pdfmake.min.js"></script>
+    <script src="~/assets/plugins/datatables/vfs_fonts.js"></script>
+    <script src="~/assets/plugins/datatables/buttons.html5.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-
-
-
-            $('#datatable').dataTable({
-                ajax: {
-                    url: "http://localhost:8080/api/EmpresaClasificacion",
-                    dataSrc: ''
-                },
-                dom: 'Bfrtip',
-                buttons: [
-               'excelHtml5'
-                ],
-                "bSort": false,
-                aaSorting: [[]],
-                order: [],
-                "columnDefs": [
-                { "className": "dt-center", "targets": "4" }
-                ],
-                columns: [
-                    { data: "Periodo"},
-                    { data: "RutEmp" },
-                    { data: "NomEmpresa"},
-                    { data: "TipoEmpresa" },
-                    { data: "NumTrabEmp" },
-                    { data: "Holding" },
-                    { data: "ClasFinal" }
-
-
-                ],
+            var udmapa = {}
+            if (JSON.parse(localStorage.getItem('userdata')) != null) {
+                udmapa = JSON.parse(localStorage.getItem('userdata'));
+            }
+            $.SecGetJSON(getReportalApiHost() + "api/Empresa", function (data) {
+                // $("#idfechaproceso").text(data.Fecha_ProcesoEmpresa);
+                $.each(data, function (i, obj) {
+                    if (i == 1) {
+                        $("#idfechaproceso").html(obj.Fecha_ProcesoEmpresa);
+                    }
+                })
             });
+            $("#slPeriodo").on("change", function () {
+                // $("#datatable").dataTable();
 
-            //a.dt-button.buttons-excel.buttons-html5
 
-            $(".dt-button").addClass("btn btn-success waves-effect waves-light btn-sm");
-            //console.log($(".dt-button"));
+                $('#datatable').dataTable({
+                    ajax: {
+                        url: "http://localhost:8080/api/EmpresaClasificacion/" + $("#slPeriodo").val(),
+                        dataSrc: '',
+                        "Token": udmapa.token,
+                        "TokenExpiry": "900",
+                        "Access-Control-Expose-Headers": "Token,TokenExpiry"
+                    },
+                    dom: 'Bfrtip',
+                    buttons: [
+                   'excelHtml5'
+                    ],
+                    "bSort": false,
+                    aaSorting: [[]],
+                    order: [],
+                    "columnDefs": [
+                    { "className": "dt-center", "targets": "4" }
+                    ],
+                    columns: [
+                        { data: "Periodo" },
+                        { data: "RutEmp" },
+                        { data: "NomEmpresa" },
+                        { data: "TipoEmpresa" },
+                        { data: "NumTrabEmp" },
+                        { data: "Holding" },
+                        { data: "ClasFinal" },
+                        { data: "Interes" },
+                        { data: "CostoPrev" }
+
+
+                    ],
+                    "bDestroy": true
+                });
+
+                //a.dt-button.buttons-excel.buttons-html5
+
+                $(".dt-button").addClass("btn btn-success waves-effect waves-light btn-sm");
+                //console.log($(".dt-button"));
+            });
+            $("#slPeriodo").trigger("change");
         });
     </script>
 }
@@ -59,41 +80,41 @@
     <link href="~/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 }
 <div class="boxed">
-    <div class="col-sm-12" align="right">
+    <div class="col-sm-13" align="right">
         <b>Actualización:</b><b id="idfechaproceso">
         </b>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <h4 class="page-title">Clasificación de Empresas</h4>
-            <ol class="breadcrumb">
-                <li><a href="/Reportal">Portal de Información</a></li>
-                <li><a>Clasificación Empresa</a></li>
-            </ol>
-        </div>
-
-
-    </div>
-    <div class="row">
-        <div class="panel col-lg-12">
-            <div class="table-responsive">
-
-                <table id="datatable" class="table table-striped" style="margin: 0px auto; font-size: 11px;">
-                    <thead>
-                        <tr>
-                            <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Periodo</th>
-                            <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Rut</th>
-                            <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Nombre</th>
-                            <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Tipo</th>
-                            <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;width:55px">N° Trabajador</th>
-                            <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;width:100px">Holding</th>
-                            <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Clasificación</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+    <div class="col-lg-13">
+        <div class="panel">
+            <div class="panel-heading">
+              
+                    <span class="panel-title">Seleccione Periodo:</span>
+                    <select id="slPeriodo">
+                        <option value="201611">Noviembre 2016</option>
+                        <option value="201610">Octubre 2016</option>
+                    </select>
+              
+                <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="idfechaproceso"></span></span>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped" style="margin: 0px auto; font-size: 11px;">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Periodo</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Rut</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Nombre</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Tipo</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;width:55px">N° Trabajador</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;width:100px">Holding</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Clasificación</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Interés Promedio</th>
+                                <th style="text-align:center; background: #FFFFFF none repeat scroll 0 0; color:#000000;">Provisión Promedio</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
-

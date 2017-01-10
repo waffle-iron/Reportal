@@ -15,6 +15,9 @@ namespace Reportal.Domain
         public int NumTrabEmp { get; set; }
         public string Holding { get; set; }
         public string ClasFinal { get; set; }
+        public int Interes { get; set; }
+        public int CostoPrev { get; set; }
+
 
     }
 }

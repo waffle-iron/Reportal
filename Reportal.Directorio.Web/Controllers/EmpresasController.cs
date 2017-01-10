@@ -33,6 +33,7 @@ namespace Reportal.Directorio.Web.Controllers
 
         public ActionResult ClasificacionEmpresa()
         {
+
             return View();
         }
 

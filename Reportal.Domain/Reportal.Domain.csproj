@@ -57,7 +57,9 @@
     <Compile Include="CastigosNetos.cs" />
     <Compile Include="EmpresaBeneficio_A.cs" />
     <Compile Include="EmpresaBeneficio_B.cs" />
+    <Compile Include="EmpresaClasif.cs" />
     <Compile Include="EmpresaLicencia.cs" />
+    <Compile Include="EmpresaLicenciaD.cs" />
     <Compile Include="EmpresaLicenciaA.cs" />
     <Compile Include="EmpresaLicenciaB.cs" />
     <Compile Include="EmpresaLicenciaC.cs" />

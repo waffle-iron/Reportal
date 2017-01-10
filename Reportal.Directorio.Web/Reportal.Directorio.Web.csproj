@@ -312,10 +312,15 @@
     <Content Include="assets\plugins\custombox\dist\custombox.min.js" />
     <Content Include="assets\plugins\custombox\dist\legacy.min.js" />
     <Content Include="assets\plugins\d3\d3.min.js" />
+    <Content Include="assets\plugins\datatables\buttons.html5.min.js" />
     <Content Include="assets\plugins\datatables\dataTables.bootstrap.js" />
+    <Content Include="assets\plugins\datatables\dataTables.buttons.min.js" />
     <Content Include="assets\plugins\datatables\formatted-numbers.js" />
     <Content Include="assets\plugins\datatables\jquery.dataTables.min.css" />
     <Content Include="assets\plugins\datatables\jquery.dataTables.min.js" />
+    <Content Include="assets\plugins\datatables\jszip.min.js" />
+    <Content Include="assets\plugins\datatables\pdfmake.min.js" />
+    <Content Include="assets\plugins\datatables\vfs_fonts.js" />
     <Content Include="assets\plugins\dropzone\dist\dropzone.css" />
     <Content Include="assets\plugins\dropzone\dist\dropzone.js" />
     <Content Include="assets\plugins\flot-chart\jquery.flot.crosshair.js" />
@@ -380,6 +385,8 @@
     <Content Include="assets\plugins\nestable\jquery.nestable.js" />
     <Content Include="assets\plugins\notifications\notify-metro.js" />
     <Content Include="assets\plugins\notifyjs\dist\notify.min.js" />
+    <Content Include="assets\plugins\nvd3\build\nv.d3.min.css" />
+    <Content Include="assets\plugins\nvd3\build\nv.d3.min.js" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.carousel.min.css" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.theme.default.min.css" />
     <Content Include="assets\plugins\owl.carousel\dist\assets\owl.video.play.png" />
@@ -2570,7 +2577,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\plugins\jquery.steps\build\" />
-    <Folder Include="assets\plugins\nvd3\build\" />
     <Folder Include="getstart\plugins\flot-charts\examples\gauge\" />
     <Folder Include="Views\Presupuesto\" />
   </ItemGroup>
