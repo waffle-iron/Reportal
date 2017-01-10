@@ -48,6 +48,37 @@ namespace Reportal.Data
             return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarByCanalesPropension", p, FormaCanalesPropen);
         }
 
+        public static List<TotalesUniverso> ListarTotalesUniverso(int Periodo)
+        {
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarTotalesUniverso", p, FormaTotalesUniverso);
+        }
+
+        public static List<UniversoCampagnado> ListarUniversoCampagnado(int Periodo)
+        {
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarUniversoCampagnado", p, FormaUniversoCampagnado);
+        }
+
+        public static List<UniversoGestionable> ListarUniversoGestionable(int Periodo)
+        {
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarUniversoGestionable", p, FormaUniversoGestionable);
+        }
+
+        public static List<UniversoCampagnadoPropension> ListarUniversoCampagnadoPropension(int Periodo)
+        {
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarUniversoCampagnadoPropension", p, FormaUniversoCampagnadoPropension);
+        }
+
+        public static List<UniversoGestionablePropension> ListarUniversoGestionablePropension(int Periodo)
+        {
+            Parametro p = new Parametro("@Periodo", Periodo);
+            return DBHelper.InstanceReporteria.ObtenerColeccion("sp_SegPreaprobados_ListarUniversoGestionablePropension", p, FormaUniversoGestionablePropension);
+        }
+
+
         #region Formas de salida
         private static SegPreaprobadosGlobal FormaGlobal(DataRow row)
         {
@@ -136,9 +167,7 @@ namespace Reportal.Data
                 WR = row["WR"] != DBNull.Value ? Convert.ToDecimal(row["WR"]) : 0
             };
         }
-
-
-
+        
         private static SegPreaprobadosFull FormaCanalesPropen(DataRow row)
         {
             return new SegPreaprobadosFull
@@ -158,6 +187,94 @@ namespace Reportal.Data
                 WR_Total = row["WR_Total"] != DBNull.Value ? Convert.ToDecimal(row["WR_Total"]) : 0,
             };
         }
+
+        private static TotalesUniverso FormaTotalesUniverso(DataRow row)
+        {
+            return new TotalesUniverso
+            {
+                Periodo = row["Periodo"] != DBNull.Value ? Convert.ToInt32(row["Periodo"]) : 0,
+                Item = row["Item"] != DBNull.Value ? row["Item"].ToString() : string.Empty,
+                N_Total = row["N_Total"] != DBNull.Value ? Convert.ToInt32(row["N_Total"]) : 0,
+                P_Total = row["P_Total"] != DBNull.Value ? Convert.ToInt32(row["P_Total"]) : 0,
+                N_Pensionados = row["N_Pensionados"] != DBNull.Value ? Convert.ToInt32(row["N_Pensionados"]) : 0,
+                P_Pensionados = row["P_Pensionados"] != DBNull.Value ? Convert.ToInt32(row["P_Pensionados"]) : 0,
+                N_Trabajadores = row["N_Trabajadores"] != DBNull.Value ? Convert.ToInt32(row["N_Trabajadores"]) : 0,
+                P_Trabajadores = row["P_Trabajadores"] != DBNull.Value ? Convert.ToInt32(row["P_Trabajadores"]) : 0,
+            };
+        }
+
+        private static UniversoCampagnado FormaUniversoCampagnado(DataRow row)
+        {
+            return new UniversoCampagnado
+            {
+                Periodo = row["Periodo"] != DBNull.Value ? Convert.ToInt32(row["Periodo"]) : 0,
+                Segmento = row["Segmento"] != DBNull.Value ? row["Segmento"].ToString() : string.Empty,
+                N_Total = row["N_Total"] != DBNull.Value ? Convert.ToInt32(row["N_Total"]) : 0,
+                P_Total = row["P_Total"] != DBNull.Value ? Convert.ToInt32(row["P_Total"]) : 0,
+                N_Call = row["N_Call"] != DBNull.Value ? Convert.ToInt32(row["N_Call"]) : 0,
+                P_Call = row["P_Call"] != DBNull.Value ? Convert.ToInt32(row["P_Call"]) : 0,
+                N_Email = row["N_Email"] != DBNull.Value ? Convert.ToInt32(row["N_Email"]) : 0,
+                P_Email = row["P_Email"] != DBNull.Value ? Convert.ToInt32(row["P_Email"]) : 0,
+                N_SMS = row["N_SMS"] != DBNull.Value ? Convert.ToInt32(row["N_SMS"]) : 0,
+                P_SMS = row["P_SMS"] != DBNull.Value ? Convert.ToInt32(row["P_SMS"]) : 0,
+            };
+        }
+
+        private static UniversoGestionable FormaUniversoGestionable(DataRow row)
+        {
+            return new UniversoGestionable
+            {
+                Periodo = row["Periodo"] != DBNull.Value ? Convert.ToInt32(row["Periodo"]) : 0,
+                Segmento = row["Segmento"] != DBNull.Value ? row["Segmento"].ToString() : string.Empty,
+                N_Afiliados = row["N_Afiliados"] != DBNull.Value ? Convert.ToInt32(row["N_Afiliados"]) : 0,
+                N_Celular = row["N_Celular"] != DBNull.Value ? Convert.ToInt32(row["N_Celular"]) : 0,
+                P_Celular = row["P_Celular"] != DBNull.Value ? Convert.ToInt32(row["P_Celular"]) : 0,
+                N_CelularOFijo = row["N_CelularOFijo"] != DBNull.Value ? Convert.ToInt32(row["N_CelularOFijo"]) : 0,
+                P_CelularOFijo = row["P_CelularOFijo"] != DBNull.Value ? Convert.ToInt32(row["P_CelularOFijo"]) : 0,
+                N_Email = row["N_Email"] != DBNull.Value ? Convert.ToInt32(row["N_Email"]) : 0,
+                P_Email = row["P_Email"] != DBNull.Value ? Convert.ToInt32(row["P_Email"]) : 0,
+                N_EmailOFonos = row["N_EmailOFonos"] != DBNull.Value ? Convert.ToInt32(row["N_EmailOFonos"]) : 0,
+                P_EmailOFonos = row["P_EmailOFonos"] != DBNull.Value ? Convert.ToInt32(row["P_EmailOFonos"]) : 0,
+            };
+        }
+
+        private static UniversoCampagnadoPropension FormaUniversoCampagnadoPropension(DataRow row)
+        {
+            return new UniversoCampagnadoPropension
+            {
+                Periodo = row["Periodo"] != DBNull.Value ? Convert.ToInt32(row["Periodo"]) : 0,
+                Segmento = row["Segmento"] != DBNull.Value ? row["Segmento"].ToString() : string.Empty,
+                SegmentoCompra = row["SegmentoCompra"] != DBNull.Value ? row["SegmentoCompra"].ToString() : string.Empty,
+                N_Total = row["N_Total"] != DBNull.Value ? Convert.ToInt32(row["N_Total"]) : 0,
+                P_Total = row["P_Total"] != DBNull.Value ? Convert.ToInt32(row["P_Total"]) : 0,
+                N_Call = row["N_Call"] != DBNull.Value ? Convert.ToInt32(row["N_Call"]) : 0,
+                P_Call = row["P_Call"] != DBNull.Value ? Convert.ToInt32(row["P_Call"]) : 0,
+                N_Email = row["N_Email"] != DBNull.Value ? Convert.ToInt32(row["N_Email"]) : 0,
+                P_Email = row["P_Email"] != DBNull.Value ? Convert.ToInt32(row["P_Email"]) : 0,
+                N_SMS = row["N_SMS"] != DBNull.Value ? Convert.ToInt32(row["N_SMS"]) : 0,
+                P_SMS = row["P_SMS"] != DBNull.Value ? Convert.ToInt32(row["P_SMS"]) : 0,
+            };
+        }
+
+        private static UniversoGestionablePropension FormaUniversoGestionablePropension(DataRow row)
+        {
+            return new UniversoGestionablePropension
+            {
+                Periodo = row["Periodo"] != DBNull.Value ? Convert.ToInt32(row["Periodo"]) : 0,
+                Segmento = row["Segmento"] != DBNull.Value ? row["Segmento"].ToString() : string.Empty,
+                SegmentoCompra = row["SegmentoCompra"] != DBNull.Value ? row["SegmentoCompra"].ToString() : string.Empty,
+                N_Afiliados = row["N_Afiliados"] != DBNull.Value ? Convert.ToInt32(row["N_Afiliados"]) : 0,
+                N_Celular = row["N_Celular"] != DBNull.Value ? Convert.ToInt32(row["N_Celular"]) : 0,
+                P_Celular = row["P_Celular"] != DBNull.Value ? Convert.ToInt32(row["P_Celular"]) : 0,
+                N_Fonos = row["N_Fonos"] != DBNull.Value ? Convert.ToInt32(row["N_Fonos"]) : 0,
+                P_Fonos = row["P_Fonos"] != DBNull.Value ? Convert.ToInt32(row["P_Fonos"]) : 0,
+                N_Email = row["N_Email"] != DBNull.Value ? Convert.ToInt32(row["N_Email"]) : 0,
+                P_Email = row["P_Email"] != DBNull.Value ? Convert.ToInt32(row["P_Email"]) : 0,
+                N_Alguno = row["N_Alguno"] != DBNull.Value ? Convert.ToInt32(row["N_Alguno"]) : 0,
+                P_Alguno = row["P_Alguno"] != DBNull.Value ? Convert.ToInt32(row["P_Alguno"]) : 0,
+            };
+        }
+
 
         #endregion
     }

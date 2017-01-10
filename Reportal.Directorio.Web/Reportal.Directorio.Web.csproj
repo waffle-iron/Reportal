@@ -2564,6 +2564,8 @@
     <Content Include="Views\Empresas\DetalleMapaEmpresa.cshtml" />
     <Content Include="Views\Empresas\MapaEmpresas.cshtml" />
     <Content Include="Views\Campanias\Nominas.cshtml" />
+    <Content Include="Views\Campanias\Analisis.cshtml" />
+    <Content Include="Views\Campanias\Seguimiento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -255,6 +255,7 @@
                     });
                 });
 
+
             });
 
             $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/1/", function (respoonse) {
@@ -318,13 +319,57 @@
         }
 
 
+        .charlee-pintado-velde
+        {
+            color:#fff1f1 !important;
+            background: #8bc34a none repeat scroll 0 0; 
+            text-align:center;
+        }
+
+        .charlee-pintado-bold-velde
+        {
+            color:#fff1f1 !important;
+            background: #8bc34a none repeat scroll 0 0; 
+            text-align:center;
+            font-weight:bold;
+        }
+
+        .charlee-pintado-bold-ralign-velde
+        {
+            color:#fff1f1 !important;
+            background: #8bc34a none repeat scroll 0 0; 
+            text-align:right;
+            font-weight:bold;
+        }
+
+
+        .charlee-pintado-naran
+        {
+            color:#fff1f1 !important;
+            background: #26a69a none repeat scroll 0 0; 
+            text-align:center;
+        }
+
+        .charlee-pintado-bold-naran
+        {
+            color:#fff1f1 !important;
+            background: #26a69a none repeat scroll 0 0; 
+            text-align:center;
+            font-weight:bold;
+        }
+
+        .charlee-pintado-bold-ralign-naran
+        {
+            color:#fff1f1 !important;
+            background: #26a69a none repeat scroll 0 0; 
+            text-align:right;
+            font-weight:bold;
+        }
+
+
     </style>
 
 }
-
-
-
-
 
 
 <!--Page Title-->
@@ -357,7 +402,9 @@
             <div class="well well-sm">
                 Seleccione Periodo:
                 <select id="slPeriodo">
-                    <option value="201611" selected="selected">Noviembre 2016</option>
+                    <option value="201701" selected="selected">Enero 2017</option>
+                    <option value="201612">Diciembre 2016</option>
+                    <option value="201611">Noviembre 2016</option>
                     <option value="201610">Octubre 2016</option>
                     <option value="201609">Septiembre 2016</option>
                 </select>
@@ -388,12 +435,6 @@
                     </li>
                     <li class="">
                         <a data-toggle="tab" href="#exclisiones" aria-expanded="false">Exclusiones</a>
-                    </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#another1" aria-expanded="false">Another 1</a>
-                    </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#another2" aria-expanded="false">Another 2</a>
                     </li>
                 </ul>
 
@@ -644,137 +685,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="another1" class="tab-pane fade">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h1 class="panel-title">Universo Pre-aprobados</h1>
-                            </div>
-                            <div class="panel-body">
-                                <div>
-                                    <table class="table table-charlee table-responsive table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th rowspan="2" class="charlee-pintado periodo-seleccionado" style="vertical-align:middle;"></th>
-                                                <th colspan="2" class="charlee-pintado">Pensionado</th>
-                                                <th colspan="2" class="charlee-pintado">Trabajador</th>
-                                                <th colspan="2" class="charlee-pintado">Total</th>
-                                            </tr>
-                                            <tr>
-                                                <th class="charlee-pintado">N° Afiliados</th>
-                                                <th class="charlee-pintado">%</th>
-                                                <th class="charlee-pintado">N° Afiliados</th>
-                                                <th class="charlee-pintado">%</th>
-                                                <th class="charlee-pintado">N° Afiliados</th>
-                                                <th class="charlee-pintado">%</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Total</td>
-                                                <td class="n_total_pensionado" style="text-align:right;">255.695</td>
-                                                <td class="p_total_pensionado" style="text-align:right;">100%</td>
-                                                <td class="n_total_trabajador" style="text-align:right;">810.085</td>
-                                                <td class="p_total_trabajador" style="text-align:right;">100%</td>
-                                                <td class="n_total_total" style="text-align:right;">810.085</td>
-                                                <td class="p_total_total" style="text-align:right;">100%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pre-aprobados Por Riesgo</td>
-                                                <td class="n_pa-riesgo_pensionado" style="text-align:right;">255.695</td>
-                                                <td class="p_pa-riesgo_pensionado" style="text-align:right;">100%</td>
-                                                <td class="n_pa-riesgo_trabajador" style="text-align:right;">810.085</td>
-                                                <td class="p_pa-riesgo_trabajador" style="text-align:right;">100%</td>
-                                                <td class="n_pa-riesgo_total" style="text-align:right;">810.085</td>
-                                                <td class="p_pa-riesgo_total" style="text-align:right;">100%</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="charlee-pintado-bold">Pre-aprobados Final</td>
-                                                <td class="n_pa-final_pensionado charlee-pintado-bold-ralign">255.695</td>
-                                                <td class="p_pa-final_pensionado charlee-pintado-bold-ralign">100%</td>
-                                                <td class="n_pa-final_trabajador charlee-pintado-bold-ralign">810.085</td>
-                                                <td class="p_pa-final_trabajador charlee-pintado-bold-ralign">100%</td>
-                                                <td class="n_pa-final_total charlee-pintado-bold-ralign">810.085</td>
-                                                <td class="p_pa-final_total charlee-pintado-bold-ralign">100%</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h1 class="panel-title">Universo Gestionable</h1>
-                            </div>
-                            <div class="panel-body">
-                                <div id="tabla-1">
-                                    <table class="table table-charlee table-responsive table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th rowspan="2" class="charlee-pintado" style="vertical-align:middle;">Segmento</th>
-                                                <th rowspan="2" class="charlee-pintado" style="vertical-align:middle;">N° Afiliados</th>
-                                                <th colspan="2" class="charlee-pintado">Email</th>
-                                                <th colspan="2" class="charlee-pintado">Celular</th>
-                                                <th colspan="2" class="charlee-pintado">Celular o Fijo</th>
-                                                <th colspan="2" class="charlee-pintado">Email o Fonos</th>
-                                            </tr>
-                                            <tr>
-                                                <th class="charlee-pintado">N°</th>
-                                                <th class="charlee-pintado">%</th>
-                                                <th class="charlee-pintado">N°</th>
-                                                <th class="charlee-pintado">%</th>
-                                                <th class="charlee-pintado">N°</th>
-                                                <th class="charlee-pintado">%</th>
-                                                <th class="charlee-pintado">N°</th>
-                                                <th class="charlee-pintado">%</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h1 class="panel-title">Universo Campañado</h1>
-                            </div>
-                            <div class="panel-body">
-                                <div id="tabla-1">
-                                    <table class="table table-charlee table-responsive table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th rowspan="2" class="charlee-pintado" style="vertical-align:middle;">Segmento</th>
-                                                <th colspan="2" class="charlee-pintado">Email</th>
-                                                <th colspan="2" class="charlee-pintado">SMS</th>
-                                                <th colspan="2" class="charlee-pintado">Call Center</th>
-                                                <th colspan="2" class="charlee-pintado">Total Canales Virtuales</th>
-                                            </tr>
-                                            <tr>
-                                                <th class="charlee-pintado">N°</th>
-                                                <th class="charlee-pintado">%</th>
-                                                <th class="charlee-pintado">N°</th>
-                                                <th class="charlee-pintado">%</th>
-                                                <th class="charlee-pintado">N°</th>
-                                                <th class="charlee-pintado">%</th>
-                                                <th class="charlee-pintado">N°</th>
-                                                <th class="charlee-pintado">%</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="another2" class="tab-pane fade">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h1 class="panel-title">Seguimiento exclusiones cascadas</h1>
-                            </div>
-                            <div class="panel-body">
-                                <div>
-                                    Helo Another#2
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <!--===================================================-->

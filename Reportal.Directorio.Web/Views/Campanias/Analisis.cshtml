@@ -1,0 +1,594 @@
+﻿
+@{
+    ViewBag.Title = "Analisis";
+    Layout = "~/Views/Layout/_Principal2_Oper.cshtml";
+}
+
+@section script{
+
+
+    <script type="text/javascript">
+
+
+        $(function () {
+
+            $("#slPeriodo").on("change", function () {
+                var mumerador=0, divisor=1;
+                $("#lb_Mes").html($("#slPeriodo option:selected").text());
+                $.SecGetJSON(getReportalApiHost() + "api/seg-preaprobados/resumenes-universos?Periodo=" + $("#slPeriodo").val(), function (respoonse) {
+
+                    $("#bdy_totalesuniversales").html("");
+                    $.each(respoonse.totalesUniverso, function (i, o) {
+
+                        if (o.Item != 'Pre-aprobados Final') {
+                            $("#bdy_totalesuniversales").append(
+                                $("<tr>")
+                                    .append($("<td>").html(o.Item))
+                                    .append($("<td>").html(o.N_Pensionados.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Pensionados.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Trabajadores.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Trabajadores.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Total.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Total.toMoney() + "%").css("text-align", "right"))
+                            );
+                        } else {
+                            $("#bdy_totalesuniversales").append(
+                               $("<tr>")
+                                   .append($("<td>").html(o.Item).addClass("charlee-pintado-bold"))
+                                   .append($("<td>").html(o.N_Pensionados.toMoney()).addClass("charlee-pintado-bold-ralign"))
+                                   .append($("<td>").html(o.P_Pensionados.toMoney() + "%").addClass("charlee-pintado-bold-ralign"))
+                                   .append($("<td>").html(o.N_Trabajadores.toMoney()).addClass("charlee-pintado-bold-ralign"))
+                                   .append($("<td>").html(o.P_Trabajadores.toMoney() + "%").addClass("charlee-pintado-bold-ralign"))
+                                   .append($("<td>").html(o.N_Total.toMoney()).addClass("charlee-pintado-bold-ralign"))
+                                   .append($("<td>").html(o.P_Total.toMoney() + "%").addClass("charlee-pintado-bold-ralign"))
+                           );
+                            $("#lb_NTotalMes").html(o.N_Total.toMoney());
+                            $("#lb_PrcAfConCredito").html(o.P_Total.toMoney() + "%");
+                            divisor = o.N_Total;
+                        }
+                    });
+
+
+                    $("#bdy_universogestionable").html("");
+                    $("#ft_universogestionable").html("");
+                    $.each(respoonse.universoGestionable, function (i, o) {
+
+                        if (o.Segmento != 'Total') {
+                            $("#bdy_universogestionable").append(
+                                $("<tr>")
+                                    .append($("<td>").html(o.Segmento))
+                                    .append($("<td>").html(o.N_Afiliados.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Email.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Email.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Celular.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Celular.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_CelularOFijo.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_CelularOFijo.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_EmailOFonos.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_EmailOFonos.toMoney() + "%").css("text-align", "right"))
+                            );
+                        } else {
+                            $("#ft_universogestionable").html(
+                               $("<tr>")
+                                    .append($("<td>").html(o.Segmento).addClass("charlee-pintado-bold-velde"))
+                                    .append($("<td>").html(o.N_Afiliados.toMoney()).addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.N_Email.toMoney()).addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.P_Email.toMoney() + "%").addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.N_Celular.toMoney()).addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.P_Celular.toMoney() + "%").addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.N_CelularOFijo.toMoney()).addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.P_CelularOFijo.toMoney() + "%").addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.N_EmailOFonos.toMoney()).addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.P_EmailOFonos.toMoney() + "%").addClass("charlee-pintado-bold-ralign-velde"))
+
+                           );
+                            $("#lb_PrcSuceptibles").html(o.P_EmailOFonos.toMoney() + "%");
+                        }
+                    });
+
+
+                    $("#bdy_universocampanado").html("");
+                    $("#ft_universocampanado").html("");
+                    $.each(respoonse.universoCampagnado, function (i, o) {
+
+                        if (o.Segmento != 'Total') {
+                            $("#bdy_universocampanado").append(
+                                $("<tr>")
+                                    .append($("<td>").html(o.Segmento))
+
+                                    .append($("<td>").html(o.N_Email.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Email.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_SMS.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_SMS.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Call.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Call.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Total.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Total.toMoney() + "%").css("text-align", "right"))
+                            );
+                        } else {
+                            $("#ft_universocampanado").html(
+                               $("<tr>")
+                                    .append($("<td>").html(o.Segmento).addClass("charlee-pintado-bold-naran"))
+
+                                    .append($("<td>").html(o.N_Email.toMoney()).addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.P_Email.toMoney() + "%").addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.N_SMS.toMoney()).addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.P_SMS.toMoney() + "%").addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.N_Call.toMoney()).addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.P_Call.toMoney() + "%").addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.N_Total.toMoney()).addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.P_Total.toMoney() + "%").addClass("charlee-pintado-bold-ralign-naran"))
+                           );
+                            $("#lb_CampanadosFinal").html(o.N_Total.toMoney());
+                            mumerador = 100.0 * o.N_Total;
+
+                            var x = mumerador / divisor;
+                            $("#lb_PrcPreaprobados").html(Math.round(x).toMoney() + "%");
+                        }
+                    });
+
+
+                    $("#bdy_universogestionablepropension").html("");
+                    $("#ft_universogestionablepropension").html("");
+                    $.each(respoonse.universoGestionablePropension, function (i, o) {
+
+                        if (o.SegmentoCompra != 'Total') {
+                            $("#bdy_universogestionablepropension").append(
+                                $("<tr>")
+                                    .append($("<td>").html(o.Segmento))
+                                    .append($("<td>").html(o.SegmentoCompra))
+                                    .append($("<td>").html(o.N_Afiliados.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Email.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Email.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Celular.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Celular.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Fonos.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Fonos.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Alguno.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Alguno.toMoney() + "%").css("text-align", "right"))
+                            );
+                        } else {
+                            $("#bdy_universogestionablepropension").append(
+                               $("<tr>")
+                                    .append($("<td>").html(o.Segmento).addClass("charlee-pintado-bold-velde"))
+                                    .append($("<td>").html(o.SegmentoCompra).addClass("charlee-pintado-bold-velde"))
+                                    .append($("<td>").html(o.N_Afiliados.toMoney()).addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.N_Email.toMoney()).addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.P_Email.toMoney() + "%").addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.N_Celular.toMoney()).addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.P_Celular.toMoney() + "%").addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.N_Fonos.toMoney()).addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.P_Fonos.toMoney() + "%").addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.N_Alguno.toMoney()).addClass("charlee-pintado-bold-ralign-velde"))
+                                    .append($("<td>").html(o.P_Alguno.toMoney() + "%").addClass("charlee-pintado-bold-ralign-velde"))
+                           );
+                        }
+                    });
+
+
+                    $("#bdy_universocampanadopropension").html("");
+                    $("#ft_universocampanadopropension").html("");
+                    $.each(respoonse.universoCampagnadoPropension, function (i, o) {
+
+                        if (o.SegmentoCompra != 'Total') {
+                            $("#bdy_universocampanadopropension").append(
+                                $("<tr>")
+                                    .append($("<td>").html(o.Segmento))
+                                    .append($("<td>").html(o.SegmentoCompra))
+                                    .append($("<td>").html(o.N_Email.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Email.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_SMS.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_SMS.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Call.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Call.toMoney() + "%").css("text-align", "right"))
+                                    .append($("<td>").html(o.N_Total.toMoney()).css("text-align", "right"))
+                                    .append($("<td>").html(o.P_Total.toMoney() + "%").css("text-align", "right"))
+                            );
+                        } else {
+                            $("#bdy_universocampanadopropension").append(
+                               $("<tr>")
+                                    .append($("<td>").html(o.Segmento).addClass("charlee-pintado-bold-naran"))
+                                    .append($("<td>").html(o.SegmentoCompra).addClass("charlee-pintado-bold-naran"))
+                                    .append($("<td>").html(o.N_Email.toMoney()).addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.P_Email.toMoney() + "%").addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.N_SMS.toMoney()).addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.P_SMS.toMoney() + "%").addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.N_Call.toMoney()).addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.P_Call.toMoney() + "%").addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.N_Total.toMoney()).addClass("charlee-pintado-bold-ralign-naran"))
+                                    .append($("<td>").html(o.P_Total.toMoney() + "%").addClass("charlee-pintado-bold-ralign-naran"))
+                           );
+                            
+                        }
+                    });
+
+                });
+            });
+
+            $.SecGetJSON(getReportalApiHost() + "api/FechaActualizacion/1/", function (respoonse) {
+                $("#Leyend_FechaActualizacion").html(respoonse.ActualizacionLeyenda);
+            });
+
+            $("#slPeriodo").trigger("change");
+
+        });
+
+    </script>
+}
+
+
+@section css{
+
+    <style type="text/css">
+        .head-tabla {
+            /*#ebeff2*/
+            border: 2px solid #ebeff2;
+        }
+
+        .table-charlee > tbody > tr > td,
+        .table-charlee > tbody > tr > th,
+        .table-charlee > tfoot > tr > td,
+        .table-charlee > tfoot > tr > th,
+        .table-charlee > thead > tr > td,
+        .table-charlee > thead > tr > th {
+            border-top: 1px solid #ddd;
+            /*border-right: 2px solid #ffffff;*/
+            line-height: 1.42857;
+            padding: 3px !important;
+            vertical-align: top;
+            font-size: 12px;
+        }
+
+        .charlee-pintado {
+            color: #fff1f1 !important;
+            background: #1f8fe0 none repeat scroll 0 0;
+            text-align: center;
+        }
+
+        .charlee-pintado-bold {
+            color: #fff1f1 !important;
+            background: #1f8fe0 none repeat scroll 0 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .charlee-pintado-bold-ralign {
+            color: #fff1f1 !important;
+            background: #1f8fe0 none repeat scroll 0 0;
+            text-align: right;
+            font-weight: bold;
+        }
+
+
+        .charlee-pintado-velde {
+            color: #fff1f1 !important;
+            background: #8bc34a none repeat scroll 0 0;
+            text-align: center;
+        }
+
+        .charlee-pintado-bold-velde {
+            color: #fff1f1 !important;
+            background: #8bc34a none repeat scroll 0 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .charlee-pintado-bold-ralign-velde {
+            color: #fff1f1 !important;
+            background: #8bc34a none repeat scroll 0 0;
+            text-align: right;
+            font-weight: bold;
+        }
+
+
+        .charlee-pintado-naran {
+            color: #fff1f1 !important;
+            background: #26a69a none repeat scroll 0 0;
+            text-align: center;
+        }
+
+        .charlee-pintado-bold-naran {
+            color: #fff1f1 !important;
+            background: #26a69a none repeat scroll 0 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .charlee-pintado-bold-ralign-naran {
+            color: #fff1f1 !important;
+            background: #26a69a none repeat scroll 0 0;
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
+
+}
+
+
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--<div id="page-title">
+    <h1 class="page-header text-overflow">Seguimiento Pre-Aprobados</h1>
+
+    <div class="searchbox" style="width: 350px !important;">
+        <div class="input-group custom-search-form">
+            <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
+        </div>
+    </div>
+</div>-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+<!--Breadcrumb-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--<ol class="breadcrumb">
+    <li><a href="#">Reportes</a></li>
+    <li><a href="#">Campañas</a></li>
+    <li class="active">Seguimiento Pre-Aprobados</li>
+</ol>-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End breadcrumb-->
+<!--Page content-->
+<!--===================================================-->
+<div class="boxed">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="well well-sm">
+                Seleccione Periodo:
+                <select id="slPeriodo">
+                    <option value="201701" selected="selected">Enero 2017</option>
+                    <option value="201612">Diciembre 2016</option>
+                    <option value="201611">Noviembre 2016</option>
+                    <option value="201610">Octubre 2016</option>
+                    <option value="201609">Septiembre 2016</option>
+                </select>
+
+                <span style="float:right;"><strong>*Datos actualizados al:</strong> <span id="Leyend_FechaActualizacion">Martes, 18 de Octubre de 2016</span></span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!--Default Tabs (Left Aligned)-->
+            <!--===================================================-->
+            <div class="tab-base">
+                <!--Nav Tabs-->
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#another1" aria-expanded="true">Another 1</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#another2" aria-expanded="false">Another 2</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#another3" aria-expanded="false">Another 3</a>
+                    </li>
+                </ul>
+
+                <!--Tabs Content-->
+                <div class="tab-content">
+
+                    <div id="another1" class="tab-pane fade active in">
+
+                        <div class="panel">
+                            <div class="panel-body">
+                                <p class="text-semibold text-center">El <span class="text-success" id="lb_PrcAfConCredito">31%</span> de los afiliados <span class="text-success">con crédito pre-aprobado</span>, correspondiendo a <span id="lb_NTotalMes">333.240</span> en <span id="lb_Mes">octubre</span>. De ellos, el <span id="lb_PrcSuceptibles">86%</span> es susceptible a alguna acción comercial.</p>
+                                <p class="text-semibold text-center">Campañados final: <span id="lb_CampanadosFinal">100.000</span> afiliados (<span id="lb_PrcPreaprobados">5%</span> de pre-aprobados)</p>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Universo Pre-aprobados</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div>
+                                    <table class="table table-charlee table-responsive table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" class="charlee-pintado periodo-seleccionado" style="vertical-align:middle;"></th>
+                                                <th colspan="2" class="charlee-pintado">Pensionado</th>
+                                                <th colspan="2" class="charlee-pintado">Trabajador</th>
+                                                <th colspan="2" class="charlee-pintado">Total</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="charlee-pintado">N° Afiliados</th>
+                                                <th class="charlee-pintado">%</th>
+                                                <th class="charlee-pintado">N° Afiliados</th>
+                                                <th class="charlee-pintado">%</th>
+                                                <th class="charlee-pintado">N° Afiliados</th>
+                                                <th class="charlee-pintado">%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bdy_totalesuniversales"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Universo Gestionable</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div id="tabla-1">
+                                    <table class="table table-charlee table-responsive table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" class="charlee-pintado-velde" style="vertical-align:middle;">Segmento</th>
+                                                <th rowspan="2" class="charlee-pintado-velde" style="vertical-align:middle;">N° Afiliados</th>
+                                                <th colspan="2" class="charlee-pintado-velde">Email</th>
+                                                <th colspan="2" class="charlee-pintado-velde">Celular</th>
+                                                <th colspan="2" class="charlee-pintado-velde">Celular o Fijo</th>
+                                                <th colspan="2" class="charlee-pintado-velde">Email o Fonos</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="charlee-pintado-velde">N°</th>
+                                                <th class="charlee-pintado-velde">%</th>
+                                                <th class="charlee-pintado-velde">N°</th>
+                                                <th class="charlee-pintado-velde">%</th>
+                                                <th class="charlee-pintado-velde">N°</th>
+                                                <th class="charlee-pintado-velde">%</th>
+                                                <th class="charlee-pintado-velde">N°</th>
+                                                <th class="charlee-pintado-velde">%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bdy_universogestionable"></tbody>
+                                        <tfoot id="ft_universogestionable"></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Universo Campañado</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div id="tabla-1">
+                                    <table class="table table-charlee table-responsive table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" class="charlee-pintado-naran" style="vertical-align:middle;">Segmento</th>
+                                                <th colspan="2" class="charlee-pintado-naran">Email</th>
+                                                <th colspan="2" class="charlee-pintado-naran">SMS</th>
+                                                <th colspan="2" class="charlee-pintado-naran">Call Center</th>
+                                                <th colspan="2" class="charlee-pintado-naran">Total Canales Virtuales</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="charlee-pintado-naran">N°</th>
+                                                <th class="charlee-pintado-naran">%</th>
+                                                <th class="charlee-pintado-naran">N°</th>
+                                                <th class="charlee-pintado-naran">%</th>
+                                                <th class="charlee-pintado-naran">N°</th>
+                                                <th class="charlee-pintado-naran">%</th>
+                                                <th class="charlee-pintado-naran">N°</th>
+                                                <th class="charlee-pintado-naran">%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bdy_universocampanado"></tbody>
+                                        <tfoot id="ft_universocampanado"></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="another2" class="tab-pane fade">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Universo Gestionable</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div id="tabla-1">
+                                    <table class="table table-charlee table-responsive table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" class="charlee-pintado-velde" style="vertical-align:middle;">Segmento</th>
+                                                <th rowspan="2" class="charlee-pintado-velde" style="vertical-align:middle;">Predictor</th>
+                                                <th rowspan="2" class="charlee-pintado-velde" style="vertical-align:middle;">N° Afiliados</th>
+                                                <th colspan="2" class="charlee-pintado-velde">Email</th>
+                                                <th colspan="2" class="charlee-pintado-velde">Celular</th>
+                                                <th colspan="2" class="charlee-pintado-velde">Celular o Fijo</th>
+                                                <th colspan="2" class="charlee-pintado-velde">Email o Fonos</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="charlee-pintado-velde">N°</th>
+                                                <th class="charlee-pintado-velde">%</th>
+                                                <th class="charlee-pintado-velde">N°</th>
+                                                <th class="charlee-pintado-velde">%</th>
+                                                <th class="charlee-pintado-velde">N°</th>
+                                                <th class="charlee-pintado-velde">%</th>
+                                                <th class="charlee-pintado-velde">N°</th>
+                                                <th class="charlee-pintado-velde">%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bdy_universogestionablepropension"></tbody>
+                                        <tfoot id="ft_universogestionablepropension"></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Universo Campañado</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div id="tabla-1">
+                                    <table class="table table-charlee table-responsive table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" class="charlee-pintado-naran" style="vertical-align:middle;">Segmento</th>
+                                                <th rowspan="2" class="charlee-pintado-naran" style="vertical-align:middle;">Predictor</th>
+                                                <th colspan="2" class="charlee-pintado-naran">Email</th>
+                                                <th colspan="2" class="charlee-pintado-naran">SMS</th>
+                                                <th colspan="2" class="charlee-pintado-naran">Call Center</th>
+                                                <th colspan="2" class="charlee-pintado-naran">Total Canales Virtuales</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="charlee-pintado-naran">N°</th>
+                                                <th class="charlee-pintado-naran">%</th>
+                                                <th class="charlee-pintado-naran">N°</th>
+                                                <th class="charlee-pintado-naran">%</th>
+                                                <th class="charlee-pintado-naran">N°</th>
+                                                <th class="charlee-pintado-naran">%</th>
+                                                <th class="charlee-pintado-naran">N°</th>
+                                                <th class="charlee-pintado-naran">%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bdy_universocampanadopropension"></tbody>
+                                        <tfoot id="ft_universocampanadopropension"></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="another3" class="tab-pane fade">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Resumen Mensual</h1>
+                            </div>
+                            <div class="panel-body">
+
+                                <div id="tabla-1">
+                                    <table class="table table-charlee table-responsive table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" class="charlee-pintado" style="vertical-align:middle;">Pre Aprobados {{YEAR}}</th>
+                                                <th colspan="3" class="charlee-pintado" style="vertical-align:middle;">Oferta</th>
+                                                <th colspan="5" class="charlee-pintado" style="vertical-align:middle;">Resultado</th>
+                                                <th colspan="4" class="charlee-pintado" style="vertical-align:middle;">Colocacion Total</th>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <th class="charlee-pintado">N°</th>
+                                                <th class="charlee-pintado">Monto (MM$)</th>
+                                                <th class="charlee-pintado">Promedio (M$)</th>
+                                                <th class="charlee-pintado">Compran</th>
+                                                <th class="charlee-pintado">Venta Bruta (MM$)</th>
+                                                <th class="charlee-pintado">Venta Neta (MM$)</th>
+                                                <th class="charlee-pintado">WR #</th>
+                                                <th class="charlee-pintado">Venta Bruta (MM$)</th>
+                                                <th class="charlee-pintado">% Venta Pre Aprobados</th>
+                                                <th class="charlee-pintado">Venta Neta (MM$)</th>
+                                                <th class="charlee-pintado">% Ventra Pre Aprobados</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bdy_resumenesmensuales"></tbody>
+                                        <tfoot id="ft_resumenesmensuales"></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!--===================================================-->
+            <!--End Default Tabs (Left Aligned)-->
+            <!--Icon Tabs (Left Aligned)-->
+            <!--===================================================-->
+        </div>
+    </div>
+</div>
+<!--===================================================-->
+<!--End page content-->

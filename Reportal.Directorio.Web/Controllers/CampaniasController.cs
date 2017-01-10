@@ -19,5 +19,15 @@ namespace Reportal.Directorio.Web.Controllers
             return View();
         }
 
+        
+        public ActionResult Analisis()
+        {
+            return View();
+        }
+
+        public ActionResult Seguimiento()
+        {
+            return View();
+        }
     }
 }

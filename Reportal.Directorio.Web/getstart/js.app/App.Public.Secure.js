@@ -51,11 +51,10 @@
 			        localStorage.removeItem('rep_recordata');
 			    }
 			   
-			    var ur = httpGet("ur");
-                console.log(ur)
-			    if (typeof ur != "undefined")
+			    var ur = httpGet("ru");
+                if (typeof ur != "undefined")
 			    {
-			        location.href = (getRootAplicationHost() + ur).replace("//","/");
+                    location.href = (getRootAplicationHost() + ur).replace(RegExp("//", 'g'), "/").replace(RegExp(":/", 'g'), '://');
 			    }
 			    else
 			    {
